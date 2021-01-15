@@ -1,0 +1,39 @@
+<table style="border: 1px solid gray; width: 600px; margin: auto; color: #6d6c6c;     padding-bottom: 15px;">
+  <tr>
+    <td colspan="2" style="border-bottom: 1px solid gray; font-family: sans-serif;"><h1 style="color:#555e63; padding-top: 9px; margin-bottom: 9px; padding-left: 10px; font-family: sans-serif; "><span style="color: #34b3fa;">FIX</span>PAPA</h1></td>
+  </tr>
+  <tr>
+    <td colspan="2" style="padding: 15px 10px 8px 13px;"><h1 style="margin:0px;
+color: #1eaee6;">Order Receipt</h1></td>
+  </tr>
+  <tr style="line-height: 28px; font-size: 18px;">
+    <td style="padding-left: 15px;"><b>Order No.</b></td>
+<td style=""><%=job.orderId%></td>
+  </tr>
+  <tr  style="line-height: 28px; font-size: 18px;">
+    <td style="padding-left: 15px;"><b>Date :</b></td>
+<td style=""><%=job.createdAt.toISOString()%></td>
+  </tr>
+  <tr  style="line-height: 28px; font-size: 18px;">
+    <td style="padding-left: 15px; padding-bottom: 20px;"><b>Address:</b></td>
+<td style="padding-bottom: 20px;"><%=job.address.value%></td>
+  </tr>
+  <tr>
+    <td colspan="2">
+  <table style="width: 95%; margin: auto;font-size: 20px;font-weight: bold;border:1px solid #0184d6; line-height: 60px; border-bottom: none;">
+        <tr>
+        <td style="padding-left: 12px;">Fix problems cost:</td>
+          <td>Rs.<%=job.totalPrice%></td>
+        </tr>
+        
+      </table>
+      <table style="width: 95%; margin: auto; font-size: 20px;font-weight: bold;border:1px solid #0184d6; line-height: 60px;">
+        
+        <tr>
+          <td style="padding-left: 12px;">Total cost:</td>
+          <td>Rs.<%=job.totalPrice%></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>

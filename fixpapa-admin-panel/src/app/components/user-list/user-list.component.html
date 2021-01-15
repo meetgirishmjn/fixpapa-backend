@@ -1,0 +1,174 @@
+<div class="row container-min-height">
+    <div class="Page-heading" >
+        <div class="container-fluid">
+            <h3>
+                <div class="row">
+                    <div class="col-md-7">{{this.params.realm | titlecase}}</div>
+                    <div class="col-md-2">
+                        <ng-select [allowClear]="false"
+                                  [active]="[options.selectedStatus]"
+                                  [items]="options.statusList"
+                                  (selected)="selected($event)"
+                                  placeholder="select status">
+                        </ng-select>
+                    </div> 
+                    <div class="col-md-3">
+                        <div class="input-group">
+                          <input type="text" class="form-control" [(ngModel)]="options.searchStr" placeholder="Search for...">
+                          <span class="input-group-btn">
+                            <button class="btn btn-default" (click)="getAllUsers()" type="button">Go!</button>
+                          </span>
+                        </div>
+                    </div>
+                </div>
+            </h3>
+        </div>    
+    </div>
+    <div class="container-fluid">
+
+        <div class="noDataFound" *ngIf="!users.length && !isLoading">No data found</div>
+        <div id="loader" *ngIf="isLoading"></div>
+
+        <div class="row card-row" *ngFor="let user of users">
+            
+            <div class="col-md-1">
+                <div class="card-img">
+                    <img class="img-responsive" [src]="user.image?(user.image.includes('http')?user.image:baseUrl+user.image):userDefaultImage" />
+                </div>
+            </div>
+
+            <div class="col-md-11">
+                <div class="">
+                	<span class="rah-right">
+                        <span *ngIf="params.realm != 'vendors'">
+                            <span *ngFor="let x of [1,2,3,4,5]" >
+                                <span [ngClass]="{'fa fa-start':true,checked:x<=user.rating.avgRating}" class="fa fa-star checked"></span> 
+                            </span>
+                            <br />  
+                        </span>    
+                        {{user.createdAt | date : 'dd MMMM, yyyy'}}
+                                          
+                    </span>
+                    <h5>{{user.fullName | titlecase}}</h5>
+                    <p *ngIf="user.mobile">Mobile Number : {{user.mobile}}</p>
+                    <p *ngIf="user.mobile">Email : {{user.email}}</p>
+                    <p *ngIf="user.adminVerifiedStatus && user.realm!='customer'">Admin Verify Status : {{user.adminVerifiedStatus | titlecase}}</p>
+                    <p *ngIf="user.adminVerifiedStatus && user.realm=='vendor'">Firm Name : {{user.firmName | titlecase}}</p>
+                    <p *ngIf="user.customerType && user.realm=='customer'">Customer Type : {{user.customerType | titlecase}}</p>
+                    <p *ngIf="user.realm=='customer' && user.gstNumber">GST Number : {{user.gstNumber}}</p>
+
+                    
+                    <a type="button" *ngIf="user.realm=='customer'" class="btn block-btn" (click)="openAddressModal(user)"  href="javascript:;">Show Addresses</a>&nbsp;
+
+                    <a type="button" *ngIf="user.adminVerifiedStatus == 'pending'" class="btn block-btn" (click)="openApprovalModal('approved',user)"  href="javascript:;">Approve</a>&nbsp;
+                    <a type="button" class="btn block-btn" *ngIf="user.adminVerifiedStatus == 'pending'" (click)="openApprovalModal('rejected',user)" href="javascript:;">Reject</a>
+                    <!-- this part only for redirect profile page -->
+                    <span> 
+                        <a type="button" *ngIf="params.realm == 'engineers'" class="btn block-btn" routerLink="/profile/engineer/{{user.id}}" href="javascript:;">View</a>
+                        <a type="button" *ngIf="params.realm == 'vendors'" class="btn block-btn" routerLink="/profile/vendor/{{user.id}}" href="javascript:;">View</a>
+                        <!-- <a type="button" *ngIf="params.realm == 'customers'" class="btn block-btn" routerLink="/profile/customer/{{user.id}}" href="javascript:;">View</a>&nbsp; -->
+                    </span>&nbsp;
+
+                    <span *ngIf="user.realm == 'vendor' && user.adminVerifiedStatus == 'approved'">
+                        <a type="button" *ngIf="user.active" class="btn block-btn" (click)="openActInactModal(false,user)"  href="javascript:;">Block</a>&nbsp;
+                        <a type="button" class="btn block-btn" *ngIf="!user.active" (click)="openActInactModal(true,user)" href="javascript:;">Unblock</a>
+                    </span>    
+                </div>
+            </div>
+        </div>
+
+        <div class="rah-right">
+            <ngb-pagination [collectionSize]="totalCount" (pageChange)="changePage()" [(page)]="page" [maxSize]="5" [pageSize]="limit" [boundaryLinks]="true"></ngb-pagination>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="blockModal"  role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">
+                    Alert
+                </h4>
+            </div>
+            <form  class="form-horizontal" (submit)="activeInactiveVendor(actInactForm)" #actInactForm="ngForm">
+                <div class="modal-body">
+                    <div class="bootstrap-iso">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    Are you sure you want to <span *ngIf="blockValue">unblock</span><span *ngIf="!blockValue">block</span> this vender?
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary " id="blockBtn" data-loading-text="Submit..." type="submit" >Yes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="approveModal"  role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">
+                	Alert
+                </h4>
+            </div>
+            <form  class="form-horizontal" (submit)="adminApproval(adminApprovalForm)" #adminApprovalForm="ngForm">
+                <div class="modal-body">
+                    <div class="bootstrap-iso">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    Are you sure you want to {{approvalValue}} this vender?
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary " id="approvalBtn" data-loading-text="Submit..." type="submit" >Yes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addressesModal"  role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">
+                    Customer Addresses
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="bootstrap-iso">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12" *ngFor="let address of selectedUser.addresses">
+                                Street : {{address.street}}<br />
+                                location : {{address.value}} 
+                                <hr />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,168 @@
+<header id="home" >
+	<nav id="header" class="navbar navbar-fixed-top" [ngClass]="{'inner-header' : isLogin}" >
+		<div id="header-container" class="container navbar-container">
+				<div class="container">
+						<div class="row">
+							<div class="col-md-12 comTop">
+								<div class="topNav">
+									<i class="fa fa-facebook"></i>
+									<i class="fa fa-twitter"></i>
+									<i class="fa fa-linkedin"></i>
+									<i class="fa fa-google-plus"></i>
+									<i class="fa fa-youtube"></i>
+								</div>
+								<div class="mobileNumber">
+									<!-- <div class="h6 ">0141-2980666</div> -->
+									<a href="tel:+91-9829344449" value="+91-9829344449" label="number" style="color: white;">
+										<div class="h6" style="font-size: 17px;">+919829344449</div>
+									</a>	
+									
+								</div>
+							</div>
+						</div>
+						<hr class="topNavhr">
+					</div>
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" style="margin-right:55px;" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a id="brand" class="navbar-brand">
+					
+					<div *ngIf="router.url === '/';then home else notHome;" ></div>
+					<ng-template #home>
+						<!-- <img class="img-responsive" src="assets/images/logo.png" /> -->
+						<img class="img-responsive" 
+						src="data:image/png;base64,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" /> 
+					</ng-template>
+					<ng-template #notHome>
+						<!-- <img class="img-responsive" *ngIf="isLogin && authCred.realm === 'customer'" (click)="backToHome()" style="width: 70px !important;padding: 5px 0 0 30px !important;" src="assets/images/home2.png" />
+						<img class="img-responsive" *ngIf="isLogin && (authCred.realm === 'vendor' || authCred.realm === 'engineer' )" style="width: 70px !important;padding: 5px 0 0 30px !important;" (click)="navigateToProfile()" src="assets/images/home2.png" /> -->
+						<img class="img-responsive" *ngIf="isLogin && authCred.realm === 'customer'" (click)="backToHome()" 
+						style="width: 70px !important;padding: 5px 0 0 30px !important;"
+						src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKtAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2RpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo3RkUwQUM1QTE1NzZFODExOUNDMTg0OTlFNkUzMjZGNiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo5NTlCRTlFMEIxOTYxMUU4OUIwN0NBMkJERjk2NDYyMCIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo5NTlCRTlERkIxOTYxMUU4OUIwN0NBMkJERjk2NDYyMCIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IFdpbmRvd3MiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDowRkZCMjdCREM1QjBFODExQjUwNDg5QUNFNkQ0MkNGRSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo3RkUwQUM1QTE1NzZFODExOUNDMTg0OTlFNkUzMjZGNiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pob608MAAARZSURBVHja7JxxZFVRHMfvWpbHiBH7a5THGKMsb5ZYlvJYinkxS3mJEi9lKWWJEU1TShMlllKkSCklYonSLI3+KaWIKUak8TRm/X7td+x2eve98zv37d53734/vsbbfffd99k553POudeqZmdnHSn7qhKAAlAACkABKCUABWCEAS5rywkJZv1+NfT35xJB4a8qEeAKyCXIewiOL98gTyEp5nmaICN0jmL5BbkKqY4DwE7IZ8h+SCO9Vg/ZBHkNOc/4ollIu8FxtZA9kJaoAzwGeUhfyKsOGhzjBsOpmqgCxAsfhpw2PD4NeQlZKWPgXPccoe7GqWbImGEXjS3AZhrX2izfX0dyyS5GgFupGzaUqfuftbVoFAGiLO4bDvLThufsZcglsgATTFmMQlZBBplyaYgjQK4srkE2QCYgRyG7DVsjjqtvg5RLEACVLExXEscJWF4DuhnygyGXjjgAzDC61RRkO2TA4/fPIWsg7wzl0hh1gCiLO4YD+1fIOshdreV+pGWWftyTOG8moCyuM2XRqrUs1XKTtNC/6JqmYEvdAjkXR4BKFjuZsvjueq2vQMvFDcvHNL5hzUAOM+QSCYB+ZZEgcKc8jlc7MklLuVQ0wAx9OVtZ4Pte0HmKVZKmKWlNLmsN5VKRAJUsEpaySBF80/24Wlp19Lpe+xKWXPwARGA3fcoiSy2vnvnZ1bT+HXbm9/FCkYstQCWLHsPjb2iyQABnNAA2laXrqA9LLjYAWyxkscslC9UFj5TpO7TR9az2KZdUEAAz1OVMZJEvIAuUwJgmgXJUA80bMz7kgkMC554LGyBXFq2aLDqopSzUEktNg/p9yIVzz8UYoLowP7LI0QK/LoBh6aT2h1ZyuWD4/jT1kmQ5ACpZZAw/XJcFCuKythQLovR5KcrlEEMujfT+dj8AUz5lobaV9oa0SFAro/WWclHXn7MBmKGWZyuLSrlrhj3omfPvRi5HLjXUezx7UCGAfT5l0elU0H1bZ/7Gk9uwXLnomxkFAdaUWMybyMLk6YKwShl2uaVc1GbGSi+AOYYsbmmy4C7rwirdsFy5qP3JggBNZ+0oix0uWXCXdWFXklpS2lIueS+AOAV5wJRFiraXUk60qo66c06TS2sJueBdwn1eALE5d0PGDWXRoy3ko1bVZFf3hsanInLBBtRFED0tnKeBdaKELPppzEs40a+stkpSchnSjusmFiWnMQhvI3XnAef/exaOE/IDPQtQOF9t0nrjAYL2iH4WHN6WepzwA2SbI3WbUrbtLCkBKAAFoACUKmnhoAsnsIOM49srZelYKQBxnnmFuYrokS4sY6CUABSAAlAACkApASgABaAAlBKAAnDRAJyJIYvpIAHeixk83I8cDxLgCaf4YyBRKryF22XbAm03VPEJBrxvjI+KJcvwJaaYx+MjJqNl+NxJZ+6xFevyuyP9E/ImhFYzSQm95P8HCkABKAAFoJQAFIACUABKWdQfAQYAaIVDZ2LCvS4AAAAASUVORK5CYII=" />
+						<img class="img-responsive" 
+						*ngIf="isLogin && (authCred.realm === 'vendor' || authCred.realm === 'engineer' )" 
+						style="width: 70px !important;padding: 5px 0 0 30px !important;" 
+						(click)="navigateToProfile()" 
+						src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKtAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2RpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo3RkUwQUM1QTE1NzZFODExOUNDMTg0OTlFNkUzMjZGNiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo5NTlCRTlFMEIxOTYxMUU4OUIwN0NBMkJERjk2NDYyMCIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo5NTlCRTlERkIxOTYxMUU4OUIwN0NBMkJERjk2NDYyMCIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IFdpbmRvd3MiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDowRkZCMjdCREM1QjBFODExQjUwNDg5QUNFNkQ0MkNGRSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo3RkUwQUM1QTE1NzZFODExOUNDMTg0OTlFNkUzMjZGNiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pob608MAAARZSURBVHja7JxxZFVRHMfvWpbHiBH7a5THGKMsb5ZYlvJYinkxS3mJEi9lKWWJEU1TShMlllKkSCklYonSLI3+KaWIKUak8TRm/X7td+x2eve98zv37d53734/vsbbfffd99k553POudeqZmdnHSn7qhKAAlAACkABKCUABWCEAS5rywkJZv1+NfT35xJB4a8qEeAKyCXIewiOL98gTyEp5nmaICN0jmL5BbkKqY4DwE7IZ8h+SCO9Vg/ZBHkNOc/4ollIu8FxtZA9kJaoAzwGeUhfyKsOGhzjBsOpmqgCxAsfhpw2PD4NeQlZKWPgXPccoe7GqWbImGEXjS3AZhrX2izfX0dyyS5GgFupGzaUqfuftbVoFAGiLO4bDvLThufsZcglsgATTFmMQlZBBplyaYgjQK4srkE2QCYgRyG7DVsjjqtvg5RLEACVLExXEscJWF4DuhnygyGXjjgAzDC61RRkO2TA4/fPIWsg7wzl0hh1gCiLO4YD+1fIOshdreV+pGWWftyTOG8moCyuM2XRqrUs1XKTtNC/6JqmYEvdAjkXR4BKFjuZsvjueq2vQMvFDcvHNL5hzUAOM+QSCYB+ZZEgcKc8jlc7MklLuVQ0wAx9OVtZ4Pte0HmKVZKmKWlNLmsN5VKRAJUsEpaySBF80/24Wlp19Lpe+xKWXPwARGA3fcoiSy2vnvnZ1bT+HXbm9/FCkYstQCWLHsPjb2iyQABnNAA2laXrqA9LLjYAWyxkscslC9UFj5TpO7TR9az2KZdUEAAz1OVMZJEvIAuUwJgmgXJUA80bMz7kgkMC554LGyBXFq2aLDqopSzUEktNg/p9yIVzz8UYoLowP7LI0QK/LoBh6aT2h1ZyuWD4/jT1kmQ5ACpZZAw/XJcFCuKythQLovR5KcrlEEMujfT+dj8AUz5lobaV9oa0SFAro/WWclHXn7MBmKGWZyuLSrlrhj3omfPvRi5HLjXUezx7UCGAfT5l0elU0H1bZ/7Gk9uwXLnomxkFAdaUWMybyMLk6YKwShl2uaVc1GbGSi+AOYYsbmmy4C7rwirdsFy5qP3JggBNZ+0oix0uWXCXdWFXklpS2lIueS+AOAV5wJRFiraXUk60qo66c06TS2sJueBdwn1eALE5d0PGDWXRoy3ko1bVZFf3hsanInLBBtRFED0tnKeBdaKELPppzEs40a+stkpSchnSjusmFiWnMQhvI3XnAef/exaOE/IDPQtQOF9t0nrjAYL2iH4WHN6WepzwA2SbI3WbUrbtLCkBKAAFoACUKmnhoAsnsIOM49srZelYKQBxnnmFuYrokS4sY6CUABSAAlAACkApASgABaAAlBKAAnDRAJyJIYvpIAHeixk83I8cDxLgCaf4YyBRKryF22XbAm03VPEJBrxvjI+KJcvwJaaYx+MjJqNl+NxJZ+6xFevyuyP9E/ImhFYzSQm95P8HCkABKAAFoJQAFIACUABKWdQfAQYAaIVDZ2LCvS4AAAAASUVORK5CYII=" />
+					</ng-template>
+					
+				</a>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav navbar-righ" >
+					<li class="active" ><a target="_blank" routerLink="services" >Products & Services</a></li>
+					<li *ngIf="!isLogin" ><a (click)="openVendModel()" >Become a Partner</a></li>
+					<li *ngIf="!isLogin" ><a (click)="openSignup()" >Login / Sign up</a></li>
+					<li *ngIf="isLogin && myInfo" ><a>{{myInfo.fullName}}</a></li>
+					<li *ngIf="isLogin && myInfo" ><a class="noti_cont1" ><app-notification (openPayment)="openBillModal($event)" #notification></app-notification></a></li>
+					<li *ngIf="isLogin && myInfo" class="dropdown header-dropdown">
+						<a class="noti_cont1 profile-img dropdown-toggle" id="menu1" data-toggle="dropdown" style="color:transparent !important;" >
+							<img class="img-responsive" [src]="defaultImage" />
+						</a>
+						<ul class="dropdown-menu dropdown-menu1" style="margin-right:20px;" id="dropdown-header" role="menu" aria-labelledby="menu1">
+							<li role="presentation"><a role="menuitem" tabindex="-1" routerLink="dashboard" >Dashboard</a></li>
+							<li role="presentation"><a role="menuitem" tabindex="-1" (click)="logOut()" >Log Out</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+</header>
+
+<router-outlet></router-outlet>
+   <section class="footer-copyright" style="width:100%;" >
+		<div class="container" >
+			<a href="#" class="top-scroll bounce animated" style="display: none;"><i class="fa fa-hand-o-up"></i></a>
+			<div class="row padding-top-20 padding-bottom-10 ">
+				<div class="col-md-6 col-lg-6 col-sm-6 col-xs-6 text-left">
+					<p></p>
+				</div>
+				<div class="col-md-6 col-lg-6 col-sm-6 col-xs-6"></div>
+			</div>
+		</div>
+	</section>
+<footer class="footer-bg" *ngIf="!hideHeader" >
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-xs-12 col-sm-12">
+                <div class="footer-link">
+                    <ul>
+                        <li>
+                            <a target="_blank" routerLink="about-us" >About us</a>
+                        </li>
+                        <li>
+                            <a target="_blank" routerLink="terms-and-condition" >Terms & Conditions</a>
+                        </li>
+                        <li>
+                            <a target="_blank" routerLink="privacy-and-security" >Privacy Policy</a>
+                        </li>
+						<li>
+                            <a target="_blank" routerLink="refund-policy" >Refund Policy</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6 col-xs-12 col-sm-12">
+                <div class="footer-link">
+                    <ul>
+                        <li>
+                            <a href="https://twitter.com/FixPapaJpr" target="_blank"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="https://www.facebook.com/fixpapajpr" target="_blank"><i class="fa fa-facebook-square"></i></a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/in/chetan-saini-ab911b170/" target="_blank"><i class="fa fa-linkedin"></i></a>
+                        </li>
+                        <li>
+                            <a href="https://plus.google.com/u/0/111923131680776986105" target="_blank"><i class="fa fa-google-plus"></i></a>
+                        </li>
+                        <li>
+                            <a href="https://www.youtube.com/channel/UC_DyT341UdnCDrpLirWYOBg" target="_blank"><i class="fa fa-youtube"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<app-login-modal #login (openCustomerModel)="openCustModel($event)"
+ 	(openLoginMobileModal)="openLoginMobModal()"
+	(resendOtp)="resendOtpModal($event)" 
+	(openVendorModel)="openVendModel()"></app-login-modal>
+<!-- customer sign up modal -->
+<app-customer-modal #customerModal (openLoginModal)="openSignup()"
+	(openOtpModal)="openOtpVerifyModal($event)" >
+</app-customer-modal>
+<!-- vendor sign up modal -->
+<app-vendor-modal #vendorModal (openOtpModal)="openOtpVerifyModal($event)" ></app-vendor-modal>
+<!-- otp model -->
+<app-otp-modal #otpModal></app-otp-modal>
+<app-login-mobile #loginMobile ></app-login-mobile>
+<app-mobile-login-signup></app-mobile-login-signup>
+<div class="modal" id="email-verification-alert" tabindex="-1" role="dialog"
+ aria-labelledby="basicModal"
+ aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header otp-modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body otp-modal-body">
+				<p>Please confirm your email address using the verification link sent to you. In case it's missing in your inbox,please check your spam folder.</p>
+				<div class="otp-button" style="margin-top:20px;" >
+					<button type="button" class="btn btn-primary" (click)="openOtpVerifyModalFromAlert()" >Ok</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+	

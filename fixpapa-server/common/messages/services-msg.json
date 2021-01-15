@@ -1,0 +1,22 @@
+{
+  "addService":{
+    "replyCode": "Success",
+    "replyMessage": "Successfully service added!!"
+  },
+  "getServices" : {
+  "replyCode":"Success",
+  "replyMessage":"Success"
+  
+ },
+  "getService" : {
+  "replyCode":"Success",
+  "replyMessage":"Success"
+  
+ },
+ "editService" : {
+  "replyCode":"Success",
+  "replyMessage":"Successfully updated!!"
+  
+ }
+
+}

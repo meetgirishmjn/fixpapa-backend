@@ -1,0 +1,359 @@
+.input-field{
+	margin-left: 35px;
+    width: 94%;
+}
+/*========================
+
+==========================
+
+======== Job Moduel CSS ==
+
+========================*/
+
+.disabled{
+	opacity : 0.3;
+	cursor : not-allowed !important;
+}
+.modal-body{
+	color: dimgrey;
+}
+.animate-normal{
+	-webkit-transition: all 2s ease;
+    transition: all 2s ease;
+   -webkit-animation: fadein 5s; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadein 5s; /* Firefox < 16 */
+    -ms-animation: fadein 5s; /* Internet Explorer */
+    -o-animation: fadein 5s; /* Opera < 12.1 */
+    animation: fadein 5s;
+}
+.pac-container {
+    z-index: 10000 !important;
+}
+.job-modal-header{
+    background: #083a70;
+}
+.job-modal-header h4 {
+    color: #fff;
+    font-size: 21px;
+    margin-left: 50px;
+}
+.job-modal-header .job-close {
+    opacity: unset;
+    color: #fff;
+    margin-top: 6px;
+
+}
+.container8 {
+    display: block;
+    position: relative;
+    /* padding-left: 35px; */
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 18px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-weight: normal;
+}
+/*.container8 input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}*/
+.checkmark8 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 22px;
+    width: 22px;
+    background-color: #e3e0e0;
+    border-radius: 50%;
+    margin-top: 8px;
+}
+.container8:hover input ~ .checkmark8 {
+    background-color: #ccc;
+}
+.container8 input:checked ~ .checkmark8 {
+    background-color: #2196F3;
+}.checkmark8:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+.container8 input:checked ~ .checkmark8:after {
+    display: block;
+}
+.container8 .checkmark8:after {
+    top: 7px;
+    left: 7px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}
+.job-title h3 {
+    text-align: center;
+    margin-bottom: 30px;
+
+}
+.job-step-1 label {
+    padding-top: 15px;
+    margin-bottom: 15px;
+    border-top: 1px solid #ececec;
+}
+.job-modal-height {
+    height: 500px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+.job-modal-footer .btn {
+    float: left;
+    background: #0f56a2;
+    color: #fff;
+    padding: 10px 30px;
+    font-size: 18px;
+}
+/* The container */
+.container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+	border-radius:unset !important;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.job-modal-header a i { 
+    position: absolute;
+    top: 21px;
+    color: #fff;
+    font-size: 18px;
+
+}
+.job-textarea label {
+    margin-bottom: 5px;
+    font-size: 15px;
+    font-weight: 600;
+
+}
+.Profile-input-file4{
+    height: 145px;
+width: 170px;
+position: absolute;
+top: 00px;
+z-index: 999;
+opacity: 0 !important;
+left: 0%;
+margin-top: 0px;
+}
+.container10 p {
+    float: right;
+    font-size: 16px;
+}
+.price-bg {
+    background: #efefef;
+    text-align: center;
+    padding: 10px;
+    font-size: 18px;
+
+}
+.Problem-list ul {
+    padding: 0px;
+    list-style: none;
+    padding-left: 7px;
+}
+.Problem-list ul li {
+    font-size: 17px;
+    border-bottom: 1px solid #eeeaea;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.job-term-text h4 {
+    text-align: center;
+    margin-top: 30px;
+    background: #083a70;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+}
+.job-term-text p {
+    text-align: center;
+    font-size: 16px;
+}
+.Problem-list ul li p {
+    float: right;
+}
+.input-icon {
+    background: #06386b;
+    color: #fff;
+    padding: 10px;
+    font-size: 20px;
+}
+.job-step-4 input {
+    height: 42px;
+    background: #fff;
+    border: 1px solid #dcdddf;
+    border-radius: unset !important;
+    text-align: center;
+    color: #000;
+    font-size: 18px;
+}
+.job-step-4 input[disabled]{
+    background: #fff;
+}
+.job-step-4 .input-group {
+    margin-bottom: 20px;
+}
+.time-list ul {
+    padding: 0px;
+    padding-left: 5px;
+    list-style: none;
+    margin-bottom: 30px;
+}
+.time-list ul li {
+    background: #f2f2f2;
+    font-size: 17px;
+    padding: 10px 73px;
+	text-align : center;
+    /* display: inline-block; */
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+.time-active{
+    background: #06386b !important;
+    color: #fff;
+}
+.address-text ul {
+    padding: 0px;
+    padding-left: 8px;
+    list-style: none;
+    text-align: center;
+}
+.address-text ul li {
+    margin-right: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 15px;
+    display: inline-block;
+    font-size: 15px;
+    cursor: pointer;
+}
+.address-active{
+    background: #083a70;
+    color: #fff;
+}
+.Job-Login input {
+    height: 40px;
+    margin-bottom: 20px;
+
+}
+.job-login-button .btn {
+    margin: 0 auto;
+    display: block;
+    background: #0f56a2;
+    color: #fff;
+    padding: 9px;
+    font-size: 20px;
+    width: 100%;
+    margin-top: 25px;
+}
+.Job-Login p {  
+    text-align: center;
+    margin-top: 25px;
+    font-size: 17px;
+    font-weight: bold;
+}
+.Job-Login ul {
+    padding: 0px;
+    padding-left: 8px;
+    list-style: none;
+    text-align: center;
+}
+.Job-Login ul li {
+    display: inline-block;
+    margin-right: 50px;
+    margin-top: 25px;
+}
+.Job-Login ul li:first-child {
+    background: #3c5a9a;
+    padding: 18px 24px;
+    border-radius: 50%;
+}
+.Job-Login ul li a{
+    color: #fff;
+    font-size: 26px;
+}
+.Job-Login ul li:first-child {
+    background: #3c5a9a;
+    padding: 16px 27px;
+    border-radius: 50%;
+}
+.Job-Login ul li:last-child {
+    background: #f3501d;
+    padding: 16px 20px;
+    border-radius: 50%;
+}
+@media all and (max-width: 699px) and (min-width: 300px) {
+    .job-modal-height{
+        height: 300px;
+    }
+}

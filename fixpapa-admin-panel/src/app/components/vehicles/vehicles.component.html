@@ -1,0 +1,28 @@
+<div class="container-min-height" >
+    <div class="Page-heading" >
+        <h3>
+            <div class="row">
+                <div class="col-md-11">Vehicles</div>
+                <!-- <div class="col-md-1">
+                    <a type="button" class="btn block-btn" (click)="openModal()"><i class="fa fa-plus"></i></a>
+                </div>     -->
+            </div>
+            
+        </h3>
+    </div>
+    <div class="col-lg-12" *ngFor="let product of products">
+        <div class="rah-card-container ">
+        	<div>
+        		<span class="rah-title">{{product.name}}</span>
+        	</div>
+        	<div>
+                <a type="button" class="btn block-btn rah-right" (click)="openModal(product)" href="javascript:;"><i class="fa fa-edit"></i></a>
+        		<span>
+                    <b>Brands</b> : {{product.brand | commaSeparatedList :'name'  }} <br />
+                    <span *ngIf="product.values && product.values.length"><b>values</b> : {{product.values}}<br /></span>
+                    <span>{{product.createdAt | date:'dd MMMM, yyyy'}}</span>
+                </span>
+        	</div>
+        </div>
+    </div>
+</div>

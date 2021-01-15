@@ -1,0 +1,501 @@
+{
+  "name": "People",
+  "base": "User",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true,
+    "emailVerificationRequired": true,
+    "mobileVerificationRequired": true,
+    "caseSensitiveEmail": false
+  },
+  "properties": {
+    "startTime": {
+      "type": "object",
+      "default": {
+        "value": "00:00",
+        "valueInMinute": 0
+      }
+    },
+    "endTime": {
+      "type": "object",
+      "default": {
+        "value": "00:00",
+        "valueInMinute": 0
+      }
+    },
+    "email": {
+      "type": "string",
+      "default":""
+     
+    },
+    "supportDays": {
+      "type": [
+        "number"
+      ]
+    },
+    "active": {
+      "type": "boolean",
+      "default": true
+    },
+    "isAvailable": {
+      "type": "boolean",
+      "default": true
+    },
+    "addresses": {
+      "type": [
+        "object"
+      ],
+      "default": []
+    },
+    "image": {
+      "type": "string",
+      "default": ""
+    },
+    "mobile": {
+      "type": "string",
+      "default": ""
+    },
+    "newNotification": {
+      "type": "number",
+      "default": 0
+    },
+     "isProfileComplete":{
+      "type": "boolean",
+      "default":true
+    },
+    "gstNumber": {
+      "type": "string",
+      "default": ""
+    },
+    "companyName": {
+      "type": "string",
+      "default": ""
+    },
+    "rating": {
+      "type": "object",
+      "default": {
+        "totalUsers"  : 0,
+        "totalRating" : 0,
+        "avgRating"   : 0
+      }
+    },
+    "address": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "validations": [],
+  "relations": {
+    "services": {
+      "type": "referencesMany",
+      "model": "Category",
+      "foreignKey": "servicesIds",
+      "options": {
+        "validate": true,
+        "forceId": false
+      }
+    },
+    "newpurchase": {
+      "type": "referencesMany",
+      "model": "Newpurchase",
+      "foreignKey": "newpurchaseIds",
+      "options": {
+        "validate": true,
+        "forceId": false
+      }
+    },
+    "expertise": {
+      "type": "referencesMany",
+      "model": "Services",
+      "foreignKey": "expertiseIds",
+      "options": {
+        "validate": true,
+        "forceId": false
+      }
+    },
+    "requestjob": {
+      "type": "hasMany",
+      "model": "Requestjob",
+      "foreignKey": ""
+    },
+    "accessTokens": {
+      "type": "hasMany",
+      "model": "AccessToken",
+      "foreignKey": ""
+    }
+  },
+  "indexes": {
+      "people_index": {
+        "keys": {"email": 1,"realm": 1,"mobile":1}
+      }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "deleteById"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "find"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "signup"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "adminApprovalRequest"
+    },
+    
+     {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "superAdmin",
+      "permission": "ALLOW",
+      "property": "adminApprove"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "editCustomer"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "vendor",
+      "permission": "ALLOW",
+      "property": "editEngineer"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "getMyInfo"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW",
+      "property": "getAllUsers"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "getAllUsers"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "viewProfile"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "getPeoples"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "verifyMobile"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "resendOtp"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW",
+      "property": "getAllVendors"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "superAdmin",
+      "permission": "ALLOW",
+      "property": "getAllVendors"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "uploadProfilePic"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "editMobile"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "editEmail"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "manageAddresses"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "editEmailConfirm"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "vendor",
+      "permission": "ALLOW",
+      "property": "addEngineer"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "vendor",
+      "permission": "ALLOW",
+      "property": "getEngineers"
+    },
+     {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW",
+      "property": "getEngineers"
+    },
+     {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "superAdmin",
+      "permission": "ALLOW",
+      "property": "getEngineers"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "vendor",
+      "permission": "ALLOW",
+      "property": "getFreeEngineers"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "getAddresses"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "editEmail_match_otp"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "vendor",
+      "permission": "ALLOW",
+      "property": "editVendor"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "vendor",
+      "permission": "ALLOW",
+      "property": "getvendor"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "vendor",
+      "permission": "ALLOW",
+      "property": "actInacEngineers"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "superAdmin",
+      "permission": "ALLOW",
+      "property": "actInacEngineers"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "vendor",
+      "permission": "ALLOW",
+      "property": "vendorAvailability"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "vendor",
+      "permission": "ALLOW",
+      "property": "changePwd"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "vendor",
+      "permission": "ALLOW",
+      "property": "uploadEngineerPic"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "googleLogin"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW",
+      "property": "getUsersAdmin"
+    },
+     {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "superAdmin",
+      "permission": "ALLOW",
+      "property": "getUsersAdmin"
+    },
+   
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "superAdmin",
+      "permission": "ALLOW",
+      "property": "actInacVendors"
+    },
+  
+     {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "superAdmin",
+      "permission": "ALLOW",
+      "property": "actInacCustomers"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "uniqueEmail"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "uniqueMobile"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "quickCall"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "formDetails"
+    },
+     
+     {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "superAdmin",
+      "permission": "ALLOW",
+      "property": "setCommission"
+    },
+     {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "getCommission"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "userLogin"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "userOtpVerify"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "resendUserOtp"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "editProfile"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "getUserSession"
+    }
+  ],
+  "methods": {}
+}

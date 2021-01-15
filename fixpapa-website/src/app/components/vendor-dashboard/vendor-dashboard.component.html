@@ -1,0 +1,412 @@
+<section class="customer-deshboard-bg inner-top-gap">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="cdeshboard-link">
+                        <ul>
+                            <li class="current" id="link1">
+                                <a>
+                                    <i class="fa fa-user" aria-hidden="true"></i> Latest Job
+                                </a>
+                            </li>
+                            <li id="link2">
+                                <a>
+                                    <i class="fa fa-user" aria-hidden="true"></i> Ongoing Job
+                                </a>
+                            </li>
+                            <li id="link3">
+                                <a>
+                                    <i class="fa fa-user" aria-hidden="true"></i> My Info
+                                </a>
+                            </li>
+                            <li id="link4">
+                                <a>
+                                    <i class="fa fa-user" aria-hidden="true"></i> Manage Engineer
+                                </a>
+                            </li>
+                            <li id="link5">
+                                <a>
+                                    <i class="fa fa-user" aria-hidden="true"></i> Change Password
+                                </a>
+                            </li>
+                            <li id="link6">
+                                <a>
+                                    <i class="fa fa-user" aria-hidden="true"></i> 
+                                    Account Setting
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div id="sec1" class="deshboard-detail-sec" *ngIf="currentTab === 'latestJobs'" >
+                        <h2>Latest Job</h2>
+                        <div class="latest-job-listing">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="latest-job-img">
+                                        <img class="img-responsive" src="images/register_bg.jpg">
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="latest-job-text">
+                                        <h4>Lorem ipsum dolor sit amet</h4>
+                                        <ul>
+                                            <li>
+                                                Job Title - Lorem ipsum
+                                            </li>
+                                            <li>
+                                                Date - 15/5/17
+                                            </li>
+                                            <li>
+                                                Address - Lorem ipsum dolor sit amet
+                                            </li>
+                                            <li>
+                                                Price - 2000.00
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="latest-job-button">
+                                        <ul>
+                                            <li>
+                                                <button type="button" class="btn btn-outline-primary">Accept</button>
+                                            </li>
+                                            <li>
+                                                <button type="button" class="btn btn-outline-primary">Reject</button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="latest-job-listing">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="latest-job-img">
+                                        <img class="img-responsive" src="images/register_bg.jpg">
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="latest-job-text">
+                                        <h4>Lorem ipsum dolor sit amet</h4>
+                                        <ul>
+                                            <li>
+                                                Job Title - Lorem ipsum
+                                            </li>
+                                            <li>
+                                                Date - 15/5/17
+                                            </li>
+                                            <li>
+                                                Address - Lorem ipsum dolor sit amet
+                                            </li>
+                                            <li>
+                                                Price - 2000.00
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="latest-job-button">
+                                        <ul>
+                                            <li>
+                                                <button type="button" class="btn btn-outline-primary">Accept</button>
+                                            </li>
+                                            <li>
+                                                <button type="button" class="btn btn-outline-primary">Reject</button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="sec2" class="deshboard-detail-sec" *ngIf="currentTab === 'onGoingJobs'">
+                        <h2>Ongoing Job</h2>
+                        <div class="inner-list ongoing-job">
+                            <div class="row no-row ongoing-job-border">
+                                <ul>
+                                    <li class="col-md-1"></li>
+                                    <li class="col-md-2 list-active" id="list1">
+                                        <a href="#">Today</a>
+                                    </li>
+                                    <li class="col-md-2" id="list2">
+                                        <a href="#">Tomorrow</a>
+                                    </li>
+                                    <li class="col-md-2" id="list3">
+                                        <a href="#">This Week</a>
+                                    </li>
+                                    <li class="col-md-2" id="list3">
+                                        <a href="#"> Pending</a>
+                                    </li>
+                                    <li class="col-md-2" id="list3">
+                                        <a href="#"> Cancelled</a>
+                                    </li>
+                                    <li class="col-md-1"></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="latest-job-listing">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="latest-job-img">
+                                        <img class="img-responsive" src="images/register_bg.jpg">
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="latest-job-text">
+                                        <h4>Lorem ipsum dolor sit amet</h4>
+                                        <ul>
+                                            <li>
+                                                Job Title - Lorem ipsum
+                                            </li>
+                                            <li>
+                                                Date - 15/5/17
+                                            </li>
+                                            <li>
+                                                Address - Lorem ipsum dolor sit amet
+                                            </li>
+                                            <li>
+                                                Price - 2000.00
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="latest-job-button">
+                                        <ul>
+                                            <li>
+                                                <button type="button" class="btn btn-outline-primary">Accept</button>
+                                            </li>
+                                            <li>
+                                                <button type="button" class="btn btn-outline-primary">Reject</button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="latest-job-listing">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="latest-job-img">
+                                        <img class="img-responsive" src="images/register_bg.jpg">
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="latest-job-text">
+                                        <h4>Lorem ipsum dolor sit amet</h4>
+                                        <ul>
+                                            <li>
+                                                Job Title - Lorem ipsum
+                                            </li>
+                                            <li>
+                                                Date - 15/5/17
+                                            </li>
+                                            <li>
+                                                Address - Lorem ipsum dolor sit amet
+                                            </li>
+                                            <li>
+                                                Price - 2000.00
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="latest-job-button">
+                                        <ul>
+                                            <li>
+                                                <button type="button" class="btn btn-outline-primary">Accept</button>
+                                            </li>
+                                            <li>
+                                                <button type="button" class="btn btn-outline-primary">Reject</button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="sec3" class="deshboard-detail-sec" *ngIf="currentTab === 'myInfo'" >
+                        <h2>Personal Information</h2>
+                        <div class="row no-row">
+                            <div class="col-md-3">
+                                <div class="text-center bg-form">
+                                    <div class="img-section img-section1 deshboard-img-sec">
+                                        <img src="images/register_bg.jpg" class="imgCircle" alt="Profile picture">
+                                        <i class="fa fa-camera" aria-hidden="true"></i>
+                                        <input type="file" id="image-input" onchange="readURL(this);" accept="image/*" class="form-control form-input Profile-input-file">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="readable-filed">
+                                    <span>Email</span>
+                                    <h4>test@gmail.com</h4>
+                                </div>
+                                <div class="readable-filed">
+                                    <span>Phone Number</span>
+                                    <h4>(+91) 1234 567 890</h4>
+                                </div>
+                                <div class="row editable-text">
+                                    <div class="filed-text" id="name_filed">
+                                        <span>Name</span>
+                                        <h4>Abhishek Jain</h4>
+                                        <input value="Abhishek jain" id="first_name2" class="validate marginMutedBottom font18 font-extra-bold valid" type="text" style="display:none;">
+                                    </div>
+                                    <div class="filed-edit" id="edit_filed">
+                                        <p>
+                                            <a href="#">Edit</a>
+                                        </p>
+                                        <button type="button" class="edit-save" style="display: none;">Save</button>
+                                    </div>
+                                </div>
+                                <div style="clear: both;"></div>
+                                <div class="row editable-text">
+                                    <div class="filed-text" id="bank_filed">
+                                        <span>Account Number</span>
+                                        <h4>123456789012</h4>
+                                        <input value="123456789012" id="first_name2" class="validate marginMutedBottom font18 font-extra-bold valid" type="text" style="display:none;">
+                                    </div>
+                                    <div class="filed-edit" id="edit_filed1">
+                                        <p>
+                                            <a href="#">Edit</a>
+                                        </p>
+                                        <button type="button" class="edit-save" style="display: none;">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="sec4" class="deshboard-detail-sec" *ngIf="currentTab === 'manageEngineer'" >
+                        <h2>Manage Engineer</h2>
+                        <div class="row no-row add-new-borders">
+                            <div class="new-engineer">
+                                <a href="#" data-toggle="modal" data-target="#largeModal8">Add New Engineer</a>
+                            </div>
+                        </div>
+                        <div class="latest-job-listing first-list">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="latest-job-img">
+                                        <img class="img-responsive" src="images/register_bg.jpg">
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="latest-job-text engineer-text">
+                                        <h4>Lorem ipsum</h4>
+                                        <ul>
+                                            <li>
+                                                Contact No. - 1234 567 890
+                                            </li>
+                                            <li>
+                                                Email - test@gmail.com
+                                            </li>
+                                            <li>
+                                                Year of Experience - 2 Year
+                                            </li>
+                                            <li>
+                                                Address - Lorem ipsum dolor sit amet
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="latest-job-button">
+                                        <ul>
+                                            <li>
+                                                <button type="button" class="btn btn-outline-primary">Update</button>
+                                            </li>
+                                            <li>
+                                                <button type="button" class="btn btn-outline-primary">Delete</button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="latest-job-listing">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="latest-job-img">
+                                        <img class="img-responsive" src="images/register_bg.jpg">
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="latest-job-text engineer-text">
+                                        <h4>Lorem ipsum</h4>
+                                        <ul>
+                                            <li>
+                                                Contact No. - 1234 567 890
+                                            </li>
+                                            <li>
+                                                Email - test@gmail.com
+                                            </li>
+                                            <li>
+                                                Year of Experience - 2 Year
+                                            </li>
+                                            <li>
+                                                Address - Lorem ipsum dolor sit amet
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="latest-job-button">
+                                        <ul>
+                                            <li>
+                                                <button type="button" class="btn btn-outline-primary">Update</button>
+                                            </li>
+                                            <li>
+                                                <button type="button" class="btn btn-outline-primary">Delete</button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="sec5" class="deshboard-detail-sec" *ngIf="currentTab === 'changePassword'" >
+						<app-change-password></app-change-password>
+                    </div>
+                    <div id="sec6" class="deshboard-detail-sec" *ngIf="currentTab === 'accountSeetings'" >
+                        <h2>Account Setting</h2>
+                        <div class="row no-row">
+                            <div class="col-md-12">
+                                <div class="row editable-text">
+                                    <div class="filed-text" id="email_filed">
+                                        <span>Email</span>
+                                        <h4>test@gmail.com</h4>
+                                        <input value="Abhishek jain" id="first_name2" class="validate marginMutedBottom font18 font-extra-bold valid" type="text" style="display:none;">
+                                    </div>
+                                    <div class="filed-edit" id="edit_filed3">
+                                        <p>
+                                            <a href="#">Edit</a>
+                                        </p>
+                                        <button type="button" class="edit-save" style="display: none;">Save</button>
+                                    </div>
+                                </div>
+                                <div style="clear: both;"></div>
+                                <div class="row editable-text">
+                                    <div class="filed-text" id="number_filed">
+                                        <span>Phone Number</span>
+                                        <h4>(+91) 1234 567 890</h4>
+                                        <input value="123456789012" id="first_name2" class="validate marginMutedBottom font18 font-extra-bold valid" type="text" style="display:none;">
+                                    </div>
+                                    <div class="filed-edit" id="edit_filed4">
+                                        <p>
+                                            <a href="#">Edit</a>
+                                        </p>
+                                        <button type="button" class="edit-save" style="display: none;">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+	<app-footer-dashboards></app-footer-dashboards>
+	<!-- modal add engineer -->

@@ -1,0 +1,456 @@
+<div class="hero-area">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12 col-md-8">
+                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                        <!-- Indicators -->
+                        
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner">
+                          <div class="item active">
+                            <img src="assets/images/banner/banner1.png" alt="Chania">
+                          </div>
+                          <div class="item">
+                            <img src="assets/images/banner/banner2.png" alt="Chicago">
+                          </div>
+                          <div class="item">
+                            <img src="assets/images/banner/banner3.png" alt="New York">
+                          </div>
+                        </div>
+                           
+                        <!-- Left and right controls -->
+                        <!-- <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                          <span class="glyphicon glyphicon-chevron-left"></span>
+                          <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                          <span class="glyphicon glyphicon-chevron-right"></span>
+                          <span class="sr-only">Next</span>
+                        </a> -->
+                      </div>
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    
+                        <div class="container-fluid">
+                            <div class="row" style="text-align: right;">
+                                <form class=" bannerOnForm" (submit)="formDetailInquiry(formDetailForm)" #formDetailForm="ngForm">
+
+                                    <input type="text" required [(ngModel)]="formDetailData.name" name="name" required placeholder="Enter Name..." class="form-control rounded-0" #fdName="ngModel">
+                                    <div class="error-div9" *ngIf="formDetailForm.submitted && fdName.errors && fdName.errors.required" >
+                                        <p *ngIf="fdName.errors.required" class="errMsg">Name is required</p>
+                                    </div>
+
+                                    <input type="text" required [(ngModel)]="formDetailData.companyName" name="companyName" required placeholder="Enter Company Name..." class="form-control" #fdCompanyName="ngModel">
+                                    <div class="error-div9" *ngIf="formDetailForm.submitted && fdCompanyName.errors && fdCompanyName.errors.required" >
+                                        <p *ngIf="fdCompanyName.errors.required" class="errMsg">Company Name is required</p>
+                                    </div>
+
+                                    <input type="text" required [(ngModel)]="formDetailData.workEmail" name="workEmail" required placeholder="Enter Work Mail.." class="form-control" #fdWorkEmail="ngModel">
+                                    <div class="error-div9" *ngIf="formDetailForm.submitted && fdWorkEmail.errors && fdWorkEmail.errors.required" >
+                                        <p *ngIf="fdWorkEmail.errors.required" class="errMsg">Work Email is required</p>
+                                    </div>
+
+                                    <input type="text" required [(ngModel)]="formDetailData.phone" name="phone" required placeholder="Enter Phone..." class="form-control" #fdPhone="ngModel">
+                                    <div class="error-div9" *ngIf="formDetailForm.submitted && fdPhone.errors && fdPhone.errors.required" >
+                                        <p *ngIf="fdPhone.errors.required" class="errMsg">Phone Number is required</p>
+                                    </div>
+                                    
+                                    <textarea name="content" required [(ngModel)]="formDetailData.content" required placeholder="Tell us more about your needs.." rows="3" cols="10" class="form-control" style="resize:none;" #fdContent="ngModel"></textarea>
+                                    <div class="error-div9" *ngIf="formDetailForm.submitted && fdContent.errors && fdContent.errors.required" >
+                                        <p *ngIf="fdContent.errors.required" class="errMsg2">Message is required</p>
+                                    </div>
+
+                                    <!-- <input type="submit" class="form-control bg-success" value="Submit"> --><br />
+                                    <button type="submit" class="btn btn-primary" value="submitbutton" category="submitbutton" style="width:100%" id="submitBtn" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Submit">Submit</button>
+                                </form>
+                            </div>
+                    
+                        </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!--<div class="request-button">
+		<a (click)="openEnq()" >Quick Request</a>
+		
+    </div>-->
+	<app-enquiry #enquiry></app-enquiry>
+	<!--<div id="slider" style="right:-342px;">
+		<div id="sidebar">
+		</div>
+	</div>-->
+    <section class="section-2">
+        <section class="">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="service-text">
+                            <!-- <p></p> -->
+                            <h3 style="margin-top: 70px;" >FIXPAPA PORTFOLIO </h3>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="owl-section-bg">
+                            <div id="owl-demo" class="owl-carousel arrow-class">
+                                <div class="item" [ngx-scroll-to]="'#fixAProblem'" >
+                                    <div class="service-box">
+                                        <div class="service-img" >
+                                            <!-- <img class="img-responsive" src="assets/images/slider/1.png" /> -->
+                                            <img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEYAAAAvCAMAAABpC0wkAAAAZlBMVEUAAAAHOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm+9Dcb/AAAAIXRSTlMA7hDJ6LVCBfkL3zwmkZ4z1aVOzmYcvKlzriuaWRbah39Jq6vPAAAB4ElEQVRIx+WW3bKjIAyAwWKBqhXxt1bbk/d/yY0ws8TacxZ6t7vfFTLyTUIgyv4j+vIwVd/bRzslWVajXhcsCgDUOUkz4oqCUSwgPM3COgC40LwyESwy3jPxvWcBpHPDe8r+1JedpwKk8qPmzwUqPD1js6CeO7gNdoORsRLfKb+TyIqDRxQYD/V04DxV5YM6bQ95/17zBb/he4++QeDMtHCDQb4N5gEBZYlH5xDIsQDgqd9pMo6rx6unqTL0PNAz7y1tj2HjC8LF9Y1G7OMsBU7VDQkS7Z78R03GCD4vBQ7e2W7BFNM04fx4LuRypGuwtp5Gf6rZ10hM8mPNDQi5/kwjr7DjJpM1fV32ObwwyjSNHTgoDg6lqCdF8wUBfm5oXgnHz1JLzQogDDJWI0/EYnGi2e9PpGbeDm0OjoEhetjVS8dprOsPlgNi5KHfwBSp8V1mCRomaV7PyKQepVsqfJPynjE0izlyi/vwNeiOt+sZW/BgOenDLc1lgia7O0vPAroJDSNWYy9cDJ1+/QC1S+LVlGvGDqzxV/Nn/kqNTtEUh1kp2YoavsZqBtTYbRnlZkxrABGmPcXQqq0NtMYMVKPAcXpWVwVJKKppwDG7P6IkDNXokW80XTcZnkI7s3+WX1kBZrnsJAG0AAAAAElFTkSuQmCC" />
+                                        </div>
+                                        <h5>Repair Services</h5>
+                                    </div>
+                                </div>
+                                <div class="item" [ngx-scroll-to]="'newPurchase'" >
+                                    <div class="service-box">
+                                        <div class="service-img">
+                                            <!-- <img class="img-responsive" src="assets/images/slider/2.png" /> -->
+                                            <img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEYAAAAvCAMAAABpC0wkAAAAZlBMVEUAAAABOm8BOm8BOm8BOm8BOm8BOm8BOm8BOm8BOm8BOm8BOm8BOm8BOm8BOm8BOm8BOm8BOm8BOm8BOm8BOm8BOm8BOm8BOm8BOm8BOm8BOm8BOm8BOm8BOm8BOm8BOm8BOm8BOm/kOQQiAAAAIXRSTlMA5rsq3gYR9JxqTO0iXb+mUBg4x7MxlnPNgnhgRR7SjED41TmmAAABzklEQVRIx+2W2Y6jMBAA28ZtMEfMfYUE+v9/ciF2jkGsDIO0DztTQjy4UKlBtgT88q/B4U5EUfM3b7V0ZBSjB8m29qwOHBlBhhY39Wh15MhEZGC3Tc2fem8m29TlzmkKMpTbutk5zcDNY9W2llYrcJAFPhHPARW/vOEKP/WE4ALj3JMAnV8GdRAE+nGVfvOhEfYgESBjHcgqkxLiGOb72MpP7aaquU7hxhQ0kR5Hr+WKp9CL7K1DcOItG9BPsznT+S2v80L5HG3mqRPXQFltNrG3ZArt11OBxVWljc0Yfc9dw3Czvablpdil56IDrZgIB+MvD82SfRk/FyPK0IM4B7zJgvqsynMJYDS77szclM91oEuty1Jfr8TaiKh7ZZK9GUzq4EkiGS2I+Ggmhg+SwmSoOZUJyVLimQx0NnPPyjMZOwTxc9NA3D5WQziXgbhmUTnA0UwGaxABjmZIhelC/loPZ9I0vB/LWPwGYWEQZDl0GN54MIMFHcvc9CoTwoxk9AUxOTI4sa2MoC/0CC7SQhjYOhNZce9hBxh7C3EarTK9EZ6EI3jrzBW+Q7XOqP8swxwZ5ycezmawff11oV7OVwXfIi+YSO1kFyYU/DD+AK8mT+3pcho6AAAAAElFTkSuQmCC" />
+                                        </div>
+                                        <h5>Consult & Buy</h5>
+                                    </div>
+                                </div>
+                                <div class="item" [ngx-scroll-to]="'#officeSetUp'" >
+                                    <div class="service-box">
+                                        <div class="service-img">
+                                            <!-- <img class="img-responsive" src="assets/images/slider/3.png" /> -->
+                                            <img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEYAAAAvCAMAAABpC0wkAAAAb1BMVEUAAAAHOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm+xpOqxAAAAJHRSTlMA+AclENvx5r2E7TsYqVEyjUrQyXBrQrauo5V8LcJeWB6bd2ReWcJxAAACdElEQVRIx+2V2Y6jQAxFXRTFTsgGIft2/v8bx9CJGhIJSPfLjDRHCqkIbKrutR35z9/AzEWl9Tz5FUVkUMymtL50+SSvNzfgooSGML8fnqn8OLnIVG5Gg9cilzQ+Ghpcfk/1xnkJ0cSdnEIwW/v45afxioadFDWaxU4TZQMsq15iTRUdsl2iNxaTtMl2jSgzeafUJMHelwn46xDCm98zxrbu6w3yaedZuLdnL1vC1dnWBuOq7DSpUng7+8XxILirf+vx88QhJLcXAa8EsRqnV0/WhKOHOiVgYnklYS5i4a7riNUEUUxte8Vz3WciEOsaznpN2MkQNgfCc68XUJJUIkzl55hCX2XMbKhobwH0xfMD6sJqqsuFlq1KtsNlQ+MAgnnWyWFFaja6yomkcoZg1xSSIx/YTAjHVDos8SQDqwkxmXjVzLbZDUN2F6gZXXZNC8ccdVljv600QSoDbDDZU+u0Uq0Mtnm3Bh1N2nlsOdhPHo96yOYJXB872eMkJfqONLrpQWJINYl+Rfq5iAQUTdgSV3wXBcxkmIBQJWyTXYODyBqnDmJyXT/Zj3fCGUqRuUqbLU2tsSELkVXVLYuQfHReLTF+o+qWIGqWC4K3gaiZxzi0pu8xpXgb9HLtxnj7BNxCxsnbcgtbdV6lvAdg9jIF3zSmn3C2xnmvvWI6A3HUdFXUNfOp3/sGkrNMJiERSXseq1pG85byATNYqyVdZb9635eP0BivZ/IRiFL5EAt559cWcGdPPkYD7dO4sv0zyOQH+Dwnf7ECtpn8jPVXEx+iUVHGTc/mASSlLz+ngo0DdIL/iiODokw33awW8nvim/zD/AFK+DeFnpJzzQAAAABJRU5ErkJggg==" />
+                                        </div>
+                                        <h5>Get Bid for IT Setup</h5>
+                                    </div>
+                                </div>
+                                <div class="item" [ngx-scroll-to]="'#amc'" >
+                                    <div class="service-box">
+                                        <div class="service-img">
+                                            <!-- <img class="img-responsive" src="assets/images/slider/4.png" /> -->
+                                            <img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEYAAAAvCAMAAABpC0wkAAAAb1BMVEUAAAAHOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm+xpOqxAAAAJHRSTlMA7NYQyDCfOolh9nO0gkwbCa17eOC7lmtFPygXzr+nWVHjkR8EVpMFAAAB0UlEQVRIx+3WR5KjQBAF0CwLCO+Fa5D073/GoVXAoiVgQLObfiuKIBLzMyugX5/x89ylj10xqulTLkbBJ8/R2hEpiVGsiAre0wnBBZBfmMQdAIcOi254cRF0mMYLj44THD9kIZ0Q44l1HTNHkk6o8eQ3RGFhjqvjabsS3xKzLJ8Lnlp0SAKDzdlwGCUdMfdL/jO3r1NlloiLuQ3pCHvOWJDRwkiP9bDqcxOUWacmcUfRUcr0v/NddKxyetA9PHGtp5haOqPDD1ycqOLjhT5RJvs3G4UD4CbnCi03k3GiDvMeNHCM5EDCYwmdIpaO6eflaQFGU9eFivbV1nVwBkHUqKpSy71LrR0aCUdmKVk6fmy2/zSNMpEMIyZtRYvIstnl3jTjRX4U5N1AK0q8yl2rmV7Hv92FSBji0IwtrSjwFpPaL/urIhIuAwso4NgqY2NTpgJAh/W8z9OKFNu0KEIxP7JXr3+bbQ6Rc5tmwt3u/Vf8frdtP0ndiiw5n1O0bsA7njWqqura6+VUuPc7dGHYw1zaZAFMhRLbimZ/6+VEGivmb7vnAcB2L9jQWrRvCYKzt8WYH9FfqD3OucxtETWP2gr6MrnruGt5dmOMZdJ+0H/lDzDLcEEEeqORAAAAAElFTkSuQmCC" />
+                                        </div>
+                                        <h5>Maintenance Services</h5>
+                                    </div>
+                                </div>
+                                <div class="item" [ngx-scroll-to]="'#rent'" >
+                                    <div class="service-box">
+                                        <div class="service-img">
+                                            <!-- <img class="img-responsive" src="assets/images/slider/5.png" /> -->
+                                            <img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEYAAAAvCAMAAABpC0wkAAAA3lBMVEUAAAAHOm8HOm8HOm8HOm8HOm8HOm8GOm8HOm8HOm8HOm8GOW4GOW8HOm8HOm8HOm8HOm8HOm8HOm8HOm8HOm8GOW8HOm8HOm8HOm8GOW4HOm8HOm8HOm8HOm8HOm8HOm8GOm8HOm8HOm8HOm8HOm8HOm8FOG4HOm8GOG4HOm8HOm8HOm8EN24AMmnr7/Q9ZY/M1+JXeZ4jUID2+PrH0995lLFlhaZdfqEbSXoPQXQALmfW3+ihtMmWrMKKo7t9mLRwjqy5yNcuWYYAJWD////Dz9xMcJg3YYvg5+2xwNJTlE8KAAAAK3RSTlMAIPQ8Qc/s+xHuyoFxRQoF6EsZ2LGHJq0s36ahj2xWtpzkvlDDl3ledmQ2oA6zbAAAAqRJREFUSMfN09eSokAUgOFDcEAUUDChYhx1nEMw5zR59/1faJukrlpjj17s/jdUafFVn+4G/klMu1iuiPcqvC6wrNAo3KdwD2w53amiztyjaBJ2yEMtYvkeJhG+zghFuKWcFyOndI0RveXotzBMPuUXR5MzTI95zN+gSBhWZ4qYJL+I8auMyDC5XMHruaAcK7EUlpmUx4gtTFxR+IwU03WjXq+n2FjhoDwkRZ3luwJhuAw2tCsDGHgoVdgrgglJlNQyogl5zFy7NjJiuUJqptPpJq9ECkpKl4wldrzVdLri1cuOAn9pd6tQQzQYmSXMc4uCYblzxbaNXC5mZCGBhCkKVMyZgq77WlNAA85AIQmluAia+aTRMQcFV87urdppJuoYMTwiR8UcFMseD0ezhcUi7hmOpWSYx1Cxv1bT195oNbCQFOcgHzA8DaNFijV76Tn9wctq7jMJKBgpakZrhMrC+r3E7XCysNErC0oe67SMtp9oMJg648VmY1mhUvLuIh3DNKKJ+r1Rvz/c2vMjhW0CFSMGikVW0Nt8rOfTjR0oqlr0Py86BpKCP890YC9H2/F6juG+qCX/xGkZMAW0X0fOx2zivCz79tFEwhPQM2Q9bm/35Xy+uetPKzxppRYo9AxxpsNd/723dd9sDBS1Fk5Ez5Dak+Gv8Xo5jhQgCj4BNcND5LzvcDa3jpQ2UDOCDGGJieMugt0NJiLYESPTMcRxZ9HutiLlwKRpGciGitjyH7cyajZ4vRsqtzHEKWNWBchViXIHA4pMFOJUlJ8yHFD0/D3DoVBhKKp8e+BiHlGXYleTdMSq9o1CH3HolcdMWEOgdJQinsa2YZ/J4ml58QLTwrNiTZnn/Hg5LeFZpQuMhD8udoFJ6+zDSfG/Ov2X1Zvwf/YHLi2Uj50t1ywAAAAASUVORK5CYII=" />
+                                        </div>
+                                        <h5>Products on Rent</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="top-gap1" style="margin-top:100px !important;" id="fixAProblem" >
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="section-heading first-heading">
+                            <h2>Repair Services</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="carousel-bg" >
+            <div class="container">
+                <div class="row">
+					<div class="col-md-12" *ngIf="loadingFix" >
+						<img src="assets/images/spinner-blue-circle_2123.gif" alt="loading" class="loader-icon1" />
+					</div>
+                    <div class="col-md-12" *ngIf="fixAProblem && !loadingFix" >
+						<owl-carousel [options]="{items: 4, dots: false, nav: true, responsive : responsiveOptions,
+							navText : [&#x27;&#x3c;&#x27;,&#x27;&#x3e;&#x27;]}" [items]="fixAProblem"
+							[carouselClasses]="['owl-theme', 'sliding', 'owl-nav','owl-con']">
+							<div class="item" *ngFor="let item of fixAProblem;let i = index;" (click)="openFixProblemModal({categoryId : item.id})" >
+								<div class="product-img" >
+									<img class="img-responsive"  [src]="item.image" alt="image" />
+								</div>
+								<p class="align-center" >{{item.name}}</p>
+							</div>
+						</owl-carousel>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="" id="newPurchase" >
+            <div class="container padding-top-start">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="section-heading">
+                            <h2>Consult & Buy</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class=" carousel-bg"  >
+            <div class="container">
+                <div class="row">
+					<div class="col-md-12" *ngIf="loadingPurchase" >
+						<img src="assets/images/spinner-blue-circle_2123.gif" alt="loading" class="loader-icon1" />
+					</div>
+                    <div class="col-md-12" *ngIf="newPurchaseCategories && !loadingPurchase" >
+                        <owl-carousel [options]="{items: 4, dots: false, nav: true, responsive : responsiveOptions,
+						navText : [&#x27;&#x3c;&#x27;,&#x27;&#x3e;&#x27;]}" [items]="newPurchaseCategories"
+							[carouselClasses]="['owl-theme', 'sliding', 'owl-nav','owl-con']">
+                            <div class="item" *ngFor="let item of newPurchaseCategories;let i = index;" 
+                            (click)="openNewPurchaseModal({'id' : item.id})" >
+								<div class="thumbnail-image product-img" >
+									<img class="img-responsive" [src]="item.image" alt="image" />
+								</div>
+								<p class="align-center" >{{item.name}}</p>
+							</div>
+						</owl-carousel>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="" id="officeSetUp">
+            <div class="container padding-top-start">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="section-heading">
+                            <h2>Get Bid for IT Setup</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="carousel-bg"  >
+            <div class="container">
+                <div class="row">
+					<div class="col-md-12" *ngIf="loadingOffice" >
+						<img src="assets/images/spinner-blue-circle_2123.gif" alt="loading" class="loader-icon1" />
+					</div>
+                    <div class="col-md-12" *ngIf="bidCategories && !loadingOffice" >
+                        <owl-carousel [options]="{items: 4, dots: false, nav: true,responsive : responsiveOptions,
+						navText : [&#x27;&#x3c;&#x27;,&#x27;&#x3e;&#x27;]}" [items]="bidCategories"
+							[carouselClasses]="['owl-theme', 'sliding', 'owl-nav','owl-con']">
+                            <div class="item" *ngFor="let item of bidCategories;let i = index;" 
+                                (click)="openBidModal({'id' : item.id})" >
+								<div class="thumbnail-image product-img" >
+									<img class="img-responsive"  [src]="item.image" alt="image"  />
+								</div>
+								<p class="align-center" >{{item.name}}</p>
+							</div>
+						</owl-carousel>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="" id="amc" >
+            <div class="container padding-top-start">
+                <div class="row">
+                    <div class="col-md-12"  >
+                        <div class="section-heading">
+                            <h2>Maintenance Services</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="carousel-bg" >
+            <div class="container">
+                <div class="row">
+					<div class="col-md-12" *ngIf="loadingAmc" >
+						<img src="assets/images/spinner-blue-circle_2123.gif" alt="loading" class="loader-icon1" />
+					</div>
+                    <div class="col-md-12" *ngIf="amcCategories && !loadingAmc" >
+                        <owl-carousel [options]="{items: 4, dots: false, nav: true,
+                             responsive : responsiveOptions,
+						navText : [&#x27;&#x3c;&#x27;,&#x27;&#x3e;&#x27;]}" [items]="amcCategories"
+							[carouselClasses]="['owl-theme', 'sliding', 'owl-nav','owl-con']">
+                            <div class="item" *ngFor="let item of amcCategories;let i = index;"
+                             (click)="openAmcModal({'id' : item.id})" >
+								<div class="thumbnail-image product-img" >
+									<img class="img-responsive"  [src]="item.image" alt="image"  />
+								</div>
+								<p class="align-center" >{{item.name}}</p>
+							</div>
+						</owl-carousel>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="" id="rent" >
+            <div class="container padding-top-start">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="section-heading">
+                            <h2>Products on Rent</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="carousel-bg"  >
+            <div class="container">
+                <div class="row">
+					<div class="col-md-12" *ngIf="loadingRent" >
+						<img src="assets/images/spinner-blue-circle_2123.gif" alt="loading" class="loader-icon1" />
+					</div>
+                    <div class="col-md-12" *ngIf="rentCategories && !loadingRent" >
+                        <owl-carousel [options]="{items: 4, dots: false, nav: true, responsive : responsiveOptions,
+						navText : [&#x27;&#x3c;&#x27;,&#x27;&#x3e;&#x27;]}" [items]="rentCategories"
+							[carouselClasses]="['owl-theme', 'sliding', 'owl-nav','owl-con']">
+                            <div class="item" *ngFor="let item of rentCategories;let i = index;" 
+                            (click)="openRentModal()" >
+								<div class="thumbnail-image product-img" >
+									<img class="img-responsive" [src]="item.image" alt="image" />
+								</div>
+								<p class="align-center" >{{item.name}}</p>
+							</div>
+						</owl-carousel>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="top-gap">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="section-heading">
+                            <h2>FIXPAPA ASSURANCE</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class=" carousel-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="patner-logo">
+                            <!-- <img class="img-responsive" src="assets/images/icons/2.png" /> -->
+                            <img class="img-responsive" src="data:image/png;base64,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" />
+                            <p>High Quality & Verified Professional</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="patner-logo">
+                            <!-- <img class="img-responsive" src="assets/images/icons/1.png" /> -->
+                            <img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOsAAADrCAMAAAC/1JHnAAAApVBMVEUAAACDhIaDhIaDhIanqKmDhIaDhIbExMSDhIaDhIaDhIaDhIaDhIbExMTExMTExMSDhIaDhIbExMSDhIaDhIbExMTExMTExMTExMTExMTExMTExMTExMTExMSDhIbExMTExMSDhIbExMTExMSDhIaDhIbExMTExMTExMSDhIaDhIaDhIbExMSDhIaDhIbExMTExMTExMSDhIbExMTExMSDhIbExMSFQ2QRAAAANXRSTlMAEYgeCuhK9cDVK96tz7Iv9vC8m1k6eBAj21tLmKhEhmV1GOq3ysWhbGxkfOM8NpBSm5IdRHf1cgoAABEFSURBVHja7NjtkpMwGAXgU5c1fiUZUSgBKggK6KAtdjn3f2nidtWZdbtr+Ux1n7/tTHOavHmT4NGjR4/+EOgoTbdNR0kpy6bjp6nWDv4hwc5vCsOjhFRx6q1x5nTaSMEDI904rtJOpLUO004SN/LX57VKonMN7PlKHEKqJPUCHOXoXRUXN99twgDnJbjJaeLUc/B39pGvcnZMGZ1NDV/Fhh23z5IM0rJmx/UzWO8QtG526wGLwhX2xw2SgqTxNQZyos113BCWChVJk9wEHSeujDWskyWSFKWHETmptHBydZmTshq/PeptThYVrOEpkhsPk3AqQ8rEji70I6mIA0xnV5AmweK0IkWyxrQ8lzQ+FuXEPZL2TluEWI5vyDjDPK4k6XpYxs4lXY35pDlZOpifU5ImwqycRNBUmFtqKHzMLnBJtcecMkW6AZYQ5vP+yWHNPMRC1htSZZhJef1jy4lymhBz0AVFhUVlLlliehUpl38SqsQM+0VJbmGBwLCOMKW9S2HJddJRZIzpaENjzzuBT24wlYh0bXqtvsqpJhpPZUmp/qZzuhkmUJI+LLM3kzSFDcUO1skkTTBBVA8WclwKjTE5irk9G/DtWWD0n0QFtqOGVayXPxYe548YdsPc5qjXYb2Rotq8gA8SUo/TV4XtUYHtKIOMLW02tzQ0ewy0IyOcA5fFGoNoCw+Gd1tLKgyxrxnjTGQ1y2ELQ8FCF29wBy1YDdmCjU331Z9Wz7/hLrsBbbays9usnr852nlMhl480sJbXBf15cXoNSdte4a4tnrWfrlvf4r7FauEfbqobxwcddWrZEMKCw/8q4/ta9wn6TFDWc4UE/n08qL/rL5+invJ07us4gYTedu2l6u+s9q+wv0CwfDUdpNP1lmftW37vuesth9XDw9d4hTrmiGmsXrV/vC+X9T2LR5UsMEJNlSYyOf2YIVTPWnb9gkeFghGJ+3BGQZ7cfnhHW77etkefHD+LOSXz3Dc09dte3mBv+DzO/Hm2h0lDIThkGwwXKpQqNWqVJTtbbt7dO3w/3+auu3uAJNQmHD0+dbq0b47l7wzSW/EZG7QRHsQA0Aaix5KwxEzDPgaIBmRmgHAbqoLuhYU9xnlTw1/SO4HeYj07I86/Il2ignhD+lkd/t4ObUxLbOVi+BAVNqlQt7J8L2GA3IsqtGME/N2qjl8KxbUCrBXx+BBj+ikJIUXNiNS4UEQnO1pWrguFjKHD50ISjw0utBv58qZwLCftUQ9nxb/66UOF+TQkddwAsMY1BF0CJxRjZSYzup7+2lSWBdxTKsUejQiBEISxBoQe55Wz39VzbwKOP93YQ1gQJQBJdHQx1iiipU8J7CvLxqeMKx+KGBhHFKL+Quk81fDutQ+uAAeoa0tQbYTc0FLv3C1UtJFtIYZfnfpwH7BavVDRcCjoG0JYL1iNMdXztgPbfuL53335EhkknVlNXAgD3gXlV/Gr/ZuuXuggiwf7GRHJmgt8Bhm8O1NO2aKzthXtiHsXy1XnaZpFRyp0zQFiqFSG8Hjdmzp+7W9EVzWIMesRLKvKuoGtlVlkr7UFZGqd+xLxrOxq6orn2YkRZemE1BZCjf13i4VrRSXM9RDP4c3K69xVdrSODO1EuOo1DgTGNJAcLlzT2yf/S41CpvYrNj2eliXXi9bO6IKSrC5JN2JdCYmsQaSxkWMX+3KMs27bMoy6Kg1tqhC6feK4tr1PPjM2yoNGtQppmprTAaUyBTxSW9gkboWPly4mu2trxUOzFAsLpNGiGq3l06U8OLRkaofMbmZlJlNbCw1jJOUgV0qSO93T9fLpjAS0Z8vKHJApsS2IOZ48ST+ssA0Fyco1mEWixcM9KiJVJzklk/iR7T9fCRmHtk76cjsdjtsy7syiqhUiVJ1tcSzu/cOQ+VP6hJr6lhQyvpQy/fYxhJSrF58sk2x75d5HbHNbWKTxhmiYNPktVWqoYaJNcVeUi+80LvDxhKTUI1XuVUqbMUSvKWe+BK9MI8yxoUEIwGp1Foswh0dyT95XGyo+GG9BjnoRdJPqj6OFGuzjT2y+UP7kSwsuCdOLGXed64SxfKl5i9pcv/sFKVkZ9339hsp14v5dR+Ga50T6xprFMuTii4iiE5x1kVY8Qr2x+DHnl2uwT6NoE86dAOSLdXgO5IuTVrOTmc8YNBLzZQKlCwWg4s3yZKK++AKCGa+TTzzPV0lUHI1XJhKntQaN+EI9yR6064GZviKYX0Jx5PyHsXOl4rXjwkQUs7W6cJ3JbG1XTEeMzxBsbOl4kcWwRDNWk58HbSm+V24gSFoa2tAsXNTBDfNhv4PLDfx2dv4hySszHm7cf0zOzLmBpwZtm//r1h3G1iVHTOh8HHTRLEPGXTRFVm7MneKaH/9XZNK6IceJxWNuhyVCn327p5QcOf1b9w2jGxoLRWQWhqLnCgVJzmlQ0xv9I0sbtoL0oY9L8/FX1BYCUSsWypSHV+jNqQnhILHbS+SONDOI87hRHoUqJXFbciJUutTK4gUtmjmhTNWqNeRQ5tHeXKHCb6zRKRbKq3InT7KNuB/A/C1/bnErmllcGt98q+51UbKCVKTuHOw5v1K2AguT+05+YK7/j5g8EDM7G5DuqQivR6uezNGopYZ1688fpFBd8u1wQhYvIB8TWoR9AaleywEPIp8D9g79g4RRxGFZj10yZHjUjPb5rXGeQBhTTp8K4EBQL+u9OBufJUQsW6peYn9/TlVVl1nraVYYg3zub3zfcSUqVMzakaCJ91SoSGbgLhvRGUgeHxs3/naJpkNRGzo5qAgYl1SI0W1DvyX3vobp7ecPbhCh9ivrWr0CaZ0TeEPdOuhhl4zD1f/Q+tOEwmBsTx3Dm1iGyBIS4+WqJV58UH1nbdPsw1TRn/U2Dp4GaIqSK2rKjouRlQr6JqrFWM8iyC1hUVZtVa0MmF8ZYYrcOsi5n5GHtN+dDZTK07Xbq3IZs4Taao1AeokGVqZI10NBK3cWoMcXiP5zdy1LTcNA9GVZZn4MsWuNSVAMYTGUMd1CIH6/z8NWmjX6UqyojUznKe2k6Q9lbTXo3Vs56oNvy0J4Ip7mCmDzsHOFbJZsh3YuWb3FBGLK1ffvqFc/TXiNTi4rujrdUBLJ9gO69z7vNKlcZ+/edtUNAF2mOFfM3UOV9j5S/ypz+FX/i9ZXEFuDFyVjSukrh0c27gW9K1Vw4ibsPjEqA5jPGzhKpWda2z98IxwVWe6G+pnvgXlOXJqNXrkWrjaen6GRigz117APNzqw6uwmyqxLk9FkpG9Qyr8qNI8R1cYcCQL5K+fxmuGmgn/ruTx2629gEGRCjvXVp5EXa2AQIwjfn0IrjehWhZrMFVj61BRlAJMOD7ZADQLSgdT/TzecOqIiBMhSOpw9ft7/wBoO8kT2ZJTLAljUZFX+W8xWc3BiN5b/DCUjyspAEDyFHuo3eLX/aHADgTWwqVzC8zXVDSW1DNixIKazSw9LV0rjV3K2jPY6sAM/JTJKVf7cHH4FU/JhX6QRhOVdOYMczdvOuxAipbXfcXQnxM40SMID3AW6eV8lxy1arQn+UA+OGxiBBPUZ5YD9rKUtHZ/EJ27JduTcKuVcDZox/UwXrCadJOFKJ3JdEsmadhOq4oBQJYkST4fP8Y70sliC2GGCZvdnMQiz9yWvXuOKRAVz+Vgdyeow0G9ZeNetX6ujJJNZGGyounfWcADSjM8XiWmTHBjWy/oVu6MW6qp0MTYoGVUTFHHxhkgQU1nZhs59WzIHLlfLsxJbxuY0fHEXKIwVrQxWq8Gx3nUM+VYacl5yy6g0zwC8IxTZy1py9QZ6IiWpGeEam1PeSXvhg6ms/4QpTFF20zJVntbtCvchqvGjUNQcBQ/GEedBZ0aK9ziDxvnNs4j16rih1BUVe1nnWj8y4uc4n1dl/dGid3RWQqLZ6gm2POcIq2PIuaJJVAVH4Bs6NKU2GIkWxXen7RCqsS1lmnaDGKxW6Hj+AYCsdtMjlbZIFnLHER3vpeQumO0wbPAjCTw3lk4pMxtZNVGwhz2RYXxyCnVWkrg4Iuhf3PLHEybogFBsn790hjNEF1VYscY3hWzgZtFuGJQ1OOPXNZz6PB1BaHK5fpuvDA3PbhccRsT+VPbZ+Zrh1PhRT0jxg0Khm+NPvcbnytuYzprYRX1L4vLJxMK8o5QZXONXxkraa8xpeXfcygbHH0ygVJ58hcbpdSps8oIVSp85waI/E1Mi7841lsjIxeeLnkLpMqrMrnng3wcr5lDaY2qq+zYzjItIlSIvYTkbeG1uRXAscRHSiB/Kg8JnboFP89LVxhi7IRlhS+tUfJh2cmPOOVn11vFEl2Dk36MnTzWc2JureHUBYsrhcKc/HHA2ot5Y4/j14gqgV+KwJhhjO0xxmceV4qVjgEhkylgAhHl94tzvcJYkD8ShnKlSD0id92X9tPMGQbz03G54+5fTC8ti70EO7Ikdb5bQyAOxDLxB+lRcRmZ9KjqxOaY8d9keXMXnuJcOTuVX9hci6LohEFvqZT+DTEdv6YjpaivFaIuihUVjLMv5dO73YGTIFWeP8x7bPYYW5iQbp+Aq2eMCZvfWOV5XjrWlTeH9mOg29lFgiikQ0B7NkO0hyCsiVehbmcNXGCw5wbfxfDm0H4fP/xPs5YRAVNqX89qgfAlLGwDuWpYBtcei3aNJ5aFIXALC1gEa7qsFJ9vlllYwZ8Dz0tcv3qd6ctFuL68V5NFpksKxikEfKz9bGz8dny/+DMqqigDqEyNqGRL+0F8XIzfPbODt7AANqRG0VTGwzlU7CoELTPdvWFkuAw5RaqFUUyiBBl4WsMieOudsB2WeWBbikfQLBLq6eHuF5qddxnwWCF+NLHNaI5AeQndkvyNE0YcznFOP4GNDIswVERMlbd1yagtMZ6Z+HH81d7d7UAJA1EAPjGYJmrbpKYt5SeLNAEuUNi4nvd/NKNGvXBjlC1sMX5vMGGYzgwQQpEg1pcvirs78/tvU7x6++klEqg4e/wFwwWPKl68/80HHR/uze0pUtjHvyytlrRI7+dD5TfYKv2vyRqGArt49XrXUNcNvyYzvGIf7362DOl9jJy2DAor9vHm5+CWnGG76UCOH3E2jsFjg5YDTsYK1tjCSzY4lT5uLjKarHAmA1ts1VFonEdD6bHZyLnHWUwPrgUVw1mCrcgVj/CGssAZ3AQnPKaXVDgBKxL0eeXMFtkrI8c0W+UFmetTXRBLOmTNS6oCSdSZ9xTFwMEjkSnrYAtD+RHJNOSETPmBoURCXbb3bC8pSyRVkRdkqA8pE/hngRqRHT3T9EjuJmg88lILKo8dlIEhr63MtF+u9YbxhnwsZIO9+DajCtUPO5/6jhzyGGhtpNTYlZWMNZ7PCaoev/r38rg35BUHcOTw3Hq8RoYah7CSccXT+CvZehzEt6Qp8RxVpHA40BQoLgWOpwdSlThUMZKhxsGKhZQdDnczpDq2RlUz2eAp3HzonVMa0lg8iW/J0OEQZSMYJjxRbcjZFdibbkleCzxXZcjoPPakFSnGHB4ZroYUF4+9WEPGJpfJuVakWErsoR7IsOQxW31jFUnTeaSlL5GUlwJ5sWMgRVsjmd5JkkOeu9pKkYyLRgJFpUjKxiJXvTMkg7N4iF9HQcY2h6XA79hFkozj6rGNdoYkzZTbgvau29dwGZqqxN+xTkWSQrkSp1FOSpBkVJdK4w94OzWSX8gl99S9Q3dj4FdSNd2qPe4pdeeaYeZXw7LmdJL+nb52reQPUg7ND62UM78TQ9Pl0AQ+TK/dVUnBe4K8XjqbSweYkNa2+6HS+h8M8b///kviM0k5Ov42dSrSAAAAAElFTkSuQmCC" /> 
+                            <p>Insured & Satisfaction Guarantee</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="patner-logo">
+                            <!-- <img class="img-responsive" src="assets/images/icons/4.png" /> -->
+                            <img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOsAAADrCAMAAAC/1JHnAAAAolBMVEUAAACDhIaDhIaDhIaDhIagoaKDhIaDhIaDhIaDhIaDhIaDhIbExMSDhIaDhIaDhIbExMTExMTExMSDhIbExMTExMTExMTExMTExMSDhIbExMTExMTExMSDhIaDhIaDhIbExMTExMTExMTExMSDhIaDhIaDhIaDhIbExMSDhIbExMTExMSDhIbExMTExMTExMTExMTExMTExMTExMSDhIbExMSELFN9AAAANHRSTlMA6w7iLAcivVvOTjwPpRnY9sRXnCQa6ao6kteaMLFlbrO6eWiJNHeAocXNTUVwhZNF4Ixhtrz+IgAAEVNJREFUeNrs2WuTkzAYBeCjK/WWXQOGi4FVLuogtYUunP//1yyiuzurVVsIpM4+nzLTGSaHvLmQ4tGjR49+oZKmKOp4L62qquwbedEmicB/RHl57GoeJKswLqKzj6yK2JUc7KosjjfF3jpJkrZvbOO4qm5/T7frcw0c5WnAng63RaRwkEi821ei41bhvKhNKoeuF5GDf+Ovf7wcXZ7P+Dax5p57SkmqttxxL8t9WG8IGsSewKlUnkn746obl6TOFUZy1uH3uC0s5aUk9fYu6ARxdZ3AOn4/pLKMMCHRuiQzD1ZJyoCsCjH9g+uAdDewRpSSDCMY4RSarG4c2KBPKmsFczyX1BakTUJSbgXMijJS51iUiM0nvUvrtlhOviNrH/NoKjKLsAzPJTOF+bQBWQrMT5SkbjArsZXcFZhboSk3mJ3KyNTHnPxwKN8FeAFljvl4AQMPCxEhGfqYh1MOdbSYJuDOwxwSl7LAovyMLB0YV5DV8ldCGznDelGS9fInU0BpBg1M8jNKSz4nRUrGMCfZUdtzT5CTIUxZk5lNt5lNwFDAiA1ZwypJwMyHASWZwzK+NrIphNasSvf5LrUyEDWChURGmWBKTsjAngX4Yde4nvJ5KYPlz0qH1JOGDbmzNyqQk81kUW0e1R9hI0zC3rl6a0sm0+yr0vaoQE2pMFps6WbzQEztYySPXOMcZHQFRklIi/4k+xOhmWIMP7DtuP/HvpbjCiPF2UjkmBosqW36Xv0bb8Q2u6G0+wzx0M3Ji3FEepja6tXX18+uYIh74pxzKt5gch+7vSdfPq9ggh8wPm2yug4m964bPPn4FAY0J03Z1sxkve5+evkMBmxZOSdUQ4vpve/uXJgI67jH77IpQ0zg6dU9q1fX3X1vTJSxkvSO3W4CgbGefbi+eHLfEPHD6tXbofUWBhTUDo4gdvRGJ73sfuuiH81PL7veJxjgHrcWh0wx0ufugBfoXV307UsYoCSbYw5b0scozuWBpM9fY/Ci661gQE73mCrYYJxvzFvrWptAEF0uy7KLgBWtYguJaYCi1EsL7/9qjQ1hlnDZBZavOb90NZ85zMyZszOxoaoZHGjowNPw/9UuWgH4sXqd0KPQMmRHonls6jy6SR6hNfBQfVxJCtPXpVO5pBZc8S8ZOloD2+qnrDncKjFHhaD1GnXBYi9hcRYGQRju05iZHlYgT3LhelhsDs3yEzESgJQHZFnka2ULmh9lzFpqFZ/k4v9bxV2GSOjXGGhYzMlvqMMXqbAudUw5tNEZXAFGUOD5fedJJqyvSz2w9pmI3gKuAJp6cwMrdn7vENZF5epjea4GcQ+iZB+wSUM3N9rVG5ozB0hP4rDukAquuaTfyDNm6md5YbE94fUqmCNUGAIrV63rcy2GCoGFPsR2r68Q2HuBCCvnykbqvgia6Pr29IoV9NjbqrpTy1WfwRXgpU1wXWt6j70fX+39RCq5OtTYi3IYW0WcBW4UkcgNM7uwcCu48YmtMTW0d9fVmCl6hJXtQjdMGxuYjnJ13ZoLwHc3js6xTU/CvMdTJ6FvY7PDL0hRXCkMg5MZ/dXnXZMX1qfEmrhkfB5bVf1BCnPYrpMvmeUl/AyYOX59Nq3XPlc3w8/hGivkypqWkXrzfFOQNIlch1Yrpo3ZtsPK9IbUcbV58xOlzDFNM0mcgrHDlzrHVSNBFjPHOfzITgPSsk1uE0i77j/2tLZzu54yAdd6thb2z9g0Gh7njKTWIYBuxi7Ht7ERSZ3HDMnj25C5f4FSXqjDgAgPDxS1Yd+kM85GnMh55HhQTBnGfBmS6B1SE9cG7mdQNv1UBVHSY1rWCPX66Jj1moOk8XUgVT+qW8Vcg6PUFUSKK0a4JY3YprDm4iexhjXhc0+va6Yw5HAKR3EQ5fQAEkWu60a50eXq+tSnbRY4rn9PYy3tpvrCJL6vdkq5GmMiojvuuaz6fbNxKyiPiGv2UTltX/BRfe89vUMKczgQDRQ2ZxM4Clx5MKOVJDqFcaxcEu/6jMQjUhhXKjlZZSKuyKqrPau/PXKXNVAvfbfYHRgJJX546v0V0yEKetCKbHFcKUg6PHxdXXW9MAwZ/89dHbh2kLVqOwPmEth2PfFVdY0vlitKeReByZQs/lH97Ob1Fl0AVwuNkTW8Y8lqE9Zet10deq12l8z1eBUuCS/hhax1uuusXB+QIiTzuBJN00YckctVKaYT5On+vGAxlOt/0mHkfaLv0WV8YzU5LWaSs9PfXS+lClZ5gC/ZXx3hkzPKkLMohHttLmsTBeQX73MElhWEV0i1LEMMVWpzPrSY1WEhqcVQQwJ5sOIapQqeKec28ZG8FIMUwUhCGSKpWYlzVtaedUA/Vd/kgplyFWvKDSf+nEkTUodUdBUB+xPwW1tN06xeqqfTkAsshXgLxemtO0lVKcTigvXbUoq7d7rkRBXSHu44MWw+p4nTDRgpFaAS1y4GD2TI+9tAlQ+srwNvR2aaWH1tf1B+h1QnsaGLP2gQjCtaDFS5dlYW0J73ks5JvQxDrgnfRwzaMuIRY5gt8TsgSAw6XYifFckw6I4gwSwN3vSYH7bNM/GGzNc1eIFoh3XTivIVUgndGJv3geETcgXwCsYErW3sXnOltOXwsjJAlUCnlOcK9x0XVCGQ+teFbyvMmgDB8cLp9CZwDta2o8MCONBqHNmCfa++8N88IXWA99TuPIItFHAVV4cJvtubeF2/qe7X4lrm9tkPorIc5mpNMaC5RIeFEgUXpZ5rA5om+mkFtyFlOZsrSHwIdRIjMa4rzAvVGlwBBgnCEFarS7gyKPUUuri8mXirfq3JFaCAqwXiZMuuOx6r25VsE3AljPaRNOxgFlcQJ02HvzHROG2rl3W4It3u7CPpRkc9XC0DziQmAU2I6cVwPSBJoU41kjnNfSXuXFWl5mWkUV9PEw62gB/wfl+La62/hX1AYXr83cxuMWieBsnJJ3KuWYX0BBNWXnWDNSZzfViVK2CIq1l2ARYS6sA5jVqhdOVGxBfElZVdgOWKeK7BXK4wWVMMJua6EbSodIDrhcX1L3XX2uUkDERlCDQFgaP4QqVoX9hjj2/+/1/TbYo3NFBmSqvb+aC7Z7tdbjNz5yaZSaj2zmLNT7feyTuHFRVuG/gw4vW/YtVHUs2C813rXkWoKDBWKLWJN+rh3xT5SLVG9nZBegnWj1fl4Xg2Vr0Espnr7q5jwcyvG0goHg9fN7+icgW2GxeQ5aal4jpZx9wlj5C7IYixBNarBipMDw4rrAhFn+XBcekv/5Vc3YTFp+sF6lj7vZtgvC0JIgSDWTG8HkuHmOdcN1CzA4SBKRdlbl20lp3akFuZSzjPWaJq7xq9+JnWhwda968b1MCoS/R2SxayKoRCJJy/rqafWkzrvx5Zt/MYk//S3rK2ujTyX2fC7qrs+AGCpcataa653rTw8cjtKq4y/lb2LQ1nwfYoNmjr4UOS7IuZL/2A0bzSvLreOuJ+1yIt40734Bz6pyuZ4mPeCZGleGG7hR7TDBp2l4RfNN+vEqjzCCLowB+xk3jqVtYHPn4Uz9hhO0O4JrzyNdRuYat5eqBWgf1AGtDiE6i5YVEMy2DYpkFfsCuEa8zfbEY97eRALdKukA8xRfFURweXBwB7RB5EyEnYKj854XC4cMw+x+AHUuoE8a9mbnNJd7cwttqRgtyutCPP8u9u2EbWwkzuCsSFvbPDlf5ThZP22jDbO7OY4vD8xeEVZmSpbMN6QdZeKgx9ATVqCDpgF/CFIMNHxZFNE8VEBfp0dVH0gNQ+mIosFZxVdORRn3ojIgnQowawlEEVIgRGDQVOFyfYCmq2LwWaMQXY7lKxv6XAA7mA6bwjWDOMAIu/GIKFc1ZvKLKMKOm4Cr4Me2svszWaiWz9O7PQzvtqz5TxdCOkdaf3hTzgC0HwkpSDYRbOrQa0fQpkxl0JAPUT08ABU0OF0ZEFtrZYPAQzzcdEEwJ0EhGXw5XoZTcwDSuhy1FhNu8+LlzXJ5QxKZSqFU6lE5eGUce2EspCRJJjymuRLghFA9Yuu0Io7/uZAC6j21IE8q2EVYCZmDM62E9pMdfuXP9TnAGpNVSFFQEmnH09VFqMLfPFvFUlSDIKns3YaW7cbXaJxeepgRZJUpHtlk5sp4s8r9JhMgAWstRliShhlA9gYuNMZwWWc+YYLla21adLrtqWXBH2BUQVPwhgcf1SdBus4B51muD2+OsMEh6i3SW/MBy6W4pVSPMYub1nj2SBnCRWTfKC/0p6uGElxVrZNB8ZqIU9xsmErtBGoiYKQbw4y5uypVFIxRK8BWISKgn0nbEtkYWrm3MEJSDB+giV0GHGmuAM76Ov+PIf+/jyeA1j4pKTwRrOAPXBcniwPLtisU2IdSPGeog8P+ZjxRQ5CZCMJE3cz5sPDG6+BVbKkCw4WDettF4j7rGmwxPDq96c+1WIVczDrDYlMBBM423wLbMR6WXvKup3abzKeTg3/8mwzjddqEgA8hZuOPEErME+ivR+jIepLmvXhTfRH0tdHzZWEITjsORnng8CJ57gwymklFg3JXBMB+suxpHGUBR8F34xsBXwagpW71KsKG1xsWaL0+MI1rIbOj4Opt3njwurVTuiPYkDo3hgNbgX8OHRYA1NfsUpZBJagmZogmGN8VLCTXys0MNKq1HJCax0HFQcCyOyJbQg80iY6VjBwxok5GAderu4vPRWi1fNtzPLFd9v68Pk91Z4oZzY1cMqd3IPm5kwnZOz03SshxcFXG7K/iD1fjGODZIcZw92enZLrGYJe8vnYSyi5+kFp8G/HdnSenNbHtaFZvMwbMfQo+JzaL8g7Qix0hgPy3NOaz4j00jOoUXaecHFuifbQlPgQ/1WGXIZMKMRyTaFrS9mVZv8HNp3zWsuVs/vmBmCAfPcX+j+qvt2xmYaSKWn1L4flxrvOVj/jRWsOJUPGl7zaLBmk25ueMG56Or9Y8Hq04QrEz9xYppRxFZ6/8R2dPGw8jj26fc7ufH1nH1gVpMuHy7Hum/7zL5A5+O93G975mKkJXt+8OqerkKVXmPgXit0x/ZHRjyX3Xp2v/a7vbvpcRYE4gA+l944AJGXAAeVi6GxVpv/9/9qz3aTp6fuZmtRYbO/c2M6OgMDmvDamYmXug70fa8EOyxUKaZfHFotUMMJ8nmOJvO1ZrFccTRZB08VUhrjunNU69PBrJqQtaLa9CtLz0DU1hdbvnLdwhImqorSqweZANyoIicBQ2vdwAPVY0JitNpQ0/g0AuG9NtrVEqzEm5MkE7UMxleOSO9RCW0NwVqeoc9rZhgqXqMx5LgML399p3SmB2KBnorGXLZCO6PsZcBJQDDKJBbdQLEOSVE2HohUKCbgGsroVmzNqoTUUFYSuFCBlINQlNkZGMprKsL8CDVzEyZK2267crSb/KfGlbYQiMBA21ACuqB3H6cJ8LQVZgoaoZTYuMXpAVFGHlsNF2hT1kGX8IlBz2EYPfPb8lh1X5bqb8tjqeF2Si7roCUdhnmsyt/1edw1dIybBh9pR6MDvxzRMgYBtDvf5tMAzLsPyGwB3AFL6WsHtIr2JDXg6RC9Bu/3S+SmAzpLB2EGmOM+0Taew410oHMH6JHR1oIB4E90LHmPtt822nukfGjoePdo+WW7aG0H6KmMFQfRtQX4ss19PwtgLibSO9sCEDH3ww2LBtJS2taPHWaAmzNlo3oHQJS5VytbAHoJlMHp82JuKvdLQdULAK639BYmBw5oU8KmwHfslADoQa4tstB3+NDF0qr0qesi8MF52dBr7Gg0AN6OJUymP9SMrcYH3V5k+FHa2tEn3KXpeqLaNHFw+JSMjzKw578KsfdixiexyJJm0teoc28cHlIS/sGkNOM/LqZY03djXwoyepM0nnHJX6Kt92l+KQQbH2QIvzDEP3/+ZPEP2iyQCHNxVEIAAAAASUVORK5CYII=" /> 
+                            <p>On time Arrival</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="patner-logo">
+                            <!-- <img class="img-responsive" src="assets/images/icons/3.png" /> -->
+                            <img class="img-responsive" src="data:image/png;base64,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" /> 
+                            <p>Nearby local Support</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="top-gap">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="section-heading">
+                            <h2>Download the App</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="download-text">
+                        <h3>Download the App</h3>
+                        <p>Choose and book from 100+ services and track them on the go with the App</p>
+                        <ul>
+                            <li>
+                                <a href="https://play.google.com/store/apps/details?id=com.fixpapa.ffixpapa">
+                                    <!-- <img class="img-responsive" src="assets/images/googlePlay.png" /> -->
+                                    <img class="img-responsive" src="data:image/png;base64,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" /> 
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <!-- <img class="img-responsive" src="assets/images/appStore.png" /> -->
+                                    <img class="img-responsive" src="data:image/png;base64,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" /> 
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="phone-img">
+                        <img class="img-responsive" src="assets/images/phone.png" />
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="section-heading">
+                            <h2>About Us</h2>
+                        </div>
+                        <div class="about-text" style="color:grey;text-align: justify;text-justify: inter-word;" >
+                            <p>
+								We exhibit G L Technovations, a project plans association in the field of Information Technology since Year 2006.
+								It is professionally managed, Vibrant and Dynamic Company involved with Marketing and overhauling practices with Sales
+								and Service Networks at genuine territories with around 3500+ pleased customers in Rajasthan. We use development as an
+								approach to connect with customers by outfitting them with straightforward courses of action that update their gainfulness.
+								We deal with equipment advancement, organizing advances, programming advances, and reasonable reproductions in mix with our
+								size and this stays up with the latest with present day innovation. 
+							</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="section-heading">
+                            <h2>Contact Us</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="contact-text">
+                            <h6><i class="fa fa-map-marker"></i>Address</h6>
+                            <p>G L Technovations.<br/>
+								5-F25, 5th Floor, Mahima Trinity Mall,<br/>
+								Swage Farm near Sanganer Road, <br />
+                                Jaipur Rajasthan - 302019<br/>
+								Time: Mon - Sat (9:30 am - 6:30 pm)
+							</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="contact-text">
+                            <h6><i class="fa fa-phone"></i>Phone Number</h6>
+                            <p>0141-2980666<br />+919799044449</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="contact-text">
+                            <h6><i class="fa fa-envelope"></i>Email Address</h6>
+                            <p>support@fixpapa.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+	<app-create-job #fixProblemModal></app-create-job>
+	<app-new-purchase #newPurchaseModal></app-new-purchase>
+	<app-bid-request #bidModal></app-bid-request>
+	<app-amc-request #amcModal></app-amc-request>
+	<app-rent-request #rentModal></app-rent-request>

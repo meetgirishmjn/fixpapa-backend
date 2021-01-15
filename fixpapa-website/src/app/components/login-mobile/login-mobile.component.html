@@ -1,0 +1,47 @@
+<div class="modal wow slideInRight" id="login-mobile-modal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header otp-modal-header">
+        <button type="button" class="close" data-dismiss="modal" (click)="closeModal()"  aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body otp-modal-body">
+        <!-- <h3>Enter 4-digit code</h3> -->
+        <!-- <h6 *ngIf="!mode" >We have sent an OTP to {{registeredMobileNo}}</h6> -->
+        <div *ngIf="isReg;then content else other_content">here is ignored</div>  
+        <ng-template #content>
+          <p>Enter the OTP</p>
+          <br/>
+          <form noValidate [formGroup]="otpForm" (ngSubmit)="verifyOtp()"  >
+            <input class="otp" placeholder="Please Enter OTP" type="tel" name="otp"
+              formControlName="otp" />
+            <div class="Resend-text">
+              <a (click)="resendOtp()" >Resend OTP</a>
+            </div>
+            <div class="otp-button" style="margin-top:20px;" >
+              <button type="submit" class="btn btn-primary" >Submit</button>
+            </div>
+          </form>
+        </ng-template>
+        <ng-template #other_content>
+          <p>Enter the Mobile No.</p>
+          <br/>
+          <form noValidate [formGroup]="loginForm" (ngSubmit)="loginMob()"  >
+            <div class="form-group">
+              <input class="otp" placeholder="Mobile Number" 
+              type="tel" name="mob" formControlName="mob" />
+            </div>
+            <div class="error-div" *ngIf="loginForm.controls['mob'] && loginForm.controls['mob'].errors && (loginForm.controls['mob'].dirty || loginForm.controls['mob'].touched)" >
+              <p *ngIf="loginForm.controls['mob'].errors.required">Contact No. is required</p>
+              <p *ngIf="loginForm.controls['mob'].errors.validMobile">Invalid Contact No.</p>
+            </div>
+            <div class="otp-button" style="margin-top:20px;" >
+              <button type="submit" class="btn btn-primary" >Submit</button>
+            </div>
+          </form>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

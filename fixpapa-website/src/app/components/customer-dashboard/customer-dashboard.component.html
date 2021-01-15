@@ -1,0 +1,1280 @@
+	<section class="customer-deshboard-bg inner-top-gap">
+        <div class="container">
+			<div class="row" *ngIf="myInfo && myInfo.realm === 'vendor'" >
+				<div class="col-md-10" ></div>
+				<div class="col-md-1" >
+					<label class="switch">
+						<input type="checkbox" *ngIf="myInfo.isAvailable" checked id="check1" (change)="vendorAvailability(false)" />
+						<input type="checkbox" *ngIf="!myInfo.isAvailable" id="check1" (change)="vendorAvailability(true)" />
+						<span class="slider round"></span>
+					</label>
+				</div>
+				<div class="col-md-1"><h4 style="color:grey;" ><b>Online</b></h4></div>
+			</div>
+            <div class="row">
+				<div *ngIf="loadingMyInfo" class="col-md-12" style="height:200px;" >
+					<img src="assets/images/loader.gif" alt="loading screen" id="loadingInfo" />
+				</div>
+                <div class="col-md-3" *ngIf="!loadingMyInfo && myInfo" >
+                    <div class="cdeshboard-link">
+                        <ul>
+							<li [ngClass]="{'current' : currentTab === 'latestJobs' }" *ngIf="myInfo.realm === 'vendor'" id="link1">
+                                <a (click)="currentTab='latestJobs';latestVendorJobs('latest')"  >
+                                    <img src="assets/images/icons/job1.png" *ngIf="currentTab === 'latestJobs'" class="icons-nav-container" />
+									<img src="assets/images/icons/job.png" *ngIf="currentTab !== 'latestJobs'" class="icons-nav-container" /> Latest Jobs
+                                </a>
+                            </li>
+							<li [ngClass]="{'current' : currentTab === 'onGoingJobs' }" *ngIf="myInfo.realm === 'vendor'" id="link2">
+                                <a (click)="currentTab='onGoingJobs';getOngoingjobs('open')" >
+                                    <img src="assets/images/icons/job1.png" class="icons-nav-container" *ngIf="currentTab === 'onGoingJobs'" />
+									<img src="assets/images/icons/job.png" class="icons-nav-container" *ngIf="currentTab !== 'onGoingJobs'" /> Ongoing Jobs
+                                </a>
+                            </li> <!-- engineer -->
+							<li [ngClass]="{'current' : currentTab === 'openJobs' }" *ngIf="myInfo.realm === 'engineer'" id="link3">
+                                <a (click)="currentTab='openJobs';getEngineerJobsNew('today')" >
+                                    <img src="assets/images/icons/job1.png" *ngIf="currentTab === 'openJobs'" class="icons-nav-container" />
+									<img src="assets/images/icons/job.png" *ngIf="currentTab !== 'openJobs'" class="icons-nav-container" /> Open Jobs
+                                </a>
+                            </li>
+							<li [ngClass]="{'current' : currentTab === 'inProgJobs' }" *ngIf="myInfo.realm === 'engineer'" id="link4">
+                                <a (click)="currentTab='inProgJobs';getEngineerJobs('ongoing')" >
+                                    <img src="assets/images/icons/job1.png" class="icons-nav-container" *ngIf="currentTab === 'inProgJobs'" />
+									<img src="assets/images/icons/job.png" class="icons-nav-container" *ngIf="currentTab !== 'inProgJobs'" /> In Progress Jobs
+                                </a>
+                            </li> <!-- engineer -->
+							<li [ngClass]="{'current' : currentTab === 'manageEngineer' }" *ngIf="myInfo.realm === 'vendor'" id="link5">
+                                <a (click)="currentTab='manageEngineer';getEngineers();" >
+                                    <img src="assets/images/icons/manage_eng1.png" class="icons-nav-container" *ngIf="currentTab === 'manageEngineer'" />
+									<img src="assets/images/icons/manage_eng.png" class="icons-nav-container" *ngIf="currentTab !== 'manageEngineer'" />Manage Engineer
+                                </a>
+                            </li>
+                            <li [ngClass]="{'current' : currentTab === 'myOrders' }" *ngIf="myInfo.realm === 'customer'" id="link6">
+                                <a (click)="getMyOrders('pending')" >
+                                    <img src="assets/images/icons/job1.png" class="icons-nav-container" *ngIf="currentTab === 'myOrders'" />
+									<img src="assets/images/icons/job.png" class="icons-nav-container" *ngIf="currentTab !== 'myOrders'" />My Jobs
+                                </a>
+                            </li>
+                            <li id="link2" [ngClass]="{'current' : currentTab === 'myInfo' }" >
+                                <a (click)="currentTab = 'myInfo';getInfo()" >
+                                    <img src="assets/images/icons/myinfo1.png" class="icons-nav-container" *ngIf="currentTab === 'myInfo'" />
+									<img src="assets/images/icons/myinfo.png" class="icons-nav-container" *ngIf="currentTab !== 'myInfo'" />My Info
+                                </a>
+                            </li>
+                            <li id="link3" [ngClass]="{'current' : currentTab === 'accountSettings' }" *ngIf="myInfo.realm !== 'engineer'" >
+                                <a (click)="accountSettings()" >
+                                    <img src="assets/images/icons/account1.png" class="icons-nav-container" *ngIf="currentTab === 'accountSettings'" />
+									<img src="assets/images/icons/account.png" class="icons-nav-container" *ngIf="currentTab !== 'accountSettings'" />Account Setting
+                                </a>
+                            </li>
+                            <li id="link4" [ngClass]="{'current' : currentTab === 'manageAddress' }" *ngIf="myInfo.realm === 'customer' || myInfo.realm === 'vendor'" >
+                                <a (click)="getAddresses();" >
+                                    <img src="assets/images/icons/address1.png" class="icons-nav-container" *ngIf="currentTab === 'manageAddress'" />
+									<img src="assets/images/icons/address.png" class="icons-nav-container" *ngIf="currentTab !== 'manageAddress'" />Manage Address
+                                </a>
+                            </li>
+							<li id="link4" [ngClass]="{'current' : currentTab === 'changePassword' }" *ngIf="myInfo.realm !== 'engineer'" >
+                                <a (click)="currentTab='changePassword';createChangePasswordForm();" >
+                                    <img src="assets/images/icons/password1.png" class="icons-nav-container" *ngIf="currentTab === 'changePassword'" />
+									<img src="assets/images/icons/password.png" class="icons-nav-container" *ngIf="currentTab !== 'changePassword'" />Change Password
+                                </a>
+                            </li>
+							<li id="link5" [ngClass]="{'current' : currentTab === 'payment' }" *ngIf="myInfo.realm === 'vendor'" >
+                                <a (click)="currentTab='payment';getPayments();" >
+                                    <img src="assets/images/icons/payment1.png" class="icons-nav-container" *ngIf="currentTab === 'payment'" />
+									<img src="assets/images/icons/payment.png" class="icons-nav-container" *ngIf="currentTab !== 'payment'" />Payments
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+				<app-sidebar [engineersArr]="freeEngList" (successAssign)="getVendorJobs($event)" [jobId]="searchForJob" #freeEngineersList></app-sidebar>
+                <div class="col-md-9" *ngIf="!loadingMyInfo && myInfo" >
+					<!-- for engineer -->
+					<div id="sec12" class="deshboard-detail-sec" *ngIf="currentTab === 'openJobs'" >
+                        <h2>Open Job</h2>
+                        <div class="inner-list ongoing-job">
+                            <div class="row no-row ongoing-job-border">
+                                <ul>
+                                    <li class="col-md-4" id="list4" [ngClass]="{'list-active' : jobTypeNewEng === 'today' }" (click)="jobTypeNewEng = 'today';engineerNewJobs('today')" >
+                                        <a>Today</a>
+                                    </li>
+                                    <li class="col-md-4" id="list5" [ngClass]="{'list-active' : jobTypeNewEng === 'tomorrow' }" (click)="jobTypeNewEng = 'tomorrow';engineerNewJobs('tomorrow')"  >
+                                        <a>Tomorrow</a>
+                                    </li>
+                                    <li class="col-md-4" id="list6" [ngClass]="{'list-active' : jobTypeNewEng === 'week' }" (click)="jobTypeNewEng = 'week';engineerNewJobs('week')" >
+                                        <a>All Jobs</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+						<div class="inner-detail-text" id="detail4" *ngIf="jobTypeNewEng === 'today' || jobTypeNewEng === 'tomorrow' || jobTypeNewEng === 'week'">
+							<!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p> -->
+							<!-- jobs -->
+							<div class="col-md-12 fixed-height" *ngIf="loadingEngJobs" >
+								<img src="assets/images/Loading_apple.gif" alt="loading screen" id="loading-jobs" />
+							</div>
+							<div class="col-md-12 fixed-height" *ngIf="!loadingEngJobs && engJobs.length === 0" >
+								<h5 class="greyColor" ><b>Oops Jobs are not found</b></h5>
+							</div>
+							<div *ngIf="engJobs.length > 0 && !loadingEngJobs" class="col-md-12 fixed-height " >
+								<div class="row listing" *ngFor="let job of engJobs;let index1 = index;" [ngClass]="{'border' : index1 != engJobs.length-1}"  >
+									<div class="row" >
+										<div class="col-md-3 cont1" >
+											<div class="latest-job-img">
+												<img class="img-responsive" [src]="job.category.image" />
+												<h4 *ngIf="job.category" class="expert-cont" >{{job.category.name | uppercase}}</h4>
+												<table class="brand-prod-table" >
+													<tr *ngIf="job.brand && job.brand.name !== job.category.name">
+														<td>BRAND</td>
+														<td class="brand-prod" >{{job.brand.name}}</td>
+													</tr>
+													<tr *ngIf="job.category.productsIds.length > 1 && job.product"  >
+														<td>PRODUCT</td>
+														<td class="brand-prod" >{{job.product.name}}</td>
+													</tr>
+													<tr *ngIf="job.orderId"  >
+														<td>ORDER #</td>
+														<td class="brand-prod" >{{job.orderId}}</td>
+													</tr>
+												</table>
+											</div>
+										</div>
+										<div class="col-md-5" >
+											<div class="list-text" >
+												<div class="list-location-text">
+													<h4>Problems</h4>
+													<table class="prob-cont" >
+														<tr *ngFor="let problem of job.problems;" >
+															<td>{{problem.probContent}}</td>
+															<td>{{problem.price | currency:'INR'}}</td>
+														</tr>
+														<tr>
+															<td>TOTAL</td>
+															<td>{{job.totalPrice | currency:'INR'}}</td>
+														</tr>
+													</table>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-4" >
+											<h5><span class="expert-cont" >Start Date : </span><span class="greyColor" >{{job.startDate | date }}&nbsp;,&nbsp;{{ job.startDate | date : 'shortTime' }}</span></h5>
+											<h5><span class="expert-cont" >End Date   : </span><span class="greyColor" >{{job.endDate | date }}&nbsp;,&nbsp;{{ job.endDate | date : 'shortTime' }}</span></h5>
+											<h5 *ngIf="job.schedule && job.schedule.eStartDate && job.schedule.eEndDate" ><span class="expert-cont" >Scheduled : </span><span class="greyColor" >{{job.schedule.eStartDate | date : 'shortTime' }}&nbsp;-&nbsp;{{ job.schedule.eEndDate | date : 'shortTime' }}</span></h5>
+											<div class="row">
+												<div class="col-md-1 col-xs-2" ><img class="eng-info-img" src="assets/images/address.png" /></div>
+												<div class="col-md-10 col-xs-10">
+													<!-- <h5 *ngIf="job.address.length>0" >{{job.address[0].value}}&nbsp;{{job.address[0].street}}</h5> -->
+													<h5 *ngIf="job.address.value" ><span *ngIf="job.address.street" >{{job.address.street}},&nbsp;</span>{{job.address.value}}</h5>
+												</div>
+											</div>
+											<br/>
+											<span class="status-cont" *ngIf="jobType === 'ongoing'" >{{job.status | uppercase}}</span>
+										</div>
+									</div>
+									<div class="row" >
+										<div *ngIf="job.showSlots" style="margin-top:20px;margin-left:25px;" >
+											<label *ngFor="let slot of job.availableSlots[0];let i = index;" class="experties-cont" ><a class="schedule-cont" (click)="scheduleJob(job,slot.time,index1)" >{{slot.time}}</a></label>
+										</div>
+									</div>
+									<div class="row latest-job-button1">
+										<button type="button" class="btn btn-outline-primary" *ngIf="job.status === 'scheduled' || job.status === 'vendorAccepted'" (click)="job.showSlots = !job.showSlots" >Schedule</button>
+										<button type="button" class="btn btn-outline-primary" (click)="navigateToProfile(job.customerId,'customer')" >Customer</button>
+										<button type="button" class="btn btn-outline-primary" *ngIf="jobTypeNewEng === 'today' && (job.status === 'scheduled' || job.status === 'vendorAccepted')" (click)="acceptJob(job.id)" >Accept</button>
+										<button type="button" class="btn btn-outline-primary" (click)="navigateToJob(job.id)" >View Job</button>
+									</div>
+								</div>
+							</div>
+							<!-- jobs -->
+                        </div>
+					</div>
+
+					<div id="sec13" class="deshboard-detail-sec" *ngIf="currentTab === 'inProgJobs'" >
+                        <h2>In Progress Job</h2>
+                        <div class="inner-list ongoing-job">
+                            <div class="row no-row ongoing-job-border">
+                                <ul>
+                                    <li class="col-md-6" id="list4" [ngClass]="{'list-active' : jobTypeEng === 'ongoing' }" (click)="getEngineerJobs('ongoing')" >
+                                        <a>On Going</a>
+                                    </li>
+                                    <li class="col-md-6" id="list5" [ngClass]="{'list-active' : jobTypeEng === 'completed' }" (click)="getEngineerJobs('completed')"  >
+                                        <a>Completed</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+						<div class="inner-detail-text" id="detail4" *ngIf="jobTypeEng === 'ongoing' || jobTypeEng === 'completed'">
+							<!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p> -->
+
+							<!-- jobs -->
+							<div class="col-md-12 fixed-height" *ngIf="loadingEngJobs" >
+								<img src="assets/images/Loading_apple.gif" alt="loading screen" id="loading-jobs" />
+							</div>
+							<div class="col-md-12 fixed-height" *ngIf="!loadingEngJobs && engJobs.length === 0" >
+								<h5 class="greyColor" ><b>Oops Jobs are not found</b></h5>
+							</div>
+							<div *ngIf="engJobs.length > 0 && !loadingEngJobs" class="col-md-12 fixed-height " >
+								<div class="row listing" *ngFor="let job of engJobs;let i = index;" [ngClass]="{'border' : i != engJobs.length-1}" >
+									<div class="row" >
+										<div class="col-md-3 cont1" >
+											<div class="latest-job-img">
+												<img class="img-responsive" [src]="job.category.image" />
+												<h4 *ngIf="job.category" class="expert-cont" >{{job.category.name | uppercase}}</h4>
+												<table class="brand-prod-table" >
+													<tr *ngIf="job.brand && job.brand.name !== job.category.name">
+														<td>BRAND</td>
+														<td class="brand-prod" >{{job.brand.name}}</td>
+													</tr>
+													<tr *ngIf="job.category.productsIds.length > 1 && job.product"  >
+														<td>PRODUCT</td>
+														<td class="brand-prod" >{{job.product.name}}</td>
+													</tr>
+													<tr *ngIf="job.orderId"  >
+														<td>ORDER #</td>
+														<td class="brand-prod" >{{job.orderId}}</td>
+													</tr>
+												</table>
+											</div>
+										</div>
+										<div class="col-md-5" >
+											<div class="list-text" >
+												<div class="list-location-text">
+													<h4>Problems</h4>
+													<table class="prob-cont" >
+														<tr *ngFor="let problem of job.problems;" >
+															<td>{{problem.probContent}}</td>
+															<td>{{problem.price | currency:'INR'}}</td>
+														</tr>
+														<tr>
+															<td>TOTAL</td>
+															<td>{{job.totalPrice | currency:'INR'}}</td>
+														</tr>
+													</table>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-4" >
+											<h5><span class="expert-cont" >Start Date : </span><span class="greyColor" >{{job.startDate | date }}&nbsp;,&nbsp;{{ job.startDate | date : 'shortTime' }}</span></h5>
+											<h5><span class="expert-cont" >End Date : </span><span class="greyColor" >{{job.endDate | date }}&nbsp;,&nbsp;{{ job.endDate | date : 'shortTime' }}</span></h5>
+											<h5 *ngIf="job.schedule && job.schedule.eStartDate && job.schedule.eEndDate" ><span class="expert-cont" >Scheduled : </span><span class="greyColor" >{{job.schedule.eStartDate | date : 'shortTime' }}&nbsp;-&nbsp;{{ job.schedule.eEndDate | date : 'shortTime' }}</span></h5>
+											<div class="row">
+												<div class="col-md-1 col-xs-2" ><img class="eng-info-img" src="assets/images/address.png" /></div>
+												<div class="col-md-10 col-xs-10">
+													<!-- <h5 *ngIf="job.address.length>0" >{{job.address[0].value}}&nbsp;{{job.address[0].street}}</h5> -->
+													<h5 *ngIf="job.address.value" ><span *ngIf="job.address.street" >{{job.address.street}},&nbsp;</span>{{job.address.value}}</h5>
+												</div>
+											</div>
+											<br/>
+											<span class="status-cont" *ngIf="jobTypeEng === 'ongoing' && (job.status === 'outForDelivery' || job.status === 'on the way' || job.status === 'paymentDone' || job.status === 'inprocess')" >{{job.status | uppercase}}</span>
+											<span class="status-cont" *ngIf="jobTypeEng === 'ongoing' && job.status === 'billGenerated'" [tooltip]="billGenerated" >{{job.status | uppercase}}</span>
+											<span class="status-cont" *ngIf="jobTypeEng === 'completed' && job.status === 'indispute'" [tooltip]="completed" style="background-color:red !important;" >{{job.status | uppercase}}</span>
+											<tooltip-content #billGenerated [animation]="true" placement="bottom">
+												<h5 *ngIf="job.bill" >Generated Bill</h5>
+												<h6 *ngIf="job.orderId" >Order No. : {{job.orderId}}</h6>
+												<h6 *ngIf="job.bill" >Amount : <small *ngIf="job.bill.totalAmount" >{{job.bill.totalAmount}}</small></h6>
+												<h6 *ngIf="job.bill" >Service Cost : <small *ngIf="job.bill.addServiceCost" >{{job.bill.addServiceCost}}</small></h6>
+												<h6 *ngIf="job.bill?.discount" >Discount : <small *ngIf="job.bill.discount" >{{job.bill.discount}}</small></h6>
+												<h6 *ngIf="job.bill.addPart && job.bill.addPart.length > 0" >Parts Added</h6>
+												<h6 *ngFor="let part of job.bill.addPart;" ><small>{{part.partName}}</small>&nbsp;<small>{{part.partNumber}}</small>&nbsp;<small>{{part.partCost}}</small></h6>
+												<h6 *ngIf="job.bill.total" >Total Amount : <small>{{job.bill.total}}</small></h6>
+												<h6 *ngIf="job.bill.clientResponse" >Client Response : <small>{{job.bill.clientResponse}}</small></h6>
+												<h6 *ngIf="job.bill.generatedAt" ><small *ngIf="job.bill.generatedAt" >{{job.bill.generatedAt | date }}&nbsp;,&nbsp;{{ job.bill.generatedAt | date : 'shortTime' }}</small></h6>
+											</tooltip-content>
+
+											<span class="status-cont" *ngIf="jobTypeEng !== 'completed' && job.siteType === 'Offsite'" [tooltip]="offsite" >{{job.siteType}}</span>
+											<tooltip-content #offsite [animation]="true" placement="bottom">
+												<div *ngIf="job.pick" >
+													<h6 *ngIf="job.pick.proCondition" >Detail</h6>
+													<h5 *ngIf="job.pick.duration" >Time Required : <small>{{job.pick.duration}}&nbsp;days</small></h5>
+													<h6 *ngIf="job.pick.damage" >Damage : <small>{{job.pick.damage}}</small></h6>
+													<h6 *ngIf="job.pick.details" >Details : <small>{{job.pick.details}}</small></h6>
+													<h6 *ngIf="job.pick.proCondition" >Condition : <small>{{job.pick.proCondition}}</small></h6>
+													<!--<h6 *ngIf="job.pick.offlineStatus && job.pick.offlineStatus.length > 0" >Offline Status</h6>
+													<table *ngIf="job.pick.offlineStatus && job.pick.offlineStatus.length > 0" >
+														<tr>
+															<td>Date</td>
+															<td>Status</td>
+														</tr>
+														<tr *ngFor="let status of job.pick.offlineStatus;" >
+															<td>{{status.workDate}}</td>
+															<td>{{status.text}}</td>
+														</tr>
+													</table>-->
+													<h6 *ngIf="job.pick.createdAt" ><small *ngIf="job.pick.createdAt" >{{job.pick.createdAt | date }}&nbsp;,&nbsp;{{ job.pick.createdAt | date : 'shortTime' }}</small></h6>
+												</div>
+											</tooltip-content>
+
+											<span class="status-cont" *ngIf="jobTypeEng == 'completed' && job.status === 'canceled'" [tooltip]="cancel" >{{job.status | uppercase}}</span>
+											<tooltip-content #cancel [animation]="true" placement="bottom" >
+												<h6 *ngIf="job.cancelJob" >{{job.cancelJob.cancelledDate | date }}&nbsp;,&nbsp;{{ job.cancelJob.cancelledDate | date : 'shortTime' }}</h6>
+												<h6 *ngIf="job.cancelJob" >Cancelled By - {{job.cancelJob.cancelledBy}}</h6>
+												<h6 *ngIf="job.cancelJob" >{{job.cancelJob.reason}}</h6>
+												<h6 *ngIf="job.cancelJob" >{{job.cancelJob.comment}}</h6>
+											</tooltip-content>
+											
+											<span class="status-cont"  *ngIf="jobTypeEng === 'completed' && job.status === 'completed' " [tooltip]="completed" >{{job.status | uppercase}}</span>
+											
+											<tooltip-content #completed [animation]="true" placement="bottom">
+												<h6 *ngIf="job.completeJob" >Info</h6>
+												<h6 *ngIf="job.completeJob?.isPaymentDone" >Payment Done</h6>
+												<h6 *ngIf="!job.completeJob?.isPaymentDone" >Payment is not Done</h6>
+												<h6 *ngIf="job.completeJob?.isPaymentDone" >{{job.completeJob.modeOfPayment}}</h6>
+												<h6 *ngIf="job.completeJob?.comment" >{{job.completeJob.comment}}</h6>
+												<h6 *ngIf="job.completeJob?.completedAt" >{{job.completeJob.completedAt | date }}&nbsp;,&nbsp;{{ job.completeJob.completedAt | date : 'shortTime' }}</h6>
+											</tooltip-content>
+											
+										</div>
+									</div>
+									<div class="row latest-job-button1" >
+										<button type="button" class="btn btn-outline-primary" *ngIf="jobTypeEng === 'ongoing' && job.siteType === 'Offsite' && job.status === 'inprocess'" (click)="addPart(job.id)" >Part Request</button>
+										<button type="button" class="btn btn-outline-primary" *ngIf="jobTypeEng === 'ongoing' && job.siteType === 'Offsite' && job.status === 'inprocess'" (click)="updateStat(job.id)" >Update Status</button>
+										<button type="button" class="btn btn-outline-primary" *ngIf="jobTypeEng === 'ongoing' && job.siteType === 'Offsite' && job.status === 'inprocess'" (click)="updateJobStatus(job.id,job)" >Deliver Product</button>
+										<button type="button" class="btn btn-outline-primary" (click)="navigateToProfile(job.customerId,'customer')" >Customer</button>
+										<button type="button" class="btn btn-outline-primary" (click)="navigateToJob(job.id)" >View Job</button>
+									</div>
+								</div>
+							</div>
+							<!-- jobs -->
+                        </div>
+					</div>
+					<!-- for engineer -->
+
+					<!-- for vendor -->
+					<div id="sec7" class="deshboard-detail-sec" *ngIf="currentTab === 'latestJobs'" >
+                        <h2 style="margin-bottom:0px !important;" >Latest Job</h2>
+                        <div class="latest-job-listing" style="padding-bottom:0px !important;padding-top:0px !important;" >
+							<div class="col-md-12 fixed-height" *ngIf="loadingVendorJobs" >
+								<img src="assets/images/Loading_apple.gif" alt="loading screen" id="loading-jobs" />
+							</div>
+							<div class="col-md-12 fixed-height" *ngIf="!loadingVendorJobs && vendorJobs.length === 0" >
+								<h5 class="greyColor" ><b>Oops Jobs are not available</b></h5>
+							</div>
+							<div *ngIf="!loadingJobs && vendorJobs.length > 0" class="col-md-12 fixed-height">
+								<div class="row listing" *ngFor="let job of vendorJobs;let i = index;" [ngClass]="{'border' : i != vendorJobs.length-1}" >
+									<div class="row" >
+										<div class="col-md-3 cont1" >
+											<div class="latest-job-img">
+												<img class="img-responsive" [src]="job.category.image" />
+												<h4 *ngIf="job.category" class="expert-cont" >{{job.category.name | uppercase}}</h4>
+												<table class="brand-prod-table" >
+													<tr *ngIf="job.brand && job.brand.name !== job.category.name">
+														<td>BRAND</td>
+														<td class="brand-prod" >{{job.brand.name}}</td>
+													</tr>
+													<tr *ngIf="job.category.productsIds.length > 1 && job.product"  >
+														<td>PRODUCT</td>
+														<td class="brand-prod" >{{job.product.name}}</td>
+													</tr>
+													<tr *ngIf="job.orderId"  >
+														<td>ORDER #</td>
+														<td class="brand-prod" >{{job.orderId}}</td>
+													</tr>
+												</table>
+											</div>
+										</div>
+										<div class="col-md-5" >
+											<div class="list-text" >
+												<div class="list-location-text">
+													<h4>Problems</h4>
+													<table class="prob-cont" >
+														<tr *ngFor="let problem of job.problems;" >
+															<td>{{problem.probContent}}</td>
+															<td>{{problem.price | currency:'INR'}}</td>
+														</tr>
+														<tr>
+															<td>TOTAL</td>
+															<td>{{job.totalPrice | currency:'INR'}}</td>
+														</tr>
+													</table>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-4" >
+											<h5><span class="expert-cont" >Assigned At:</span><span class="greyColor" >{{job.vendorAssignedDate | date }},&nbsp;{{ job.vendorAssignedDate | date : 'shortTime' }}</span></h5>
+											<h5><span class="expert-cont" >Start Date : </span><span class="greyColor" >{{job.startDate | date }}&nbsp;,&nbsp;{{ job.startDate | date : 'shortTime' }}</span></h5>
+											<h5><span class="expert-cont" >End Date : </span><span class="greyColor" >{{job.endDate | date }}&nbsp;,&nbsp;{{ job.endDate | date : 'shortTime' }}</span></h5>
+											<!-- <h5 *ngIf="job?.schedule?.eStartDate && job?.schedule?.eEndDate" ><span class="expert-cont" >Scheduled : </span><span class="greyColor" >{{job.schedule.eStartDate | date : 'shortTime' }}&nbsp;-&nbsp;{{ job.schedule.eEndDate | date : 'shortTime' }}</span></h5> -->
+											<div class="row">
+												<div class="col-md-1 col-xs-2" ><img class="eng-info-img" src="assets/images/address.png" /></div>
+												<div class="col-md-10 col-xs-10">
+													<!-- <h5 *ngIf="job.address.length>0" >{{job.address[0].value}}&nbsp;{{job.address[0].street}}</h5> -->
+													<h5 *ngIf="job.address.value" ><span *ngIf="job.address.street" >{{job.address.street}},&nbsp;</span>{{job.address.value}}</h5>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row latest-job-button1">
+										<button type="button" class="btn btn-outline-primary" (click)="vendorAcceptOrReject(job.id,'vendorAccepted')" >Accept</button>
+										<button type="button" class="btn btn-outline-primary" (click)="vendorAcceptOrReject(job.id,'requested')" >Reject</button>
+										<button type="button" class="btn btn-outline-primary" (click)="navigateToJob(job.id)" >View Job</button>
+									</div>
+								</div>
+							</div>
+                        </div>
+					</div>
+
+					<div id="sec8" class="deshboard-detail-sec" *ngIf="currentTab === 'onGoingJobs'" >
+                        <h2>On Going Job</h2>
+                        <div class="inner-list ongoing-job">
+                            <div class="row no-row ongoing-job-border">
+                                <ul>
+                                    <li class="col-md-4 col-xs-4" id="list4" [ngClass]="{'list-active' : jobType === 'open' }" (click)="getOngoingjobs('open')" >
+                                        <a>Open</a>
+                                    </li>
+                                    <li class="col-md-4 col-xs-4" id="list5" [ngClass]="{'list-active' : jobType === 'ongoing' }" (click)="getOngoingjobs('ongoing')"  >
+                                        <a>On Going</a>
+                                    </li>
+                                    <li class="col-md-4 col-xs-4" id="list6" [ngClass]="{'list-active' : jobType === 'close' }" (click)="getOngoingjobs('close')" >
+                                        <a>Close</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+						<div class="inner-detail-text" id="detail4" *ngIf="jobType === 'open' || jobType === 'ongoing' || jobType === 'close'">
+							<!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p> -->
+							<!-- jobs -->
+							<div class="col-md-12 fixed-height" *ngIf="loadingVendorJobs" >
+								<img src="assets/images/Loading_apple.gif" alt="loading screen" id="loading-jobs" />
+							</div>
+							<div class="col-md-12 fixed-height" *ngIf="!loadingVendorJobs && vendorJobs.length === 0" >
+								<h5 class="greyColor" ><b>Oops Jobs are not available</b></h5>
+							</div>
+							<div *ngIf="vendorJobs.length > 0 && !loadingVendorJobs" class="col-md-12 fixed-height " >
+								<div class="row listing" *ngFor="let job of vendorJobs;let i = index;" [ngClass]="{'border' : i != vendorJobs.length-1}"  >
+									<div class="row" >
+										<div class="col-md-3 cont1" >
+											<div class="latest-job-img">
+												<img class="img-responsive" [src]="job.category.image" />
+												<h4 *ngIf="job.category" class="expert-cont" >{{job.category.name | uppercase}}</h4>
+												<table class="brand-prod-table" >
+													<tr *ngIf="job.brand && job.brand.name !== job.category.name">
+														<td>BRAND</td>
+														<td class="brand-prod" >{{job.brand.name}}</td>
+													</tr>
+													<tr *ngIf="job.category.productsIds.length > 1 && job.product"  >
+														<td>PRODUCT</td>
+														<td class="brand-prod" >{{job.product.name}}</td>
+													</tr>
+													<tr *ngIf="job.orderId"  >
+														<td>ORDER #</td>
+														<td class="brand-prod" >{{job.orderId}}</td>
+													</tr>
+												</table>
+											</div>
+										</div>
+										<div class="col-md-5" >
+											<div class="list-text" >
+												<div class="list-location-text">
+													<h4>Problems</h4>
+													<table class="prob-cont" >
+														<tr *ngFor="let problem of job.problems;" >
+															<td>{{problem.probContent}}</td>
+															<td>{{problem.price | currency:'INR'}}</td>
+														</tr>
+														<tr>
+															<td>TOTAL</td>
+															<td>{{job.totalPrice | currency:'INR'}}</td>
+														</tr>
+													</table>
+													<h4 *ngIf="job.isEngineerAssigned && (jobType === 'open' || jobType === 'ongoing' )" >Job is Assigned to <a (click)="navigateToProfile(job.engineerId,'engineer')" >{{job.engineer.fullName}}</a></h4>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-4" >
+											<!-- vendorAssignedDate -->
+											<h5><span class="expert-cont" >Start Date : </span><span class="greyColor" >{{job.startDate | date }}&nbsp;,&nbsp;{{ job.startDate | date : 'shortTime' }}</span></h5>
+											<h5><span class="expert-cont" >End Date : </span><span class="greyColor" >{{job.endDate | date }}&nbsp;,&nbsp;{{ job.endDate | date : 'shortTime' }}</span></h5>
+											<h5 *ngIf="job?.schedule?.eStartDate && job?.schedule?.eEndDate" ><span class="expert-cont" >Scheduled : </span><span class="greyColor" >{{job.schedule.eStartDate | date : 'shortTime' }}&nbsp;-&nbsp;{{ job.schedule.eEndDate | date : 'shortTime' }}</span></h5>
+											<div class="row">
+												<div class="col-md-1 col-xs-2" ><img class="eng-info-img" src="assets/images/address.png" /></div>
+												<div class="col-md-10 col-xs-10">
+													<!-- <h5 *ngIf="job.address.length>0" >{{job.address[0].value}}&nbsp;{{job.address[0].street}}</h5> -->
+													<h5 *ngIf="job.address.value" ><span *ngIf="job.address.street" >{{job.address.street}},&nbsp;</span>{{job.address.value}}</h5>
+												</div>
+											</div>
+											<br/>
+											<span class="status-cont" *ngIf="jobType === 'ongoing' && (job.status === 'outForDelivery' || job.status === 'on the way' || job.status === 'scheduled' || job.status === 'paymentDone' || job.status === 'inprocess')" >{{job.status | uppercase}}</span>
+											<span class="status-cont" *ngIf="jobType === 'ongoing' && job.status === 'billGenerated'" [tooltip]="billGenerated" >{{job.status | uppercase}}</span>
+											<tooltip-content #billGenerated [animation]="true" placement="bottom">
+												<h5 *ngIf="job.bill" >Generated Bill</h5>
+												<h6 *ngIf="job.orderId" >Order No. <small>{{job.orderId}}</small></h6>
+												<h6 *ngIf="job.bill" >Amount : <small *ngIf="job.bill.totalAmount" >{{job.bill.totalAmount}}</small></h6>
+												<h6 *ngIf="job.bill" >Service Cost : <small *ngIf="job.bill.addServiceCost" >{{job.bill.addServiceCost}}</small></h6>
+												<h6 *ngIf="job.bill && job.bill.discount" >Discount : <small *ngIf="job.bill.discount" >{{job.bill.discount}}</small></h6>
+												<h6 *ngIf="job.bill.addPart && job.bill.addPart.length > 0" >Parts Added</h6>
+												<h6 *ngFor="let part of job.bill.addPart;" ><small>{{part.partName}}</small>&nbsp;<small>{{part.partNumber}}</small>&nbsp;<small>{{part.partCost}}</small></h6>
+												<h6 *ngIf="job.bill.total" >Total Amount : <small>{{job.bill.total}}</small></h6>
+												<h6 *ngIf="job.bill.clientResponse" >Client Response : <small>{{job.bill.clientResponse}}</small></h6>
+												<h6 *ngIf="job.bill.generatedAt" ><small *ngIf="job.bill.generatedAt" >{{job.bill.generatedAt | date }}&nbsp;,&nbsp;{{ job.bill.generatedAt | date : 'shortTime' }}</small></h6>
+											</tooltip-content>
+
+											<span class="status-cont" *ngIf="jobType !== 'close' && job.siteType === 'Offsite'" [tooltip]="offsite" >{{job.siteType}}</span>
+											<tooltip-content #offsite [animation]="true" placement="bottom">
+												<div *ngIf="job.pick" >
+													<h6 *ngIf="job.pick.proCondition" >Detail</h6>
+													<h5 *ngIf="job.pick.duration" >Time Required : <small>{{job.pick.duration}}&nbsp;days</small></h5>
+													<h6 *ngIf="job.pick.damage" >Damage : <small>{{job.pick.damage}}</small></h6>
+													<h6 *ngIf="job.pick.details" >Details : <small>{{job.pick.details}}</small></h6>
+													<h6 *ngIf="job.pick.proCondition" >Condition : <small>{{job.pick.proCondition}}</small></h6>
+													<!--<h6 *ngIf="job.pick.offlineStatus && job.pick.offlineStatus.length > 0" >Offline Status</h6>
+													<table *ngIf="job.pick.offlineStatus && job.pick.offlineStatus.length > 0" >
+														<tr>
+															<td>Date</td>
+															<td>Status</td>
+														</tr>
+														<tr *ngFor="let status of job.pick.offlineStatus;" >
+															<td>{{status.workDate}}</td>
+															<td>{{status.text}}</td>
+														</tr>
+													</table>-->
+													<h6 *ngIf="job.pick.createdAt" ><small *ngIf="job.pick.createdAt" >{{job.pick.createdAt | date }}&nbsp;,&nbsp;{{ job.pick.createdAt | date : 'shortTime' }}</small></h6>
+												</div>
+											</tooltip-content>
+
+											<span class="status-cont" *ngIf="jobType === 'close' && job.status === 'completed'" [tooltip]="completed" >{{job.status | uppercase}}</span>
+											<span class="status-cont" *ngIf="jobType === 'close' && job.status === 'indispute'" [tooltip]="completed" style="background-color:red !important;" >{{job.status | uppercase}}</span>
+											<tooltip-content #completed [animation]="true" placement="bottom">
+												<h6 *ngIf="job.completeJob" >Info</h6>
+												<h6 *ngIf="job.completeJob?.isPaymentDone" >Payment Done</h6>
+												<h6 *ngIf="job.completeJob?.isPaymentDone && !job.completeJob.isPaymentDone" >Payment Not Done</h6>
+												<h6 *ngIf="job.completeJob?.isPaymentDone" >{{job.completeJob.modeOfPayment}}</h6>
+												<h6 *ngIf="job.completeJob?.comment" >{{job.completeJob.comment}}</h6>
+												<h6 *ngIf="job.completeJob?.completedAt" >{{job.completeJob.completedAt | date }}&nbsp;,&nbsp;{{ job.completeJob.completedAt | date : 'shortTime' }}</h6>
+											</tooltip-content>
+
+											<span class="status-cont" *ngIf="jobType === 'close' && job.status === 'canceled'" [tooltip]="cancel" >{{job.status | uppercase}}</span>
+											<tooltip-content #cancel [animation]="true" placement="bottom" >
+												<h6 *ngIf="job.cancelJob" >{{job.cancelJob.cancelledDate | date }}&nbsp;,&nbsp;{{ job.cancelJob.cancelledDate | date : 'shortTime' }}</h6>
+												<h6 *ngIf="job.cancelJob" >Cancelled By - {{job.cancelJob.cancelledBy}}</h6>
+												<h6 *ngIf="job.cancelJob" >{{job.cancelJob.reason}}</h6>
+												<h6 *ngIf="job.cancelJob" >{{job.cancelJob.comment}}</h6>
+											</tooltip-content>
+										</div>
+									</div>
+									<div class="row latest-job-button1"><!--  -->
+										<button type="button" class="btn btn-outline-primary" *ngIf="!job.isEngineerAssigned && jobType === 'open'" (click)="openSideBar(job.id)" >Assign Engineer</button>
+										<button type="button" class="btn btn-outline-primary" (click)="navigateToProfile(job.customerId,'customer')" >Customer</button>
+										<button type="button" class="btn btn-outline-primary" *ngIf="jobType === 'ongoing' && job.status === 'on the way'" (click)="checkLiveLocation(job.id)" >Live Location</button>
+										<button type="button" class="btn btn-outline-primary" *ngIf="job.siteType === 'Offsite' && jobType === 'ongoing' && job.status === 'inprocess'" (click)="addPart(job.id)" >Request Part</button>
+										<button type="button" class="btn btn-outline-primary" *ngIf="job.siteType === 'Offsite' && jobType === 'ongoing' && job.status === 'inprocess'" (click)="updateStat(job.id)" >Update Status</button>
+										<button type="button" class="btn btn-outline-primary" *ngIf="jobType !== 'close' && job.status != 'paymentDone'" (click)="cancelJob({'jobId' : job.id, 'realm' : 'vendor'} )" >Cancel</button>
+										<button type="button" class="btn btn-outline-primary" (click)="navigateToJob(job.id)" >View Job</button>
+									</div>
+								</div>
+							</div>
+							<!-- jobs -->
+                        </div>
+					</div>
+
+					<div id="sec9" class="deshboard-detail-sec" *ngIf="currentTab === 'manageEngineer'" >
+                        <h2>Manage Engineer</h2>
+                        <div class="row no-row add-new-borders">
+                            <div class="new-engineer">
+                                <a class="combo" data-toggle="modal" (click)="openAddEngModal()" >Add New Engineer</a>
+                            </div>
+                        </div>
+						<div class="col-md-12 col-xs-12 col-sm-12 fixed-height" *ngIf="loadingEng" >
+							<img src="assets/images/Loading_apple.gif" alt="loading screen" id="loading-jobs" />
+						</div>
+						<div class="col-md-12 col-sm-12 col-xs-12 fixed-height" *ngIf="!loadingEng && engineersArr.length === 0" >
+							<h5 class="greyColor" ><b>Engineers are not added</b></h5>
+						</div>
+						<div *ngIf="engineersArr.length > 0 && !loadingEng" class="col-md-12 col-xs-12 col-sm-12 fixed-height " >
+							<div class="latest-job-listing first-list" *ngFor="let engineer of engineersArr;" >
+								<div class="row" style="margin: 0px !important;" >
+									<div class="col-md-3 col-sm-6 col-xs-12">
+										<div class="latest-job-img">
+											<img class="img-responsive" [src]="engineer.image" />
+											<h5 class="name-cont" >{{engineer.fullName}}</h5>
+										</div>
+										<h4 class="expert-cont" >Experties</h4>
+									</div>
+									<div class="col-md-5 col-sm-6 col-xs-12">
+										<div class="latest-job-text engineer-text" >
+											<ul>
+												<li>
+													<div class="row">
+														<div class="col-md-1 col-sm-2 col-xs-2" >
+															<img src="assets/images/call.png" class="eng-info-img" />
+														</div>
+														<div class="col-md-10 col-sm-10 col-xs-10" >
+															<h5 class="engineer-info" >{{engineer.mobile}}</h5>
+														</div>
+													</div>
+												</li>
+												<li>
+													<div class="row">
+														<div class="col-md-1 col-xs-2 col-sm-2" >
+															<img src="assets/images/email.png" class="eng-info-img" />
+														</div>
+														<div class="col-md-10 col-xs-10 col-sm-10" >
+															<h5 class="engineer-info" >{{engineer.email}}</h5>
+														</div>
+													</div>
+												</li>
+												<li>
+													<div class="row">
+														<div class="col-md-1 col-xs-2 col-sm-2" >
+															<img src="assets/images/year.png" class="eng-info-img" />
+														</div>
+														<div class="col-md-10 col-xs-10 col-sm-10" >
+															<h5 class="engineer-info" >{{engineer.exp}}&nbsp;Year</h5>
+														</div>
+													</div>
+												</li>
+												<li>
+													<div class="row">
+														<div class="col-md-1 col-xs-2 col-sm-2" >
+															<img src="assets/images/address.png" class="eng-info-img" />
+														</div>
+														<div class="col-md-10 col-xs-10 col-sm-10" >
+															<h5 class="engineer-info" >{{engineer.address}}</h5>
+														</div>
+													</div>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div class="col-md-4 col-sm-6 col-xs-12">
+										<div class="latest-job-button">
+											<ul>
+												<li style="margin-top:10px;float:none !important;" >
+													<button type="button" class="btn btn-outline-secondary" (click)="openEditEngModal(engineer)" >Edit</button>
+												</li>
+												<li style="margin-top:10px;float:none !important;" >
+													<button type="button" *ngIf="engineer.active" class="btn btn-outline-secondary" (click)="actInacEngineers(engineer.id,false)" >Block</button>
+													<button type="button" *ngIf="!engineer.active" class="btn btn-outline-secondary" (click)="actInacEngineers(engineer.id,true)" >Unblock</button>
+												</li>
+												<li style="margin-top:10px;float:none !important;" >
+													<button type="button" class="btn btn-outline-secondary" (click)="changePasswordEng(engineer.id)" >Change Password</button>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="row" style="margin:10px !important;" >
+									<label class="experties-cont" *ngFor="let experties of engineer.expertise" >{{experties.name}}</label>
+								</div>
+							</div>
+						</div>
+					</div>
+				<!-- for vendor -->
+
+                    <div id="sec1" class="deshboard-detail-sec" *ngIf="currentTab === 'myOrders'" >
+                        <h2 style="padding:10px;" >My Jobs</h2>
+                        <div class="inner-list">
+                            <div class="row no-row border-bottom-myJobs">
+                                <ul>
+                                    <li class="col-md-4 col-xs-4" [ngClass]="{'list-active' : orderType === 'pending' }" (click)="getMyOrders('pending')" id="list1"  >
+                                        <a>Open</a>
+                                    </li>
+                                    <li class="col-md-4 col-xs-4" [ngClass]="{'list-active' : orderType === 'onGoing' }" (click)="getMyOrders('onGoing')" id="list2">
+                                        <a>On Going</a>
+                                    </li>
+                                    <li class="col-md-4 col-xs-4" [ngClass]="{'list-active' : orderType === 'closed' }" (click)="getMyOrders('closed')" id="list3">
+                                        <a>Closed</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="inner-detail-text" id="detail1" *ngIf="orderType === 'pending' || orderType === 'onGoing' || orderType === 'closed'">
+							<!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p> -->
+							<!-- jobs -->
+							<div class="col-md-12 fixed-height" *ngIf="loadingJobs" >
+								<img src="assets/images/Loading_apple.gif" alt="loading screen" id="loading-jobs" />
+							</div>
+							<div class="col-md-12 fixed-height" *ngIf="!loadingJobs && myJobs.length === 0" >
+								<h5 class="greyColor" ><b>Oops Jobs are not found</b></h5>
+							</div>
+							<div *ngIf="myJobs.length > 0 && !loadingJobs" class="col-md-12 col-sm-12 col-sm-12 fixed-height " >
+								<div class="row listing" *ngFor="let job of myJobs;let i = index;" [ngClass]="{'border' : i != myJobs.length-1}" >
+									<div class="row" >
+										<div class="col-md-3 cont1" >
+											<div class="latest-job-img">
+												<img class="img-responsive" [src]="job.category.image" />
+												<h4 *ngIf="job.category" class="expert-cont" >{{job.category.name | uppercase}}</h4>
+												<table class="brand-prod-table" >
+													<tr *ngIf="job.brand && job.brand.name !== job.category.name">
+														<td>BRAND</td>
+														<td class="brand-prod" >{{job.brand.name}}</td>
+													</tr>
+													<tr *ngIf="job.category.productsIds.length > 1 && job.product"  >
+														<td>PRODUCT</td>
+														<td class="brand-prod" >{{job.product.name}}</td>
+													</tr>
+													<tr *ngIf="job.orderId"  >
+														<td>ORDER #</td>
+														<td class="brand-prod" >{{job.orderId}}</td>
+													</tr>
+												</table>
+											</div>
+										</div>
+										<div class="col-md-5" >
+											<div class="list-text" >
+												<div class="list-location-text">
+													<h4>Problems</h4>
+													<table class="prob-cont" >
+														<tr *ngFor="let problem of job.problems;" >
+															<td>{{problem.probContent}}</td>
+															<td>{{problem.price | currency:'INR'}}</td>
+														</tr>
+														<tr>
+															<td>TOTAL</td>
+															<td>{{job.totalPrice | currency:'INR'}}</td>
+														</tr>
+													</table>
+													<h4 *ngIf="orderType !== 'closed' && job.isEngineerAssigned" >Job is Assigned to <a (click)="navigateToProfile(job.engineerId,'engineer')" >{{job.engineer.fullName}}</a></h4>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-4" >
+											<h5><span class="expert-cont" >Start Date : </span><span class="greyColor" >{{job.startDate | date }}&nbsp;,&nbsp;{{ job.startDate | date : 'shortTime' }}</span></h5>
+											<h5><span class="expert-cont" >End Date : </span><span class="greyColor" >{{job.endDate | date }}&nbsp;,&nbsp;{{ job.endDate | date : 'shortTime' }}</span></h5>
+											<h5 *ngIf="job.schedule && job.schedule.eStartDate && job.schedule.eEndDate" ><span class="expert-cont" >Scheduled : </span><span class="greyColor" >{{job.schedule.eStartDate | date : 'shortTime' }}&nbsp;-&nbsp;{{ job.schedule.eEndDate | date : 'shortTime' }}</span></h5>
+											<div class="row">
+												<div class="col-md-1 col-xs-2" ><img class="eng-info-img" src="assets/images/address.png" /></div>
+												<div class="col-md-10 col-xs-10">
+													<!-- <h5 *ngIf="job.address.length>0" >{{job.address[0].value}}&nbsp;{{job.address[0].street}}</h5> -->
+													<h5 *ngIf="job.address.value" ><span *ngIf="job.address.street" >{{job.address.street}},&nbsp;</span>{{job.address.value}}</h5>
+												</div>
+											</div>
+											<p *ngIf="(job.status == 'vendorAccepted' || job.status == 'on the way' || job.status == 'scheduled') && job.otp" >Job OTP : <span class="status-cont" >{{job.otp}}</span></p>
+											<br/>
+											<br/>
+											<span class="status-cont"  *ngIf="orderType === 'closed' && job.status === 'canceled'" [tooltip]="cancel" >{{job.status}}</span>
+											<span class="status-cont" style="background-color:red !important;margin-left: 20px;" *ngIf="orderType === 'closed' && job.status === 'indispute'" >{{job.status | uppercase}}</span>
+											<tooltip-content #cancel [animation]="true" placement="bottom" >
+												<h6 *ngIf="job.cancelJob" ><b>{{job.cancelJob.cancelledDate | date }}&nbsp;,&nbsp;{{ job.cancelJob.cancelledDate | date : 'shortTime' }}</b></h6>
+												<h6 *ngIf="job.cancelJob" >Cancelled By - {{job.cancelJob.cancelledBy}}</h6>
+												<h6 *ngIf="job.cancelJob" >{{job.cancelJob.reason}}</h6>
+												<h6 *ngIf="job.cancelJob" >{{job.cancelJob.comment}}</h6>
+											</tooltip-content>
+										</div>
+									</div>
+									<div style="clear:both;" ></div>
+									<div class="row" *ngIf="job.status !== 'canceled'" >
+										<app-job-status [jobToCheckStatus]="job" #jobStatus></app-job-status>
+									</div>
+									<div class="col-md-12 col-sm-12 col-xs-12"><!-- (click)="makePayment(job)" -->
+										<!--<div class="col-md-6 col-sm-6 col-sx-12" style="margin-top:20px;" >
+											<h5 style="display : none;" class="wow" id="demo{{i}}" >mdsdnbd</h5>
+										</div>-->
+										<div class="col-md-6 col-sm-6 col-sx-12 latest-job-button1">
+											<button type="button" class="btn btn-outline-primary" style="float:right;" *ngIf="orderType == 'closed' && job.status === 'completed'" (click)="navigateToProfile(job.engineerId,'engineer')" >Engineer</button>
+											<button type="button" class="btn btn-outline-primary" style="float:right;" *ngIf="orderType !== 'closed' && (job.status != 'billGenerated' && job.status != 'paymentDone')" (click)="cancelJob({'jobId' : job.id, 'realm' : 'customer'})" >Cancel</button>
+											<button type="button" class="btn btn-outline-primary" style="float:right;" *ngIf="orderType === 'onGoing' && job.status === 'billGenerated'" (click)="getBill(job.id)" >Make Payment</button>
+											<button type="button" class="btn btn-outline-primary" style="float:right;" (click)="navigateToJob(job.id)" >View Job</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- jobs -->
+                        </div>
+
+                    </div>
+                    <div id="sec2" class="deshboard-detail-sec" *ngIf="currentTab === 'myInfo' && !loadingMyInfo && myInfo">
+                        <h2>My Info</h2>
+                        <div class="row no-row">
+                            <div class="col-md-3">
+                                <div class="text-center bg-form">
+                                    <div class="img-section img-section1 deshboard-img-sec">
+                                        <img [src]="customerProfilePic" class="imgCircle" alt="Profile picture">
+                                        <i class="fa fa-camera" aria-hidden="true"></i>
+                                        <input type="file" id="image-input" rah-file-dir (imageAsUrl)="customerProfilePic" (assignValue)="files.image = $event;uploadProfilePic();" accept="image/*" class="form-control form-input Profile-input-file">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-9" *ngIf="myInfo" >
+								<div class="readable-filed" *ngIf="myInfo.realm === 'engineer'" >
+                                    <span>Name</span>
+                                    <h4>{{myInfo.fullName}}</h4>
+                                </div>
+                                <div class="readable-filed">
+                                    <span>Email</span>
+                                    <h4>{{myInfo.email}}</h4>
+                                </div>
+                                <div class="readable-filed">
+                                    <span>Phone Number</span>
+                                    <h4>{{myInfo.mobile}}</h4>
+                                </div>
+								<div class="readable-filed" *ngIf="myInfo.realm === 'engineer'" >
+                                    <span>Address</span>
+                                    <h4>{{myInfo.address}}</h4>
+                                </div>
+                                <div class="readable-filed" *ngIf="myInfo.realm === 'engineer'" >
+                                    <span>Experience</span>
+                                    <h4>{{myInfo.exp}} <span *ngIf="myInfo.exp == 1" >year</span><span *ngIf="myInfo.exp > 1" >years</span></h4>
+                                </div>
+								<div class="readable-filed" *ngIf="myInfo.realm === 'engineer'" >
+                                    <h5>Experties</h5>
+                                    <label class="experties-cont" *ngFor="let experties of myInfo.expertise" >{{experties.name}}</label>
+                                </div>
+								<form novalidate [formGroup]="myInfoForm" *ngIf="myInfo.realm !== 'engineer' && myInfoForm" >
+									<div class="row editable-text" >
+										<div class="filed-text" id="name_filed">
+											<span>Name</span>
+											<input formControlName="fullName" id="first_name2" style="border-right: none" class="validate marginMutedBottom font18 font-extra-bold valid" readonly="true" type="text" />
+										</div>
+										<div class="error-div1" *ngIf="fullName.errors && (fullName.dirty || fullName.touched)" >
+											<p *ngIf="fullName.errors.required">Name is required</p>
+										</div>
+										<div class="filed-edit" id="edit_filed" *ngIf="myInfo.realm !== 'engineer'" >
+											<p id="parent1">
+												<a (click)="disableEdit($event)" id="edit1" >Edit</a>
+											</p>
+											<button type="button" class="edit-save" id="save1" style="display : none;" (click)="disableSave($event,'customer')" >Save</button>
+										</div>
+									</div>
+									<div style="clear: both;"></div>
+									<div class="row editable-text" *ngIf="(myInfo.realm === 'customer' && myInfo.customerType === 'corporate') || myInfo.realm === 'vendor'" >
+										<div class="filed-text" id="bank_filed">
+											<span>GST Number</span>
+											<input formControlName="gstNumber" id="first_name" style="border-right: none" class="validate marginMutedBottom font18 font-extra-bold valid" type="text" readonly="true" />
+										</div>
+										<!--<div class="error-div1" *ngIf="gstNumber.errors && (gstNumber.dirty || gstNumber.touched)" >
+											<p *ngIf="gstNumber.errors.required">GST Number is required</p>
+										</div>-->
+										<!--<div class="filed-edit" id="edit_filed1" >
+											<p id="parent2" >
+												<a (click)="disableEdit($event)" id="edit2" >Edit</a>
+											</p>
+											<button type="button" class="edit-save" id="save2" style="display : none;" (click)="disableSave($event,'customer')" >Save</button>
+										</div>-->
+									</div>
+									<!-- vendor -->
+									<div  *ngIf="myInfo.realm === 'vendor'" >
+										<div class="row editable-text" >
+											<div class="filed-text" id="bank_filed6">
+												<span>No. of Engineers</span>
+												<input formControlName="noOfEngineers" appTestDirective name="noOfEngineers" id="noOfEngineers" style="border-right: none" class="validate marginMutedBottom font18 font-extra-bold valid" type="tel" readonly="true" />
+											</div>
+											<!--<div class="filed-edit" id="edit_filed6">
+												<p id="parent6" >
+													<a (click)="disableEdit($event)" id="edit6" >Edit</a>
+												</p>
+												<button type="button" class="edit-save" id="save6" style="display : none;" (click)="disableSave($event,'vendor')" >Save</button>
+											</div>-->
+										</div>
+										<!--<div class="error-div" *ngIf="noOfEngineers.errors && (noOfEngineers.dirty || noOfEngineers.touched)" >
+											<p *ngIf="noOfEngineers.errors.required">Specify the no.of Engineers</p>
+											<p *ngIf="noOfEngineers.errors.validNoOfEng" >Invalid Number</p>
+										</div>-->
+										<div class="row editable-text" >
+											<div class="filed-text" id="bank_filed7">
+												<span>Years of Experience</span>
+												<input formControlName="yearOfExp" appTestDirective1 name="yearOfExp" id="yearOfExp" style="border-right: none" class="validate marginMutedBottom font18 font-extra-bold valid" type="tel" readonly="true" />
+											</div>
+											<div class="filed-edit" id="edit_filed7">
+												<p id="parent7" >
+													<a (click)="disableEdit($event)" id="edit7" >Edit</a>
+												</p>
+												<button type="button" class="edit-save" id="save7" style="display : none;" (click)="disableSave($event,'vendor')" >Save</button>
+											</div>
+										</div>
+										<div class="error-div" style="float:right !important;" *ngIf="yearOfExp.errors && (yearOfExp.dirty || yearOfExp.touched)" >
+											<p *ngIf="yearOfExp.errors.required">Specify the years of experience</p>
+											<p *ngIf="yearOfExp.errors.validWorkEx" >Invalid Number</p>
+										</div>
+										<div class="row editable-text" >
+											<div class="filed-text bank-name-container1" id="edit_filed8">
+												<span>Bank Name</span>
+												<input formControlName="bankName" name="bankName" id="bankName" style="border-right: none" class="validate marginMutedBottom font18 font-extra-bold valid" type="text" readonly="true" />
+												<!-- <span class="cross-icon1" style="bottom:730px !important;" *ngIf="myInfoForm.get('bankName').value && myInfoForm.get('bankName').value.length > 0" ><i class="glyphicon glyphicon-remove" (click)="clearBankName()" ></i></span> -->
+											</div>
+											<div class="filed-edit" id="edit_filed8" >
+												<p id="parent8">
+													<a (click)="showList = true;disableEdit($event)" id="edit8" >Edit</a>
+												</p>
+												<button type="button" class="edit-save" id="save8" style="display : none;" (click)="showList = false;disableSave($event,'vendor')" >Save</button>
+											</div>
+											<div style="clear:both;" ></div><!-- bottom: 550px; -->
+											<ul class="filter-select1" style="z-index:999;display:block;width: 95.8% !important;" id="category-container1" *ngIf="showList && myInfoForm.controls.bankName.dirty && bankNames && bankNames.length > 0">
+												<li class="li-style" *ngFor="let bank of bankNames | filterBankList : myInfoForm.get('bankName').value" >
+													<a (click)="selectBank(bank)" class="a-style-list" >{{bank}}</a>
+												</li>
+											</ul>
+										</div>
+										<div class="error-div1" *ngIf="bankName.errors && (bankName.dirty || bankName.touched)" >
+											<p *ngIf="bankName.errors.required">Please specify Bank Name</p>
+										</div>
+										<div class="row editable-text" >
+											<div class="filed-text" id="bank_filed9">
+												<span>Firm Name</span>
+												<input formControlName="firmName" name="firmName" id="firmName" style="border-right: none" class="validate marginMutedBottom font18 font-extra-bold valid" type="tel" readonly="true" />
+											</div>
+											<div class="filed-edit" id="edit_filed9">
+												<p id="parent9" >
+													<a (click)="disableEdit($event)" id="edit9" >Edit</a>
+												</p>
+												<button type="button" class="edit-save" id="save9" style="display : none;" (click)="disableSave($event,'vendor')" >Save</button>
+											</div>
+										</div>
+										<div class="error-div1" *ngIf="firmName.errors && (firmName.dirty || firmName.touched)" >
+											<p *ngIf="firmName.errors.required">Please specify Firm Name</p>
+										</div>
+										<div class="row editable-text" >
+											<div class="filed-text" id="bank_filed89">
+												<span>IFSC Code</span>
+												<input formControlName="ifscCode" name="ifscCode" id="ifscCode" style="border-right: none" class="validate marginMutedBottom font18 font-extra-bold valid" type="text" readonly="true" />
+											</div>
+											<div class="filed-edit" id="edit_filed10">
+												<p id="parent10" >
+													<a (click)="disableEdit($event)" id="edit10" >Edit</a>
+												</p>
+												<button type="button" class="edit-save" id="save10" style="display : none;" (click)="disableSave($event,'vendor')" >Save</button>
+											</div>
+										</div>
+										<div class="error-div1" *ngIf="ifscCode.errors && (ifscCode.dirty || ifscCode.touched)" >
+											<p *ngIf="ifscCode.errors.required">Please specify IFSC Code</p>
+										</div>
+										<div class="row editable-text" >
+											<div class="filed-text" id="bank_filed11">
+												<span>Account Number</span>
+												<input formControlName="accountNumber" name="accountNumber" id="accountNumber" style="border-right: none" class="validate marginMutedBottom font18 font-extra-bold valid" type="text" readonly="true" />
+											</div>
+											<div class="filed-edit" id="edit_filed11">
+												<p id="parent11" >
+													<a (click)="disableEdit($event)" id="edit11" >Edit</a>
+												</p>
+												<button type="button" class="edit-save" id="save11" style="display : none;" (click)="disableSave($event,'vendor')" >Save</button>
+											</div>
+										</div>
+										<div class="error-div1" *ngIf="accountNumber.errors && (accountNumber.dirty || accountNumber.touched)" >
+											<p *ngIf="accountNumber.errors.required">Please specify Account Number</p>
+										</div>
+									</div>
+									<div style="clear: both;"></div>
+									<div class="row editable-text" *ngIf="myInfo.realm === 'vendor'" >
+										<div class="filed-text clockpicker" id="bank_filed">
+											<span>Start Time</span>
+											<input formControlName="startTime" id="startTime" style="border-right: none" class="validate marginMutedBottom font18 font-extra-bold valid" type="text" readonly="true" />
+										</div>
+										<div class="filed-edit" id="edit_filed12">
+											<p id="parent12" >
+												<a (click)="initializeClockPicker();disableEdit($event)" id="edit12" >Edit</a>
+											</p>
+											<button type="button" class="edit-save" id="save12" style="display : none;" (click)="disableSave($event,'vendor')" >Save</button>
+										</div>
+									</div>
+									<div class="col-md-6 error-div" style="float:right !important;" *ngIf="startTime.errors && (startTime.dirty || startTime.touched)" >
+										<p *ngIf="noStartTime">Support start time is required</p>
+									</div>
+									<!-- <div style="clear:both;" ></div> -->
+									<div class="row editable-text" *ngIf="myInfo.realm === 'vendor'" >
+										<div class="filed-text clockpicker" id="bank_filed">
+											<span>End Time</span>
+											<input formControlName="endTime" id="endTime" style="border-right: none" class="validate marginMutedBottom font18 font-extra-bold valid" type="text" readonly="true" />
+										</div>
+										<div class="filed-edit" id="edit_filed13">
+											<p id="parent13" >
+												<a (click)="initializeClockPicker1();disableEdit($event)" id="edit13" >Edit</a>
+											</p>
+											<button type="button" class="edit-save" id="save13" style="display : none;" (click)="disableSave($event,'vendor')" >Save</button>
+										</div>
+									</div>
+									<div class="col-md-12 error-div1" *ngIf="invalidTime" >
+										<p>Invalid Time</p>
+									</div>
+									<div class="col-md-6 error-div" style="float:right !important;" *ngIf="endTime.errors && (endTime.dirty || endTime.touched)" >
+										<p *ngIf="noEndTime">Support end time is required</p>
+									</div>
+									<div style="clear: both;"></div>
+									<div class="row editable-text" *ngIf="myInfo.realm === 'vendor'">
+										<div class="filed-text" id="bank_filed">
+											<span>Support Day</span>
+											<input formControlName="supportDays" id="supportDays" style="border-right: none" class="validate marginMutedBottom font18 font-extra-bold valid" type="text" readonly="true" />
+										</div>
+										<div class="filed-edit" id="edit_filed14">
+											<p id="parent14" >
+												<a (click)="showDays = true;disableEdit($event)" id="edit14" >Edit</a>
+											</p>
+											<button type="button" class="edit-save" id="save14" style="display : none;" (click)="showDays = false;disableSave($event,'vendor')" >Save</button>
+										</div>
+									</div>
+									<div *ngIf="showDays" class="support-days-cont" #days>
+										<div class="col-md-4" *ngFor="let loop of [block1,block2,block3];">
+											<div class="cheack1" >
+												<div class="form-check day-check" *ngFor="let block of loop;" >
+													<label class="container2">{{block.name}}
+														<input type="checkbox" class="days-container" [value]="block.name" (change)="onChange(block.name,block.value,$event)" />
+														<span class="checkmark1"></span>
+													</label>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="error-div1" *ngIf="noSupportDays" >
+										<p>Select Atleast one</p>
+									</div>
+									<div style="clear: both;"></div>
+
+									<div class="row editable-text" *ngIf="myInfo.realm === 'vendor'">
+										<div class="filed-text" id="bank_filed">
+											<span>Services Offered</span>
+											<input formControlName="servicesIds" id="servicesIds" style="border-right: none" class="validate marginMutedBottom font18 font-extra-bold valid" type="text" readonly="true" />
+										</div>
+										<div class="filed-edit" id="edit_filed15">
+											<p id="parent15" >
+												<a (click)="showServices = true;disableEdit($event)" id="edit15" >Edit</a>
+											</p>
+											<button type="button" class="edit-save" id="save15" style="display : none;" (click)="showServices = false;disableSave($event,'vendor')" >Save</button>
+										</div>
+									</div>
+									<div *ngIf="showServices" class="col-md-12 patner-cheack" #services>
+										<div class="form-check" *ngFor="let service of servicesOffered;" >
+											<label class="container2">{{service.name}}
+												<input type="checkbox" [value]="service.name" class="service-container" (change)="changeServices(service.name,service.id,$event)" />
+												<span class="checkmark1"></span>
+											</label>
+										</div>
+									</div>
+									<div class="error-div1" *ngIf="noServices" >
+										<p>Select Atleast one</p>
+									</div>
+									<div style="clear: both;"></div>
+
+									<div class="row editable-text" *ngIf="myInfo.realm === 'vendor'" #products >
+										<div class="filed-text" id="bank_filed">
+											<span>Product Offered</span>
+											<input formControlName="newpurchaseIds" id="newpurchaseIds" style="border-right: none" class="validate marginMutedBottom font18 font-extra-bold valid" type="text" readonly="true" />
+										</div>
+										<div class="filed-edit" id="edit_filed16">
+											<p id="parent16" >
+												<a (click)="showProducts = true;disableEdit($event)" id="edit16" >Edit</a>
+											</p>
+											<button type="button" class="edit-save" id="save16" style="display : none;" (click)="showProducts=false;disableSave($event,'vendor')" >Save</button>
+										</div>
+									</div>
+									<div *ngIf="showProducts" class="col-md-12 patner-cheack" #products >
+										<div class="form-check" *ngFor="let product of productsOffered;" >
+											<label class="container2">{{product.name}}
+												<input type="checkbox" [value]="product.name" class="purchase-container" (change)="changeProducts(product.name,product.id,$event)" />
+												<span class="checkmark1"></span>
+											</label>
+										</div>
+									</div>
+									<div class="error-div1" *ngIf="noProducts" >
+										<p>Select Atleast one</p>
+									</div>
+									<div style="clear: both;"></div>
+								</form>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="sec3" class="deshboard-detail-sec" *ngIf="currentTab === 'accountSettings'" >
+                        <h2>Account Setting</h2>
+                        <div class="row no-row">
+                            <div class="col-md-12">
+								<form novalidate [formGroup]="accountSettingForm" >
+									<div class="row editable-text">
+										<div class="filed-text" id="name_filed1">
+											<span>Email</span>
+											<input formControlName="email" id="first_name3" style="border-right: none" class="validate marginMutedBottom font18 font-extra-bold valid" readonly="true" type="text" />
+										</div>
+										<div class="filed-edit" id="edit_filed2">
+											<p id="parent3" >
+												<a (click)="disableEdit($event)" style="display:block;" id="edit3" >Edit</a>
+											</p>
+											<button type="button" class="edit-save" id="save3" style="display : none;" (click)="disableSave($event,'email')" >Save</button>
+										</div>
+									</div>
+									<div class="error-div1" *ngIf="email.errors && (email.dirty || email.touched)" >
+										<p *ngIf="email.errors.required">Email is required</p>
+										<p *ngIf="email.errors.validEmail">Invalid Email</p>
+									</div>
+									<!-- <div style="clear: both;"></div> -->
+									<div class="row editable-text">
+										<div class="filed-text" id="name_filed2">
+											<span>Mobile</span>
+											<input formControlName="mobile" appTestDirective id="first_name4" style="border-right: none" class="validate marginMutedBottom font18 font-extra-bold valid" readonly="true" type="tel" />
+										</div><!-- appTestDirective2 appTestDirective-->
+										<div class="filed-edit" id="edit_filed3">
+											<p id="parent4" >
+												<a (click)="disableEdit($event)" id="edit4" >Edit</a>
+											</p>
+											<button type="button" class="edit-save" id="save4" style="display : none;" (click)="disableSave($event,'mobile')" >Save</button>
+										</div>
+									</div>
+									<div class="error-div1" *ngIf="mobile.errors && (mobile.dirty || mobile.touched)" >
+										<p *ngIf="mobile.errors.required">Mobile is required</p>
+										<p *ngIf="mobile.errors.validMobile" >Invalid Mobile No.</p>
+									</div>
+								</form>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="sec4" class="deshboard-detail-sec" *ngIf="currentTab === 'manageAddress'" >
+						<h2>Manage Address</h2>
+                        <div class="row no-row" style="margin-top: 10px;margin-bottom: 15px;" >
+                            <div class="col-md-4">
+                                <!--<div class="row editable-text address-section1" >
+                                    <div class="Address-fileds" id="Address-filed" style="height:200px;background: white;" >
+                                        <!--<p>
+                                            <a (click)="openModal()">+ Add New Address</a>
+                                        </p>
+
+                                    </div>
+                                </div>-->
+								<img src="assets/images/add_address.png" style="height:200px;margin-top:10px;" (click)="openModal()" />
+                            </div>
+							<div class="col-md-4" *ngFor="let address of oldAddress;let i = index" >
+								<div class="row editable-text address-section" style="height:200px;background: white;" >
+									<div class="filed-text" id="email_filed">
+										<p><span *ngIf="address.street" >{{address.street}},&nbsp;</span>{{address.value}}</p>
+									</div>
+									<div class="filed-edit address-edit" id="edit_filed4">
+										<p>
+											<a (click)="editAddress(address,i)" >Edit&nbsp;&nbsp;|&nbsp;</a>
+											<a (click)="openConfirm(i)" >Delete</a>
+										</p>
+									</div>
+								</div>
+							</div>
+                        </div>
+
+                    </div>
+					<div id="sec5" class="deshboard-detail-sec" *ngIf="currentTab === 'changePassword'" >
+                        <h2>Change Password</h2>
+						<div class="row no-row">
+							<div class="col-md-2"></div>
+							<div class="col-md-6">
+								<div class="row" style="padding: 20px;" >
+									<form novalidate class="change-password" [formGroup]="changePasswordForm" #formDir="ngForm" >
+										<div class="control-group">
+											<label for="current_password" class="control-label">Current Password</label>
+											<div class="controls">
+												<input name="current_password" type="password" name="oldPassword" formControlName="oldPassword" />
+											</div>
+										</div>
+										<div class="error-div1" *ngIf="oldPassword.errors && (oldPassword.dirty || oldPassword.touched)" >
+											<p *ngIf="oldPassword.errors.required" >Old Password is required</p>
+										</div>
+										<div class="control-group">
+											<label for="new_password" class="control-label">New Password</label>
+											<div class="controls">
+												<input name="new_password" type="password" name="newPassword" formControlName="newPassword"  />
+											</div>
+										</div>
+										<div class="error-div1" *ngIf="newPassword.errors && (newPassword.dirty || newPassword.touched)" >
+											<p *ngIf="newPassword.errors.required">Password is required</p>
+											<p *ngIf="newPassword.errors.minlength">Password must be 6 characters long, we need another {{newPassword.errors.minlength.requiredLength - newPassword.errors.minlength.actualLength}} characters </p>
+										</div>
+										<div class="control-group">
+											<label for="confirm_password" class="control-label">Confirm Password</label>
+											<div class="controls">
+												<input name="confirm_password" type="password" name="confNewPassword" formControlName="confNewPassword"  />
+											</div>
+										</div>
+										<div class="error-div1" *ngIf="confNewPassword.errors && (confNewPassword.dirty || confNewPassword.touched)" >
+											<p *ngIf="confNewPassword.errors.required">Confirm Password is required</p>
+										</div>
+										<div class="error-div1" *ngIf="changePasswordForm.get('newPassword').value && changePasswordForm.get('newPassword').value.length > 0 &&
+											changePasswordForm.get('confNewPassword').value && changePasswordForm.get('confNewPassword').value.length > 0 &&
+											changePasswordForm.get('newPassword').value != changePasswordForm.get('confNewPassword').value" >
+											<p>Passwords doesn't Match</p>
+										</div>
+									</form>
+								</div>
+							</div>
+							<div class="col-md-2"></div>
+							<div class="col-md-12">
+								<div class="col-md-2" ></div>
+								<div class="col-md-6" >
+									<div class="next-button save-btn change-pass" >
+										<button type="submit" class="btn btn-primary next-step" (click)="changePassword()" >Save</button>
+									</div>
+								</div>
+								<div class="col-md-2" ></div>
+							</div>
+						</div>
+                    </div>
+					<div id="sec6" class="deshboard-detail-sec" *ngIf="currentTab === 'payment'" >
+						<h2 style="margin-bottom : 0px !important;" >Payments</h2>
+						<app-payment [myId]="myInfo.id" [cashPay]="cashPay" [chequePay]="chequePay" [onlinePay]="onlinePay" ></app-payment>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal wow fade" id="myModal" role="dialog" tabindex="-1" aria-labelledby="basicModal" aria-hidden="true" >
+        <div class="modal-dialog">
+			<!-- Modal content -->
+			<div class="modal-content">
+				<form *ngIf="addressForm" role="form" novalidate [formGroup]="addressForm" >
+					<div class="modal-header address-header">
+						<button type="button" class="close" data-dismiss="modal" (click)="closeModal()" >&times;</button>
+					</div>
+					<div class="modal-body">
+						<!-- <h5>Add New Address</h5> -->
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group reg-form" >
+									<!-- <input class="form-control" id="address-vendor" placeholder="Address" name="address" formControlName="address" /> -->
+									<input placeholder="Address" style="padding-right: 40px;" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" id="address-cust"
+									class="form-control" formControlName="address" />
+									<span class="cross-icon" style="top: 17px !important;padding-right: 5px;" id="cross-icon-add" *ngIf="addressForm.get('address').value && addressForm.get('address').value.length > 0" >
+										<i class="glyphicon glyphicon-remove" (click)="clearAddress()" ></i>
+									</span>
+								</div>
+								<div class="error-div" *ngIf="address.errors && (address.dirty || address.touched)" >
+									<p *ngIf="address.errors.required">Address is required</p>
+								</div>
+								<div class="error-div" *ngIf="invalidLocation && address.dirty && addressForm.get('address').value && addressForm.get('address').value.length > 0" >
+									<p>Invalid Location</p>
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="form-group reg-form">
+									<span>
+										<p class="currentLoc-container form-control" style="height: 43px !important;" (click)="setCurrentLocation()" ><img src="assets/images/currentLoc.png" /><a class="a-style-list" style="font-size:14px;" >Current Location</a></p>
+									</span>
+								</div>
+							</div>
+							<div style="clear:both;" ></div>
+							<div class="col-md-12">
+								<div class="form-group reg-form">
+									<input type="text" class="form-control" placeholder="House No./ Street/ Landmark (optional)" name="houseNo" formControlName="street" />
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" name="submit" class="btn btn-primary" (click)="addAddress()" >Save</button>
+						<button type="submit" name="submit" class="btn btn-default" (click)="closeModal()" >Cancel</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal wow fade" id="myModal1" role="dialog" tabindex="-1" aria-labelledby="basicModal" aria-hidden="true" >
+        <div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header address-header" >
+					<!-- <h5>Address Delete</h5> -->
+					<button type="button" class="close" data-dismiss="modal" (click)="closeModal()" >&times;</button>
+				</div>
+				<div class="modal-body" >
+					<p>Are you sure you want to delete the address ??</p>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" name="submit" class="btn btn-primary" (click)="deleteAddress()"  >Submit</button>
+					<button type="submit" name="submit" class="btn btn-default" (click)="closeModalConf()"  >Cancel</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<app-add-engineer (addEngModal)="getEngineers()" #addEngineer></app-add-engineer>
+	<app-otp-modal (newData)="updateMobile($event)" (newData1)="updateEmail($event)" #otpModal></app-otp-modal>
+	<app-cancel-job (jobCancelled)="checkCancelledJobs()" #cancelJobModal></app-cancel-job>
+	<app-change-password #changePasswordModal></app-change-password>
+	<app-request-parts #requestParts></app-request-parts>
+	<app-update-status #updateStatus></app-update-status>
+	<app-live-location #liveLocation></app-live-location>
+	<app-give-feedback #feedback></app-give-feedback>
+	<app-bill (openPayment)="openBill($event)" (paymentDone)="checkCustJobs($event)" #billAnother></app-bill>

@@ -1,0 +1,13 @@
+<div class="form-component input--medium search-input col-md-5">
+	<form [formGroup]="searchForm" >
+		<div class="input--with-icon" >
+			<input type="text" formControlName="searchText" id="search-container" autocomplete="off" placeholder="Search for Services" name="search-text" [autofocus]="true" />
+			<span class="cross-icon" *ngIf="searchForm.get('searchText').value && searchForm.get('searchText').value.length > 0" ><i class="glyphicon glyphicon-remove" (click)="clearText()" ></i></span>
+		</div>
+		<ul class="filter-select" style="display:block;" id="category-container" *ngIf="searchForm.controls.searchText.dirty && categories && categories.length > 0">
+			<li class="li-style" *ngFor="let category of categories | filterRequest : searchForm.get('searchText').value" >
+				<a (click)="openFixProbForm(category.id,category.name)" class="a-style-list" id="search-category" >{{category.name}}</a>
+			</li>
+		</ul>
+	</form>
+</div>

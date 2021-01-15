@@ -1,0 +1,40 @@
+<!--<div id="header" class="  sidenav" >
+</div>-->
+<!--<div id="mySidenav" class="sidenav animated enq-cont" >
+	<a class="closebtn" (click)="closePanel()" >x</a>
+	<h2>Contact Form</h2>
+	<p>This is my form.Please fill it out.It's awesome!</p>
+	
+	<textarea>Message</textarea>
+	
+</div>-->
+
+<div id="contactform" #container>
+	<div id="contact-button" (click)="openEnq()" >   
+		<div class="rotated-text">Quick Call</div>
+	</div>
+	<form novalidate [formGroup]="enquiryForm" >
+		<div>
+			<input type="tel" class="form-control" placeholder="Mobile No." name="mobileNo" formControlName="mobileNo" />
+		</div>
+		<div class="error-div3" style="margin-top:-30px !important;" *ngIf="mobileNo.errors && (mobileNo.dirty || mobileNo.touched)" >
+			<p *ngIf="mobileNo.errors.required">Mobile No. is required</p>
+			<p *ngIf="mobileNo.errors.validMobile">Invalid Mobile</p>
+		</div>
+		<select class="selectpicker" formControlName="service" >
+			<option value="">Select Category</option>
+			<option>Repair Services</option>
+			<option>Consult & Buy</option>
+			<option>Get Bid for IT Setup</option>
+			<option>Maintenance Services</option>
+			<option>Products on Rent</option>
+		</select>
+		<div class="error-div3" style="margin-top:-30px !important;" *ngIf="service.errors && (service.dirty || service.touched)" >
+			<p *ngIf="service.errors.required">Category is required</p>
+			
+		</div>
+		<angular2-date-picker formControlName="timeofCalling" (onDateSelect)="onDateSelect($event)"  [settings]="settings"></angular2-date-picker>
+		<button class="btn btn-primary" type="submit" style="margin-top:60px !important;margin-left:60px;" (click)="sendEnq()" >Send Message</button>
+	</form>
+</div>
+	

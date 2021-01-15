@@ -1,0 +1,102 @@
+<section class="customer-deshboard-bg inner-top-gap" >
+	<div class="container" *ngIf="userInfo" >
+		<div class="row information" >
+			<div class="col-md-4 col-xs-4">
+			</div>
+			<div class="col-md-4 col-xs-4" >
+				<div class="latest-job-img1">
+					<img class="img-responsive" [src]="userInfo.image" />
+				</div>
+			</div>
+			<div class="col-md-4 col-xs-4" >
+			</div>
+		</div>
+		<div class="row" >
+			<div class="col-md-4 col-xs-4" >
+			</div>
+			<div class="col-md-4 col-xs-4" >
+				<h3 class="blue center" ><b>{{userInfo.fullName}}</b></h3>
+				<div class="center" *ngIf="userInfo.rating" >
+					<div class="mark">
+						<span class="rating-input"></span>
+						<span data-value="1" *ngIf="userInfo.rating.avgRating > 1 || userInfo.rating.avgRating == 1" class="glyphicon glyphicon-star" ></span>
+						<span data-value="1" *ngIf="userInfo.rating.avgRating < 1" class="glyphicon glyphicon-star-empty"></span>
+						<span data-value="2" *ngIf="userInfo.rating.avgRating > 2 || userInfo.rating.avgRating == 2" class="glyphicon glyphicon-star"></span>
+						<span data-value="2" *ngIf="userInfo.rating.avgRating < 2" class="glyphicon glyphicon-star-empty"></span>
+						<span data-value="3" *ngIf="userInfo.rating.avgRating > 3 || userInfo.rating.avgRating == 3" class="glyphicon glyphicon-star" ></span>
+						<span data-value="3" *ngIf="userInfo.rating.avgRating < 3" class="glyphicon glyphicon-star-empty"></span>
+						<span data-value="4" *ngIf="userInfo.rating.avgRating > 4 || userInfo.rating.avgRating == 4" class="glyphicon glyphicon-star" ></span>
+						<span data-value="4" *ngIf="userInfo.rating.avgRating < 4" class="glyphicon glyphicon-star-empty"></span>
+						<span data-value="5" *ngIf="userInfo.rating.avgRating == 5" class="glyphicon glyphicon-star"></span>
+						<span data-value="5" *ngIf="userInfo.rating.avgRating < 5" class="glyphicon glyphicon-star-empty"></span>
+						&nbsp;&nbsp;<span class="grey" >{{userInfo.rating.totalUsers}}</span>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 col-xs-4" >
+			</div>
+		</div>
+		<div class="row row-in-center center" >
+			<h4 class="blue" *ngIf="realm !== 'customer'" ><b>Email</b>&nbsp;&nbsp;<b class="grey" >{{userInfo.email}}</b></h4>
+			<h4 class="blue" *ngIf="realm !== 'customer'" ><b>Contact No.</b>&nbsp;&nbsp;<b class="grey" >{{userInfo.mobile}}</b></h4>
+			<h4 class="blue" *ngIf="userInfo.realm === 'customer'" ><b>Customer Type</b>&nbsp;&nbsp;<b class="grey" >{{userInfo.customerType}}</b></h4>
+		</div>
+		<div class="row row-in-center" *ngIf="userInfo.realm === 'engineer'" >
+			<label class="experties-cont" *ngFor="let experties of userInfo.expertise" >{{experties.name}}</label>
+		</div>
+		<div class="row">
+			<h2 class="blue" >Previous Reviews</h2>
+			<div class="container fixed-height" >
+				<div class="row" *ngIf="loadingJobs" >
+					<img src="assets/images/Loading_apple.gif" alt="loading screen" style="margin-top:50px;width: 25px;height: 25px;position: absolute;left: 49%;top:10%" />
+				</div>
+				<div class="row" *ngIf="!loadingJobs && jobs.length === 0" >
+					<h5 class="greyColor" ><b>Previous Reviews are not Available</b></h5>
+				</div>
+				<div *ngIf="!loadingJobs && jobs.length > 0" >
+					<div class="row job-cont" *ngFor="let job of jobs;let i = index;" >
+						<div class="col-md-12" >
+							<h4 style="color:#191616;" ><b>{{job.category.name}}</b></h4>
+							<div *ngIf="job.ratedetail.length > 0" >
+								<div *ngFor="let rating of job.ratedetail;" >
+									<div *ngIf="userInfo.realm === rating.forUser" >
+										<div class="mark" >
+											<span class="rating-input"></span>
+											<span data-value="1" *ngIf="rating.userRating > 1 || rating.userRating == 1" class="glyphicon glyphicon-star"></span>
+											<span data-value="1" *ngIf="rating.userRating < 1" class="glyphicon glyphicon-star-empty"></span>
+											<span data-value="2" *ngIf="rating.userRating > 2 || rating.userRating == 2" class="glyphicon glyphicon-star"></span>
+											<span data-value="2" *ngIf="rating.userRating < 2" class="glyphicon glyphicon-star-empty"></span>
+											<span data-value="3" *ngIf="rating.userRating > 3 || rating.userRating == 3" class="glyphicon glyphicon-star"></span>
+											<span data-value="3" *ngIf="rating.userRating < 3" class="glyphicon glyphicon-star-empty"></span>
+											<span data-value="4" *ngIf="rating.userRating > 4 || rating.userRating == 4" class="glyphicon glyphicon-star"></span>
+											<span data-value="4" *ngIf="rating.userRating < 4" class="glyphicon glyphicon-star-empty"></span>
+											<span data-value="5" *ngIf="rating.userRating == 5" class="glyphicon glyphicon-star"></span>
+											<span data-value="5" *ngIf="rating.userRating < 5" class="glyphicon glyphicon-star-empty"></span>
+											&nbsp;&nbsp;<a *ngIf="rating.comment" class="status-cont" data-toggle="collapse" (click)="checkCont($event)" data-target="#demo{{i}}" >Review</a>
+											<div class="col-md-12" style="display : none;" id="demo{{i}}" >
+												<h5>{{rating.comment}}</h5>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div *ngIf="job.ratedetail.length == 0" >
+								<div class="mark">
+									<span class="rating-input"></span>
+									<span data-value="1" class="glyphicon glyphicon-star-empty"></span>
+									<span data-value="2" class="glyphicon glyphicon-star-empty"></span>
+									<span data-value="3" class="glyphicon glyphicon-star-empty"></span>
+									<span data-value="4" class="glyphicon glyphicon-star-empty"></span>
+									<span data-value="5" class="glyphicon glyphicon-star-empty"></span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12" >
+							<label class="experties-cont" *ngFor="let problem of job.problems" >{{problem.probContent}}</label>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

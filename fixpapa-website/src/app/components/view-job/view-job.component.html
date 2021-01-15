@@ -1,0 +1,261 @@
+<section class="customer-deshboard-bg inner-top-gap" >
+	<div class="container">
+		<div class="row" *ngIf="loadingJob && !job" >
+			<img src="assets/images/Loading_apple.gif" alt="loading screen" style="margin-top:50px;width: 25px;height: 25px;position: absolute;left: 49%;top:10%" />
+		</div>
+		<div *ngIf="!loadingJob && job" >
+			<div class="row header combo" >
+				<div class="col-md-12 top-header" >
+					<div class="col-md-4" >
+						<h3 class="white" >{{job.category.name}}</h3>
+						<h4 class="grey" *ngIf="job.product && job.product.name !== job.category.name" >{{job.product.name}}</h4>
+						<h4 class="grey" *ngIf="job.brand && job.brand.name !== job.category.name" >{{job.brand.name}}</h4>
+					</div>
+					<div class="col-md-8">
+						<table style="width:100%;" >
+							<tr>
+								<td class="grey" style="width: 15%;" ><h5>Start Date</h5></td>
+								<td class="white" style="float:left;width:85%;" ><h5>{{job.startDate | date }}&nbsp;,&nbsp;{{ job.startDate | date : 'shortTime' }}</h5></td>
+							</tr>
+							<tr>
+								<td class="grey" style="width: 15%;" ><h5>End Date</h5></td>
+								<td class="white" style="float:left;width:85%;" ><h5>{{job.endDate | date }}&nbsp;,&nbsp;{{ job.endDate | date : 'shortTime' }}</h5></td>
+							</tr>
+							<tr *ngIf="job.schedule?.eStartDate && job.schedule?.eEndDate" >
+								<td class="grey" style="width: 15%;" ><h5>Scheduled</h5></td>
+								<td class="white" style="float:left;width:85%;" ><h5>{{job.schedule.eStartDate | date : 'shortTime' }}&nbsp;-&nbsp;{{ job.schedule.eEndDate | date : 'shortTime' }}</h5></td>
+							</tr>
+							<tr>
+								<td class="grey" style="width: 15%;" ><h5>Location</h5></td>
+								<td class="white" style="float:left;width:85%;"><h5><span *ngIf="job.address.street" >{{job.address.street}},&nbsp;</span>{{job.address.value}}</h5></td>
+							</tr>
+							<tr>
+								<td class="grey" style="width: 15%;" ><h5>Order #</h5></td>
+								<td class="white" style="float:left;width:85%;"><h5>{{job.orderId}}</h5></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="row description" *ngIf="job.completeJob && job.completeJob.isPaymentDone" >
+				<h4 class="blue" ><b>Payment Info</b></h4>
+				<p class="grey" style="background-color: #eee;padding: 20px;" >Payment is done via {{job.completeJob.modeOfPayment}} on {{job.completeJob.completedAt | date }}&nbsp;,&nbsp;{{ job.completeJob.completedAt | date : 'shortTime' }} &nbsp;<a (click)="getBill(job.id)" >Get Bill</a></p>
+			</div>
+			<div class="row description" *ngIf="job.completeJob && !job.completeJob.isPaymentDone" >
+				<h4 class="blue" ><b>Payment Info</b></h4>
+				<p class="grey" style="background-color: #eee;padding: 20px;" >Payment is not done &nbsp;&nbsp;<a (click)="getBill(job.id)" >Get Bill</a></p>
+			</div>
+			<div class="row description" *ngIf="realm === 'customer' && job.bill?.addPart?.length > 0 && job.bill?.clientResponse === 'requested'" >
+				<h4 class="blue" ><b>Request For parts</b></h4>
+			</div>
+			<div class="row status-of-job" *ngIf="realm === 'customer' && job.siteType === 'Offsite' && job.bill?.addPart?.length > 0 && job.bill?.clientResponse === 'requested'" >
+				<table>
+					<tr>
+						<th class="status-text" >Name</th>
+						<th class="status-text" >No.</th>
+						<th class="status-text" >Cost</th>
+					</tr>
+					<tr *ngFor="let part of job.bill.addPart;" >
+						<td class="grey" >{{part.partName}}</td>
+						<td class="grey" >{{part.partNumber}}</td>
+						<td class="grey" >{{part.partCost | currency:'INR'}}</td>
+					</tr>
+				</table>
+				<br/>
+				<div class="col-xs-12 col-md-12 col-sm-6" style="text-align:center;" >
+					<div class="col-md-2" ></div>
+					<div class="col-xs-6 col-sm-6 col-md-4" style="text-align:center;" >
+						<button type="button" class="btn btn-primary combo combo-but" (click)="productResponse(job.bill.addPart,job.id,'done')" >Approve</button>
+					</div>
+					<div class="col-xs-6 col-sm-6 col-md-4" style="text-align:center;" >
+						<button type="button" class="btn btn-primary combo combo-but" (click)="productResponse(job.bill.addPart,job.id,'decline')" >Decline</button>
+					</div>
+					<div class="col-md-2" ></div>
+				</div>
+			</div>
+			
+			<div class="row description" *ngIf="job.siteType === 'Offsite' && job.bill?.addPart?.length > 0 && job.bill?.clientResponse !== 'requested'"  >
+				<h4 class="blue" *ngIf="job.bill.clientResponse === 'done'" ><b>Approved Parts</b></h4>
+				<h4 class="blue" *ngIf="job.bill.clientResponse === 'decline'" ><b>Declined Parts</b></h4>
+			</div>
+			<div class="row status-of-job" *ngIf="job.siteType === 'Offsite' && job.bill?.addPart?.length > 0 && job.bill?.clientResponse !== 'requested'" >
+				<table>
+					<tr>
+						<th class="status-text" >Name</th>
+						<th class="status-text" >No.</th>
+						<th class="status-text" >Cost</th>
+					</tr>
+					<tr *ngFor="let part of job.bill.addPart;" >
+						<td class="grey" >{{part.partName}}</td>
+						<td class="grey" >{{part.partNumber}}</td>
+						<td class="grey" >{{part.partCost | currency:'INR' }}</td>
+					</tr>
+				</table>
+			</div>
+			
+			<div class="row description" *ngIf="job.siteType === 'Offsite' && job?.pick?.offsiteStatus?.length > 0"  >
+				<h4 class="blue" ><b>Offline Status</b></h4>
+			</div>
+			<div class="row status-of-job" *ngIf="job.siteType === 'Offsite' && job?.pick?.offsiteStatus?.length > 0" >
+				<table *ngIf="job.pick.offsiteStatus.length > 0" style >
+					<tr *ngFor="let status of job.pick.offsiteStatus;" >
+						<td class="status-text" >{{status.text}}</td>
+						<td class="grey" >{{status.workDate | date}}&nbsp;,&nbsp;{{ status.workDate | date : 'shortTime' }}</td>
+					</tr>
+				</table>
+			</div>
+			<!--<div class="row description" *ngIf="(job.status === 'completed' || job.status === 'outForDelivery' || job.status === 'billGenerated') && job.bill?.addPart?.length > 0 && job.bill?.clientResponse === 'Done'" >
+				<h4 class="blue" ><b>Approved Parts</b></h4>
+			</div>
+			<div class="row status-of-job" *ngIf="(job.status === 'completed' || job.status === 'outForDelivery' || job.status === 'billGenerated') && job.bill?.addPart?.length > 0 && job.bill?.clientResponse === 'Done'" >
+				<table>
+					<tr>
+						<th class="status-text" >Name</th>
+						<th class="status-text" >No.</th>
+						<th class="status-text" >Cost</th>
+					</tr>
+					<tr *ngFor="let part of job.bill.addPart;" >
+						<td class="grey" >{{part.partName}}</td>
+						<td class="grey" >{{part.partNumber}}</td>
+						<td class="grey" >{{part.partCost}}</td>
+					</tr>
+				</table>
+			</div>-->
+			<!--<div class="row description" *ngIf="job.status === 'completed' && job.completeJob && job.bill?.addPart?.length > 0 && job.bill?.clientResponse === 'Done'" >
+				<h4 class="blue" ><b>Bill</b></h4>
+			</div>-->
+			<!--<div class="row problems description" *ngIf="job.status === 'completed' && job.completeJob && job.bill?.addPart?.length > 0 && job.bill?.clientResponse === 'Done'" >
+				<h4 class="blue" ><b>Bill</b></h4>
+				<table cellspacing="10" >
+					<tr *ngFor="let problem of job.problems;" >
+						<td class="prob-content light-text font-large" >{{problem.probContent}}</td>
+						<td class="amount black-text" align="center" >{{problem.price | currency:'INR'}}</td>
+					</tr>
+					<tr class="blue" >
+						<td align="center" class="combo font-large" >Total</td>
+						<td align="center" class="combo font-large" >{{job.totalPrice | currency:'INR'}}</td>
+					</tr>
+				</table>
+			</div>-->
+			
+			<div class="row description" *ngIf="job.siteType === 'Offsite'" >
+				<h4 class="blue" ><b>Prior Condition</b></h4>
+			</div>
+			<div class="row status-of-job" *ngIf="job.siteType === 'Offsite'" >
+				<table>
+					<tr>
+						<td class="status-text" >Condition</td>
+						<td class="grey" >{{job.pick.proCondition}}</td>
+					</tr>
+					<tr>
+						<td class="status-text" >Damage</td>
+						<td class="grey" >{{job.pick.damage}}</td>
+					</tr>
+					<tr>
+						<td class="status-text" >Details</td>
+						<td class="grey" >{{job.pick.details}}</td>
+					</tr>
+					<tr>
+						<td class="status-text" >Duration To Repair</td>
+						<td class="grey" >{{job.pick.duration}}&nbsp;days</td>
+					</tr>
+				</table>
+			</div>
+			<div class="row description" *ngIf="realm === 'vendor' && job.siteType === 'Offsite' && job?.pick?.custSign" >
+				<div style="height:120px;" >
+					<div class="col-md-12 col-sm-12 col-xs-12" >
+						<div class="row img-mob" style="float:right;" >
+							<img id="myImg" [src]="job.pick.custSign" (click)="zoomImage($event)" />
+							<!-- The Modal -->
+							<div id="myModal" class="modal">
+								<a (click)="closeModal($event)" ><span class="close">&times;</span></a>
+								<img class="modal-content" id="img01" />
+								<div id="caption"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>			
+			<div class="row description" *ngIf="job.problemDes" >
+				<h4 class="blue" ><b>Description</b></h4>
+				<p class="grey" style="background-color: #eee;padding: 20px;" >{{job.problemDes}}</p>
+			</div>
+			<div class="row problems description">
+				<h4 class="blue" ><b>Problems</b></h4>
+				<table cellspacing="10" >
+					<tr *ngFor="let problem of job.problems;" >
+						<td class="prob-content light-text font-large" >{{problem.probContent}}</td>
+						<td class="amount black-text" align="center" >{{problem.price | currency:'INR'}}</td>
+					</tr>
+					<tr class="blue" >
+						<td align="center" class="combo font-large" >Total</td>
+						<td align="center" class="combo font-large" >{{job.totalPrice | currency:'INR'}}</td>
+					</tr>
+				</table>
+			</div>
+			<div class="row description" *ngIf="job.image?.length > 0" >
+				<div style="height:120px;" >
+					<div class="col-md-12 col-sm-12 col-xs-12" style="padding-right:0px !important;"  *ngIf="job.image.length > 0" >
+						<div class="img-mob" style="float:right;" *ngFor="let image of job.image;" >
+							<img id="myImg" [src]="image" style="padding:5px;" (click)="zoomImage($event)" />
+							<!-- The Modal -->
+							<div id="myModal" class="modal">
+								<a (click)="closeModal($event)" ><span class="close">&times;</span></a>
+								<img class="modal-content" id="img01" />
+								<div id="caption"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row information driver" style="margin-top:20px;" [ngStyle]="{'margin-bottom' : job.status === 'pending' ? '0px' : '70px'}" >
+				<!--  style="background-color: #f5f5f58c;" -->
+				<div class="col-md-12 col-xs-12">
+					<div class="col-md-6 col-xs-12" *ngIf="job.engineer" >
+						<div class="col-md-4 col-xs-6" style="padding-left : 0px !important;" >
+							<h4 class="blue" style="text-align:center;" ><b>Engineer</b></h4>
+							<div class="latest-job-img">
+								<img class="img-responsive" [src]="job.engineer.image" />
+							</div>
+						</div>
+						<div class="col-md-2">
+						</div>
+						<div class="col-md-6 col-xs-6 driver-info" >
+							<h4 class="grey" ><b>{{job.engineer.fullName}}</b></h4>
+							<h5 class="blue" *ngIf="job.status !== 'canceled' && job.status !== 'completed' && job.status !== 'indispute'" ><b>{{job.engineer.mobile}}</b></h5>
+							<h5 class="blue" ><b>{{job.engineer.exp}}&nbsp;years</b></h5>
+						</div>
+					</div>
+					<div class="col-md-6 col-xs-12" >
+						<div class="col-md-4 col-xs-6" style="padding-left : 0px !important;" >
+							<h4 class="blue" style="text-align:center;" ><b>Customer</b></h4>
+							<div class="latest-job-img">
+								<img class="img-responsive" [src]="job.customer.image" />
+							</div>
+						</div>
+						<div class="col-md-2">
+						</div>
+						<div class="col-md-6 col-xs-6 driver-info" >
+							<h4 class="grey" ><b>{{job.customer.fullName}}</b></h4>
+							<h5 class="blue" *ngIf="job.status !== 'canceled' && job.status !== 'completed' && job.status !== 'indispute'" ><b>{{job.customer.mobile}}</b></h5>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row" style="margin-top:70px;margin-bottom:70px;" *ngIf="realm === 'vendor' && job.status === 'pending'" >
+				<div class="col-md-2" >
+				</div>
+				<div class="col-md-4 col-xs-6" style="text-align:center;" >
+					<button type="button" class="btn btn-primary combo combo-but" (click)="vendorAcceptOrReject(job.id,'vendorAccepted')" >Accept</button>
+				</div>
+				<div class="col-md-4 col-xs-6" style="text-align:center;" >
+					<button type="button" class="btn btn-secondary combo combo-but" (click)="vendorAcceptOrReject(job.id,'requested')" >Reject</button>
+				</div>
+				<div class="col-md-2" >
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<app-bill #bill></app-bill>

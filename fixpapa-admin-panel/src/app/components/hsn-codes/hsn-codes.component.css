@@ -1,0 +1,45 @@
+.header{
+	height : 70px;
+	background : #06386b;
+	color : white;
+	margin-bottom : 70px;
+}
+.inner-top-gap{
+    margin-top: 150px;
+}
+.customer-deshboard-bg{
+    color: grey;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+.login-close{
+	color : grey;
+}
+.login-close:hover{
+	outline : none !important;
+}
+
+.reg-bg{
+	max-height : 500px;
+	overflow-y : scroll;
+	overflow-x : hidden;
+}
+.reg-bg::-webkit-scrollbar-thumb {
+    background-color: grey;
+    border-radius: 10px;
+}

@@ -1,0 +1,120 @@
+<div class="modal  wow  login-modal" id="largeModal2" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" >
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content" *ngIf="customerSignUpForm" >
+			<div class="modal-header login-header" >
+				<button type="button" class="close login-close" data-dismiss="modal" (click)="closeModal()" >&times;</button>
+			</div>
+			<div class="modal-body no-padding">
+				<div class="col-md-12 no-gap reg-bg1">
+					<div class="reg-bg">
+						<h2>Sign up as Customer</h2>
+						<form novalidate [formGroup]="customerSignUpForm" >
+							<div class="col-md-4">
+								<div class="text-center bg-form">
+									<div class="img-section img-section1">
+										<img [src]="custProfileImg" class="imgCircle" alt="Profile picture" />
+										<input type="file" id="image-input" name="profileImage" rah-file-dir (imageAsUrl)="custProfileImg = $event" (assignValue)="files.image = $event" accept="image/*" class="form-control form-input Profile-input-file" />
+										<p>Upload Your Image</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-8">
+								<div class="col-md-4 radio-text">
+									<p>Type of User</p>
+								</div>
+								<div class="col-md-1"></div>
+								<div class="form-group radio-button col-md-7">
+									<label class="container1">Home
+										<input type="radio" value="home" name="customerType" formControlName="customerType" />
+										<span class="checkmark"></span>
+									</label>
+									<label class="container1">Co-operate
+										<input type="radio" name="customerType" value="corporate" formControlName="customerType" />
+										<span class="checkmark"></span>
+									</label>
+								</div>
+								<div style="clear: both;"></div>
+								<div class="form-group reg-form">
+									<input type="text" class="form-control" name="fullname" formControlName="fullName" placeholder="Name" />
+								</div>
+								<div class="error-div" *ngIf="fullName.errors && (fullName.dirty || fullName.touched)" >
+									<p *ngIf="fullName.errors.required">Name is required</p>
+								</div>
+								<div class="form-group reg-form co1-md-6" *ngIf="!isLogin || (isLogin && !user.emailVerified) || user.email == ''" >
+									<input type="text" class="form-control" name="email" formControlName="email" placeholder="Email Address" />
+								</div>
+								<div class="error-div" *ngIf="(!isLogin || (isLogin && !user.emailVerified)) && email.errors && (email.dirty || email.touched)" >
+									<p *ngIf="email.errors.required">Email is required</p>
+									<!-- <p *ngIf="email.errors.pattern" >Invalid Email</p> -->
+									<p *ngIf="email.errors.validEmail" >Invalid Email</p>
+								</div>
+								<div class="form-group reg-form" >
+									<input type="password" class="form-control" name="pass" formControlName="password" placeholder="Password" />
+								</div>
+								<div class="error-div" *ngIf="password.errors && (password.dirty || password.touched)">
+									<p *ngIf="password.errors.required">Password is required</p>
+									<p *ngIf="password.errors.minlength">Password must be 6 characters long, we need another {{password.errors.minlength.requiredLength - password.errors.minlength.actualLength}} characters </p>
+								</div>
+								<div class="form-group reg-form" >
+									<input type="password" class="form-control" name="cPass" formControlName="confPassCust" placeholder="Confirm Password" />
+								</div>
+								<div class="error-div" *ngIf="confPassCust.errors && (confPassCust.dirty || confPassCust.touched)" >
+									<p *ngIf="confPassCust.errors.required">Confirm Password is required</p>
+								</div>
+								<div class="error-div" *ngIf="customerSignUpForm.get('password').value && customerSignUpForm.get('password').value.length > 0 &&
+										customerSignUpForm.get('confPassCust').value && customerSignUpForm.get('confPassCust').value.length > 0 && 
+										customerSignUpForm.get('password').value != customerSignUpForm.get('confPassCust').value" >
+									<p>Passwords doesn't Match</p>
+								</div>
+								<div style="clear:both;" ></div>
+								<div class="form-group reg-form" *ngIf="!isLogin || (isLogin && !user.mobileVerified)" >
+									<input type="tel" class="form-control" name="mobile" formControlName="mobile" placeholder="Contact No" />
+								</div>
+								<div class="error-div" *ngIf="(!isLogin || (isLogin && !user.mobileVerified)) && mobile.errors && (mobile.dirty || mobile.touched)" >
+									<p *ngIf="mobile.errors.required">Contact No. is required</p>
+									<p *ngIf="mobile.errors.validMobile" >Invalid Contact No.</p>
+								</div>
+								<div class="form-group reg-form" *ngIf="customerSignUpForm.get('customerType').value === 'corporate'" >
+									<input type="text" class="form-control" name="gstNumber" formControlName="gstNumber" placeholder="GST No." />
+								</div>
+								<div class="form-group reg-form" *ngIf="customerSignUpForm.get('customerType').value === 'corporate'" >
+									<input type="text" class="form-control" name="companyName" formControlName="companyName" placeholder="Company Name" />
+								</div>
+							</div>
+							<div style="clear: both;"></div>
+
+							<div class="col-md-12 col-xs-12 col-sm-12">
+								<!-- <div class="form-group reg-form address-field col-md-12 col-xs-12 col-sm-12" #addressInput style="padding-left:0px !important;padding-right:0px !important;" >
+									
+									<input placeholder="Select Location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" id="customer-address" 
+									class="form-control" formControlName="address" style="padding-right: 50px;" autocomplete="off" />
+									<span class="cross-icon" *ngIf="customerSignUpForm.get('address').value && customerSignUpForm.get('address').value.length > 0" >
+										<i class="glyphicon glyphicon-remove" (click)="clearAddress()" ></i>
+									</span>
+								</div>
+								
+								<div class="form-group reg-form address-field col-md-12 col-sm-12 col-xs-12" style="padding-left:0px !important;padding-right:0px !important;margin-bottom:0px !important;" >
+									<input type="text" class="form-control" name="street" formControlName="street" placeholder="House No. / street / Landmark (optional)" />
+								</div>
+								<div style="clear:both;"></div>
+								<div class="error-div" *ngIf="address.errors && (address.dirty || address.touched)" >
+									<p *ngIf="address.errors.required" >Address is required</p>
+								</div>
+								<div class="error-div" *ngIf="invalidLocation && address.dirty && customerSignUpForm.get('address').value && customerSignUpForm.get('address').value.length > 0" >
+									<p style="padding-right: 15px;" >Invalid Location</p>
+								</div> -->
+								<div class="login-button login-form">
+									<button type="submit" class="btn btn-primary" [ngClass]="{'disabled' : disableCust}" [disabled]="disableCust" (click)="checkSignUpForm()" >Sign Up</button>
+								</div>
+							</div>
+
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer no-padding">
+				
+			</div>
+		</div>
+	</div>
+</div>

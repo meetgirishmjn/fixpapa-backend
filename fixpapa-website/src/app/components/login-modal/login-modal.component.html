@@ -1,0 +1,97 @@
+<div class="modal wow slideInRight login-modal" id="largeModal1" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header login-header">
+				<button type="button" class="close login-close" (click)="loginForm.reset({emailOrMobile: '', password: ''});" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body no-padding">
+				<div class="col-md-5 no-gap">
+					<div class="logo-bg">
+						<img class="img-responsive" src="assets/images/logo.png" />
+					</div>
+				</div>
+				<div class="col-md-7 no-gap">
+					<div class="login-bg">
+						<h2>Login</h2>
+						<!--<div class="form-group radio-button col-md-12 no-gap" >
+							<input type="checkbox" id="test1" [(ngModel)]="isPartner" name="rememberMe" />
+							<label for="test1" class="shift-left" >As Partner</label>
+						</div>-->
+						<!-- segment button -->
+						<div class="login-tab1">
+							<ul>
+								<li>
+									<a [ngClass]="{'active1' : realm === 'customer'}" 
+									(click)="realm = 'customer'" >Customer</a>
+								</li>
+								<li>
+									<a [ngClass]="{'active1' : realm === 'vendor'}" *ngIf="!disableOthers"
+									 (click)="realm = 'vendor'" >Partner</a>
+								</li>
+								<li>
+									<a [ngClass]="{'active1' : realm === 'engineer'}" *ngIf="!disableOthers"
+									(click)="realm = 'engineer'" >Engineer</a>
+								</li>
+							</ul>
+						</div>
+							<!-- segment button -->
+						<form class="login-form" novalidate [formGroup]="loginForm" >
+							<div class="form-group">
+								<input type="email" name="emailOrMobile" formControlName="emailOrMobile" class="form-control" placeholder="Email id / Mobile No" required autocomplete="off" />
+							</div>
+							<div class="error-div" *ngIf="emailOrMobile.errors && (emailOrMobile.dirty || emailOrMobile.touched)">
+								<p *ngIf="emailOrMobile.errors.required">Field is required</p>
+							</div>
+							<div class="error-div" *ngIf="invalidMobOrEmail && emailOrMobile.dirty && loginForm.get('emailOrMobile').value && loginForm.get('emailOrMobile').value.length > 0" >
+								<p>Invalid Mobile/Email</p>
+							</div>
+							<div class="form-group">
+								<input type="password" name="password" class="form-control" formControlName="passwordL" required id="exampleInputPassword1" placeholder="Password" />
+							</div>
+							<div class="error-div" *ngIf="passwordL.errors && (passwordL.dirty || passwordL.touched)">
+								<p *ngIf="passwordL.errors.required">Password is required</p>
+								<!--<p *ngIf="password.errors.minlength">Password must be 6 characters long, we need another {{password.errors.minlength.requiredLength - password.errors.minlength.actualLength}} characters </p>-->
+							</div>
+							<div class="login-button">
+								<button type="submit" class="btn btn-primary" (click)="checkCredentials()" >Login</button>
+							</div>
+							<!--<div class="form-group" *ngIf="mobileNotVerified" >
+								<a (click)="openVerifyOtpModel()" ></a>
+							</div>-->
+						</form>
+						<div class="login-form-text">
+							<h5 style="text-align:center;" ><a routerLink="reset" target="_blank" *ngIf="realm === 'customer' || realm === 'vendor'" >Forgot Password</a></h5>
+							<div class="row" >
+								<div class="col-md-12" >
+									<!-- <h5 style="text-align:center;" ><a id="hide" (click)="openCustModel()" *ngIf="realm === 'customer'" >Sign up as Customer</a></h5> -->
+									<h5 style="text-align:center;" ><a (click)="openVendModal()" *ngIf="realm === 'vendor'" >Sign up as Partner</a></h5>
+								</div>
+								<!-- <div class="col-md-6" > -->
+									
+								<!-- </div> -->
+							</div>
+						</div>
+						<div style="clear: both;"></div>
+						<div class="login-social" style="background-color:#06386B;" *ngIf="realm === 'customer'" >
+							<ul>
+								<li>
+									<a (click)="openLoginModal()"  ><i class="fa fa-phone"></i> <span style="position:relative; top:-5px;">Login with Otp</span></a>
+								</li>
+								<!-- <li>
+									<a (click)="checkLoginState()" ><i class="fa fa-facebook-f"></i></a>
+								</li>
+								<li>
+									<a id="googleBtn" (click)="socialSignIn()" ><i class="fa fa-google-plus"></i></a>
+								</li> -->
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer no-padding">
+				<!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button> -->
+			</div>
+		</div>
+	</div>
+</div>

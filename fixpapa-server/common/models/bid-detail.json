@@ -1,0 +1,19 @@
+{
+  "name": "BidDetail",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {
+    "services": {
+      "type": "belongsTo",
+      "model": "Services",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

@@ -1,0 +1,39 @@
+{
+  "addAmcType":{
+    "replyCode": "Success",
+    "replyMessage": "Success"
+  },
+  "getAllAmc" : {
+  "replyCode":"Success",
+  "replyMessage":"Success"
+  
+ },
+ "editAmc" : {
+  "replyCode":"Success",
+  "replyMessage":"Successfully updated!!"
+  
+ },
+ "getAmc" : {
+  "replyCode":"Success",
+  "replyMessage":"Success"
+  
+ },
+ "createAmc" : {
+  "replyCode":"Success",
+  "replyMessage":"Successfully request sent!!"
+  
+ }, 
+ "getAllAmcReq" : {
+  "replyCode":"Success",
+  "replyMessage":"Success"
+  
+ },
+ "deleteAmc" : {
+  "replyCode":"Success",
+  "replyMessage":"Successfully deleted!!"
+  
+ }
+
+
+
+}

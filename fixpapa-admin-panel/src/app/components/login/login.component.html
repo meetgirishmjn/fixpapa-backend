@@ -1,0 +1,89 @@
+<div class="login-bg">
+  <div id="login-page ">
+      <div class="container">
+        <form class="form-login" (submit)="login(loginForm)" #loginForm="ngForm">
+          <h2 class="form-login-heading">sign in now</h2>
+          <div class="login-wrap">
+              <div class="alert alert-danger" *ngIf="actionError.isError">
+                {{actionError.msg}}
+              </div>
+
+              <label class="radio-inline">
+                <input type="radio" name="logRealm" [(ngModel)]="user.realm" value="admin">Admin
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="logRealm" [(ngModel)]="user.realm" value="superAdmin">Super Admin
+              </label><br /><br />
+
+            	<input type="text" class="form-control" pattern="[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" [(ngModel)]="user.email" [required]="true" name="Email" placeholder="Email" #email="ngModel" autofocus>
+            	<div class="error-div" *ngIf="loginForm._submitted && email.errors?.required">
+    	        	Email is required
+    	      	</div>
+    	      	<div class="error-div" *ngIf="loginForm._submitted && email.errors?.pattern">
+    	          	Invalid email
+    	      	</div>
+            <br>
+            <input type="password" class="form-control" minlength="6" required [(ngModel)]="user.password" required name="password" placeholder="Password" #password="ngModel">
+            <div class="error-div" *ngIf="loginForm._submitted && password.errors?.required">
+              Password is required
+            </div>
+            <div class="error-div" *ngIf="loginForm._submitted && password.errors?.minlength">
+              password should be 6 characters long
+            </div>
+            <label class="checkbox">
+              <span class="pull-right">
+                  <a href="javascript:;" (click)="openForgetpass()"> Forgot Password?</a>
+              </span>
+            </label>
+            <button class="btn btn-theme btn-block" href="index.html" type="submit"><i class="fa fa-lock"></i> SIGN IN</button>
+            <!-- <hr>
+            <div class="login-social-link centered">
+              <p>or you can sign in via your social network</p>
+              <button class="btn btn-facebook" type="submit"><i class="fa fa-facebook"></i> Facebook</button>
+              <button class="btn btn-twitter" type="submit"><i class="fa fa-twitter"></i> Twitter</button>
+            </div>
+            <div class="registration">
+              Don't have an account yet?
+              <br/>
+              <a class="" href="#">
+                  Create an account
+              </a>
+            </div> -->
+          </div>
+          
+        </form>
+      </div>
+  </div>
+
+  <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="forgetModal" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Forgot Password ?</h4>
+        </div>
+        <form (submit)="resetPassSubmit(forgetForm)" #forgetForm="ngForm">
+            <div class="modal-body">
+              <div class="alert alert-danger" *ngIf="actionResError.isError">
+                {{actionResError.msg}}
+              </div>
+              <p>Enter your e-mail address below to reset your password.</p>
+              
+              <input type="text" autocomplete="off" class="form-control placeholder-no-fix" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" [(ngModel)]="resetEmail" [required]="true" name="resetEmail" placeholder="Email" #resEmail="ngModel">
+
+              <div class="error-div" *ngIf="forgetForm._submitted && resEmail.errors?.required">
+                Email is required
+              </div>
+              <div class="error-div" *ngIf="forgetForm._submitted && resEmail.errors?.pattern">
+                  Invalid email
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
+              <button class="btn btn-theme"  data-loading-text="submit..." id="resetBtn" type="submit">Submit</button>
+            </div>
+        </form>    
+      </div>
+    </div>
+  </div>
+</div>

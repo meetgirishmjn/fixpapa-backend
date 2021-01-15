@@ -1,0 +1,202 @@
+<div class="row container-min-height">
+    <div class="Page-heading" >
+        <div class="container-fluid">
+            <h3>
+                <div class="row">
+                    <div class="col-md-11">Consult & Buy</div>
+                </div>
+            </h3>
+        </div>    
+    </div>
+    <div class="container-fluid">
+
+        <div class="noDataFound" *ngIf="!purchaseRequests.length && !isLoading">No data found</div>
+        <div id="loader" *ngIf="isLoading"></div>
+
+        <div class="row card-row" *ngFor="let request of purchaseRequests">
+            <div class="row">
+                <div class="col-md-1">
+                    <div class="card-img"  *ngIf="request.newpurchase">
+                        <img class="img-responsive" [src]="baseUrl+request.newpurchase.image" />
+                    </div>
+                </div>
+                <div class="col-md-4"> 
+                    <!-- <span ><strong>Request Info</strong></span><br /><br /> -->
+                    <!-- <div class="row" *ngIf="request.title">
+                        <div class="col-md-3" >Title</div>
+                        <div class="col-md-1">:</div>
+                        <div class="col-md-8">{{request.title}}</div>
+                    </div>    
+                    <div class="row" *ngIf="request.newpurchase && request.product && request.newpurchase.name!=request.product.name">
+                        <div class="col-md-3" >Category</div>
+                        <div class="col-md-1">:</div>
+                        <div class="col-md-8">{{request.newpurchase.name}}</div>
+                    </div>    
+                    <div class="row" *ngIf="request.product">
+                        <div class="col-md-3">Product</div>
+                        <div class="col-md-1">:</div>
+                        <div class="col-md-8">{{request.product.name}}</div>
+                    </div>    
+                    <div class="row" *ngIf="request.brand && request.newpurchase && request.brand.name != request.newpurchase.name">
+                        <div class="col-md-3">Brand</div>
+                        <div class="col-md-1">:</div>
+                        <div class="col-md-8">{{request.brand.name}}</div>
+                    </div>    
+                    <div class="row" *ngIf="request.configuration">
+                        <div class="col-md-3">Configuration</div>
+                        <div class="col-md-1">:</div>
+                        <div class="col-md-8">{{request.configuration}}</div>
+                    </div>  
+                    <div class="row" *ngIf="request.priceBudget">
+                        <div class="col-md-3">Budget</div>
+                        <div class="col-md-1">:</div>
+                        <div class="col-md-8">{{request.priceBudget}}</div>
+                    </div>    
+                    <div class="row" *ngIf="request.createdAt">
+                        <div class="col-md-3">Created At</div>
+                        <div class="col-md-1">:</div>
+                        <div class="col-md-8">{{request.createdAt | date:'dd MMMM, yyyy'}}</div>
+                    </div> 
+                    <div class="row" *ngIf="request.purchaseDate">
+                        <div class="col-md-3">Purchase Date</div>
+                        <div class="col-md-1">:</div>
+                        <div class="col-md-8">{{request.purchaseDate | date:'dd MMMM, yyyy'}}</div>
+                    </div> 
+                    <div class="row" *ngIf="request.noOfUnits">
+                        <div class="col-md-3">Number of Units</div>
+                        <div class="col-md-1">:</div>
+                        <div class="col-md-8">{{request.noOfUnits}}</div>
+                    </div>     -->
+                    <span ><strong>Request Info</strong></span><br /><br />
+                    <table class="table borderless"  border="0">
+                        <tbody>
+                          <tr *ngIf="request.title">
+                            <td width="20%">Title</td>
+                            <td>:</td>
+                            <td>{{request.title}}</td>
+                          </tr>
+                          <tr *ngIf="request.estiBudget">
+                            <td width="20%">Category</td>
+                            <td>:</td>
+                            <td>{{request.newpurchase.name}}</td>
+                          </tr>
+                          <tr *ngIf="request.product">
+                            <td width="20%">Product</td>
+                            <td>:</td>
+                            <td>{{request.product.name}}</td>
+                          </tr>
+                          <tr *ngIf="request.brand && request.newpurchase && request.brand.name != request.newpurchase.name">
+                            <td width="20%">Brand</td>
+                            <td>:</td>
+                            <td>{{request.brand.name}}</td>
+                          </tr>
+                          <tr *ngIf="request.modelNumber">
+                            <td width="20%">Model Number</td>
+                            <td>:</td>
+                            <td>{{request.modelNumber}}</td>
+                          </tr>
+                          <tr *ngIf="request.noOfUnits">
+                            <td width="20%">Number of Units</td>
+                            <td>:</td>
+                            <td>{{request.noOfUnits}}</td>
+                          </tr>
+                          <tr *ngIf="request.modeOfPayment">
+                            <td width="20%">Mode of Payment</td>
+                            <td>:</td>
+                            <td>{{request.modeOfPayment}}</td>
+                          </tr>
+                          
+                          <tr *ngIf="request.configuration">
+                            <td width="20%">Configuration</td>
+                            <td>:</td>
+                            <td>{{request.configuration}}</td>
+                          </tr>
+                          <tr *ngIf="request.priceBudget">
+                            <td width="20%">Budget</td>
+                            <td>:</td>
+                            <td>{{request.priceBudget}}</td>
+                          </tr>
+                          <tr *ngIf="request.createdAt">
+                            <td width="20%">Created At</td>
+                            <td>:</td>
+                            <td>{{request.createdAt | date:'dd MMMM, yyyy'}}</td>
+                          </tr>
+                          <tr *ngIf="request.purchaseDate">
+                            <td width="20%">Purchase Date</td>
+                            <td>:</td>
+                            <td>{{request.purchaseDate | date:'dd MMMM, yyyy'}}</td>
+                          </tr>
+                          <tr *ngIf="request.deliveryAdd">
+                            <td width="20%">Delivery Address</td>
+                            <td>:</td>
+                            <td>{{request.deliveryAdd}}</td>
+                          </tr>
+                          <tr *ngIf="request.configuration">
+                            <td width="20%">Configuration</td>
+                            <td>:</td>
+                            <td>{{request.configuration}}</td>
+                          </tr>
+                          <tr *ngIf="request.other">
+                            <td width="20%">Other</td>
+                            <td>:</td>
+                            <td>{{request.other}}</td>
+                          </tr>
+                          
+                          <tr><td colspan="3">&nbsp;</td></tr>
+                        </tbody>
+                    </table>
+                    
+                </div> 
+                <div class="col-md-6">
+                    <span ><strong>Customer Info</strong></span><br /><br />
+                    <table class="table borderless"  border="0" *ngIf="request.people">
+                        <tbody>
+                          <tr *ngIf="request.people.fullName">
+                            <td width="20%">Name</td>
+                            <td>:</td>
+                            <td>{{request.people.fullName}}</td>
+                          </tr>
+                          <tr *ngIf="request.people.email">
+                            <td width="20%">Email</td>
+                            <td>:</td>
+                            <td>{{request.people.email}}</td>
+                          </tr>
+                          <tr *ngIf="request.people.email">
+                            <td width="20%">Mobile</td>
+                            <td>:</td>
+                            <td>{{request.people.mobile}}</td>
+                          </tr>
+                        </tbody>
+                    </table>      
+
+
+                    <!-- <div *ngIf="request.people">
+                        <span ><strong>Customer Info</strong></span><br /><br />
+                        <div class="row" *ngIf="request.people.fullName">
+                            <div class="col-md-2" >Name</div>
+                            <div class="col-md-1">:</div>
+                            <div class="col-md-9">{{request.people.fullName}}</div>
+                        </div>   
+                        <div class="row" *ngIf="request.people.email">
+                            <div class="col-md-2" >Email</div>
+                            <div class="col-md-1">:</div>
+                            <div class="col-md-9">{{request.people.email}}</div>
+                        </div>   
+                    </div>     -->
+                </div>  
+                <div class="col-md-12" *ngIf="request.description">
+                    
+                    Description :=> {{request.description}}
+                </div>  
+                <!-- <div class="col-md-12 col-md-offset-1"> 
+                    Customer Name : {{request.people.fullName}}
+                </div>                    -->
+            </div>
+        </div>  
+
+        <div class="rah-right">
+            <ngb-pagination [collectionSize]="options.totalCount" (pageChange)="changePage()" [(page)]="options.page" [maxSize]="5" [pageSize]="options.limit" [boundaryLinks]="true"></ngb-pagination>
+        </div>
+
+    </div>
+</div>

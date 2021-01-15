@@ -1,0 +1,147 @@
+<div class="vendor_header">
+    <div class="container">
+        <h2>Vendor Info</h2>
+    </div>
+</div>
+<div class="container img_us">
+    <div class="col-sm-12">
+        <div class="vendor-info-image">
+            <img [src]="user.image?(user.image.includes('http')?user.image:baseUrl+user.image):userDefaultImage">
+        </div>
+    </div>
+    <div class="col-sm-12" >
+        <!-- <div class="vendor-info-image" >
+        	<span *ngFor="let x of [1,2,3,4,5]">
+            	<span [ngClass]="{'fa fa-start':true,checked:x<user.rating.avgRating}" class="fa fa-star checked"></span> 
+        	</span>
+
+            
+
+        </div> -->
+    </div>
+    <hr>
+    <div class="row pt_p">
+    	<div class="col-sm-6">
+	        <table class="table-responsive">
+	            <tr>
+	                <td><b>Name</b> </td>
+	                <td>{{user.fullName | titlecase}}</td>
+	            </tr>
+	            <tr>
+	                <td><b>Phone Number</b></td>
+	                <td>{{user.mobile}}</td>
+	            </tr>
+	            <tr>
+	                <td><b>No. of engineers</b></td>
+	                <td>{{user.noOfEngineers}}</td>
+	            </tr>
+	            <tr>
+	                <td><b>Bank Name</b> </td>
+	                <td>{{user.bankName}}</td>
+	            </tr>
+	            <tr>
+	                <td><b>IFSC Code</b></td>
+	                <td>{{user.ifscCode}}</td>
+	            </tr>
+	            <tr *ngIf="user.startTime">
+	                <td><b>Start Time</b> </td>
+	                <td>{{user.startTime.value}}</td>
+	            </tr>
+	            <tr *ngIf="user.endTime">
+	                <td><b>End Time</b> </td>
+	                <td>{{user.endTime.value}}</td>
+	            </tr>
+	            <tr >
+	                <td><b>Support Day</b> </td>
+	                <td>{{getDaysList(user.supportDays || [])}}</td>
+	            </tr>
+	            <tr>
+	                <td><b>Product Offered</b> </td>
+	                <td>{{getProductList(user.newpurchase || [])}}</td>
+	            </tr>
+	        </table>
+	    </div>  
+    	<div class="col-sm-6">
+	        <table class="table-responsive">
+	            <tr>
+	                <td><b>Email</b></td>
+	                <td>{{user.email}}</td>
+	            </tr>
+	            <tr>
+	                <td><b>GST Number</b></td>
+	                <td> {{user.gstNumber}}</td>
+	            </tr>
+	            <tr>
+	                <td><b>Year of experience</b></td>
+	                <td>{{user.yearOfExp}}</td>
+	            </tr>
+	            <tr>
+	                <td><b>Firm Name</b> </td>
+	                <td>{{user.firmName}}</td>
+	            </tr>
+	            <tr>
+	                <td><b>Account Number</b> </td>
+	                <td>{{user.accountNumber}}</td>
+	            </tr>
+	            
+	            <tr >
+	                <td><b>Services Offered</b> </td>
+	                <td >{{getServicesList(user.services || [])}}</td>
+	            </tr>
+	            
+	        </table>
+	    </div>  	      
+    </div>
+    <hr>
+    <div class="container engg">
+        <h3>Our Engineers:</h3>
+        <div class="noDataFound" *ngIf="!engineers.length && !isLoadingEng">No Engineer Found</div>
+        <div class="engd" *ngFor="let engineer of engineers;let i = index">
+            <div class="rer">
+                <b>{{i+1}}.</b>
+                <b>Name: </b>
+                <a href="javascript:;">  &nbsp;&nbsp;{{engineer.fullName}}</a>
+            </div>
+            &nbsp; &nbsp;<b>Mobile No.:</b> &nbsp; {{engineer.mobile}}
+        </div>
+        <hr>
+    </div>
+    <div class="container vendor_footer">
+        <div class="container">
+            <h2>Document</h2>
+        </div>
+    </div>
+    <div class="container dl_po" >
+    	<div class="noDataFound" *ngIf="!user.aadharImg && !user.panImg && !user.chequeImg && !user.gstImg">No Document Found</div>
+
+        <div class="col-md-3" *ngIf="user.aadharImg">
+            <div class="document-image">
+                <a [attr.href]="baseUrl+user.aadharImg" download>
+						<img [src]="baseUrl+user.aadharImg" width="150" height="150">
+				</a>
+			</div>
+        </div>
+        <div class="col-md-3" *ngIf="user.panImg">
+            <div class="document-image">
+                <a [attr.href]="baseUrl+user.panImg" download>
+						<img [src]="baseUrl+user.panImg" width="150" height="150">
+				</a>
+			</div>
+        </div>
+        <div class="col-md-3" *ngIf="user.chequeImg">
+            <div class="document-image">
+                <a [attr.href]="baseUrl+user.chequeImg" download>
+						<img [src]="baseUrl+user.chequeImg" width="150" height="150">
+				</a>
+			</div>
+        </div>
+        <div class="col-md-3" *ngIf="user.gstImg">
+            <div class="document-image">
+                <a [attr.href]="baseUrl+user.gstImg" download>
+						<img [src]="baseUrl+user.gstImg" width="150" height="150">
+				</a>
+			</div>
+        </div>
+       
+    </div>
+</div>    

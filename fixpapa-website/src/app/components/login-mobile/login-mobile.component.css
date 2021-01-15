@@ -1,0 +1,10 @@
+.login-close{
+	color : grey;
+}
+.login-close:hover{
+	outline : none !important;
+}
+
+.error-div p {
+	font-size: 14px;
+}

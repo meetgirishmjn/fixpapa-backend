@@ -1,0 +1,41 @@
+User-agent: Googlebot
+Disallow: /reset
+
+User-agent: Googlebot-image
+Disallow: /reset
+
+User-agent: Googlebot-mobile
+Disallow: /reset
+
+User-agent: MSNBot
+Disallow: /reset
+
+User-agent: Slurp
+Disallow: /reset
+
+User-agent: Robozilla
+Disallow: /reset
+
+User-agent: ia_archiver
+Disallow: /reset
+
+User-agent: baiduspider
+Disallow: /reset
+
+User-agent: yahoo-mmcrawler
+Disallow: /reset
+
+User-agent: psbot
+Disallow: /reset
+
+User-agent: NinjaBot
+Disallow: /reset
+
+User-agent: Adsbot-Google
+Disallow: /reset
+
+User-agent: *
+Disallow: /reset
+
+
+Sitemap: https://fixpapa.com/sitemap.xml

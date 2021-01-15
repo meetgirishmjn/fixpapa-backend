@@ -1,0 +1,22 @@
+{
+  "generateChecksum":{
+    "replyCode": "Success",
+    "replyMessage": "Successfully generated"
+  },
+  "checksumVerified":{
+    "replyCode": "Success",
+    "replyMessage": "Successfully verified"
+  },
+  "redirectUrl":{
+    "replyCode": "Success",
+    "replyMessage": "Successfully redirected"
+  },
+  "cashPayment":{
+    "replyCode": "Success",
+    "replyMessage": "Successfully cash payment done!!"
+  },
+   "chequePayment":{
+    "replyCode": "Success",
+    "replyMessage": "Successfully cheque payment done!!"
+  }
+}

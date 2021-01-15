@@ -1,0 +1,23 @@
+<div class="modal fade" id="update-status" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content" *ngIf="updateStatusForm" >
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Update Job Status</h4>
+			</div>
+			<form novalidate [formGroup]="updateStatusForm" >
+				<div class="modal-body">
+					<div class="form-group text-area">
+						<label for="comment" style="margin: 10px 10px;color: grey" >Status</label>
+						<textarea class="form-control" rows="5" id="offlineStatus" name="offlineStatus" formControlName="offlineStatus" ></textarea>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" (click)="updateStatus()" [ngClass]="{'disabled' : disabled}" >Submit</button>
+					<button type="button" class="btn btn-secondary" (click)="closeModal()" >Cancel</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

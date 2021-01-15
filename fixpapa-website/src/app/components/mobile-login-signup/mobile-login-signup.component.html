@@ -1,0 +1,75 @@
+<div class="modal wow login-modal" id="largeModal6" tabindex="-1" 
+  role="dialog" aria-labelledby="basicModal" aria-hidden="true" >
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content" *ngIf="customerSignUpForm" >
+			<div class="modal-header login-header" >
+				<button type="button" class="close login-close" data-dismiss="modal" (click)="closeModal()" >&times;</button>
+			</div>
+			<div class="modal-body no-padding">
+				<div class="col-md-12 no-gap reg-bg1">
+					<div class="reg-bg">
+						<h2>Sign up as Customer</h2>
+						<form novalidate [formGroup]="customerSignUpForm" >
+							<div class="col-md-4">
+								<div class="text-center bg-form">
+									<div class="img-section img-section1">
+										<img [src]="custProfileImg" class="imgCircle" alt="Profile picture" />
+										<input type="file" id="image-input" name="profileImage" rah-file-dir (imageAsUrl)="custProfileImg = $event" (assignValue)="files.image = $event" accept="image/*" class="form-control form-input Profile-input-file" />
+										<p>Upload Your Image</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-8">
+								<div class="col-md-4 radio-text">
+									<p>Type of User</p>
+								</div>
+								<div class="col-md-1"></div>
+								<div class="form-group radio-button col-md-7">
+									<label class="container1">Home
+										<input type="radio" value="home" name="customerType" formControlName="customerType" />
+										<span class="checkmark"></span>
+									</label>
+									<label class="container1">Co-operate
+										<input type="radio" name="customerType" value="corporate" formControlName="customerType" />
+										<span class="checkmark"></span>
+									</label>
+								</div>
+								<div style="clear: both;"></div>
+								<div class="form-group reg-form">
+									<input type="text" class="form-control" name="fullname" formControlName="fullName" placeholder="Name" />
+								</div>
+								<div class="error-div" *ngIf="fullName.errors && (fullName.dirty || fullName.touched)" >
+									<p *ngIf="fullName.errors.required">Name is required</p>
+								</div>
+								<div class="form-group reg-form co1-md-6">
+									<input type="text" class="form-control" name="email" formControlName="email" placeholder="Email Address" />
+								</div>
+								<div class="error-div" *ngIf="email.errors && (email.dirty || email.touched)" >
+									<p *ngIf="email.errors.required">Email is required</p>
+									<!-- <p *ngIf="email.errors.pattern" >Invalid Email</p> -->
+									<p *ngIf="email.errors.validEmail" >Invalid Email</p>
+								</div>
+								<div class="form-group reg-form" *ngIf="customerSignUpForm.get('customerType').value === 'corporate'" >
+									<input type="text" class="form-control" name="gstNumber" formControlName="gstNumber" placeholder="GST No." />
+								</div>
+								<div class="form-group reg-form" *ngIf="customerSignUpForm.get('customerType').value === 'corporate'" >
+									<input type="text" class="form-control" name="companyName" formControlName="companyName" placeholder="Company Name" />
+								</div>
+							</div>
+							<div style="clear: both;"></div>
+
+							<div class="col-md-12 col-xs-12 col-sm-12">
+								<div class="login-button login-form">
+									<button type="submit" class="btn btn-primary" [ngClass]="{'disabled' : disableCust}" [disabled]="disableCust" (click)="checkSignUpForm()" >Update</button>
+								</div>
+							</div>
+
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer no-padding">
+			</div>
+		</div>
+	</div>
+</div>

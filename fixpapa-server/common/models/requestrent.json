@@ -1,0 +1,65 @@
+{
+  "name": "Requestrent",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "Aggregate": true
+  },
+  "properties": {
+    "address": {
+      "type": "string",
+      "default": ""
+    },
+    "description": {
+      "type": "string",
+      "default": ""
+    },
+    "estiBudget": {
+      "type": "number",
+      "default": ""
+    },
+    "rentDetail": {
+      "type": [
+        "object"
+      ],
+      "default": []
+    }
+  },
+  "validations": [],
+  "relations": {
+    "rentDetails": {
+      "type": "embedsMany",
+      "model": "Rentdetail",
+      "property": "rentDetail",
+      "options": {
+        "validate": true,
+        "forceId": true,
+        "persistent": true
+      },
+      "scope": {
+        "include": "category"
+      }
+    },
+    "category": {
+      "type": "belongsTo",
+      "model": "Category",
+      "foreignKey": ""
+    },
+    "people": {
+      "type": "belongsTo",
+      "model": "People",
+      "foreignKey": ""
+    }
+  },
+  "indexes": {
+      "rent_req_index": {
+        "keys": {"peopleId": 1,"categoryId":1}
+      }
+  
+  },
+  "acls": [],
+  "methods": {}
+}

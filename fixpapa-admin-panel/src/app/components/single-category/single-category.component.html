@@ -1,0 +1,180 @@
+<div class="row container-min-height" >
+    <div class="Page-heading" >
+        <div class="container-fluid">
+            <h3>
+                <div class="row">
+                    <div class="col-md-11">{{ category.name }}</div>
+                </div>
+            </h3>
+        </div>    
+    </div>
+
+    <div class="col-lg-12">
+        <div class="rah-card-container ">
+            <h4>
+                <div class="row">
+                    <div class="col-md-11">Products</div>
+                    <div class="col-md-1" >
+                        <!-- <a type="button" class="btn block-btn" href="javascript:;" (click)="openModal()"><i class="fa fa-plus"></i></a> -->
+                        <a type="button" class="btn block-btn rah-right" (click)="openProductModal()" href="javascript:;" >
+                            <i class="fa fa-plus"></i>
+                        </a>
+                    </div>    
+                </div>
+            </h4><br />
+            <ul class="list-group">
+                <li class="list-group-item" *ngFor="let product of category.products">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="">
+                                <h5>{{product.name}}</h5>
+                            </div>
+                        </div>
+                        <!-- <div class="col-md-2" align="right">
+                            <a type="button" class="btn block-btn" (click)="openModal(category)" href="javascript:;"><i class="fa fa-edit"></i></a>&nbsp;
+                           
+                        </div> -->
+                    </div>    
+                </li>
+            </ul>
+        </div>
+    </div>    
+    
+    <div class="col-lg-12">
+        <div class="rah-card-container ">
+            <h4>
+                <div class="row">
+                    <div class="col-md-11">Problems</div>
+                    <div class="col-md-1" >
+                        <a type="button" class="btn block-btn rah-right" (click)="openProblemModal()" href="javascript:;" >
+                            <i class="fa fa-plus"></i>
+                        </a>
+                    </div>    
+                </div>    
+            </h4><br />
+            <ul class="list-group">
+                <li class="list-group-item"  *ngFor="let problem of category.problems">
+                    <a type="button" class="btn block-btn rah-right" (click)="openProblemModal(problem)" href="javascript:;" >
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    {{problem.probContent}}<br />
+                    <b>Price: &#8377; {{problem.price}} </b>
+                </li>
+              
+            </ul>
+        </div>
+    </div>    
+</div>
+
+
+<div class="modal fade" id="productModal"  role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">
+                    <!-- <span *ngIf="!selectedCategory">Add</span><span *ngIf="selectedBrand">Edit</span> Product -->
+                    Add Product 
+                </h4>
+            </div>
+            <form  class="form-horizontal" id="productForm" (submit)="addProduct(productForm)" #productForm="ngForm">
+                <div class="modal-body">
+                   <!--  <div class="alert alert-danger" >
+                      alert
+                    </div> -->
+                    <!-- <p >Are you sure you want to block this user?</p> -->
+                    <div class="bootstrap-iso">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    
+                                    <div class="form-group col-lg-12">
+                                        <label for="brandName">Select Product</label>
+                                        <!-- <ng-select required [multiple]="true"
+                                            [active]="selectedProducts"
+                                            [allowClear]="true"
+                                            [items]="allProducts |selectAutocomplete:'name'"
+                                            [disabled]="disabled"
+                                            (data)="selectData($event)"
+                                            placeholder="No Product Selected">
+                                        </ng-select> -->
+                                        <ng-select required [multiple]="true"
+                                            [active]="selectedProducts"
+                                            [allowClear]="true"
+                                            [items]="allProducts |selectAutocomplete:'name'"
+                                            (data)="selectData($event)"
+                                            placeholder="No Product Selected">
+                                        </ng-select>
+
+                                        <div class="error-div" *ngIf="productForm._submitted && !selectedProducts.length">
+                                          this field is required
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary " id="productBtn" type="submit" >Submit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="problemModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">
+                    <span *ngIf="!selectedProblem.id">Add</span><span *ngIf="selectedProblem.id">Edit</span> Problem
+                </h4>
+            </div>
+            <form  class="form-horizontal" id="problemForm" (submit)="addProblem(problemForm)" #problemForm="ngForm">
+                <div class="modal-body">
+                    
+                    <!-- <p >Are you sure you want to block this user?</p> -->
+                    <div class="bootstrap-iso">
+                        <div class="container-fluid">
+                            <div class="alert alert-danger col-md-12" *ngIf="errSuccProb.isError">
+                              {{errSuccProb.errMsg}}
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    
+                                    <div class="form-group col-lg-12">
+                                        <label for="brandName">Problem</label>
+                                        <input type="text" required="" [(ngModel)]="selectedProblem.probContent" class="form-control" name="probContent" id="probContent" placeholder="Add Problem" #probContent="ngModel">
+                                    
+                                        <div class="error-div" *ngIf="problemForm._submitted && probContent.errors?.required">
+                                          this field is required
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    <div class="form-group col-lg-12">
+                                        <label for="brandName">Price</label>
+                                        <input type="text" required="" [(ngModel)]="selectedProblem.price" class="form-control" name="price" id="price" placeholder="Add Price" #price="ngModel">
+
+                                        <div class="error-div" *ngIf="problemForm._submitted && price.errors?.required" >
+                                          this field is required
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary " id="problemBtn" data-loading-text="Submit..." type="submit" >Submit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

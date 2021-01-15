@@ -1,0 +1,28 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+
+<p>Paytm response page</p>
+
+
+<% if(success.STATUS == "TXN_SUCCESS"){%>
+   <h1>Transaction complete successfully!!</h1>
+ <% }
+ else if(success.STATUS == "INVALID"){ %>
+	
+   <h1>Invalid Transaction</h1>
+ <% } else{ %>  
+   <h1>Oops! Transaction failed!!</h1>
+<% } %>
+
+
+
+<a href="https://fixpapa.com/">Back to Home</a>
+
+
+
+</body>
+</html>

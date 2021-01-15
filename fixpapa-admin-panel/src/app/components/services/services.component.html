@@ -1,0 +1,80 @@
+<div class="row container-min-height" >
+    <div class="Page-heading" >
+        <h3>Services</h3>
+    </div>
+    <div class="col-lg-12">
+        <div class="rah-card-container">
+            <h4>
+                Services
+                <a type="button" class="btn block-btn rah-right" (click)="openServiceModal()" href="javascript:;" >
+                    <i class="fa fa-plus"></i>
+                </a>
+            </h4><br />
+
+            <div class="noDataFound" *ngIf="!services.length && !isLoading">No data found</div>
+            <div id="loader" *ngIf="isLoading"></div>
+
+            <ul class="list-group">
+                <li class="list-group-item" *ngFor="let service of services">
+                    <!-- {{service.name}}
+                    <a type="button" class="btn block-btn" (click)="openModal(contract)" href="javascript:;"><i class="fa fa-edit"></i></a>&nbsp; -->
+
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="">
+                                <h5>{{service.name}}</h5>
+                            </div>
+                        </div>
+                        <div class="col-md-2" align="right">
+                            <a type="button" class="btn block-btn" (click)="openServiceModal(service)" href="javascript:;"><i class="fa fa-edit"></i></a>&nbsp;
+                        </div>
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+    </div>    
+</div>
+
+<div class="modal fade" id="serviceModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">
+                    <!-- <span *ngIf="!selectedCategory">Add</span><span *ngIf="selectedCategory">Edit</span> Service -->
+                    Add Service
+                </h4>
+            </div>
+            <form  class="form-horizontal"  id="serviceForm" (submit)="addService(serviceForm)" #serviceForm="ngForm" >
+                <div class="modal-body">
+                    <!--  <div class="alert alert-danger" >
+                      alert
+                    </div> -->
+                    <!-- <p >Are you sure you want to block this user?</p> -->
+                    <div class="bootstrap-iso">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="form-group col-lg-12">
+                                        <label for="brandName">Service</label>
+                                        <input type="text" required="" [(ngModel)]="selectedService.name" class="form-control" name="name" id="name" placeholder="Add Service"  #name="ngModel">
+                                    
+                                        <div class="error-div" *ngIf="serviceForm._submitted && name.errors?.required" >
+                                          this field is required
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary " id="serviceBtn" data-loading-text="Submit..." type="submit" >Submit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

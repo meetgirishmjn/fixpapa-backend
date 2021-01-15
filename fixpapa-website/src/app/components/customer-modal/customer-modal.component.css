@@ -1,0 +1,6 @@
+.login-close{
+	color : grey;
+}
+.login-close:hover{
+	outline : none !important;
+}

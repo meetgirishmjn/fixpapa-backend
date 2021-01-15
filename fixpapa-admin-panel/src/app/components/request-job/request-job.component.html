@@ -1,0 +1,310 @@
+
+<div class="row container-min-height">
+    <div class="Page-heading" >
+        <div class="container-fluid">
+            <h3>
+                <div class="row">
+                    <div class="col-md-10">Repair Services</div>
+                    <div class="col-md-2">
+                        <ng-select [allowClear]="false"
+                                  [items]="options.statusList"
+                                  [active]="[options.selectedStatus]"
+                                  (selected)="selected($event)"
+                                  placeholder="select status">
+                        </ng-select>
+                    </div> 
+                </div>
+            </h3>
+        </div>    
+    </div>
+
+    <div class="filter container-fluid">
+        <div class="row card-row">
+            <h4>Filters</h4>
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="startDate">Start Date</label>
+                        <input [owlDateTimeTrigger]="dt12" dateTimeChange [owlDateTime]="dt12" [(ngModel)]="options.startDate"  class="form-control" id="startDate" placeholder="Start Date">
+                        <owl-date-time  (afterPickerClosed)="afterDatePick('start',dt12)" [pickerType]="'calendar'" #dt12></owl-date-time>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <label for="endDate">End Date</label>
+                    <input [owlDateTimeTrigger]="dt13" [owlDateTime]="dt13" [(ngModel)]="options.endDate" class="form-control"  id="endDate" placeholder="End Date">
+                    <owl-date-time [pickerType]="'calendar'" (afterPickerClosed)="afterDatePick('end',dt13)" #dt13></owl-date-time>
+                </div>
+                <div class="form-group col-sm-4">
+                    <label for="address">Address/Order Id</label>
+                   <div class="input-group">
+                      <div class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{options.searchBy}} <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                          <li><a href="javascript:;" (click)="options.searchBy = 'Order Id'" >Order Id</a></li>
+                          <li><a href="javascript:;" (click)="options.searchBy = 'Address'">Address</a></li>
+                        </ul>
+                      </div><!-- /btn-group -->
+                      <input type="text" [(ngModel)]="options.searchStr"  placeholder="search by address or order id" class="form-control" aria-label="...">
+                    </div><!-- /input-group -->
+                </div>    
+                <!-- <div class="form-group col-sm-3">
+                    <label for="address">Address/Order Id</label>
+                    <input type="text" placeholder="search by address or order id" class="form-control" id="address">
+                </div> -->
+
+            </div>
+
+            <div style="float: right">
+                <button type="button" (click)="getJobs()" class="btn block-btn" >Search</button>
+            </div>    
+
+        </div>    
+    </div> 
+
+    <div class="container-fluid">
+
+        <div class="noDataFound" *ngIf="!jobs.length && !isLoading">No data found</div>
+        <div id="loader" *ngIf="isLoading"></div>
+
+        <div class="row card-row" *ngFor="let job of jobs">
+            <div class="row">
+                <div class="col-md-1">
+                    <div class="card-img"  *ngIf="job.category">
+                        <img class="img-responsive" [src]="baseUrl+job.category.image" />
+                    </div>
+                </div>
+                <span class="rah-right">
+                    <!-- {{job.startDate | date : 'dd MMMM, yyyy At hh:mm a'}}<br />  -->
+                    {{job.status | titlecase}}<br />
+                    <p *ngIf="job.status">
+                        <span *ngIf="!job.bill || !job.bill.total">Amount : &#x20B9; {{job.totalPrice}}</span>
+                        <span *ngIf="job.bill && job.bill.total">Amount : &#x20B9; {{job.bill.total}}</span>
+                    </p>
+                </span>
+                <div class="col-md-3">
+                    <div class="" *ngIf="job.customer">
+                        <h5><strong>Customer Info</strong></h5>
+                        <h5>Name : {{job.customer.fullName | titlecase}}</h5>
+                        <p>Mobile Number : {{job.customer.mobile}}</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <h5><strong>Vendor Info</strong></h5>
+                    <div *ngIf="job.vendor && job.status != 'requested' ">
+                        <h5>Name : {{job.vendor.fullName | titlecase}}</h5>
+                        <p>Mobile Number : {{job.vendor.mobile}}</p>
+                    </div>
+                    <div *ngIf="!job.vendor && job.status == 'requested'"><h5>Not Assigned</h5></div>
+                </div>
+                <div class="col-md-3">
+                    <h5><strong>Engineer Info</strong></h5>
+                    <div *ngIf="job.engineer && job.status != 'requested'">
+                        <h5>Name : {{job.engineer.fullName | titlecase}}</h5>
+                        <p>Mobile Number : {{job.engineer.mobile}}</p>
+                    </div>
+                    <div *ngIf="!job.engineer && job.status == 'requested'"><h5>Not Assigned</h5></div>
+                </div>
+            </div><br />
+            <div class="row">
+                <div class="col-sm-11 col-md-offset-1">
+                    Address : {{job.address.street}} ,{{job.address.value}}<br />
+                    Order Id : {{job.orderId}}<br />
+                    Job start At : {{job.startDate | date : 'dd MMMM, yyyy At hh:mm a'}}<br /> 
+                    Created At : {{job.createdAt | date : 'dd MMMM, yyyy At hh:mm a'}}<br /> 
+                </div>
+            </div>    
+            <br />
+            <div class="row" *ngIf="job.status == 'canceled'">
+                <div class="col-sm-11 col-md-offset-1">
+                    Cancellation Reason : <span *ngIf="job.cancelJob.reason != 'Other'">{{job.cancelJob.reason}}</span><span *ngIf="job.cancelJob.reason == 'Other'">{{job.cancelJob.comment}}</span><br />
+                    Cancellation Date : {{job.cancelJob.cancelledDate | date : 'dd MMMM, yyyy At hh:mm a'}}<br />
+                    Cancelled By : {{job.cancelJob.cancelledBy | titlecase}}
+                </div>
+            </div>    
+            <div class="row" *ngIf="job.status == 'indispute'">
+                <div class="col-sm-11 col-md-offset-1">
+                    Dispute Reason : {{job.completeJob.comment}}<br />
+                    Dispute Date : {{job.completeJob.completedAt | date:'dd MMMM, yyyy At hh:mm a'}}
+                </div>
+            </div>    
+            <div class="row" *ngIf="job.status == 'completed'">
+                <div class="col-sm-11 col-md-offset-1">
+                    Mode of payment : {{job.completeJob.modeOfPayment}}<br />
+                    Completed Date : {{job.completeJob.completedAt | date:'dd MMMM, yyyy At hh:mm a'}}
+                </div>
+            </div>    
+            <div class="row" *ngIf="job.oldJobId">
+                <div class="col-sm-11 col-md-offset-1">
+                    <a routerLink="/job-request-info/{{job.oldJobId}}">View Old Job</a>
+                </div>
+            </div>    
+            <div style="float: right">
+                <a type="button" class="btn block-btn" *ngIf="(!job.vendorId && job.status!='canceled') || job.status == 'requested'" (click)="sendMessage(job)" href="javascript:;">Send Message</a>&nbsp;
+                <a type="button" routerLink="/job-request-info/{{job.id}}" class="btn block-btn" >View</a>&nbsp; <!-- job.venToAdmin -->
+                <a type="button" *ngIf="job.status === 'completed'" routerLink="/generate-bill/{{job.id}}"  class="btn block-btn" ><span *ngIf="!job.adminToCust">Generate Bill</span><span *ngIf="job.adminToCust">Generated</span></a>&nbsp;
+                <a type="button" class="btn block-btn" *ngIf="(!job.vendorId && job.status!='canceled') || job.status == 'requested'" (click)="openAssignModal(job)" href="javascript:;">Assign Vendor</a>
+                <a type="button" class="btn block-btn" *ngIf="job.status == 'canceled' && !job.newJob && job.cancelJob.cancelledBy == 'vendor' " (click)="reInitJobModel(job)" href="javascript:;">Create Job</a>
+            </div>    
+
+        </div>
+        <div class="rah-right">
+            <ngb-pagination [collectionSize]="options.totalJobs" (pageChange)="changePage()" [(page)]="options.page" [maxSize]="5" [pageSize]="filter.limit" [boundaryLinks]="true"></ngb-pagination>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="modal fade" id="viewJobModel" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <form  class="form-horizontal" (submit)="adminApproval(adminApprovalForm)" #adminApprovalForm="ngForm">
+                <div class="modal-body">
+                    <div class="bootstrap-iso">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    Are you sure you want to {{approvalValue}} this vender?
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary " id="approvalBtn" data-loading-text="Submit..." type="submit" >Yes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> -->
+
+<div class="modal fade" id="VendorAssignModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">
+                    Select Vendor 
+                    <input  type="text" style="margin-top:8px" class="form-control" [(ngModel)]="vendorSearchStr" required="" name="vendorSearch" id="vendorSearch" placeholder="Search By Name" >
+                
+                </h4>
+            </div>
+            <form  class="form-horizontal" (submit)="assignVendor(vendorAssForm)" #vendorAssForm="ngForm">
+                <div class="modal-body modal-content-height">
+                    
+                    <div *ngFor="let vendor of allVendors | filter:'fullName':vendorSearchStr" class="radio">
+                        <label>
+                            <input type="radio" class="radio-select" [(ngModel)]="assignVendorInfo.id" [value]="vendor.id" (click)="this.assignVendorInfo.info = vendor" name="optradio">
+                            <div class="row card-row-modal">
+                                <div class="col-md-12">
+                                    <div class="">
+                                        <h5>Name : {{vendor.fullName}}</h5>
+                                        <p>Mobile Number : {{vendor.mobile}}</p>
+                                        <p>Email : {{vendor.email}}</p>
+                                        <p>Number Of Engineers : {{vendor.noOfEngineers}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </label>    
+                        <hr />
+                    </div>    
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary " [disabled]="!assignVendorInfo.id" id="assignBtn" data-loading-text="Assign..." type="submit" >Assign</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="modal fade" id="approveModal"  role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">
+                	Alert
+                </h4>
+            </div>
+            <form  class="form-horizontal" (submit)="adminApproval(adminApprovalForm)" #adminApprovalForm="ngForm">
+                <div class="modal-body">
+                    <div class="bootstrap-iso">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    Are you sure you want to {{approvalValue}} this vender?
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary " id="approvalBtn" data-loading-text="Submit..." type="submit" >Yes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> -->
+
+<div class="modal fade" id="reInitJob"  role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">
+                    Re-create Job
+                </h4>
+            </div>
+            <form  class="form-horizontal" (submit)="reInitJob(reInitJobForm)" #reInitJobForm="ngForm">
+                <div class="modal-body">
+                    <div class="bootstrap-iso">
+                        <div class="container-fluid">
+                            <!-- <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    Please select start date and end date.
+                                </div>
+                            </div> -->
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="form-group ">
+                                        <label for="startDate">Start Date</label>
+                                        <input [owlDateTimeTrigger]="startTimeRe" required dateTimeChange [owlDateTime]="startTimeRe" [min]="minDateEE" name="startTimeRe" [(ngModel)]="reInitJobData.startDate"  class="form-control" id="startDateRe" placeholder="Start Date">
+                                        <owl-date-time [pickerType]="'calendar'"  #startTimeRe></owl-date-time>
+                                        <div class="error-div" *ngIf="!reInitJobData.startValid" >
+                                          this field is required
+                                        </div>
+                                    </div>
+                                </div>    
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="form-group ">
+                                        <label for="startDate">Time Slot</label>
+                                        <ng-select [allowClear]="false"
+                                              [items]="reInitSlots"
+                                              [active]="[reInitJobData.slotValue]"
+                                              (selected)="selectedSlot($event)"
+                                              placeholder="select Slot">
+                                        </ng-select>   
+                                        <div class="error-div" *ngIf="!reInitJobData.isSlotSelect" >
+                                          this field is required
+                                        </div> 
+                                    </div>    
+                                </div>
+                            </div>        
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary " id="reInitJobBtn" data-loading-text="Create..." type="submit" >Create</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

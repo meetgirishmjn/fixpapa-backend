@@ -1,0 +1,36 @@
+<!-- <div id="map" class="col-md-12" style="margin-top:200px;width:100%;height:700px;" #googleMap>
+	
+</div> -->
+
+
+<div class="modal fade" id="live-location" role="dialog" >
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Engineer Live Location</h4>
+			</div>
+			<div class="modal-body">
+				<agm-map [latitude]="pos.lat" [longitude]="pos.lng" [scrollwheel]="true" [streetViewControl]="true" 
+					zoomControl="true" fullscreenControl="true" panControl="true" mapTypeControl="true" 
+					rotateControl="true" scaleControl="true" [mapTypeId]="'roadmap'" (click)="checkForAddress(pos)" >
+					<agm-marker [latitude]="pos.lat" [longitude]="pos.lng" title="Engineer" maxZoom="18" >
+						<agm-info-window>{{formatted_address}}</agm-info-window>
+					</agm-marker>
+				</agm-map>
+				<div class="row" >
+					<div class="col-md-6" >
+						<h5 style="color:grey;text-align:center;" *ngIf="pos.rem_duration" ><b>Approximate Time Duration to reach : <span>{{pos.rem_duration}}</span></b></h5>
+					</div>
+					<div class="col-md-6" >
+						<h5 style="color:grey;text-align:center;" *ngIf="pos.rem_duration" ><b>Approximate Distance to reach : <span>{{pos.rem_distance}}</span></b></h5>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" (click)="closeModal()" >Cancel</button>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,87 @@
+.header{
+	height : 70px;
+	background : #06386b;
+	color : white;
+	margin-bottom : 70px;
+}
+.inner-top-gap{
+    margin-top: 150px;
+}
+.customer-deshboard-bg{
+    color: grey;
+}
+.invoice-title h2, .invoice-title h3 {
+    display: inline-block;
+}
+
+.table > tbody > tr > .no-line {
+    border-top: none;
+}
+
+.table > thead > tr > .no-line {
+    border-bottom: none;
+}
+
+.table > tbody > tr > .thick-line {
+    border-top: 2px solid;
+}
+.invoice-title {
+    text-align: center;
+}
+.invoice-title h2 {
+    font-size: 25px;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+.invoice-title p {
+    margin-bottom: 5px;
+}
+.bg-heading h6 {
+    background: #06386b;
+    padding: 10px;
+    text-align: center;
+    color: #fff;
+    font-size: 15px;
+}
+address {
+    border: 1px solid #333;
+    padding: 10px;
+    margin-bottom: 0px;
+    height: 130px;
+}
+.no-gap-right {
+    padding-right: 0px;
+}
+.no-gap-left{
+	padding-left: 0px;
+}
+.no-gap{
+	 padding-right: 0px;
+	 padding-left: 0px;
+}
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{
+	border: 1px solid #ddd !important;
+}
+.footer-content h5 {
+    background: #efefef;
+    padding: 10px;
+    border: 1px solid #b1b1b1;
+    font-weight: bold;
+}
+.footer-content ul {
+    padding-left: 20px;
+}
+.sub-footer-text {
+    border-top: 1px solid #c2c2c2;
+    border-bottom: 1px solid #c2c2c2;
+}
+.sub-footer-text p {
+    margin-bottom: 0px;
+    padding: 10px;
+}
+input{
+	padding-left: 5px;
+}
+.error-inp{
+	border: 1.5px solid #e40e0e;
+}

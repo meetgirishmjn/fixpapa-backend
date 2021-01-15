@@ -1,0 +1,31 @@
+<div class=" container-min-height" >
+    <div class="Page-heading" >
+        <h3>
+            <div class="row">
+                <div class="col-md-11">Rent A System</div>
+                <div class="col-md-1">
+                    <!-- <a type="button" class="btn block-btn"  (click)="openModal()"> -->
+                    <a type="button" class="btn block-btn">                         
+                        <i class="fa fa-plus"></i>
+                    </a>
+                </div>    
+            </div>
+        </h3>
+    </div>
+    <div class="col-lg-12" *ngFor="let system of [1,2,3,4,5,6]">
+        <div class="rah-card-container ">
+            <a type="button" class="btn block-btn rah-right" (click)="openModal()">
+                <i class="fa fa-edit"></i>
+            </a>
+        	<div>
+        		<span class="rah-title">{{system}}</span>
+        	</div>
+        	<!-- <div>
+        		<span>
+                    <b>Products</b> : {{hardware.products | commaSeparatedList:"name"}}<br />
+                </span>
+                <span>{{hardware.createdAt|date:'dd MMMM, yyyy'}}</span>
+        	</div> -->
+        </div>
+    </div>
+</div>

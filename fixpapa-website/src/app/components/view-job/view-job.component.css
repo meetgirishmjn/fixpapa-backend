@@ -1,0 +1,203 @@
+.inner-top-gap{
+    margin-top: 60px;
+}
+.header{
+	height : auto;
+	min-height : 150px;
+}
+.combo{
+	background-color:#06386b !important;
+	color:white !important;
+}
+.white{
+	color : white;
+}
+.grey{
+	color : grey;
+}
+.request-for-parts table{
+	border: 1px solid black;
+}
+.status-of-job table {
+    border-collapse: collapse;
+    width: 100%;
+}
+.status-of-job table td, .status-of-job table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+.status-of-job table th {
+    background-color : #06386b !important;
+}
+.status-of-job table tr{background-color: #f2f2f2;}
+.status-of-job table tr:hover {background-color: #ddd;}
+.status-of-job table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+#myImg{
+	width: 170px;
+    height: 100px;
+	border : 1px solid #eee;
+}
+.top-header{
+	margin-top : 30px;
+}
+.blue{
+	color : #06386b;
+}
+.description{
+	margin-top : 20px !important;
+	font-size: initial;
+}
+.problems table,.problems td {
+}
+.problems td {
+	background-color : #dfdfdf;
+	padding : 10px;
+}
+.problems table {
+	background-color : #f0f0f0;
+	border-spacing: 10px;
+	border-collapse: separate;
+	width : 100%;
+	/* margin : 0 5%; */
+}
+.light-text{
+	color: #838486;
+}
+.dark-text{
+	color: #545557;
+}
+.black-text{
+	color: black;
+}
+.font-large{
+	font-weight: 600;
+}
+
+
+#myImg {
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.69); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+/* Caption of Modal Image */
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+/* Add Animation */
+.modal-content, #caption {    
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+    from {-webkit-transform:scale(0)} 
+    to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+    from {transform:scale(0)} 
+    to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+    position: absolute;
+    top: 55px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.driver .latest-job-img img {
+    width: 140px !important;
+    height: 140px !important;
+	padding: 5px 0 !important;
+}
+
+.driver-info{
+	/* background-color:#eee; */
+	margin-top:5px;
+	text-align: center;
+	padding:25px;
+}
+
+.combo-but{
+    border-color: #06386b !important;
+    border-radius: initial !important;
+    padding: 10px 50px !important;
+    font-weight: 700 !important;
+    font-size: medium !important;
+}
+.img-mob{
+	float:right;
+	/* margin-right: 15px !important; */
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+    .modal-content {
+        width: 100%;
+    }
+	.img-mob{
+		margin-right: 0 !important;
+	}
+}
+.status-text{
+	color: #838486;
+    font-weight: 600;
+}
+/*.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}*/

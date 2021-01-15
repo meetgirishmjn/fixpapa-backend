@@ -1,0 +1,38 @@
+<h1>Please do not refresh this page...</h1>
+<form method="post" action="https://api.fixpapa.com/api/Transactions/payment" name="f1"> <!-- https://pguat.paytm.com/oltp-web/processTransaction -->
+	<table>
+		<tbody>
+			<tr>
+				<td><input type="hidden" name="MID" [value]="data.MID" /></td>
+			</tr>
+			<tr>
+				<td><input type="hidden" name="ORDER_ID" [value]="data.ORDER_ID" /></td>
+			</tr>
+			<tr>
+				<td><input type="hidden" name="CUST_ID" [value]="data.CUST_ID" /></td>
+			</tr>
+			<tr>
+				<td><input id="INDUSTRY_TYPE_ID" type="hidden" tabindex="4" maxlength="12" size="12" name="INDUSTRY_TYPE_ID" autocomplete="off" [value]="data.INDUSTRY_TYPE_ID"></td>
+			</tr>
+			<tr>
+				<td><input id="WEBSITE" tabindex="4" type="hidden" maxlength="12" size="12" name="WEBSITE" autocomplete="off" value="WEBPROD" /></td>
+			</tr>
+			<tr>
+				<td><input id="CHANNEL_ID" type="hidden" tabindex="4" maxlength="12" size="12" name="CHANNEL_ID" autocomplete="off" [value]="data.CHANNEL_ID"></td>
+			</tr>
+			<tr>
+				<td><input title="TXN_AMOUNT" tabindex="10" type="hidden" name="TXN_AMOUNT" [value]="data.TXN_AMOUNT" ></td>
+			</tr>
+			<tr>
+				<td><input id="MOBILE_NO" type="hidden" tabindex="4" maxlength="12" size="12" name="MOBILE_NO" autocomplete="off" [value]="data.MOBILE_NO"></td>
+			</tr>
+			<tr>
+				<td><input title="EMAIL_ID" tabindex="10" type="hidden" name="EMAIL" [value]="data.EMAIL" ></td>
+			</tr>
+			<tr>
+				<td><input title="CALLBACK_URL" tabindex="9" type="hidden" name="CALLBACK_URL" [value]="data.CALLBACK_URL" /></td>
+			</tr>
+			<!-- <input type="hidden" name="CHECKSUMHASH" [value]="data.CHECKSUMHASH" /> -->
+		</tbody>
+	</table>
+</form>

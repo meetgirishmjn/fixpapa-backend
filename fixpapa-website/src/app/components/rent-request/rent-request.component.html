@@ -1,0 +1,87 @@
+<div class="modal fade" id="rentModal" role="dialog">
+	<div class="modal-dialog">
+		<div *ngIf="loading" class="modal-content" >
+			<div class="modal-body" style="height:500px;" >
+				<img src="assets/images/loader.gif" alt="loading screen" style="width: 50px;height: 50px;position: absolute;left: 46%;top:46%;" />
+			</div>
+		</div>
+		<div class="modal-content" *ngIf="rentableArr && !loading" >
+			<div class="modal-header job-modal-header">
+				<button type="button" class="close job-close" (click)="closeModal()" >&times;</button>
+				<h4 class="modal-title">Rent</h4>
+			</div>
+			<div class="modal-body job-modal-height" *ngIf="rentForm" >
+				<form novalidate [formGroup]="rentForm" style="height:inherit;" >
+					<div class="animate-normal" style="height:inherit;" >
+						<div class="col-md-12 col-sm-12 col-xs-12" >
+							<div class="col-md-4 col-sm-4 col-xs-4" >
+								<h5 style="text-align : center;" >Need to give for</h5>
+							</div>
+							<div class="col-md-4 col-sm-4 col-xs-4" >
+								<h5 style="text-align : center;" >No. of Systems</h5>
+							</div>
+							<div class="col-md-4 col-sm-4 col-xs-4" >
+								<h5 style="text-align : center;" >Time Period(in months)</h5>
+							</div>
+						</div>
+						<div class="col-md-12 col-sm-12 col-xs-12" *ngFor="let category of rentableArr;let i=index;" >
+							<div class="col-md-1 col-xs-1" style="padding-left:0px;" >
+								<label class="container" >
+									<input type="checkbox" [value]="category.id" name="category" class="category-container" (change)="changeCategory(category,category.id,i,$event)" />
+									<span class="checkmark" style="margin-top:8px;" ></span>
+								</label>
+							</div>
+							<div class="col-md-3 col-sm-4 col-xs-3" >
+								<h5 style="font-size:16px !important;" >{{category.name}}</h5>
+							</div>
+							<div class="col-md-4 col-sm-4 col-xs-4" style="padding-right:0px;" >
+								<label class="container8">
+									<select class="form-control option-container" (change)="checkForUnits(i)" >
+										<option *ngFor="let option of noOfUnits" [ngValue]="option" >{{option}}</option>
+									</select>
+								</label>
+							</div>
+							<div class="col-md-4 col-sm-4 col-xs-4" style="padding-right:0px;" >
+								<label class="container8" >
+									<select class="form-control option-container1" (change)="checkForTime(i)" >
+										<option *ngFor="let option of timePeriod" [ngValue]="option" >{{option}}</option>
+									</select>
+								</label>
+							</div>
+						</div>
+						<div class="error-div3 col-md-12 col-sm-12 col-xs-12" *ngIf="emptyArr" >
+							<p>Please Select Type</p>
+						</div>
+						
+						<div class="col-md-12 col-sm-12 col-xs-12" >
+							<label class="container8" >
+								<textarea class="form-control" rows="3" id="description" name="description" formControlName="description" placeholder="Description of the rent item to be taken" ></textarea>
+							</label>
+						</div>
+						
+						<div class="col-md-12 col-sm-12 col-xs-12" >
+							<label class="container8" >
+								<textarea class="form-control" rows="3" id="address" name="address" formControlName="address" placeholder="Address" ></textarea>
+							</label>
+						</div>
+						<div class="error-div5 col-sm-12 col-sm-12 col-md-12" *ngIf="address.errors && (address.dirty || address.touched)" >
+							<p *ngIf="address.errors.required">Address is required</p>
+						</div>
+							
+						<div class="form-group col-md-12 col-sm-12 col-xs-12" >
+							<input type="tel" name="budget" placeholder="Budget (IN RS)" appTestDirective formControlName="estiBudget" class="form-control" />
+						</div>
+						<div class="error-div5 col-sm-12 col-sm-12 col-md-12" *ngIf="estiBudget.errors && (estiBudget.dirty || estiBudget.touched)" >
+							<p *ngIf="estiBudget.errors.validAmount">Invalid Value</p>
+							<p *ngIf="estiBudget.errors.required">Budget is required</p>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer job-modal-footer">
+				<button type="button" class="btn btn-default" (click)="checkRentReqForm()" >Post</button>
+				<button type="button" class="btn btn-secondary" (click)="closeModal()" >Cancel</button>
+			</div>
+		</div>
+	</div>
+</div>

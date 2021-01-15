@@ -1,0 +1,64 @@
+<div class="container-min-height" >
+    <div class="Page-heading" >
+        <h3>
+            <div class="row">
+                <div class="col-md-11">Brands</div>
+                <div class="col-md-1">
+                    <a type="button" class="btn block-btn" href="javascript:;" (click)="openModal()"><i class="fa fa-plus"></i></a>
+                </div>    
+            </div>    
+            
+            
+        </h3>
+    </div>
+
+    <div class="noDataFound" *ngIf="!brands.length && !isLoading">No data found</div>
+    <div id="loader" *ngIf="isLoading"></div>
+
+    <div class="col-lg-12" *ngFor="let brand of brands">
+        <div class="rah-card-container ">
+        	<div>
+        		<a type="button" class="btn block-btn rah-right" (click)="openModal(brand)" href="javascript:;"><i class="fa fa-edit"></i></a>
+        		<span class="rah-title">{{brand.name}}</span><br />
+        		<span >Last Updated : {{brand.createdAt | date:'dd MMMM, yyyy'}}</span>
+        	</div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="brandModal"  role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">
+                	<span *ngIf="!selectedBrand">Add</span><span *ngIf="selectedBrand">Edit</span> Brand
+                </h4>
+            </div>
+            <form  class="form-horizontal" id="brandForm" (submit)="addBrand(brandForm)" #brandForm="ngForm" >
+                <div class="modal-body">
+                   <!--  <div class="alert alert-danger" >
+                      alert
+                    </div> -->
+                    <!-- <p >Are you sure you want to block this user?</p> -->
+                    <div class="bootstrap-iso">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="form-group col-lg-12">
+									    <label for="brandName">Brand Name</label>
+									    <input type="text" class="form-control" [(ngModel)]="selectedBrand.name" name="brandName" id="brandName" placeholder="Brand Name">
+									</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary "  id="brandBtn" data-loading-text="Submit..." type="submit" >Submit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

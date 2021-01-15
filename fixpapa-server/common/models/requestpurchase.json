@@ -1,0 +1,125 @@
+{
+  "name": "Requestpurchase",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "modelNumber": {
+      "type": "string",
+      "required": true
+    },
+    "noOfUnits": {
+      "type": "number",
+      "required": true
+    },
+    "configuration": {
+      "type": "string",
+      "default": ""
+    },
+    "priceBudget": {
+      "type": "number",
+      "default": ""
+    },
+    "values": {
+      "type": [
+        "string"
+      ],
+      "default": []
+    },
+    "title": {
+      "type": "string",
+      "default": ""
+    },
+    "deliveryAdd": {
+      "type": "string",
+      "default": ""
+    },
+    "modeOfPayment": {
+      "type": "string",
+      "required": true
+    },
+    "other": {
+      "type": "string",
+      "default": ""
+    },
+    "purchaseDate": {
+      "type": "date",
+      "default": ""
+    }
+  },
+  "validations": [],
+  "relations": {
+    "newpurchase": {
+      "type": "belongsTo",
+      "model": "Newpurchase",
+      "foreignKey": ""
+    },
+    "people": {
+      "type": "belongsTo",
+      "model": "People",
+      "foreignKey": ""
+    },
+    "product": {
+      "type": "belongsTo",
+      "model": "Products",
+      "foreignKey": ""
+    },
+    "brand": {
+      "type": "belongsTo",
+      "model": "Brand",
+      "foreignKey": ""
+    }
+  },
+  "indexes": {
+      "purchase_req_index": {
+        "keys": {"peopleId": 1, "productId": 1,"brandId":1,"newpurchaseId":1}
+      }
+  
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "find"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "deleteById"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "customer",
+      "permission": "ALLOW",
+      "property": "createPurchase"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW",
+      "property": "getAllPurchases"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "superAdmin",
+      "permission": "ALLOW",
+      "property": "getAllPurchases"
+    }
+  ],
+  "methods": {}
+}

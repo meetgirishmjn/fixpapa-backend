@@ -1,0 +1,10 @@
+.radio-select{
+	position: absolute!important;
+    top: 30px!important;
+}
+
+.modal-content-height{
+	overflow: auto; 
+	max-height: 500px;
+}
+

@@ -1,0 +1,140 @@
+<div class="modal fade" id="newPurchaseModal" role="dialog">
+	<div class="modal-dialog">
+		<div *ngIf="loading" class="modal-content" >
+			<div class="modal-body" style="height:500px;" >
+				<img src="assets/images/loader.gif" alt="loading screen" style="width: 50px;height: 50px;position: absolute;left: 46%;top:46%;" />
+			</div>
+		</div>
+		<div class="modal-content" *ngIf="newPurchaseArr && !loading" >
+			<div class="modal-header job-modal-header">
+				<button type="button" class="close job-close" (click)="closeModal()" >&times;</button>
+				<h4 class="modal-title">{{newPurchaseArr.name}}</h4>
+			</div>
+			<div class="modal-body job-modal-height" *ngIf="newPurchaseReqForm" >
+				<form novalidate [formGroup]="newPurchaseReqForm" >
+					<div class="animate-normal" >
+						<div class="form-group">
+							<label class="container8" >Title
+								<input type="text" class="form-control" placeholder="Title" id="title" name="title" formControlName="title" />
+							</label>
+						</div>
+						<div class="error-div9" *ngIf="title.errors && (title.dirty || title.touched)" >
+							<p *ngIf="title.errors.required" >Title is required</p>
+						</div>
+						
+						<label class="container8" *ngIf="productsData.length>0" >Product <!--  -->
+							<select class="form-control" formControlName="productId" (focus)="focusedBefore('select')" (focusout)="changedValue('select')" (change)="checkForBrandsAndValues(productId)" >
+								<option *ngFor="let product of productsData" [ngValue]="product.id" >{{product.name}}</option>
+							</select>
+						</label>
+						<div class="error-div5" *ngIf="productId.errors && (productId.dirty || productId.touched)" >
+							<p *ngIf="productId.errors.required" >Please Select Product</p>
+						</div>
+						<!--<div class="error-div5" *ngIf="productsData.length>0 && !product1 && focusBeforeSelect" >
+							<p>Please select Product</p>
+						</div>-->
+						
+						<label class="container8" *ngIf="brandsData.length>0" >Brand
+							<select class="form-control" formControlName="brandId" >
+								<option *ngFor="let brand of brandsData" [ngValue]="brand.id" >{{brand.name}}</option>
+							</select>
+						</label>
+						<div class="error-div5" *ngIf="brandsData.length>0 && !newPurchaseReqForm.get('brandId').value && (brandId.dirty || brandId.touched)" >
+							<p>Please Select Brand</p>
+						</div>
+						
+						<label class="container8" *ngIf="valuesArr.length>0" >Type
+							<select class="form-control" formControlName="values" >
+								<option *ngFor="let value of valuesArr" [ngValue]="value" >{{value}}</option>
+							</select>
+						</label>
+						<div class="error-div5" *ngIf="valuesArr.length>0 && !newPurchaseReqForm.get('values').value && (values.dirty || values.touched)" >
+							<p>Please Select Value</p>
+						</div>
+						
+						<label class="container8" *ngIf="noOfUnitsArr.length>0" >No. of Units
+							<select class="form-control" formControlName="noOfUnits" >
+								<option *ngFor="let value of noOfUnitsArr" [ngValue]="value" >{{value}}</option>
+							</select>
+						</label>
+						
+						<label class="container8" >Date
+							<div class="input-group placeholder-color" #startDate>
+								<span class="input-group-addon input-icon"><i class="fa fa-calendar"></i></span>
+								<input readonly class="form-control" style="height: 40px;margin-top: 1px;" id="startDate1" name="startDate" placeholder="Date" type="text" formControlName="startDate" />
+							</div>
+						</label>
+						<!-- focus)="focusedBefore('date')" (focusout)="changedValue('date')" () ||  -->
+						<div class="error-div9" *ngIf="!startDate1 && focusBeforeDate" >
+							<p>Please select date</p>
+						</div>
+						
+						<label class="container8" >Time
+							<div class="input-group clockpicker step2a" >
+								<input type="text" class="form-control" readonly placeholder="Time" id="startTime1" name="startTime" formControlName="startTime" />
+								<span class="input-group-addon">
+									<span class="glyphicon glyphicon-time"></span>
+								</span>
+							</div>
+						</label>
+						<div class="error-div9" *ngIf="startTime.errors && (startTime.dirty || startTime.touched)" >
+							<p style="margin-top: 16px;" *ngIf="startTime.errors.required" >Please select Time</p>
+						</div>
+						
+						<div class="form-group">
+							<label class="container8">Budget
+								<input type="tel" name="budget" placeholder="Budget (IN RS)" appTestDirective formControlName="priceBudget" class="form-control" />
+							</label>
+						</div>
+						<div class="error-div9" *ngIf="priceBudget.errors && (priceBudget.dirty || priceBudget.touched)" >
+							<p *ngIf="priceBudget.errors.required">Budget is required</p>
+							<p *ngIf="priceBudget.errors.validateAmount">Invalid Number</p>
+						</div>
+						
+						<div class="form-group">
+							<label class="container8">Model Number
+								<input type="text" name="modelNumber" placeholder="Model Number" formControlName="modelNumber" class="form-control" />
+							</label>
+						</div>
+						<div class="error-div9" *ngIf="modelNumber.errors && (modelNumber.dirty || modelNumber.touched)" >
+							<p *ngIf="modelNumber.errors.required">Model No. is required</p>
+						</div>
+						
+						<div class="form-group" >
+							<label class="container8" >Mode of Payment
+								<select class="form-control" formControlName="modeOfPayment" >
+									<option *ngFor="let value of modeOfPaymentArr" [ngValue]="value" >{{value}}</option>
+								</select>
+							</label>
+						</div>
+						
+						<div class="form-group" >
+							<label class="container8" >
+								<textarea class="form-control" rows="3" id="address" name="address" formControlName="deliveryAdd" placeholder="Delivery Address" ></textarea>
+							</label>
+						</div>
+						<div class="error-div9" *ngIf="deliveryAdd.errors && (deliveryAdd.dirty || deliveryAdd.touched)" >
+							<p *ngIf="deliveryAdd.errors.required">Address is required</p>
+						</div>
+						
+						<div class="form-group" >
+							<label class="container8" >
+								<textarea class="form-control" rows="3" id="configuration" name="configuration" formControlName="configuration" placeholder="Configuration Required like(RAM,Processor,HDD,OS,Sreen Size etc.)" ></textarea>
+							</label>
+						</div>
+						
+						<div class="form-group" >
+							<label class="container8" >
+								<textarea class="form-control" rows="3" id="other" name="other" formControlName="other" placeholder="other (if Required)" ></textarea>
+							</label>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer job-modal-footer" >
+				<button type="button" class="btn btn-primary" (click)="checkPurchaseReqForm()" >Post</button>
+				<button type="button" class="btn btn-secondary" (click)="closeModal()" >Cancel</button>
+			</div>
+		</div>
+	</div>
+</div>

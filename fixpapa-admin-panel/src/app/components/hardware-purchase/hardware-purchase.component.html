@@ -1,0 +1,164 @@
+<div class=" container-min-height" >
+    <div class="Page-heading" >
+        <h3>
+            <div class="row">
+                <div class="col-md-11">Hardware Purchase</div>
+                <div class="col-md-1">
+                    <a type="button" class="btn block-btn"  (click)="openModal()">
+                        <i class="fa fa-plus"></i>
+                    </a>
+                </div>    
+            </div>
+        </h3>
+    </div>
+
+    <div class="container-fluid">
+        <div class="noDataFound" *ngIf="!hardwares.length && !isLoading">No data found</div>
+        <div id="loader" *ngIf="isLoading"></div>
+        <div class="row card-row" *ngFor="let hardware of hardwares">
+            <div class="col-md-1">
+                <div class="card-img">
+                    <img class="img-responsive" [src]="baseUrl+hardware.image">
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="">
+                    <h5>{{hardware.name}}</h5>
+                    <p *ngIf="hardware.products && hardware.products.length">Products : {{hardware.products | commaSeparatedList:"name"}}</p>
+                    <p>{{hardware.createdAt|date:'dd MMMM, yyyy'}}</p>
+                </div>
+            </div>
+            <div class="col-md-2" align="right">
+                <a type="button" class="btn block-btn" (click)="openModal(hardware)" href="javascript:;"><i class="fa fa-edit"></i></a>&nbsp;
+                <a type="button" class="btn block-btn" *ngIf="role == 'superAdmin'" (click)="openDelModal(hardware)" href="javascript:;"><i class="fa fa-times-circle-o "></i></a>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- <div class="col-lg-12" *ngFor="let hardware of hardwares">
+        <div class="rah-card-container ">
+            <a type="button" class="btn block-btn rah-right" (click)="openModal(hardware)">
+                <i class="fa fa-edit"></i>
+            </a>
+        	<div>
+        		<span class="rah-title">{{hardware.name}}</span>
+        	</div>
+        	<div>
+        		<span>
+                    <b>Products</b> : {{hardware.products | commaSeparatedList:"name"}}<br />
+                </span>
+                <span>{{hardware.createdAt|date:'dd MMMM, yyyy'}}</span>
+        	</div>
+        </div>
+    </div> -->
+</div>
+
+<div class="modal fade" id="hardwareModal"  role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Product</h4>
+            </div>
+            <form  class="form-horizontal" id="hardwareForm" (submit)="addHardware(hardwareForm)" #hardwareForm="ngForm" >
+                <div class="modal-body">
+                    <!-- <div class="alert alert-danger" >
+                      alert
+                    </div> -->
+                    <!-- <p >Are you sure you want to block this user?</p> -->
+                    <div class="bootstrap-iso">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="row">
+                                        <div class="form-group col-lg-12">
+                                            <label for="categoryName">Category Name</label>
+                                            <input type="text" required="" [(ngModel)]="selectedHardware.name" class="form-control" name="name" id="name" placeholder="Category Name" #name="ngModel">
+
+                                            <div class="error-div" *ngIf="hardwareForm._submitted && name.errors?.required" >
+                                              this field is required
+                                            </div>
+                                        </div>
+                                    </div>    
+                                    <div class="row">
+                                        <div class="form-group col-lg-12">
+                                            <label for="brandName">Select Proudct</label>
+                                            <!-- <ng-select [multiple]="true"
+                                                [active]="selectedProducts"
+                                                [allowClear]="true"
+                                                [items]="products |selectAutocomplete:'name'"
+                                                [disabled]="disabled"
+                                                (data) = "selectData($event)"
+                                                placeholder="No Product Selected">
+                                            </ng-select> -->
+                                            <ng-select [multiple]="true"
+                                                [active]="selectedProducts"
+                                                [allowClear]="true"
+                                                [items]="products |selectAutocomplete:'name'"
+                                                (data) = "selectData($event)"
+                                                placeholder="No Product Selected">
+                                            </ng-select>
+
+                                            <div class="error-div" *ngIf="hardwareForm._submitted && !selectedProducts.length" >
+                                              this field is required
+                                            </div>
+                                        </div>
+                                    </div>  
+                                    <div class="row">  
+                                        <div class="form-group col-lg-12">
+                                            <label for="itemName">Image</label>
+                                            <input type="file" class="form-control"  name="itemImage" id="categoryImage" rah-file-dir (assignValue)="files=$event" accept="image/*" placeholder="Image">
+                                        </div>
+                                    </div>   
+                                    <div class="error-div" *ngIf="imgSize.isError" >
+                                        <span *ngIf="imgSize.error === 'imgNotFound'">
+                                            this field is required
+                                        </span>
+                                        <span *ngIf="imgSize.error === 'sizeError'">
+                                            size of image should be {{imgSize.width}} x {{imgSize.height}}
+                                        </span>
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary " id="hardwareBtn" data-loading-text="Submit..." type="submit" >Submit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteModal"  role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Alert</h4>
+            </div>
+            <form  class="form-horizontal" (submit)="deleteData(delNewPurchaseForm)" #delNewPurchaseForm="ngForm">
+                <div class="modal-body">
+                   <!--  <div class="alert alert-danger" >
+                      alert
+                    </div> -->
+                    <!-- <p >Are you sure you want to block this user?</p> -->
+                    
+                    <div class="bootstrap-iso">
+                        <div class="container-fluid">
+                            Are you sure you want to delete this category ?
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary " id="delBtn" data-loading-text="deleting..." type="submit" >Delete</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

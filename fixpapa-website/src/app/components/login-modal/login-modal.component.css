@@ -1,0 +1,23 @@
+.login-form-text a{
+	color: white;
+    font-weight: 700;
+}
+.login-tab1{
+	margin-top: 30px;
+}
+.login-close:hover{
+	outline : 0 !important;
+}
+
+.login-social ul li:nth-child(1){
+	border-radius:20px!important;
+	padding:4px 15px;
+	display: flex;
+
+}
+
+.login-social ul li:nth-child(1) a {
+	color:white!important;
+	align-self: center!important;
+
+}

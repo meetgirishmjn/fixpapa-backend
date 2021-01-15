@@ -1,0 +1,119 @@
+{
+  "signupSuccess":{
+    "replyCode": "Success",
+    "replyMessage": ""
+  },
+  "userLogin" : {
+  "replyCode":"Success",
+  "replyMessage":"logged in successfully"
+  
+ },
+ "userSignup" : {
+  "replyCode":"Success",
+  "replyMessage":"Please confirm your email address using the verification link sent to you. In case it's missing in your inbox,please check your spam folder"
+  
+ },
+ "editProfile":{
+    "replyCode": "Success",
+    "replyMessage": "Successfully edited profile!!"
+  },
+  "resetPwd":{
+    "replyCode": "Success",
+    "replyMessage": "Requested forget password!!"
+  },
+  "getPeoples":{
+    "replyCode": "Success",
+    "replyMessage": "Done"
+  },
+  "getVendors":{
+    "replyCode": "Success",
+    "replyMessage": "Done"
+  },
+  "adminVerified":{
+    "replyCode": "Success",
+    "replyMessage": "Admin verified!!"
+  },
+
+"uploadProfilePic":{
+    "replyCode": "Success",
+    "replyMessage": "Profile image uploaded!!"
+  },
+  
+  "resendOtp":{
+    "replyCode": "Success",
+    "replyMessage": "successfully resend otp!!"
+  },
+  "mobileVerify":{
+    "replyCode": "Success",
+    "replyMessage": "Mobile verified now !!"
+  },
+   "emailUpdated":{
+    "replyCode": "Success",
+    "replyMessage": "Update Email request send, Check mail!!"
+  },
+  "mobileUpdated":{
+    "replyCode": "Success",
+    "replyMessage": "you have received an otp on your updated mobile number!!"
+  },
+  "manageAddress":{
+    "replyCode": "Success",
+    "replyMessage": "you hove added a new address!!"
+  },
+  "addEngineer":{
+    "replyCode": "Success",
+    "replyMessage": "Engineer added successfully!!"
+  },
+  "getMyInfo":{
+    "replyCode": "Success",
+    "replyMessage": "successfully done!!"
+  },
+   "getAddresses":{
+    "replyCode": "Success",
+    "replyMessage": "successfully done!!"
+  },
+   "otp_Matched":{
+    "replyCode": "Success",
+    "replyMessage": "successfully otp matched!!"
+  },
+ "engineerupdate":{
+    "replyCode": "Success",
+    "replyMessage": "successfully engineer info updated!!"
+  },
+   "inactiveEngineer":{
+    "replyCode": "Success",
+    "replyMessage": "Engineer is inactive now!!"
+  },
+   "vendorAvailable":{
+    "replyCode": "Success",
+    "replyMessage": "Vendor availability!!"
+  },
+   "changePwd":{
+    "replyCode": "Success",
+    "replyMessage": "Engineer pwd chnaged successfully!!"
+  },
+   "viewProfile":{
+    "replyCode": "Success",
+    "replyMessage": "Full profile!!"
+  },
+  "logoutSuccess":{
+    "replyCode": "Success",
+    "replyMessage": "Successfully logout!!"
+  },
+   "inactiveVendor":{
+    "replyCode": "Success",
+    "replyMessage": "Successfully done!!"
+  },
+   "inactiveCustomer":{
+    "replyCode": "Success",
+    "replyMessage": "Successfully done!!"
+  },
+   "editEmail":{
+    "replyCode": "Success",
+    "replyMessage": "Successfully email updated"
+  }
+
+
+
+
+
+}

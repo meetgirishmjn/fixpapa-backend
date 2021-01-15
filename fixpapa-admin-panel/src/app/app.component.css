@@ -1,0 +1,26 @@
+
+#sidebar{
+    overflow     : scroll;
+    margin-left  : 0px;
+}
+
+/* Noty counter */
+
+.noti_Counter {
+  display:block;
+  position:absolute;
+  background:#06386b;
+  /*color:#FFF;*/
+  color:red;
+  font-size:9px;
+  font-weight:normal;
+  padding:1px 3px;
+  margin: 0px 10px 10px 10px;
+  border-radius:2px;
+  -moz-border-radius:2px; 
+  -webkit-border-radius:2px;
+  z-index:1;
+  top:5px;
+}
+
+/* Noty counter */

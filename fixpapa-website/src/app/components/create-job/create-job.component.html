@@ -1,0 +1,318 @@
+<div class="modal fade" id="jobmodal" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div *ngIf="loading" class="modal-content" >
+			<div class="modal-body" style="height:500px;" >
+				<img src="assets/images/loader.gif" alt="loading screen" style="width: 50px;height: 50px;position: absolute;left: 46%;top:46%;" />
+			</div>
+		</div>
+		<div class="modal-content" *ngIf="categoryData && !loading" >
+			<div class="modal-header job-modal-header">
+				<button type="button" class="close job-close" (click)="closeModal()" >&times;</button>
+				 <a (click)="goBack()" *ngIf="(productsData && productsData.length>0 && phase > 1) || (brandsData && brandsData.length>0 && phase > 2)" ><i class="fa fa-arrow-left"></i></a>
+				<h4 class="modal-title">{{categoryData.name}}</h4>
+			</div>
+			<div class="modal-body job-modal-height">
+				<div *ngIf="productsData && productsData.length>0 && phase === 1 " id="phase1" class="animate-normal" >
+					<div class="job-title" >
+						<h3>Select Product Type</h3>
+					</div>
+					<div class="job-form" >
+						<form class="job-step-1" [formGroup]="productForm" novalidate >
+							<label class="container8" *ngFor="let product of productsData;" >{{product.name}}
+								<input type="radio" name="productId" [value]="product.id" formControlName="productId" (change)="onSelectProduct(product)" />
+								<span class="checkmark8"></span>
+							</label>
+							<div class="error-div-job" *ngIf="productId.errors && (productId.dirty || productId.touched)" >
+								<p *ngIf="productId.errors.required">Please select a product</p>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div *ngIf="brandsData && brandsData.length>0 && phase === 2 " id="phase2" class="animate-normal" >
+					<div class="job-title">
+						<h3>What is the brand of your {{this.selectedProduct}}?</h3>
+					</div>
+					<div class="job-form">
+						<form class="job-step-1" [formGroup]="brandForm" novalidate >
+							<label class="container8" *ngFor="let brand of brandsData;" >{{brand.name}}
+								<input type="radio" name="brandId" [value]="brand.id" formControlName="brandId" />
+								<span class="checkmark8"></span>
+							</label>
+							<div class="error-div-job" *ngIf="brandId.errors && (brandId.dirty || brandId.touched)" >
+								<p *ngIf="brandId.errors.required">Please select a brand</p>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div *ngIf="problemsArr && problemsArr.length>0 && phase === 3 " id="phase3" class="animate-normal" #problem >
+					<div class="job-title">
+						<h3>What is the Problem of your {{categoryData.name}}?</h3>
+                    </div>
+                    <div class="job-form">
+                        <form class="job-step-1" [formGroup]="productForm" novalidate >
+                            <label class="container10" *ngFor="let problem of problemsArr;" >{{problem.probContent}}
+                                <p>{{problem.price | currency:'INR'}}</p>
+                                <input type="checkbox" [value]="problem.id" name="problem" class="problem-container" (change)="changeProblem(problem,problem.id,$event)" />
+                                <span class="checkmark10"></span>
+                            </label>
+							<div class="error-div-job" *ngIf="noProblems" >
+								<p>Select atleast a Problem</p>
+							</div>
+                        </form>
+                    </div>
+				</div>
+				<div *ngIf="phase === 4" id="phase4" class="animate-normal" >
+					<div class="job-title">
+						<h3>Detailing</h3>
+                    </div>
+					<div class="job-form">
+						<form class="job-step-1" novalidate [formGroup]="problemDesForm" >
+							<div class="form-group job-textarea">
+								<label for="comment" style="border-top:none !important;" >Problem In Words</label>
+								<textarea class="form-control" rows="3" id="comment" name="problemDes" formControlName="problemDes" ></textarea>
+							</div>
+							
+							<div class="col-md-6 img-section img-section4">
+								<h4>Upload Product Image</h4>
+								<img [src]="productImage1" class="imgCircle" style="width: 150px;height: 150px;" alt="Product Image" />
+								<input type="file" id="image-input3" rah-file-dir accept="image/*" (imageAsUrl)="productImage1 = $event"  (assignValue)="addFiles($event)" class="form-control form-input Profile-input-file Profile-input-file4" />
+								<!-- <p>Upload Product Image</p> -->
+							</div>
+							<div class="col-md-6 img-section img-section4">
+								<h4>Upload Product Image</h4>
+								<img [src]="productImage2" class="imgCircle" style="width: 150px;height: 150px;" alt="Product Image" />
+								<input type="file" id="image-input4" rah-file-dir accept="image/*" (imageAsUrl)="productImage2 = $event" (assignValue)="addFiles($event)" class="form-control form-input Profile-input-file Profile-input-file4" />
+								<!-- <p>Upload Your Image</p> -->
+							</div>
+						</form>
+					</div>
+				</div>
+				<div *ngIf="phase === 5" id="phase5" class="animate-normal" >
+					<div class="job-step-3"  >
+						<p class="price-bg">Amount
+							<br/> <span style="color: #0f56a1; font-size: 19px;">{{totalPrice | currency:'INR' }}</span> </p>
+						<div class="Problem-list" >
+							<ul>
+								<li *ngFor="let problem of problemsSelectedArr;" >
+									{{problem.probContent}}
+									<p>{{problem.price | currency:'INR' }}</p>
+								</li>
+							</ul>
+						</div>
+						<div class="job-term-text" style="max-height:150px;overflow-y:scroll;overflow-x:hidden;border: 1px solid #eee;margin-bottom: 20px;" >
+							<h4 style="margin-top:0px !important;border-radius:unset !important;" >Terms & Conditions</h4>
+							<p>Warranty/Guarantee on new product or spare parts would be as described on the material bill online. Please insist to generate the material bill online from our FIXPAPA IT Professional in case he is procuring the materials for you.</p>
+							<p>
+								We FIXPAPA are individual IT sales & service provider and have a well-qualified and police verified IT Professionals. We are not authorized service centre for any IT brand.
+							</p>
+							<p>
+								Any device which is repairable would be insured only up to the repair amount or the amount mentioned above or the depreciated value which will be verified by FIXPAPA IT Professional.
+							</p>
+							<p>
+								Physical damage, adaptor, charger and any sort of software will not be covered in warranty in any case.
+							</p>
+							<p>
+								We strongly discourage any direct contact with our FIXPAPA IT Professional regarding a job booked through us, as in such cases FIXPAPA will not be liable or responsible and has no control over the situation or condition. All warranty and service assurance offered by FIXPAPA, in such case, stands null & void.
+							</p>
+							<p>
+								If you do have any complaints, suggestions or feedback with regard to the service or product quality, or our service provider, pricing etc. please report it to our Customer Support Desk at 0141-2980666, +919799044449 or mail us at support@fixpapa.com. It is advisable to do this within 48hrs of your service.
+							</p>
+						</div>
+						<div class="job-term-text" style="max-height:150px;overflow-y:scroll;overflow-x:hidden;border: 1px solid #eee;margin-bottom: 20px;" >
+							<h4 style="margin-top:0px !important;border-radius:unset !important;" >What's This Amount includes</h4>
+							<p>Procedure - Initially the faulty system will be inspected by FIXPAPA IT Professional, details and a quote will be provided and once approved by you it will be fixed. In case faulty product need to be picked up and inspected at our partner service station, an online quote will be provided on your panel (web & app) and once approved by you it will be fixed and delivered back.</p>
+							<p>Prices – Prices which is shown in web or app for any service or product may very after the inspection of faulty product by FIXPAPA IT Professional.</p>
+							<p>Cancellation & Charges - In case you book a service with FIXPAPA, our IT Professional visit your premises, same moment you can cancel the call, No charge will be taken for this situation, but if you ask our IT Professional to inspect the faulty product, then the mentioned or minimum service charges has to be given to our IT Professional.</p>
+							<p>Warranty - Maximum  7 days warranty for Software related issues, Hardware related issues as per part used and repair performed</p>
+							<p>Liability – No liability for pre-existing issues/potential risks reported by the service centre but not handled due to customer refusal</p>
+							<p>Parts used (if applicable) - Genuine or compatible parts used depending on customer request & warranties will be applicable accordingly.</p>
+							<p>Before you start - Since data can be wiped off in case of OS installation, inform IT Professional if you need a backup; charges will apply.</p>
+							<p>Data Backup & Recovery - Depending on the status of the memory drive charges may vary based on diagnosis. We do not take or provide any kind of responsibility for data backup data lost or data recovery.</p>
+							<p>Software Installation – FIXPAPA only recommends Genuine Software will be installed. If you wish to install procured software, provide the license key to the IT Professional.</p>
+							<p>Tax – All prices are inclusive of Tax/GST as applicable by Govt’s Policies</p>
+						</div>
+						<div class="job-term-text" style="max-height:150px;overflow-y:scroll;overflow-x:hidden;border: 1px solid #eee;" >
+							<h4 style="margin-top:0px !important;border-radius:unset !important;" >Guarantee</h4>
+							<div class="container">
+								<div class="row">
+									<div class="col-md-3">
+										<div class="patner-logo">
+											<img class="img-responsive" src="assets/images/icons/2.png" />
+											<h5 style="text-align:center !important;" >High Quality & Verified Professional</h5>
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="patner-logo">
+											<img class="img-responsive" src="assets/images/icons/1.png" />
+											<h5 style="text-align:center !important;" >Insured & Satisfaction Guarantee</h5>
+										</div>
+									</div>
+								</div>
+								<div class="row" >
+									<div class="col-md-3">
+										<div class="patner-logo">
+											<img class="img-responsive" src="assets/images/icons/4.png" />
+											<h5 style="text-align:center !important;" >On time Arrival</h5>
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="patner-logo">
+											<img class="img-responsive" src="assets/images/icons/3.png" />
+											<h5 style="text-align:center !important;" >Nearby local Support</h5>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div *ngIf="phase === 6" id="phase6" class="animate-normal" >
+					<div class="job-title">
+                        <h3>Address Section</h3>
+                    </div>
+					<div class="job-form" >
+						<div class="job-step-4">
+                            <form [formGroup]="addressForm" novalidate >
+                                <div class="input-group placeholder-color" #startDate>
+                                    <span class="input-group-addon input-icon"><i class="fa fa-calendar"></i></span>
+                                    <input class="form-control" (focus)="focusedBefore()" (focusout)="changedValue()" id="startDate" name="startDate" placeholder="Date" type="text" formControlName="startDate" autocomplete="off" />
+                                </div>
+								<div class="error-div" *ngIf="!startDate1 && focusBeforeDate" >
+									<p>Please select date</p>
+								</div>
+								<!--<div class="error-div" *ngIf="noTimeSlots && startDate1" >
+									<p>Time Slot is not available, please choose a different date</p>
+								</div>-->
+                                <div class="input-group placeholder-color" *ngIf="startDate1 && startDate1.length > 0" >
+                                    <span class="input-group-addon input-icon">
+                                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                    </span>
+                                    <input class="form-control" id="endDate" name="endDate" placeholder="Select Time Slot" type="text" (click)="disabledTime = !disabledTime;" formControlName="endDate" autocomplete="off" />
+                                </div>
+								<div class="error-div" *ngIf="!endDate1 && (endDate.dirty || endDate.touched)" >
+									<p>Select Time Slot</p>
+								</div>
+                                <div class="time-list" *ngIf="!disabledTime" >
+                                    <ul>
+                                        <li *ngFor="let time of validTime;" >
+											<a *ngIf="time.disabled" disabled="time.disabled" [ngClass]="{disabled : time.disabled}" >{{time.time}}</a>
+											<a (click)="createDates(time.time);disabledTime=true;" *ngIf="!time.disabled" >{{time.time}}</a>
+										</li>
+                                    </ul>
+                                </div>
+								<!-- <div class="error-div" *ngIf="!endDate1" > -->
+									<!-- <p>Please select time</p> -->
+								<!-- </div> -->
+								<div class="input-group placeholder-color" #address1>
+									<span class="input-group-addon input-icon" style="padding:10px 14px !important;" >
+										<i class="fa fa-map-marker" aria-hidden="true"></i>
+									</span>
+									<input placeholder="Address" autocorrect="off" autocapitalize="off" 
+									spellcheck="off" type="text" id="customer-address" 
+									class="form-control" formControlName="address" name="address" style="padding-right: 50px;"
+									[ngStyle]="{'padding-right':addressForm.get('address')?.value?.length > 0 ? '50px' : '0px' }" autocomplete="off" />
+									<span class="cross-icon" style="right: 10px !important;bottom: 10px !important;z-index: 999 !important;"
+										*ngIf="addressForm && addressForm.get('address') && 
+										addressForm.get('address').value && 
+										addressForm.get('address').value.length > 0" >
+										<i class="glyphicon glyphicon-remove" (click)="clearAdd = true; clearAddress();" ></i>
+									</span>
+								</div>
+								<!--*ngIf="addressForm && addressForm.get('address') && 
+								addressForm.get('address').value && addressForm.get('address').value.length > 0"-->
+								<ng-container>
+									<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" 
+										 [panControl]="true" [fullscreenControl]="true" [usePanning]="true"
+										 [scaleControl]="true"
+										style="width:100%;height:300px;" >
+										<agm-marker [latitude]="lat" [longitude]="lng" [markerDraggable]="true"
+											(dragEnd)="markerDragEnd($event)">
+										<agm-info-window *ngIf="formatted_address" >{{formatted_address}}</agm-info-window>
+										</agm-marker>
+									</agm-map>
+								</ng-container>
+								<!--new-->
+								<!-- <div class="form-group">
+									<label>Enter address</label>
+									<input type="text" class="form-control" (keydown.enter)="$event.preventDefault()"
+									placeholder="Search Nearest Location" id="location-customer"
+									autocorrect="off" autocapitalize="off" spellcheck="off" 
+									type="text" #search>
+								</div>	  -->
+									
+								<!--new-->
+								<div class="error-div" *ngIf="address.errors && (address.dirty || address.touched)" >
+									<p *ngIf="address.errors.required" >Enter Address</p>
+								</div>
+								<div class="error-div" *ngIf="invalidLocation && address.dirty && addressForm.get('address').value && addressForm.get('address').value.length > 0" >
+									<p style="padding-right: 15px;" >Invalid Location</p>
+								</div>
+								<div style="clear:both;"></div>
+								<!-- <div class="input-group placeholder-color col-md-12 col-xs-12" style="padding:0px !important;" >
+									<span>
+										<p class="currentLoc-container form-control" style="height: 43px !important;text-align: center;padding-top: 10px;" (click)="setCurrentLocation()" ><img  style="width:20px;height:20px;padding:0 !important;" src="assets/images/currentLoc.png" /><a class="a-style-list" style="font-size:14px;" >Use my Current Location</a></p>
+									</span>
+								</div> -->
+                                <div class="input-group placeholder-color">
+                                    <span class="input-group-addon input-icon"><i class="fa fa-home" aria-hidden="true"></i></span>
+                                    <input class="form-control" name="Address" placeholder="Flat No./ Street/ Landmark (optional)" type="text" formControlName="street" autocomplete="off" />
+                                </div>
+                                <div class="address-text" *ngIf="addressArr && addressArr.addresses && addressArr.addresses.length>0" >
+                                    <ul>
+                                        <li *ngFor="let address of addressArr.addresses;let i = index;" ><a (click)="selectAddress(address,i)" ><span *ngIf="address.street" >{{address.street}},&nbsp;</span>{{address.value}}</a></li>
+                                    </ul>
+                                </div>
+                            </form>
+                        </div>
+					</div>
+				</div>
+				<div *ngIf="phase === 7" id="phase7" class="animate-normal" >
+					<div class="Job-Login">
+						<form [formGroup]="loginForm" novalidate >
+							<div class="form-group">
+								<input type="text" class="form-control"
+								id="usr" placeholder="Email Id/Mobile No." formControlName="emailOrMobile" />
+							</div>
+							<div class="error-div" *ngIf="emailOrMobile.errors && (emailOrMobile.dirty || emailOrMobile.touched)" >
+								<p *ngIf="emailOrMobile.errors.required">Enter Email/Mobile No.</p>
+							</div>
+							<div class="error-div" *ngIf="invalidMobOrEmail && emailOrMobile.dirty && loginForm.get('emailOrMobile').value && loginForm.get('emailOrMobile').value.length > 0" >
+								<p>Invalid Mobile/Email</p>
+							</div>
+							<div class="form-group">
+								<input type="password" class="form-control" id="pwd" placeholder="Password" formControlName="passwordL" />
+							</div>
+							<div class="error-div" *ngIf="passwordL.errors && (passwordL.dirty || passwordL.touched)" >
+								<p *ngIf="passwordL.errors.required">Enter Password</p>
+							</div>
+							<div class="job-login-button">
+								<button type="button" class="btn" (click)="checkCredentials()" >Submit</button>
+							</div>
+							<!-- <p>Or Login With</p> -->
+							<ul>
+								<li>
+									<a (click)="openLoginModal()"  ><i class="fa fa-phone"></i></a>
+								</li>
+								<!-- <li>
+									<a (click)="checkLoginState()" ><i class="fa fa-facebook" aria-hidden="true"></i></a>
+								</li>
+								<li>
+									<a (click)="socialSignIn()" ><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+								</li> -->
+							</ul>
+						</form>
+					</div>
+				</div>
+			</div>
+			<!--<div class="col-md-12 col-sm-12 col-xs-12 error-div-job" >
+				<p style="padding: 10px;" >Please select an option</p>
+			</div>-->
+			<br/>
+			<div class="modal-footer job-modal-footer">
+				<button type="button" class="btn btn-default" *ngIf="phase == 1 || phase == 2 || phase == 3 || phase == 4 || phase == 5" (click)="checkForPhase()" >Next <i class="fa fa-arrow-right"></i></button>
+				<button type="button" class="btn btn-default" [ngClass]="{'disabled' : disable}" [disabled]="disable" *ngIf="phase == 6" (click)="checkForPhase()" >Post</button>
+			</div>
+		</div>
+	</div>
+</div>

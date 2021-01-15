@@ -1,0 +1,93 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "project": {
+    "name": "Fix-Papa"
+  },
+  "apps": [
+    {
+      "root": "src",
+      "outDir": "dist",
+      "assets": [
+        "assets",
+        "favicon.ico",
+        "firebase-messaging-sw.js",
+        "manifest.json",
+        "sitemap.xml",
+        "robots.txt"
+      ],
+      "index": "index.html",
+      "main": "main.ts",
+      "polyfills": "polyfills.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.app.json",
+      "testTsconfig": "tsconfig.spec.json",
+      "prefix": "app",
+      "styles": [
+        "styles.css",
+
+        "../src/assets/css/font-awesome.min.css",
+        "../src/assets/css/style1.min.css",
+        "../src/assets/css/style3.min.css",
+        "../src/assets/css/animate.css",
+
+
+        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "../node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css",
+        "../node_modules/ng2-toastr/bundles/ng2-toastr.min.css",
+        "../node_modules/owl.carousel/dist/assets/owl.carousel.css",
+        "../node_modules/owl.carousel/dist/assets/owl.theme.default.css",
+        "../node_modules/clockpicker/dist/bootstrap-clockpicker.min.css"
+      ],
+      "scripts": [
+        "../node_modules/jquery/dist/jquery.min.js",
+        "../node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js",
+        "../node_modules/bootstrap/dist/js/bootstrap.min.js",
+
+        "../src/assets/js/script.min.js",
+        "../src/assets/js/wow.min.js",
+        
+        
+        "../src/assets/js/firebase.js",
+        "../src/assets/js/talk-to.js",
+
+
+        "../node_modules/owl.carousel/dist/owl.carousel.js",
+        "../node_modules/clockpicker/dist/bootstrap-clockpicker.min.js",
+        "../src/assets/js/jquery.nicescroll.js"
+      ],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      }
+    }
+  ],
+  "e2e": {
+    "protractor": {
+      "config": "./protractor.conf.js"
+    }
+  },
+  "lint": [
+    {
+      "project": "src/tsconfig.app.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "src/tsconfig.spec.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "e2e/tsconfig.e2e.json",
+      "exclude": "**/node_modules/**"
+    }
+  ],
+  "test": {
+    "karma": {
+      "config": "./karma.conf.js"
+    }
+  },
+  "defaults": {
+    "styleExt": "css",
+    "component": {}
+  }
+}

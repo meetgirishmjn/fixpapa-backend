@@ -1,0 +1,188 @@
+<div class=" container-min-height" >
+    <div class="Page-heading" >
+        <h3>
+            <div class="row">
+                <div class="col-md-11">Bid Category</div>
+                <div class="col-md-1">
+                    <a type="button" class="btn block-btn"  (click)="openModal()">
+                        <i class="fa fa-plus"></i>
+                    </a>
+                </div>    
+            </div>
+        </h3>
+    </div>
+
+    <div class="container-fluid">
+
+        <div class="noDataFound" *ngIf="!allBids.length && !isLoading">No data found</div>
+        <div id="loader" *ngIf="isLoading"></div>
+
+        <div class="row card-row" *ngFor="let bid of allBids">
+            <div class="col-md-1">
+                <div class="card-img">
+                    <img class="img-responsive" [src]="baseUrl+bid.image">
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="">
+                    <h5>{{bid.name}}</h5>
+                    <p *ngIf="bid.services && bid.services.length">Services : {{bid.services | commaSeparatedList:"name"}}</p>
+                    <p>{{bid.createdAt|date:'dd MMMM, yyyy'}}</p>
+                </div>
+            </div>
+            <div class="col-md-2" align="right">
+                <a type="button" class="btn block-btn" (click)="openModal(bid)" href="javascript:;"><i class="fa fa-edit"></i></a>&nbsp;
+                <a type="button" class="btn block-btn" *ngIf="role == 'superAdmin'" (click)="openDelModal(bid)" href="javascript:;"><i class="fa fa-times-circle-o "></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="col-lg-12" *ngFor="let bid of allBids">
+        <div class="rah-card-container ">
+            <a type="button" class="btn block-btn rah-right" (click)="openModal(bid)">
+                <i class="fa fa-edit"></i>
+            </a>
+        	<div>
+        		<span class="rah-title">{{bid.name}}</span>
+        	</div>
+        	<div>
+        		<span>
+                    <b>Categories</b> : {{bid.services | commaSeparatedList:"name"}}<br />
+                    <b>Units</b> : {{bid.noOfSystems}}<br />
+                </span>
+                <span>{{bid.createdAt|date:'dd MMMM, yyyy'}}</span>
+        	</div>
+        </div>
+    </div> -->
+</div>
+
+
+<div class="modal fade" id="bidModal"  role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><span *ngIf="selectedBid.id">Edit</span><span *ngIf="!selectedBid.id">Add</span> Product</h4>
+            </div>
+            <form  class="form-horizontal" id="bidForm" (submit)="addBid(bidForm)" #bidForm="ngForm" >
+                <div class="modal-body">
+                    <!-- <div class="alert alert-danger" >
+                      alert
+                    </div> -->
+                    <!-- <p >Are you sure you want to block this user?</p> -->
+                    <div class="bootstrap-iso">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="row">
+                                        <div class="form-group col-lg-12">
+                                            <label for="setupType">Setup Type</label>
+                                            <input type="text" required="" [(ngModel)]="selectedBid.name" class="form-control" name="setupType" id="setupType" placeholder="Setup Type" #setupType="ngModel">
+
+                                            <div class="error-div" *ngIf="bidForm._submitted && setupType.errors?.required" >
+                                              this field is required
+                                            </div>
+                                        </div>
+                                    </div>    
+                                    <div class="row">
+                                        <div class="form-group col-lg-12">
+                                            <label for="brandName">Select Services</label>
+                                            <!-- <ng-select [multiple]="true"
+                                                [active]="selectedServices"
+                                                [allowClear]="true"
+                                                [items]="services |selectAutocomplete:'name'"
+                                                [disabled]="disabled"
+                                                (data) = "selectData($event)"
+                                                placeholder="No Service Selected">
+                                            </ng-select> -->
+                                            <ng-select [multiple]="true"
+                                                [active]="selectedServices"
+                                                [allowClear]="true"
+                                                [items]="services |selectAutocomplete:'name'"
+                                                (data) = "selectData($event)"
+                                                placeholder="No Service Selected">
+                                            </ng-select>
+
+                                            <div class="error-div" *ngIf="bidForm._submitted && !selectedServices.length" >
+                                              this field is required
+                                            </div>
+                                        </div>
+                                    </div>  
+                                    <div class="row">  
+	                                    <div class="form-group col-lg-12">
+	                                        <label for="brandName">Image</label>
+	                                        <input type="file" class="form-control"  name="categoryImage" id="categoryImage" rah-file-dir (assignValue)="files=$event" accept="image/*" placeholder="Image">
+	                                    </div>
+                                    </div>    
+                                    <div class="error-div" *ngIf="imgSize.isError" >
+                                        <span *ngIf="imgSize.error === 'imgNotFound'">
+                                            this field is required
+                                        </span>
+                                        <span *ngIf="imgSize.error === 'sizeError'">
+                                            size of image should be {{imgSize.width}} x {{imgSize.height}}
+                                        </span>
+                                    </div>
+                                    <h4>
+                                        <span style="margin-left:-15px">Add Units</span>
+                                        <a type="button" class="btn block-btn rah-right"  (click)="selectedBid.noOfSystems.push('')"><i class="fa fa-plus"></i></a>
+                                    </h4><br />
+                                    <div class="row" *ngFor="let x of selectedBid.noOfSystems;let i = index; trackBy:trackByIndex;">
+                                        <div class=" col-lg-10">
+                                            <div class="form-group">
+                                                <label for="noOfSystems">Systems</label>
+                                                <input type="text" required="" [(ngModel)]="selectedBid.noOfSystems[i]" class="form-control" name="value{{i+1}}" id="value{{i+1}}" placeholder="Unit">
+
+                                                <div class="error-div" *ngIf="bidForm._submitted && !selectedBid.noOfSystems[i].length" >
+                                                  this field is required
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-lg-2">    
+                                            <a type="button" class="btn block-btn rah-btn-top-margin" (click)="selectedBid.noOfSystems.splice(i,1)"><i class="fa fa-minus"></i></a>
+                                        </div>    
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" id="bidBtn" data-loading-text="Submit..." type="submit" >Submit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteModal"  role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Alert</h4>
+            </div>
+            <form  class="form-horizontal" (submit)="deleteData(delBidForm)" #delBidForm="ngForm">
+                <div class="modal-body">
+                   <!--  <div class="alert alert-danger" >
+                      alert
+                    </div> -->
+                    <!-- <p >Are you sure you want to block this user?</p> -->
+                    
+                    <div class="bootstrap-iso">
+                        <div class="container-fluid">
+                            Are you sure you want to delete this category ?
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary " id="delBtn" data-loading-text="deleting..." type="submit" >Delete</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

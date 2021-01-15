@@ -1,0 +1,37 @@
+{
+  "addItem":{
+    "replyCode": "Success",
+    "replyMessage": "Successfully addd item !!"
+  },
+  "getpurchases" : {
+  "replyCode":"Success",
+  "replyMessage":"Success"
+  
+ },
+  "getpurchase" : {
+  "replyCode":"Success",
+  "replyMessage":"Success"
+  
+ },
+  "editPurchase" : {
+  "replyCode":"Success",
+  "replyMessage":"Successfully updated!!"
+  
+ },
+ "createPurchaseReq" : {
+  "replyCode":"Success",
+  "replyMessage":"Successfully requested!!"
+  
+ },
+ "getAllPurchaseReq" : {
+  "replyCode":"Success",
+  "replyMessage":"Success"
+  
+ },
+  "deletePurchase" : {
+  "replyCode":"Success",
+  "replyMessage":"Successfully deleted!!"
+  
+ }
+
+}

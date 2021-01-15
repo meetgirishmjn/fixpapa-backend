@@ -1,0 +1,310 @@
+<div class="row container-min-height">
+    <div class="Page-heading" >
+        <div class="container-fluid">
+            <h3>
+                <div class="row">
+                    <div class="col-md-10">Job Info</div>
+                    <div class="col-md-2" >
+	                    <a type="button" class="btn block-btn"  routerLink="/generate-bill/{{params.jobId}}">
+	                        <span *ngIf="!jobData.adminToCust">Generate Bill</span>
+	                        <span *ngIf="jobData.adminToCust">Generated</span>
+	                    </a>
+	                </div>    
+                </div>
+            </h3>
+        </div>    
+    </div>
+    <div class="container-fluid" *ngIf="jobData.customer">
+    	<div class="row">
+    		<div class="col-md-4">
+	    		<div class="row card-row rah-info-card">
+	    			<div *ngIf="!jobData.customer || !jobData.customer.image" style="background-image: url(assets/img/default-images/user-default.png)" class="rah-info-card-user"></div>
+	    			<div *ngIf="jobData.customer && jobData.customer.image" [ngStyle]="{'background-image': 'url(' + baseUrl+jobData.customer.image + ')'}" class="rah-info-card-user"></div>
+		            <div class="row">
+		                <div class="col-md-12">
+		                    <div class="card-content-padding">
+		                        <h5><strong>Customer Info</strong></h5>
+		                        <span>
+			                        <div class="row">
+			                    		<div class="col-md-2">Name </div>
+			                    		<div class="col-md-1">:</div>
+			                    		<div class="col-md-9">{{jobData.customer.fullName}}</div>
+				                    </div><br />
+				                    <div class="row">
+			                    		<div class="col-md-2">Mobile </div>
+			                    		<div class="col-md-1">:</div>
+			                    		<div class="col-md-9">{{jobData.customer.mobile}}</div>
+				                    </div>
+				                </span>    
+		                        <!-- <span>
+			                        <h5>Name : {{jobData.customer.fullName}}</h5>
+			                        <p>Mobile Number : {{jobData.customer.mobile}}</p>
+			                    </span>   -->  
+		                    </div>
+		                </div>
+		            </div>    
+		        </div>		
+    		</div>
+    		<div class="col-md-4">
+	    		<div class="row card-row rah-info-card">
+	    			<div *ngIf="!jobData.vendor || !jobData.vendor.image" style="background-image: url(assets/img/default-images/user-default.png)" class="rah-info-card-user"></div>
+	    			<div *ngIf="jobData.vendor && jobData.vendor.image" [ngStyle]="{'background-image': 'url(' + baseUrl+jobData.vendor.image + ')'}" class="rah-info-card-user"></div>
+		            <div class="row">
+		                <div class="col-md-12">
+		                    <div class="card-content-padding">
+		                        <h5><strong>Vendor Info</strong></h5>
+		                        <span *ngIf="jobData.vendor">
+			                        <div class="row">
+			                    		<div class="col-md-2">Name </div>
+			                    		<div class="col-md-1">:</div>
+			                    		<div class="col-md-9">{{jobData.vendor.fullName}}</div>
+				                    </div><br />
+				                    <div class="row">
+			                    		<div class="col-md-2">Mobile </div>
+			                    		<div class="col-md-1">:</div>
+			                    		<div class="col-md-9">{{jobData.vendor.mobile}}</div>
+				                    </div><br />
+				                    <div class="row" *ngIf="jobData.vendorAssignedDate">
+			                    		<div class="col-md-2">Assigned Date </div>
+			                    		<div class="col-md-1">:</div>
+			                    		<div class="col-md-9">{{jobData.vendorAssignedDate | date:'dd MMMM, yyyy At hh:mm a'}}</div>
+				                    </div>
+				                </span>    
+
+		                        <!-- <span *ngIf="jobData.vendor">
+			                        <h5>Name : {{jobData.vendor.fullName}}</h5>
+			                        <p>Mobile Number : {{jobData.vendor.mobile}}</p>
+			                    </span>   -->  
+			                    <span *ngIf="!jobData.vendor">
+		                        	No Vendor Assign
+		                        </span>	
+		                    </div>
+		                </div>
+		            </div>    
+		        </div>		
+    		</div>
+    		<div class="col-md-4">
+	    		<div class="row card-row rah-info-card">
+	    			<div *ngIf="!jobData.engineer || !jobData.engineer.image" style="background-image: url(assets/img/default-images/user-default.png)" class="rah-info-card-user"></div>
+	    			<div *ngIf="jobData.engineer && jobData.engineer.image" [ngStyle]="{'background-image': 'url(' + baseUrl+jobData.engineer.image + ')'}" class="rah-info-card-user"></div>
+		            <div class="row">
+		                <div class="col-md-12">
+		                    <div class="card-content-padding">
+		                    	<h5><strong>Engineer Info</strong></h5>
+		                    	<span *ngIf="jobData.engineer">
+			                        <div class="row">
+			                    		<div class="col-md-2">Name </div>
+			                    		<div class="col-md-1">:</div>
+			                    		<div class="col-md-9">{{jobData.engineer.fullName}}</div>
+				                    </div><br />
+				                    <div class="row">
+			                    		<div class="col-md-2">Mobile </div>
+			                    		<div class="col-md-1">:</div>
+			                    		<div class="col-md-9">{{jobData.engineer.mobile}}</div>
+				                    </div><br />
+				                    <div class="row" *ngIf="jobData.engineerAssignedDate">
+			                    		<div class="col-md-2">Assigned Date </div>
+			                    		<div class="col-md-1">:</div>
+			                    		<div class="col-md-9">{{jobData.engineerAssignedDate | date:'dd MMMM, yyyy At hh:mm a'}}</div>
+				                    </div>
+				                </span>    
+			                    <!-- <span *ngIf="jobData.engineer">
+			                        <h5>Name : {{jobData.engineer.fullName}}</h5>
+			                    	<p>Mobile Number : {{jobData.engineer.mobile}}</p>
+			                    </span>   -->  
+		                        <span *ngIf="!jobData.engineer">
+		                        	No Engineer Assign
+		                        </span>	
+		                    </div>
+		                </div>
+		            </div>    
+		        </div>		
+    		</div>
+    	</div>
+
+    	<div class="row" >
+    		<div class="col-md-12">
+	    		<div class="row card-row rah-info-card">
+		            <div class="row">
+		                <div class="col-md-12">
+		                    <div class="card-content-padding">
+		                    	<h5><strong>Job Info</strong></h5>
+		                    	<div class="row">
+		                    		<div class="col-md-2"><h5>Job for </h5></div>
+		                    		<div class="col-md-1">:</div>
+		                    		<div class="col-md-9">{{jobData.category.name}} <span *ngIf="jobData.brand">({{jobData.brand.name}})</span></div>
+			                    </div>
+			                    <div class="row">
+			                    	<div class="col-md-2"><h5>Status </h5></div>
+		                    		<div class="col-md-1">:</div>
+		                    		<div class="col-md-9">{{jobData.status}}</div>
+			                    </div>	
+			                    <div class="row">
+			                    	<div class="col-md-2"><h5>Address </h5></div>
+		                    		<div class="col-md-1">:</div>
+		                    		<div class="col-md-9">{{jobData.address.street}} , {{jobData.address.value}}</div>
+			                    </div>	
+			                    <div class="row">
+			                    	<div class="col-md-2"><h5>Site Type </h5></div>
+		                    		<div class="col-md-1">:</div>
+		                    		<div class="col-md-9">{{jobData.siteType}}</div>
+			                    </div>	
+			                    <div class="row">
+			                    	<div class="col-md-2"><h5>Start Date</h5></div>
+		                    		<div class="col-md-1">:</div>
+		                    		<div class="col-md-9">{{jobData.startDate | date:'dd MMMM, yyyy At hh:mm a'}}</div>
+			                    </div>
+			                    <div class="row">
+			                    	<div class="col-md-2"><h5>Created At</h5></div>
+		                    		<div class="col-md-1">:</div>
+		                    		<div class="col-md-9">{{jobData.createdAt | date:'dd MMMM, yyyy At hh:mm a'}}</div>
+			                    </div>
+			                    <div *ngIf="jobData.status == 'indispute'">
+			                    	<div class="row">
+				                    	<div class="col-md-2"><h5>Dispute Reason </h5></div>
+			                    		<div class="col-md-1">:</div>
+			                    		<div class="col-md-9">{{jobData.completeJob.comment}}</div>
+				                    </div>
+			                    	<div class="row">
+				                    	<div class="col-md-2"><h5>Dispute Date</h5></div>
+			                    		<div class="col-md-1">:</div>
+			                    		<div class="col-md-9">{{jobData.completeJob.completedAt | date:'dd MMMM, yyyy At hh:mm a'}}</div>
+				                    </div>	
+								</div>	
+								<div class="row" *ngIf="jobData.problemDes">
+			                    	<div class="col-md-2"><h5>Problem Description </h5></div>
+		                    		<div class="col-md-1">:</div>
+		                    		<div class="col-md-9">{{jobData.problemDes}}</div>
+			                    </div>	
+								<div *ngIf="jobData.status == 'canceled'">
+			                    	<div class="row">
+				                    	<div class="col-md-2"><h5>Cancellation Reason </h5></div>
+			                    		<div class="col-md-1">:</div>
+			                    		<div class="col-md-9">
+			                    			<span *ngIf="jobData.cancelJob.reason != 'Other'">{{jobData.cancelJob.reason}}</span>
+			                    			<span *ngIf="jobData.cancelJob.reason == 'Other'">{{jobData.cancelJob.comment}}</span>
+			                    		</div>
+				                    </div>
+				                    <div class="row">
+				                    	<div class="col-md-2"><h5>Cancelled By </h5></div>
+			                    		<div class="col-md-1">:</div>
+			                    		<div class="col-md-9">{{jobData.cancelJob.cancelledBy | titlecase}}</div>
+				                    </div>
+			                    	<div class="row">
+				                    	<div class="col-md-2"><h5>Cancellation Date </h5></div>
+			                    		<div class="col-md-1">:</div>
+			                    		<div class="col-md-9">{{jobData.cancelJob.cancelledDate | date:'dd MMMM, yyyy At hh:mm a'}}</div>
+				                    </div>	
+				                    
+								</div>	
+
+		                    </div>
+		                </div>
+		            </div>    
+		        </div>		
+    		</div>
+    	</div>
+
+    	<div class="row" >
+    		<div class="col-md-12">
+	    		<div class="row card-row rah-info-card">
+		            <div class="row">
+		                <div class="col-md-12">
+		                    <div class="card-content-padding">
+		                    	<h5><strong>Problems</strong></h5><br />
+		                    	<div *ngFor="let problem of jobData.problems">
+		                    		<span>{{problem.probContent}}</span>	
+		                    		<span class="rah-right"> &#x20B9; {{problem.price}}</span>
+		                    		<hr />
+		                    	</div>
+		                    </div>
+		                </div>
+		            </div>    
+		        </div>		
+    		</div>
+    	</div>
+
+    	<div class="row" >
+    		<div class="col-md-12">
+	    		<div class="row card-row rah-info-card">
+		            <div class="row">
+		                <div class="col-md-12">
+		                    <div class="card-content-padding">
+		                    	<h5><strong>Additional Part Info</strong></h5><br />
+		                    	<div *ngFor="let part of jobData.bill.addPart">
+		                    		<span>{{part.partName}} ({{part.partNumber}})</span>	
+		                    		<span class="rah-right"> &#x20B9; {{part.partCost}}</span>
+		                    		<hr />
+		                    	</div>
+		                    	<span *ngIf="!jobData.bill.addPart.length">No part added yet</span>
+		                    </div>
+		                </div>
+		            </div>    
+		        </div>		
+    		</div>
+    	</div>
+
+    	<div class="row" >
+    		<div class="col-md-12">
+	    		<div class="row card-row rah-info-card">
+		            <div class="row">
+		                <div class="col-md-12">
+		                    <div class="card-content-padding">
+		                    	<h5><strong>Billing Info</strong></h5><br />
+		                    	<div>
+		                    		<span>Problem Charges</span>	
+		                    		<span class="rah-right"> &#x20B9; {{billingObj.probCharges}}</span>
+		                    		<hr />
+		                    	</div>
+		                    	<div>
+		                    		<span>Service Charges</span>	
+		                    		<span class="rah-right"> &#x20B9; {{billingObj.serviceCharges}}</span>
+		                    		<hr />
+		                    	</div>
+		                    	<div>
+		                    		<span>Additional Part Charges</span>	
+		                    		<span class="rah-right"> &#x20B9; {{billingObj.addPartCharges}}</span>
+		                    		<hr />
+		                    	</div>
+		                    	<div>
+		                    		<span>Discount</span>	
+		                    		<span class="rah-right"> &#x20B9; {{billingObj.discount}}</span>
+		                    		<hr />
+		                    	</div>
+		                    	<div>
+		                    		<strong>
+			                    		<span>Total</span>	
+			                    		<span class="rah-right"> &#x20B9; {{billingObj.total}}</span>
+			                    		<hr />
+			                    	</strong>	
+		                    	</div>
+		                    </div>
+		                </div>
+		            </div>    
+		        </div>		
+    		</div>
+    	</div>
+
+    	<div class="row" >
+    		<div class="col-md-12">
+	    		<div class="row card-row rah-info-card">
+		            <div class="row">
+		                <div class="col-md-12">
+		                    <div class="card-content-padding">
+		                    	<h5><strong>Extra Images</strong></h5><br />
+		                    	<div class="row">
+		                    		<div class="col-md-2" *ngFor="let img of jobData.image">
+		                    			<img [src]="baseUrl+img" width="100%">
+		                    		</div>
+		                    		<div class="noDataFound" *ngIf="!jobData.image.length">No images found</div>
+		                    	</div>	
+		                    </div>
+		                </div>
+		            </div>    
+		        </div>		
+    		</div>
+    	</div>
+
+
+	</div>	
+</div>

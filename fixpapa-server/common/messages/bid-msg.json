@@ -1,0 +1,37 @@
+{
+  "addBidType":{
+    "replyCode": "Success",
+    "replyMessage": "Success"
+  },
+  "getBids" : {
+  "replyCode":"Success",
+  "replyMessage":"Success"
+  
+ },
+ "editBid" : {
+  "replyCode":"Success",
+  "replyMessage":"Successfully updated!!"
+  
+ },
+ "getBid" : {
+  "replyCode":"Success",
+  "replyMessage":"Success"
+  
+ },
+ "createBid" : {
+  "replyCode":"Success",
+  "replyMessage":"Successfully request sent!!"
+  
+ },
+ "getBidRequest" : {
+  "replyCode":"Success",
+  "replyMessage":"Success"
+  
+ },
+ "deleteBid" : {
+  "replyCode":"Success",
+  "replyMessage":"Successfully deleted!!"
+  
+ }
+
+}

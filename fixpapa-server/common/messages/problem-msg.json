@@ -1,0 +1,17 @@
+{
+  "addProb":{
+    "replyCode": "Success",
+    "replyMessage": "Successfully problem content added!!"
+  },
+  "getProb" : {
+  "replyCode":"Success",
+  "replyMessage":"Success"
+  
+ },
+ "editProblem" : {
+  "replyCode":"Success",
+  "replyMessage":"Successfully updated!!"
+  
+ }
+
+}

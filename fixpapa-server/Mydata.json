@@ -1,0 +1,47 @@
+{
+  "ids": {
+    "User": 1,
+    "AccessToken": 1,
+    "ACL": 1,
+    "RoleMapping": 2,
+    "Role": 5,
+    "UserCredential": 1,
+    "UserIdentity": 1,
+    "Job": 1,
+    "People": 2,
+    "Problem": 1,
+    "Category": 1,
+    "Products": 1,
+    "Brand": 1,
+    "Bid": 1,
+    "Services": 1,
+    "AMC": 1
+  },
+  "models": {
+    "User": {},
+    "AccessToken": {},
+    "ACL": {},
+    "RoleMapping": {
+      "1": "{\"principalType\":\"USER\",\"principalId\":1,\"roleId\":1,\"id\":1}"
+    },
+    "Role": {
+      "1": "{\"name\":\"admin\",\"created\":\"2018-04-18T09:34:52.656Z\",\"modified\":\"2018-04-18T09:34:52.656Z\",\"id\":1}",
+      "2": "{\"name\":\"customer\",\"created\":\"2018-04-18T09:34:52.657Z\",\"modified\":\"2018-04-18T09:34:52.657Z\",\"id\":2}",
+      "3": "{\"name\":\"vendor\",\"created\":\"2018-04-18T09:34:52.657Z\",\"modified\":\"2018-04-18T09:34:52.657Z\",\"id\":3}",
+      "4": "{\"name\":\"engineer\",\"created\":\"2018-04-18T09:34:52.657Z\",\"modified\":\"2018-04-18T09:34:52.657Z\",\"id\":4}"
+    },
+    "UserCredential": {},
+    "UserIdentity": {},
+    "Job": {},
+    "People": {
+      "1": "{\"realm\":\"admin\",\"password\":\"$2a$10$kRywjVO0Bfh0Q89zg70Giu/0QxbsYx0LJICKrmv/9A8KEx7vEnRNS\",\"email\":\"advocosoft3@gmail.com\",\"emailVerified\":true,\"fullName\":\"AdminUser\",\"mobile\":\"+919649165819\",\"address\":\"jaipur\",\"mobileVerified\":true,\"adminVerifiedStatus\":\"approved\",\"id\":1}"
+    },
+    "Problem": {},
+    "Category": {},
+    "Products": {},
+    "Brand": {},
+    "Bid": {},
+    "Services": {},
+    "AMC": {}
+  }
+}

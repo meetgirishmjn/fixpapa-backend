@@ -1,0 +1,10 @@
+{
+  "giveRatingSuccess":{
+    "replyCode": "Success",
+    "replyMessage": "Successfully done rating!!"
+  },
+  "getRatings":{
+    "replyCode": "Success",
+    "replyMessage": "Successfully done!!"
+  }
+}

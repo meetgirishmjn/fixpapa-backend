@@ -1,0 +1,190 @@
+<div class=" container-min-height" >
+    <div class="Page-heading" >
+        <h3>
+            <div class="row">
+                <div class="col-md-11">AMC Contract</div>
+                <div class="col-md-1">
+                    <a type="button" class="btn block-btn"  (click)="openModal()">
+                        <i class="fa fa-plus"></i>
+                    </a>
+                </div>    
+            </div>
+        </h3>
+    </div>
+
+    <div class="container-fluid">
+
+        <div class="noDataFound" *ngIf="!allAMC.length && !isLoading">No data found</div>
+        <div id="loader" *ngIf="isLoading"></div>
+
+        <div class="row card-row" *ngFor="let contract of allAMC">
+            <div class="col-md-1">
+                <div class="card-img">
+                    <img class="img-responsive" [src]="baseUrl+contract.image">
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="">
+                    <h5>{{contract.name}}</h5>
+                    <p *ngIf="contract.category && contract.category">Categories : {{contract.category | commaSeparatedList:"name"}}</p>
+                    <p>Units : {{contract.noOfUnits}}</p>
+                </div>
+            </div>
+            <div class="col-md-2" align="right">
+                <a type="button" class="btn block-btn" (click)="openModal(contract)" href="javascript:;"><i class="fa fa-edit"></i></a>&nbsp;
+                <a type="button" class="btn block-btn"  *ngIf="role == 'superAdmin'" (click)="openDelModal(contract)" href="javascript:;"><i class="fa fa-times-circle-o "></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="col-lg-12" *ngFor="let contract of allAMC">
+        <div class="rah-card-container ">
+            <a type="button" class="btn block-btn rah-right" (click)="openModal(contract)">
+                <i class="fa fa-edit"></i>
+            </a>
+        	<div>
+        		<span class="rah-title">{{contract.name}}</span>
+        	</div>
+        	<div>
+        		<span>
+                    <b>Categories</b> : {{contract.category | commaSeparatedList:"name"}}<br />
+                    <b>Units</b> : {{contract.noOfUnits}}<br />
+                </span>
+                <span>{{contract.createdAt|date:'dd MMMM, yyyy'}}</span>
+        	</div>
+        </div>
+    </div> -->
+</div>
+
+
+<div class="modal fade" id="amcModal"  role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Product</h4>
+            </div>
+            <form  class="form-horizontal" id="AMCForm" (submit)="addAMC(AMCForm)" #AMCForm="ngForm" >
+                <div class="modal-body">
+                    <!-- <div class="alert alert-danger" >
+                      alert
+                    </div> -->
+                    <!-- <p >Are you sure you want to block this user?</p> -->
+                    <div class="bootstrap-iso">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="row">
+                                        <div class="form-group col-lg-12">
+                                            <label for="categoryName">User Type</label>
+                                            <input type="text" required="" [(ngModel)]="selectedAMC.name" class="form-control" name="userType" id="userType" placeholder="User Type" #userType="ngModel">
+
+                                            <div class="error-div" *ngIf="AMCForm._submitted && userType.errors?.required" >
+                                              this field is required
+                                            </div>
+                                        </div>
+                                    </div>    
+                                    <div class="row">
+                                        <div class="form-group col-lg-12">
+                                            <label for="brandName">Select Category</label>
+                                            <!-- <ng-select [multiple]="true"
+                                                [active]="selectedCategories"
+                                                [allowClear]="true"
+                                                [items]="categories |selectAutocomplete:'name'"
+                                                [disabled]="disabled"
+                                                (data) = "selectData($event)"
+                                                placeholder="No Category Selected">
+                                            </ng-select> -->
+                                            <ng-select [multiple]="true"
+                                                [active]="selectedCategories"
+                                                [allowClear]="true"
+                                                [items]="categories |selectAutocomplete:'name'"
+                                                (data) = "selectData($event)"
+                                                placeholder="No Category Selected">
+                                            </ng-select>
+
+                                            <div class="error-div" *ngIf="AMCForm._submitted && !selectedCategories.length" >
+                                              this field is required
+                                            </div>
+                                        </div>
+                                    </div>  
+                                    <div class="row">  
+	                                    <div class="form-group col-lg-12">
+	                                        <label for="brandName">Image</label>
+	                                        <input type="file" class="form-control"  name="categoryImage" id="categoryImage" rah-file-dir (assignValue)="files=$event" accept="image/*" placeholder="Image">
+	                                    </div>
+	                                </div>
+
+                                    <div class="error-div" *ngIf="imgSize.isError" >
+                                        <span *ngIf="imgSize.error === 'imgNotFound'">
+                                            this field is required
+                                        </span>
+                                        <span *ngIf="imgSize.error === 'sizeError'">
+                                            size of image should be {{imgSize.width}} x {{imgSize.height}}
+                                        </span>
+                                    </div>
+
+                                    <h4>
+                                        <span style="margin-left:-15px">Add Units</span>
+                                        <a type="button" class="btn block-btn rah-right"  (click)="selectedAMC.noOfUnits.push('')"><i class="fa fa-plus"></i></a>
+                                    </h4><br />
+                                    <div class="row" *ngFor="let x of selectedAMC.noOfUnits;let i = index; trackBy:trackByIndex;">
+                                        <div class=" col-lg-10">
+                                            <div class="form-group">
+                                                <label for="brandName">Value</label>
+                                                <input type="text" required="" [(ngModel)]="selectedAMC.noOfUnits[i]" class="form-control" name="value{{i+1}}" id="value{{i+1}}" placeholder="Unit">
+
+                                                <div class="error-div" *ngIf="AMCForm._submitted && !selectedAMC.noOfUnits[i].length" >
+                                                  this field is required
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-lg-2">    
+                                            <a type="button" class="btn block-btn rah-btn-top-margin" (click)="selectedAMC.noOfUnits.splice(i,1)"><i class="fa fa-minus"></i></a>
+                                        </div>    
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" id="amcBtn" data-loading-text="Submit..." type="submit" >Submit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteModal"  role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Alert</h4>
+            </div>
+            <form  class="form-horizontal" (submit)="deleteData(delAMCForm)" #delAMCForm="ngForm">
+                <div class="modal-body">
+                   <!--  <div class="alert alert-danger" >
+                      alert
+                    </div> -->
+                    <!-- <p >Are you sure you want to block this user?</p> -->
+                    
+                    <div class="bootstrap-iso">
+                        <div class="container-fluid">
+                            Are you sure you want to delete this category ?
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary " id="delBtn" data-loading-text="deleting..." type="submit" >Delete</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

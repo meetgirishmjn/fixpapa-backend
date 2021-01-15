@@ -1,0 +1,125 @@
+::-webkit-scrollbar{
+    width: 10px;
+}
+#notifications::-webkit-scrollbar-track{
+    box-shadow: inset 0 0 5px transparent;
+}
+#notifications::-webkit-scrollbar-track:hover{
+    box-shadow: inset 0 0 5px lightgrey;
+}
+#notifications::-webkit-scrollbar-thumb{
+    background: lightgrey;
+	-webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+   -webkit-animation: fadein 2s; 
+    -moz-animation: fadein 2s; 
+    -ms-animation: fadein 2s; 
+    -o-animation: fadein 2s; 
+    animation: fadein 2s;
+}
+#noti_Container {
+	/* position:relative; */
+}
+
+#noti_Counter {
+	display:block;
+	position:absolute;
+	background:#06386b;
+	color:#FFF;
+	font-size:9px;
+	font-weight:normal;
+	padding:1px 3px;
+	margin: 0px 10px 10px 10px;
+	border-radius:2px;
+	-moz-border-radius:2px; 
+	-webkit-border-radius:2px;
+	z-index:1;
+	top:5px;
+}
+	
+#notifications {
+	display:none;
+	width:350px;
+	position:absolute;
+	/* top:30px; */
+	/* left:0; */
+	margin-right : 100px;
+	background:#FFF;
+	border:solid 1px rgba(100, 100, 100, .20);
+	-webkit-box-shadow:0 3px 8px rgba(0, 0, 0, .20);
+	z-index: 99;
+}
+#notifications:before {         
+	content: '';
+	display:block;
+	width:0;
+	height:0;
+	color:transparent;
+	border:10px solid #CCC;
+	border-color:transparent transparent #FFF;
+	margin-top:-20px;
+	margin-left:10px;
+}
+	
+#notifications h3 {
+	display: block;
+	color: white;
+	background: #06386b;
+	font-weight: bold;
+	font-size: 15px;
+	padding: 10px;
+	margin: 0;
+	text-align: center;
+	border-bottom: solid 1px rgba(100, 100, 100, .30);
+}
+	
+
+	
+#noti_Button i {
+    color: #06386b;
+    font-size: 17px;
+	/* margin-top: 15px; */
+    padding-right: 20px;
+	cursor : pointer;
+}
+#notifications p {
+    text-align: justify;
+    font-size: 14px;
+	margin-top: 5px;
+	line-height: 18px
+}
+.noti-img img {
+    padding-top: 14px;
+}
+#notifications h4 {
+    text-align: left;
+    font-size: 20px;
+    color: #333;
+}
+.right-gap{
+    padding-right: 5px;
+}
+.left-gap{
+    padding-left: 5px;
+}
+.noti-bottom-border {
+    border-bottom: 1px solid #ddd8d8;
+    padding: 10px;
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+    /* margin-top: 10px; */
+}
+@media all and (max-width: 500px) and (min-width: 300px){
+	#notifications{
+		width: auto;
+	}
+}
+#notifications {
+    max-height: 500px;
+	min-height: 30px;
+	overflow-y : scroll;
+	overflow-x : hidden;
+}
+/*#notifications:hover {
+    overflow-y: hidden;
+}*/

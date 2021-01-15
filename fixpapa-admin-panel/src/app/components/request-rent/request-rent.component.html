@@ -1,0 +1,124 @@
+<div class="row container-min-height">
+    <div class="Page-heading" >
+        <div class="container-fluid">
+            <h3>
+                <div class="row">
+                    <div class="col-md-11">Product on Rent</div>
+                </div>
+            </h3>
+        </div>    
+    </div>
+    <div class="container-fluid">
+        <div class="noDataFound" *ngIf="!rentRequests.length && !isLoading">No data found</div>
+        <div id="loader" *ngIf="isLoading"></div>
+        <div class="row card-row" *ngFor="let request of rentRequests">
+            <div class="row">
+                <!-- <div class="col-md-1">
+                    <div class="card-img"  *ngIf="request.newpurchase">
+                        <img class="img-responsive" [src]="baseUrl+request.newpurchase.image" />
+                    </div>
+                </div> -->
+                <div class="col-md-5"> 
+                    <span ><strong>Request Info</strong></span><br /><br />
+                     
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th width="20%">Name</th>
+                            <th>Qty</th>
+                            <th>Time</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let detail of request.rentDetail">
+                            <td width="20%">{{detail.name}}</td>
+                            <td>{{detail.noOfUnits}}</td>
+                            <td>{{detail.timePeriod}} month(s)</td>
+                          </tr>
+                          <tr><td colspan="3">&nbsp;</td></tr>
+                        </tbody>
+                    </table>
+
+                    <table class="table borderless"  border="0">
+                        <tbody>
+                          <tr *ngIf="request.address">
+                            <td width="20%">Address</td>
+                            <td>:</td>
+                            <td>{{request.address}}</td>
+                          </tr>
+                          <tr *ngIf="request.createdAt">
+                            <td width="20%">Created At</td>
+                            <td>:</td>
+                            <td>{{request.createdAt | date: 'dd MMMM, yyyy'}}</td>
+                          </tr>
+                          <tr *ngIf="request.estiBudget">
+                            <td width="20%">Budget</td>
+                            <td>:</td>
+                            <td>{{request.estiBudget}}</td>
+                          </tr>
+                          <!-- <tr><td colspan="3">&nbsp;</td></tr> -->
+                        </tbody>
+                    </table>
+
+                    <!-- <div class="row" *ngIf="request.address">
+                        <div class="col-md-3" >Address</div>
+                        <div class="col-md-1">:</div>
+                        <div class="col-md-8">{{request.address}}</div>
+                    </div>  
+                    <div class="row" *ngIf="request.estiBudget">
+                        <div class="col-md-3" >Estimate Budget</div>
+                        <div class="col-md-1">:</div>
+                        <div class="col-md-8">{{request.estiBudget}}</div>
+                    </div>    -->
+
+                </div> 
+                <div class="col-md-6">
+                    <span ><strong>Customer Info</strong></span><br /><br />
+                    <table class="table borderless"  border="0" *ngIf="request.people">
+                        
+                        <tbody>
+                          <tr *ngIf="request.people.fullName">
+                            <td width="20%">Name</td>
+                            <td>:</td>
+                            <td>{{request.people.fullName}}</td>
+                          </tr>
+                          <tr *ngIf="request.people">
+                            <td width="20%">Email</td>
+                            <td>:</td>
+                            <td>{{request.people.email}}</td>
+                          </tr>
+                          <tr *ngIf="request.people">
+                            <td width="20%">Mobile</td>
+                            <td>:</td>
+                            <td>{{request.people.mobile}}</td>
+                          </tr>
+                          <tr><td colspan="3">&nbsp;</td></tr>
+                        </tbody>
+                    </table>
+                    <!-- <div *ngIf="request.people">
+                        <span ><strong>Customer Info</strong></span><br /><br />
+                        <div class="row" *ngIf="request.people.fullName">
+                            <div class="col-md-2" >Name</div>
+                            <div class="col-md-1">:</div>
+                            <div class="col-md-9">{{request.people.fullName}}</div>
+                        </div>   
+                        <div class="row" *ngIf="request.people.email">
+                            <div class="col-md-2" >Email</div>
+                            <div class="col-md-1">:</div>
+                            <div class="col-md-9">{{request.people.email}}</div>
+                        </div>   
+                    </div>     -->
+                </div>  
+                
+                <div class="col-md-12" *ngIf="request.description"> 
+                    &nbsp;&nbsp;&nbsp;Description : {{request.description}}
+                </div>                   
+            </div>
+        </div>  
+
+        <div class="rah-right">
+            <ngb-pagination [collectionSize]="options.totalCount" (pageChange)="changePage()" [(page)]="options.page" [maxSize]="5" [pageSize]="options.limit" [boundaryLinks]="true"></ngb-pagination>
+        </div>
+
+    </div>
+</div>

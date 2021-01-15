@@ -1,0 +1,177 @@
+<div class="row container-min-height" >
+    <div class="Page-heading" >
+        <div class="container-fluid">
+            <h3>
+                <div class="row">
+                    <div class="col-md-11">Cateogries</div>
+                    <div class="col-md-1">
+                        <a type="button" class="btn block-btn" href="javascript:;" (click)="openModal()"><i class="fa fa-plus"></i></a>
+                    </div>    
+                </div>
+            </h3>
+        </div>    
+    </div>
+    <!-- <div class="col-lg-12" *ngFor="let category of categories">
+        <div class="rah-card-container ">
+        	<div>
+        		<a type="button" class="btn block-btn rah-right" (click)="openModal(category)" href="javascript:;"><i class="fa fa-edit"></i></a>
+        		<a type="button" class="btn block-btn rah-right"  routerLink="/single-category/{{category.id}}"><i class="fa fa-eye"></i></a>
+                <img class="img-responsive card-img" src="http://139.59.71.150:3008/api/Containers/container/download/KO.jpg">
+        		<span class="rah-title">{{category.name}}</span>
+        		<span *ngIf="category.products && category.products.length"><br />Products : {{category.products | commaSeparatedList:"name"}}</span><br />
+        		<span>Last Updated : {{category.createdAt | date : 'dd MMMM, yyyy'}}</span>
+        	</div>
+        </div>
+    </div> -->
+    <div class="container-fluid">
+
+        <div class="noDataFound" *ngIf="!categories.length && !isLoading">No data found</div>
+        <div id="loader" *ngIf="isLoading"></div>
+
+        <div class="row card-row" *ngFor="let category of categories">
+            <div class="col-md-1">
+                <div class="card-img">
+                    <img class="img-responsive" [src]="baseUrl+category.image">
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="">
+                    <h5>{{category.name}}</h5>
+                    <p *ngIf="category.products && category.products.length">Products : {{category.products | commaSeparatedList:"name"}}</p>
+                    <p>Last Updated : {{category.createdAt | date : 'dd MMMM, yyyy'}}</p>
+                </div>
+            </div>
+            <div class="col-md-6" align="right">
+                <a type="button" class="btn block-btn" (click)="openAddOrRemoveRent(category)" href="javascript:;"  *ngIf="role == 'superAdmin'">
+                    <span *ngIf="!category.isAvailableForRent">Add For Rent</span>
+                    <span *ngIf="category.isAvailableForRent">Remove for Rent</span>
+                </a>&nbsp;
+                <a type="button" class="btn block-btn" (click)="openModal(category)" href="javascript:;"><i class="fa fa-edit"></i></a>&nbsp;
+                
+                <a type="button" class="btn block-btn" *ngIf="!category.isAvailableForRent && role == 'superAdmin'" (click)="openDelModal(category)" href="javascript:;"><i class="fa fa-times-circle-o "></i></a>&nbsp;
+                <!-- <a type="button" class="btn block-btn"  routerLink="admin/single-category/{{category.id}}"><i class="fa fa-eye"></i></a> -->
+                <a type="button" class="btn block-btn"  (click)="navigate('single-category',category.id)"><i class="fa fa-eye"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="categoryModal"  role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">
+                	<span *ngIf="!selectedCategory">Add</span><span *ngIf="selectedCategory">Edit</span> Category
+                </h4>
+            </div>
+            <form  class="form-horizontal" (submit)="addCategory(categoryForm)" #categoryForm="ngForm">
+                <div class="modal-body">
+                    <!--  <div class="alert alert-danger" >
+                      alert
+                    </div> -->
+                    <!-- <p >Are you sure you want to block this user?</p> -->
+                    
+                    <div class="bootstrap-iso">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="row">
+                                        <div class="form-group col-lg-12">
+    									    <label for="brandName">Category Name</label>
+    									    <input type="text" class="form-control" [(ngModel)]="selectedCategory.name" required="" name="categoryName" id="categoryName" placeholder="Category Name" #categoryName="ngModel">
+
+                                            <div class="error-div" *ngIf="categoryForm._submitted && categoryName.errors?.required" >
+                                              this field is required
+                                            </div>
+    									</div>
+                                    </div>    
+                                    <div class="row">
+                                        <div class="form-group col-lg-12">
+                                            <label for="brandName">Image</label>
+                                            <input type="file" class="form-control"  name="categoryImage" id="categoryImage" rah-file-dir (assignValue)="files=$event" accept="image/*" placeholder="Image">
+                                        </div>
+                                    </div>    
+                                    <div class="error-div" *ngIf="imgSize.isError" >
+                                        <span *ngIf="imgSize.error === 'imgNotFound'">
+                                            this field is required
+                                        </span>
+                                        <span *ngIf="imgSize.error === 'sizeError'">
+                                            size of image should be {{imgSize.width}} x {{imgSize.height}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary " id="categoryBtn" data-loading-text="Submit..." type="submit" >Submit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="deleteModal"  role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Alert</h4>
+            </div>
+            <form  class="form-horizontal" (submit)="deleteData(delCategoryForm)" #delCategoryForm="ngForm">
+                <div class="modal-body">
+                   <!--  <div class="alert alert-danger" >
+                      alert
+                    </div> -->
+                    <!-- <p >Are you sure you want to block this user?</p> -->
+                    
+                    <div class="bootstrap-iso">
+                        <div class="container-fluid">
+                            Are you sure you want to delete this category?
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary " id="delBtn" data-loading-text="deleting..." type="submit" >Delete</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="forRentModal"  role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Alert</h4>
+            </div>
+            <form  class="form-horizontal" (submit)="addOrRemoveRent(addOrRemoveRentForm)" #addOrRemoveRentForm="ngForm">
+                <div class="modal-body">
+                   <!--  <div class="alert alert-danger" >
+                      alert
+                    </div> -->
+                    <!-- <p >Are you sure you want to block this user?</p> -->
+                    
+                    <div class="bootstrap-iso">
+                        <div class="container-fluid">
+                            Are you sure you want to add this category for rent ?
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary " id="rentBtn" data-loading-text="Processing..." type="submit" >
+                        <span *ngIf="!selectedCategory.isAvailableForRent">Add</span>
+                        <span *ngIf="selectedCategory.isAvailableForRent">remove</span>
+                    </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

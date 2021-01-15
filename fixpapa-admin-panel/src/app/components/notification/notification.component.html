@@ -1,0 +1,64 @@
+<!-- <div id="noti_Container" >
+	<div id="noti_Counter" *ngIf="len>0" >{{len}}</div>
+	<div id="noti_Button" (click)="toggle()" >
+		<i class="fa fa-bell-o" aria-hidden="true"></i>
+	</div>
+</div> -->
+  <div id="notifications" style="position:absolute;right:-100px;margin-top:10px;-webkit-box-shadow: 0 10px 6px -6px #777;-moz-box-shadow: 0 10px 6px -6px #777;box-shadow: 1px 10px 6px -6px #777;">
+	<h3 style="background: #06386b;" >Notifications</h3>
+	<div *ngIf="loadingNotifications" style="width:100%;" >
+		<img src="assets/images/spinner-blue-circle_2123.gif" alt="loading screen"  style="width:25px !important;height:25px !important;position: absolute;left: 45%;top:50%;" >
+	</div>
+	<div *ngIf="notification?.length == 0 && !loadingNotifications" style="width:100%;" >
+		<h5 style="color:lightgrey;font-weight:bold;margin: 25px;" >Notifications are not available</h5>
+	</div>
+	<div *ngIf="notification?.length > 0 && !loadingNotifications" >
+        <div class="row noti-bottom-border" *ngFor="let noty of notification;">
+			<a style="margin-right:0px !important" >
+				<div class="col-md-12 col-xs-12 col-sm-12" >
+					<div class="row" >
+						<p style="color:#827a7ab0 !important;" >{{noty.body}}</p>
+					</div>
+					<div class="row" >
+						<div class="col-md-4 col-xs-4 col-sm-4" style="padding-left:0px !important;" >
+							<h5>{{noty.title}}</h5>
+						</div>
+						<div class="col-md-8 col-xs-8 col-sm-8" style="padding-right:0px !important;" >
+							<p style="font-style:italic;text-align:right !important;" >{{noty.Date | amTimeAgo}}</p>
+						</div>
+					</div>
+				</div>
+			</a>
+			<!-- <a style="margin-right:0px !important" >
+				<div class="col-md-12 col-xs-12 col-sm-12" >
+					<div class="row" >
+						<p style="color:#827a7ab0 !important;" >{{noty.body}}</p>
+					</div>
+					<div class="row" >
+						<div class="col-md-4 col-xs-4 col-sm-4" style="padding-left:0px !important;" >
+							<h5>{{noty.title}}</h5>
+						</div>
+						<div class="col-md-8 col-xs-8 col-sm-8" style="padding-right:0px !important;" >
+							<p style="font-style:italic;text-align:right !important;" >{{noty.Date | amTimeAgo}}</p>
+						</div>
+					</div>
+				</div>
+			</a>
+			<a style="margin-right:0px !important;" >
+				<div class="col-md-12 col-xs-12 col-sm-12" >
+					<div class="row" >
+						<p style="color:#827a7ab0 !important;" >{{noty.body}}</p>
+					</div>
+					<div class="row" >
+						<div class="col-md-4 col-xs-4 col-sm-4" style="padding-left:0px !important;" >
+							<h5>{{noty.title}}</h5>
+						</div>
+						<div class="col-md-8 col-xs-8 col-sm-8" style="padding-right:0px !important;" >
+							<p style="font-style:italic;text-align:right !important;" >{{noty.Date | amTimeAgo}}</p>
+						</div>
+					</div>
+				</div>
+			</a> -->
+		</div>
+    </div>
+</div>

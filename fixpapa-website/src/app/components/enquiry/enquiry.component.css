@@ -1,0 +1,84 @@
+#contactform {  
+	width: 300px;
+	left: -305px;
+	top : 10px;
+	height: 400px;
+	margin: 25px 0;
+	position: fixed;
+	box-shadow: 0 0 12px 0 #333;
+	z-index : 99;
+}
+
+#contact-button { 
+	width: 10%;  
+	padding: 7% 5%;  
+	cursor: pointer;
+	margin-left: 300px;
+	margin-top: 40px;
+	font-size: 23px; 
+	color: #2196f3;  
+	position: absolute;
+}
+
+#contactform, #contact-button {
+	background-color: #f5f5f5;
+	border-radius: 0 15px 15px 0; 
+	border: 5px solid #f5f5f5; 
+	border-left: none;
+}
+
+.rotated-text {
+    display: inline-block;
+    white-space: nowrap;
+    /* this is for shity "non IE" browsers
+       that dosn't support writing-mode */
+    -webkit-transform: translate(1.1em,0) rotate(90deg);
+    -moz-transform: translate(1.1em,0) rotate(90deg);
+    -o-transform: translate(1.1em,0) rotate(90deg);
+    transform: translate(1.1em,0) rotate(90deg);
+    -webkit-transform-origin: 0 0;
+    -moz-transform-origin: 0 0;
+    -o-transform-origin: 0 0;
+    transform-origin: 0 0;
+   /* IE9+ */
+   -ms-transform: none;
+   -ms-transform-origin: none;
+   /* IE8+ */
+   -ms-writing-mode: horizontal-tb;
+   /* IE7 and below */
+   writing-mode: horizontal-tb;
+   padding: 10px;
+}
+
+.rotated-text:before {
+    content: "";
+    float: left;
+    margin-top: 100%;
+}
+
+form {
+	width: 100%;
+	padding: 20px;
+}
+
+form input, form select {
+	display: block;
+	border: none;
+	width: 100%;
+    height: 30px;
+    margin: 30px 0px;  
+	color : #1565c0;
+}
+
+form textarea {
+  width: 300px;
+  margin: 40px 30px;
+  height: 170px;
+}
+
+form textarea, form input , form select{ 
+  border: 1px solid #1565c0;
+  background: #f2f2f2;  
+  padding-left : 10px;
+  border-radius : inherit;
+}

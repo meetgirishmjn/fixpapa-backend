@@ -1,0 +1,112 @@
+{
+  "name": "Requestamc",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "Aggregate": true
+  },
+  "properties": {
+    "address": {
+      "type": "string",
+      "default": ""
+    },
+    "description": {
+      "type": "string",
+      "default": ""
+    },
+    "estiBudget": {
+      "type": "number",
+      "default": ""
+    },
+    "amcDetail": {
+      "type": [
+        "object"
+      ],
+      "default": []
+    }
+  },
+  "validations": [],
+  "relations": {
+    "amcDetails": {
+      "type": "embedsMany",
+      "model": "AmcDetail",
+      "property": "amcDetail",
+      "options": {
+        "validate": true,
+        "forceId": true,
+        "persistent": true
+      },
+      "scope": {
+        "include": "category"
+      }
+    },
+    "category": {
+      "type": "belongsTo",
+      "model": "Category",
+      "foreignKey": ""
+    },
+    "amc": {
+      "type": "belongsTo",
+      "model": "AMC",
+      "foreignKey": ""
+    },
+    "people": {
+      "type": "belongsTo",
+      "model": "People",
+      "foreignKey": ""
+    }
+  },
+  "indexes": {
+      "amc_req_index": {
+        "keys": {"peopleId": 1,"categoryId":1,"amcId":1}
+      }
+  
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "find"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "createAmc"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW",
+      "property": "getAllAmcReq"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "superAdmin",
+      "permission": "ALLOW",
+      "property": "getAllAmcReq"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "getAmcReq"
+    }
+  ],
+  "methods": {}
+}

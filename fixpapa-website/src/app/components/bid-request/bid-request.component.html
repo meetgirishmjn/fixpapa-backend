@@ -1,0 +1,104 @@
+<div class="modal fade" id="bidModal" role="dialog">
+	<div class="modal-dialog">
+		<div *ngIf="loading" class="modal-content" >
+			<div class="modal-body" style="height:500px;" >
+				<img src="assets/images/loader.gif" alt="loading screen" style="width: 50px;height: 50px;position: absolute;left: 46%;top:46%;" />
+			</div>
+		</div>
+		<div class="modal-content" *ngIf="bidArr && !loading" >
+			<div class="modal-header job-modal-header">
+				<button type="button" class="close job-close" (click)="closeModal()" >&times;</button>
+				<h4 class="modal-title">{{bidArr.name}}</h4>
+			</div>
+			<div class="modal-body job-modal-height" *ngIf="bidForm" >
+				<h3 class="col-md-5" style="background:#083a70;color:white;margin-left:-15px !important;padding:15px 20px;" >Job to be done</h3>
+				<form novalidate [formGroup]="bidForm" style="height:inherit;" >
+					<div class="animate-normal" style="height:inherit;" >
+						<div class="col-md-12 col-xs-12 col-sm-12" *ngFor="let service of bidArr.services;let i=index;" style="cursor:pointer;" >
+							<div class="col-md-1 col-xs-2 col-sm-1" >
+								<label class="container" >
+									<input type="checkbox" [value]="service.id" name="service" class="service-container" (change)="changeService(service,service.id,i,$event)" />
+									<span class="checkmark" style="margin-top:8px;" ></span>
+								</label>
+							</div>
+							<div class="col-md-6 col-xs-5 col-sm-6" >
+								<h5 style="font-size:16px !important;" >{{service.name}}</h5>
+							</div>
+							<div class="col-md-5 col-xs-5 col-sm-5" >
+								<label class="container8" *ngIf="bidArr.noOfSystems.length>0" >
+									<select class="form-control option-container" (change)="checkForService(i)" >
+										<option *ngFor="let option of bidArr.noOfSystems" [ngValue]="option" >{{option}}</option>
+									</select>
+								</label>
+							</div>
+						</div>
+						<div class="error-div3 col-md-12 col-sm-12 col-xs-12" *ngIf="emptyArr" >
+							<p>Please Select Type</p>
+						</div>
+
+						<div class="col-md-12 col-xs-12" >
+							<label class="container8" >
+								<textarea class="form-control" rows="3" id="description" name="description" formControlName="description" placeholder="Description of the work to be done" ></textarea>
+							</label>
+						</div>
+
+						<div class="col-md-12 col-xs-12" >
+							<label class="container8" >
+								<textarea class="form-control" rows="3" id="address" name="address" formControlName="address" placeholder="Address" ></textarea>
+							</label>
+						</div>
+						<div class="error-div3 col-md-12 col-sm-12 col-xs-12" *ngIf="address.errors && (address.dirty || address.touched)" >
+							<p>Address is required</p>
+						</div>
+
+						<div class="col-md-12 col-xs-12" >
+							<h4>Date of Commencement</h4>
+							<div class="form-group col-md-6 col-sm-6 col-xs-12 left-date" >
+								<label class="container8" >
+									<div class="input-group placeholder-color" #startDate>
+										<span class="input-group-addon input-icon"><i class="fa fa-calendar"></i></span>
+										<input readonly class="form-control" (focus)="focusedBefore('start')" (focusout)="changedValue('start')" style="height: 40px;margin-top: 1px;" id="startDate1" name="startDate" placeholder="Start Date" type="text" formControlName="startDate" />
+									</div>
+								</label>
+								<div class="error-div5" *ngIf="focusBeforeStart && !startDate1" >
+									<p>Please select date</p>
+								</div>
+							</div>
+							<div class="form-group col-md-6 col-sm-6 col-xs-12 right-date" style="padding-right:0px !important;" >
+								<label class="container8" >
+									<div class="input-group placeholder-color" #endDate>
+										<span class="input-group-addon input-icon"><i class="fa fa-calendar"></i></span>
+										<input readonly class="form-control" (focus)="focusedBefore('end')" (focusout)="changedValue('end')" style="height: 40px;margin-top: 1px;" id="endDate1" name="endDate" placeholder="End Date" type="text" formControlName="endDate" />
+									</div>
+								</label>
+								<div class="error-div5" *ngIf="focusBeforeEnd && !endDate1" >
+									<p>Please select date</p>
+								</div>
+							</div>
+						</div>
+						<!--<div class="error-div col-md-12 col-sm-12 col-xs-12" *ngIf="!startDate && (startDate.dirty || startDate.touched)" >
+							<p>Please select date</p>
+						</div>-->
+						<div class="col-md-12 col-xs-12 col-sm-12 error-div" *ngIf="invalidTime" >
+							<p>Invalid Time</p>
+						</div>
+
+						<div class="form-group col-md-12 col-xs-12">
+							<label class="container8">Budget
+								<input type="tel" name="budget" placeholder="Budget (IN RS)" appTestDirective formControlName="estiBudget" class="form-control" />
+							</label>
+						</div>
+						<div class="error-div col-md-6 col-sm-12 col-xs-12" *ngIf="estiBudget.errors && (estiBudget.dirty || estiBudget.touched)" >
+							<p *ngIf="estiBudget.errors.validAmount" >Invalid Value</p>
+							<!-- <p *ngIf="estiBudget.errors.Required" >Please Enter Budget</p> -->
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer job-modal-footer">
+				<button type="button" class="btn btn-primary" (click)="checkBidReqForm()" >Post</button>
+				<button type="button" class="btn btn-secondary" (click)="closeModal()" >Cancel</button>
+			</div>
+		</div>
+	</div>
+</div>

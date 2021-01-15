@@ -1,0 +1,10 @@
+{
+	"getNotifications":{
+		"replyCode":"Success",
+		"replyMessage":"done"
+	},
+	"readAllNoty":{
+		"replyCode":"Success",
+		"replyMessage":"done"
+	}	
+}

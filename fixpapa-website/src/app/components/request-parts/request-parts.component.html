@@ -1,0 +1,47 @@
+<div class="modal fade" id="request-parts" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Request for Parts</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<div class="row" style="margin-bottom:10px;" >
+						<div class="col-md-4 col-xs-4 col-sm-4" >
+							<input type="text" placeholder="Part Name" name="partName" id="partName" [(ngModel)]="partName" />
+						</div>
+						<div class="col-md-4 col-xs-4 col-sm-4" >
+							<input type="text" placeholder="Part Number" name="partNumber" id="partNumber" [(ngModel)]="partNumber" />
+						</div>
+						<div class="col-md-3 col-xs-3 col-sm-3" >
+							<input type="tel" placeholder="Part Cost" name="partCost" appTestDirective id="partCost" [(ngModel)]="partCost" />
+						</div>
+						<div class="col-md-1 col-xs-1 col-sm-1" >
+							<img style="width:20px;height:20px;" src="assets/images/plus.png" (click)="addParts()" />
+						</div>
+					</div>
+					<div class="row" *ngFor="let part of addPart;let i=index;" style="margin-bottom:10px;" >
+						<div class="col-md-4 col-xs-4 col-sm-4" >
+							<input type="text" name="partName" placeholder="Part Name" id="partName{{part.index}}" [(ngModel)]="part.value.partName" />
+						</div>
+						<div class="col-md-4 col-xs-4 col-sm-4" >
+							<input type="text" name="partNumber" placeholder="Part Number" id="partNumber{{part.index}}" [(ngModel)]="part.value.partNumber" />
+						</div>
+						<div class="col-md-3 col-xs-3 col-sm-3" >
+							<input type="tel" appTestDirective placeholder="Part Cost" name="partCost" id="partCost{{part.index}}" [(ngModel)]="part.value.partCost" />
+						</div>
+						<div class="col-md-1 col-xs-1 col-sm-1" >
+							<img style="width:20px;height:20px;" src="assets/images/minus.png" (click)="deletePart(part)" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" (click)="requestParts()" [ngClass]="{'disabled' : disabled}" >Submit</button>
+				<button type="button" class="btn btn-secondary" (click)="closeModal()" >Cancel</button>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,21 @@
+.modal-body {
+    position: relative;
+    padding: 15px;
+	height : 300px;
+	overflow-y : scroll;
+	overflow-x : hidden;
+}
+.reason-cont{
+	margin-top: 20px;
+}
+select{
+	padding: 10px;
+    /* border-radius: 5px; */
+}
+select:focus{
+	outline : 0 !important;
+}
+.text-area{
+	margin-right: 75px;
+    margin-left: 15px;
+}

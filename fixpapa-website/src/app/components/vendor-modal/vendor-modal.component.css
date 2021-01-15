@@ -1,0 +1,13 @@
+.login-close{
+	color : grey;
+}
+.login-close:hover{
+	outline : none !important;
+}
+.img-cont{
+	width: 150px;
+    height: 150px;
+    padding: 0px;
+    top: 40px;
+    left: 20px;
+}

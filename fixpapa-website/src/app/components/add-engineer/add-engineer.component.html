@@ -1,0 +1,132 @@
+<div class="modal  wow  login-modal slideInRight" id="largeModal8" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header login-header">
+				<button type="button" class="close login-close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body no-padding">
+				<div class="col-md-12 no-gap">
+					<div *ngIf="loading" >
+						<img src="assets/images/loader.gif" alt="loading screen" style="margin-top:50px;width: 25px;height: 25px;position: absolute;left: 49%;top:10%" />
+					</div>
+					<div class="reg-bg reg-bg1" *ngIf="addEngForm && !loading" >
+						<h2 *ngIf="!isEdit" >Add New Engineer</h2>
+						<h2 *ngIf="isEdit" >Edit Engineer Profile</h2>
+						<form [formGroup]="addEngForm" novalidate >
+							<div class="col-md-4">
+								<div class="text-center bg-form">
+									<div class="img-section img-section1 engineer-img">
+										<img [src]="profilePic" class="imgCircle" alt="Profile picture">
+										<input type="file" *ngIf="!isEdit" rah-file-dir (assignValue)="files.image = $event" (imageAsUrl)="profilePic = $event" accept="image/*" class="form-control form-input Profile-input-file">
+										<p *ngIf="!isEdit" >Upload Image</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-8" >
+								<div style="clear: both;"></div>
+								<div class="form-group reg-form">
+									<input type="text" class="form-control" placeholder="Name" formControlName="fullName" name="fullName" />
+								</div>
+								<div class="error-div9" *ngIf="fullName.errors && (fullName.dirty || fullName.touched)" >
+									<p *ngIf="fullName.errors.required">Name is required</p>
+								</div>
+								<div class="form-group reg-form co1-md-6">
+									<input type="text" class="form-control" placeholder="Email Address" formControlName="email" name="email" />
+								</div>
+								<div class="error-div9" *ngIf="email.errors && (email.dirty || email.touched)" >
+									<p *ngIf="email.errors.required">Email is required</p>
+									<p *ngIf="email.errors.validEmail" >Invalid Email</p>
+								</div>
+								<div class="form-group reg-form" >
+									<input type="password" class="form-control" placeholder="Password" formControlName="password" name="password" />
+								</div>
+								<div class="error-div9" *ngIf="password.errors && (password.dirty || password.touched)">
+									<p *ngIf="password.errors.required">Password is required</p>
+									<p *ngIf="password.errors.minlength">Password must be 6 characters long, we need another {{password.errors.minlength.requiredLength - password.errors.minlength.actualLength}} characters </p>
+								</div>
+								<div class="form-group reg-form" *ngIf="!isEdit" >
+									<input type="password" class="form-control" placeholder="Confirm Password" formControlName="confPass" name="confPass" />
+								</div>
+								<div class="error-div9" *ngIf="!isEdit && confPass.errors && (confPass.dirty || confPass.touched)" >
+									<p *ngIf="confPass.errors.required">Confirm Password is required</p>
+								</div>
+								<div class="error-div9" *ngIf="!isEdit && addEngForm.get('password').value && addEngForm.get('password').value.length > 0 &&
+										addEngForm.get('confPass').value && addEngForm.get('confPass').value.length > 0 && 
+										addEngForm.get('password').value != addEngForm.get('confPass').value" >
+									<p>Passwords doesn't Match</p>
+								</div>
+								<div class="form-group reg-form">
+									<input type="tel" class="form-control" appTestDirective placeholder="Contact No"  formControlName="mobile" name="mobile" />
+								</div>
+								<div class="error-div9" *ngIf="mobile.errors && (mobile.dirty || mobile.touched)" >
+									<p *ngIf="mobile.errors.required">Contact No. is required</p>
+									<p *ngIf="mobile.errors.validMobile" >Invalid Contact No.</p>
+								</div>
+								<div style="clear: both;"></div>
+							</div>
+							<div style="clear: both;"></div>
+							<!--<div class="form-group reg-form engineer-select" >
+								<select class="selectpicker" name="exp" formControlName="exp" >
+									<option value="1" >1 year</option>
+									<option value="2" >2 Year</option>
+									<option value="3" >3 Year</option>
+									<option value="4" >4 Year</option>
+									<option value="5" >5 Year</option>
+								</select>
+							</div>-->
+							<div class="col-md-12" style="padding-left:0px !important;padding-right:0px !important" >
+								<div class="form-group reg-form address-field" >
+									<input type="tel" class="form-control" appTestDirective1 placeholder="Work Expirence(in years)" name="exp" formControlName="exp" />
+								</div>
+								<div style="clear:both;"></div>
+								<div class="error-div9 address-field" *ngIf="exp.errors && (exp.dirty || exp.touched)" >
+									<p *ngIf="exp.errors.required">Specify the years of experience</p>
+									<p *ngIf="exp.errors.validWorkEx" >Invalid Number</p>
+								</div>
+								<div class="form-group reg-form address-field" style="" >
+									<input type="text" class="form-control" id="Address" placeholder="Address" name="address" formControlName="address" />
+								</div>
+								<div style="clear:both;"></div>
+								<div class="error-div9" *ngIf="address.errors && (address.dirty || address.touched)" >
+									<p *ngIf="address.errors.required" style="padding-right: 15px;" >Address is required</p>
+								</div>
+								<div class="step2-heading">
+									<h3>Experience In</h3>
+								</div>
+								<div class="col-md-12" style="text-align:center;" #services>
+									<div class="patner-cheack">
+										<div class="form-check" *ngFor="let service of servicesOffered;" >
+											<label class="container2">{{service.name}}
+												<input type="checkbox" [value]="service.id" class="service-container" (change)="changeServices(service.id,$event)" />
+												<span class="checkmark1"></span>
+											</label>
+										</div>
+									</div>
+								</div>
+								<!--<div class="error-div9 address-field" *ngIf="noServices" >
+									<p>Select atleast one</p>
+								</div>-->
+								<div class="error-div9 address-field" *ngIf="expertiseIds.errors && (expertiseIds.dirty || expertiseIds.touched)" >
+									<p *ngIf="expertiseIds.errors.required">Select atleast one</p>
+								</div>
+							</div>
+							
+							<div style="clear:both;" ></div>
+							<div class="login-button login-form col-md-12 col-sm-12 col-xs-12">
+								<a type="submit" id="secondmoduel" class="btn btn-primary" *ngIf="!isEdit" (click)="checkEngineerForm()" [ngClass]="{'disabled' : disableEng}" >Add</a>
+								<a type="submit" id="secondmoduel" class="btn btn-primary" *ngIf="isEdit" (click)="checkEngineerForm()" [ngClass]="{'disabled' : disableEng}" >Upddate</a>
+							</div>
+							<div class="login-button login-form col-md-12 col-sm-12 col-xs-12" >
+								<a type="submit" id="secondmoduel" style="margin-top:0px !important;" class="btn btn-primary" (click)="closeModal()" >Cancel</a>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer no-padding">
+				<!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button> -->
+			</div>
+		</div>
+	</div>
+</div>

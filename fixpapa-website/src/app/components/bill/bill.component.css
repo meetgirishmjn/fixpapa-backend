@@ -1,0 +1,211 @@
+/*.modal-body{
+	color: dimgrey;
+}*/
+.close:focus{
+	outline : 0 !important;
+}
+#pay-button:hover{
+	background-color : #f2f2f2 !important;
+}
+.animate-normal{
+	-webkit-transition: all 2s ease;
+    transition: all 2s ease;
+   -webkit-animation: fadein 5s; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadein 5s; /* Firefox < 16 */
+    -ms-animation: fadein 5s; /* Internet Explorer */
+    -o-animation: fadein 5s; /* Opera < 12.1 */
+    animation: fadein 5s;
+}
+
+.job-modal-header{
+    background: #083a70;
+}
+.job-modal-header h4 {
+    color: #fff;
+    font-size: 21px;
+    margin-left: 50px;
+}
+.job-modal-header .job-close {
+    opacity: unset;
+    color: #fff;
+    margin-top: 6px;
+
+}
+.job-modal-height {
+    height: 500px;
+    overflow: scroll;
+    overflow-x: hidden;
+	padding : 40px;
+}
+/* The container */
+
+.inner-top-gap{
+    margin-top: 60px;
+}
+.header{
+	height : auto;
+	min-height : 150px;
+}
+.combo{
+	background-color:#06386b !important;
+	color:white !important;
+}
+.white{
+	color : white;
+}
+.grey{
+	color : grey;
+}
+.request-for-parts table{
+	border: 1px solid black;
+}
+.status-of-job table {
+    border-collapse: collapse;
+    width: 100%;
+}
+.status-of-job table td, .status-of-job table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+.status-of-job table th {
+    background-color : #06386b !important;
+}
+.status-of-job table tr{background-color: #f2f2f2;}
+.status-of-job table tr:hover {background-color: #ddd;}
+.status-of-job table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+.top-header{
+	margin-top : 30px;
+}
+.blue{
+	color : #06386b;
+}
+.description{
+	margin-top : 20px !important;
+	font-size: initial;
+}
+.light-text{
+	color: #838486;
+}
+.dark-text{
+	color: #545557;
+}
+.black-text{
+	color: black;
+}
+.font-large{
+	font-weight: 600;
+}
+.combo-but{
+    /* border-color: #06386b !important; */
+    /* border-radius: 10px !important; */
+    padding: 10px 30px !important;
+    font-weight: 700 !important;
+    font-size: medium !important;
+	/* background-color : #06386b !important; */
+}
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+    .modal-content {
+        width: 100%;
+    }
+}
+.status-text{
+	color: #838486;
+    font-weight: 600;
+}
+
+.radio-btn {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    cursor: pointer;
+    font-size: 18px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    float: left;
+}
+
+.radio-btn input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #d5d1d1;
+    border-radius: 50%;
+}
+
+.radio-btn:hover input~.checkmark {
+    background-color: #929090;
+}
+
+.radio-btn input:checked~.checkmark {
+    background-color: #06386b;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.radio-btn input:checked~.checkmark:after {
+    display: block;
+}
+
+.radio-btn .checkmark:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}
+
+/*placeholder on top*/
+#chequeForm label {
+  margin:10px 0;
+  position:relative;
+  display:inline-block;
+}
+  
+#chequeForm span {
+  padding:10px;
+  pointer-events: none;
+  position:absolute;
+  left:0;
+  top:0;
+  transition: 0.2s;
+  transition-timing-function: ease;
+  transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+  opacity:0.5;
+}
+
+#chequeForm input{
+	padding:10px;
+	width: 332px;
+	border: 1px solid lightgrey;
+}
+
+#chequeForm select{
+	height : 45px;
+}
+
+#chequeForm input:focus + span, #chequeForm input:not(:placeholder-shown) + span {
+  opacity:1;
+  transform: scale(0.75) translateY(-100%) translateX(-30px);
+}

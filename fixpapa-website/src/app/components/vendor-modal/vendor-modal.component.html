@@ -1,0 +1,517 @@
+<div class="modal  wow  login-modal" id="largeModal3" tabindex="-1" 
+	role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content modal-height">
+			<div class="modal-header login-header">
+				<button type="button" class="close login-close" data-dismiss="modal" 
+					(click)="closeModal()" >&times;</button>
+			</div>
+			<div class="modal-body no-padding">
+				<div class="wizard">
+					<div class="col-md-12 col-xs-12 col-sm-12 step-form-bg1">
+						<!-- <form role="form" novalidate [formGroup]="vendorSignUpForm" > -->
+							<div class="tab-content">
+								<div class="tab-pane active" role="tabpanel" id="step1">
+									<div class="col-md-8 col-xs-12 col-sm-12">
+										<form role="form" novalidate [formGroup]="personalDetailForm" >
+											<div class="step-form-bg">
+												<div class="text-center bg-form">
+													<div class="img-section img-section2" style="margin-bottom:0px !important;" >
+														<img [src]="vendorProfilePic" class="imgCircle" alt="Profile picture" />
+														<input type="file" id="image-input1" rah-file-dir (imageAsUrl)="vendorProfilePic = $event" (assignValue)="files.image = $event" accept="image/*" class="form-control form-input Profile-input-file profile-input-file1" />
+														<p>Upload Your Image</p>
+													</div>
+												</div>
+												<div class="form-group reg-form">
+													<input type="text" class="form-control" placeholder="Name" name="fullname" formControlName="fullName" />
+												</div>
+												<div class="error-div3" *ngIf="fullName.errors && (fullName.dirty || fullName.touched)" >
+													<p *ngIf="fullName.errors.required">Name is required</p>
+												</div>
+												<div class="form-group reg-form">
+													<input type="text" class="form-control" placeholder="Email Address" name="email" formControlName="email" />
+												</div>
+												<div class="error-div3" *ngIf="email.errors && (email.dirty || email.touched)" >
+													<p *ngIf="email.errors.required">Email is required</p>
+													<p *ngIf="email.errors.validEmail">Invalid Email</p>
+												</div>
+												<div *ngIf="existEmail" class="error-div3" >
+													<p>Already Exist</p>
+												</div>
+												<div class="form-group reg-form">
+													<input type="text" class="form-control" appTestDirective placeholder="Contact No." name="mobile" formControlName="mobile" />
+												</div>
+												<div class="error-div3" *ngIf="mobile.errors && (mobile.dirty || mobile.touched)" >
+													<p *ngIf="mobile.errors.required">Contact No. is required</p>
+													<p *ngIf="mobile.errors.validMobile" >Invalid Contact No.</p>
+												</div>
+												<div *ngIf="existMobile" class="error-div3"  >
+													<p>Already Exist</p>
+												</div>
+												<div class="form-group reg-form">
+													<input type="password" class="form-control" placeholder="Password" name="password" formControlName="password" />
+												</div>
+												<div class="error-div3" *ngIf="password.errors && (password.dirty || password.touched)" >
+													<p *ngIf="password.errors.required">Password is required</p>
+													<p *ngIf="password.errors.minlength">Password must be 6 characters long, we need another {{password.errors.minlength.requiredLength - password.errors.minlength.actualLength}} characters </p>
+												</div>
+												<div class="form-group reg-form">
+													<input type="password" class="form-control" placeholder="Confirm Password" name="confPassVen" formControlName="confPassVen" />
+												</div>
+												<div class="error-div3" *ngIf="confPassVen.errors && (confPassVen.dirty || confPassVen.touched)" >
+													<p *ngIf="confPassVen.errors.required">Confirm Password is required</p>
+												</div>
+												<div class="error-div3" *ngIf="personalDetailForm.get('password').value && personalDetailForm.get('password').value.length > 0 &&
+													personalDetailForm.get('confPassVen').value && personalDetailForm.get('confPassVen').value.length > 0 && 
+													personalDetailForm.get('password').value != personalDetailForm.get('confPassVen').value" >
+													<p>Passwords doesn't Match</p>
+												</div>
+												<div class="form-group reg-form" style="position:relative;">
+													<!-- <input class="form-control" id="address-vendor" placeholder="Address" name="address" formControlName="address" /> -->
+													<input placeholder="Select Location/Area" style="padding-right: 40px;" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" id="address-vendor1" 
+													class="form-control" formControlName="address" />
+													<span class="cross-icon" id="cross-icon-vend" *ngIf="personalDetailForm.get('address').value && personalDetailForm.get('address').value.length > 0" >
+														<i class="glyphicon glyphicon-remove" (click)="clearAddress()" ></i>
+													</span>
+												</div>
+												<!-- <div class="form-group reg-form" >
+													<span>
+														<p class="currentLoc-container form-control" style="height:43px !important;" (click)="setCurrentLocation()" ><img src="assets/images/currentLoc.png" /><a class="a-style-list" >Current Location</a></p>
+													</span>
+												</div> -->
+												<div class="form-group reg-form" style="margin-bottom:5px;" >
+													<input type="text" style="height: 43px;" formControlName="street" class="form-control" placeholder="House No. / Street / Landmark (optional)" name="street" />
+												</div>
+												<div style="clear: both;"></div>
+												<div class="error-div3" *ngIf="address.errors && (address.dirty || address.touched)" >
+													<p *ngIf="address.errors.required">Address is required</p>
+												</div>
+												<div class="error-div3" *ngIf="invalidLocation && address.dirty && personalDetailForm.get('address').value && personalDetailForm.get('address').value.length > 0" >
+													<p style="padding-right: 15px;" >Invalid Location</p>
+												</div>
+												<div class="next-button">
+													<button type="button" class="btn btn-primary next-step" style="margin-bottom:5px;" [ngClass]="{'disabled' : disablePhase1}" (click)="checkPhase('1')" >Save and continue</button>
+												</div>
+											</div>
+										</form>
+									</div>
+									<div class="col-md-4 col-xs-12 col-sm-12 icon-bgcolor">
+										<div class="wizard-inner">
+											<div class="connecting-line"></div>
+											<ul class="nav nav-tabs" role="tablist">
+												<li role="presentation" [ngClass]="{'active' : activePhase == 1}">
+													<a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Step 1">
+														<span class="round-tab">
+															1
+														</span>
+													</a>
+												</li>
+												<li role="presentation" class="disabled">
+													<a>
+														<span class="round-tab">
+															2
+														</span>
+													</a>
+												</li>
+												<li role="presentation" class="disabled">
+													<a>
+														<span class="round-tab">
+															3
+														</span>
+													</a>
+												</li>
+												<li role="presentation" class="disabled">
+													<a>
+														<span class="round-tab">
+															4
+														</span>
+													</a>
+												</li>
+											</ul>
+										</div>
+										<div class="wizard-icon">
+											<img src="assets/images/icon_11.png">
+											<h5>Reach US</h5>
+											<p>After Successful Filling the form we will reach you shortly</p>
+										</div>
+									</div>
+								</div>
+								<div class="tab-pane" role="tabpanel" id="step2">
+									<div style="clear: both;"></div>
+									<form role="form" novalidate [formGroup]="teamDetailForm" >
+										<div class="col-md-8 col-sm-12 col-xs-12 gap-top">
+											<div class="step2-heading">
+												<h3>Team Detail</h3>
+											</div>
+											<!--<div class="col-md-12 col-sm-12 col-xs-12">
+												<div class="form-group reg-form step2a">
+													<input type="tel" class="form-control" appTestDirective placeholder="Team Size" name="noOfEngineers" formControlName="noOfEngineers" />
+												</div>
+											</div>
+											<div class="col-xs-12 error-div" *ngIf="isMobile && noOfEngineers.errors && (noOfEngineers.dirty || noOfEngineers.touched)" >
+												<p *ngIf="noOfEngineers.errors.required">Specify the no.of Engineers</p>
+												<p *ngIf="noOfEngineers.errors.validNoOfEng" >Invalid Number</p>
+											</div>-->
+											<div class="col-md-12 col-sm-12 col-xs-12">
+												<div class="form-group reg-form step2a">
+													<input type="tel" class="form-control" appTestDirective1 placeholder="Work Expirence(in years)" name="yearsOfExp" formControlName="yearOfExp" />
+												</div>
+											</div>
+											<div class="col-xs-12 col-md-12 col-sm-12 error-div2" *ngIf="yearOfExp.errors && (yearOfExp.dirty || yearOfExp.touched)" >
+												<p *ngIf="yearOfExp.errors.required">Specify the years of experience</p>
+												<p *ngIf="yearOfExp.errors.validWorkEx" >Invalid Number</p>
+											</div>
+											<div style="clear: both;"></div>
+											<!--<div class="col-md-6 col-sm-6 error-div2" *ngIf="!isMobile && noOfEngineers.errors && (noOfEngineers.dirty || noOfEngineers.touched)" >
+												<p *ngIf="noOfEngineers.errors.required">Specify the no.of Engineers</p>
+												<p *ngIf="noOfEngineers.errors.validNoOfEng" >Invalid Number</p>
+											</div> 
+											<div class="col-md-6 col-sm-6 error-div2" style="float:right !important;" *ngIf="!isMobile && yearOfExp.errors && (yearOfExp.dirty || yearOfExp.touched)" >
+												<p *ngIf="yearOfExp.errors.required">Specify the years of experience</p>
+												<p *ngIf="yearOfExp.errors.validWorkEx" >Invalid Number</p>
+											</div>-->
+											<div style="clear: both;"></div>
+											<div class="step2-heading">
+												<h3>Support Time</h3>
+											</div>
+											<div class="col-md-6 col-sm-6 col-xs-12 step2a" #startTime >
+												<div class="input-group clockpicker step2a" >
+													<input type="text" class="form-control" readonly placeholder="Start Time" id="startTime" name="startTime" formControlName="startTime" />
+													<span class="input-group-addon">
+														<span class="glyphicon glyphicon-time"></span>
+													</span>
+												</div>
+											</div>
+											<div class="col-xs-12 error-div1" *ngIf="isMobile && !startTime1 && focusBeforeStart" >
+												<p>Support Start time is required</p>
+											</div>
+											<div class="col-md-6 col-sm-6 col-xs-12 step2a">
+												<div class="input-group clockpicker step2a" #endTime >
+													<input type="text" class="form-control" readonly id="endTime" placeholder="End Time" name="endTime" formControlName="endTime" />
+													<span class="input-group-addon">
+														<span class="glyphicon glyphicon-time"></span>
+													</span>
+												</div>
+											</div>
+											<div class="col-xs-12 error-div1" *ngIf="isMobile && !endTime1 && focusBeforeEnd" >
+												<p>Support end time is required</p>
+											</div>
+											<div style="clear: both;"></div>
+											<div class="col-md-12 col-xs-12 error-div1" *ngIf="invalidTime" >
+												<p>Invalid Time</p>
+											</div>
+											<div style="clear: both;"></div><!-- startTime.errors && (startTime.dirty || startTime.touched) endTime.errors && (endTime.dirty || endTime.touched)-->
+											<div class="col-md-6 col-sm-6 col-xs-6 error-div1" *ngIf="!isMobile && !startTime1 && focusBeforeStart" >
+												<p>Support Start time is required</p>
+											</div> 
+											<div class="col-md-6 col-sm-6 col-xs-6 error-div1" style="float:right !important;" *ngIf="!isMobile && !endTime1 && focusBeforeEnd" >
+												<p>Support end time is required</p>
+											</div>
+											<br/>
+											<br/>
+											<div class="step2-heading">
+												<h3>Support Day</h3>
+											</div>
+											<div class="col-md-4 col-sm-4 col-xs-6" *ngFor="let loop of [block1,block2,block3];" >
+												<div class="cheack1" >
+													<div class="form-check day-check" *ngFor="let block of loop;" >
+														<label class="container2">{{block.name}}
+															<input type="checkbox" [value]="block.value" (change)="onChange(block.value,$event)" />
+															<span class="checkmark1"></span>
+														</label> 
+													</div>
+												</div>
+											</div>
+											<div class="error-div1" style="margin-top:100px;" *ngIf="noSupportDays" >
+												<p>Select Atleast one</p>
+											</div>
+											<div style="clear: both;"></div>
+											<ul class="next-button second-button">
+												<li>
+													<button type="button" class="btn btn-default prev-step" (click)="goToStep('1')" >Previous</button>
+												</li>
+												<li>
+													<button type="button" class="btn btn-primary next-step" (click)="checkPhase('2')" >Save and continue</button>
+												</li>
+											</ul>
+										</div>
+									</form>
+									<div class="col-md-4 col-sm-12 col-xs-12 icon-bgcolor">
+										<div class="wizard-inner">
+											<div class="connecting-line"></div>
+											<ul class="nav nav-tabs" role="tablist">
+												<li role="presentation" class="disabled">
+													<a>
+														<span class="round-tab">
+															1
+														</span>
+													</a>
+												</li>
+												<li role="presentation" [ngClass]="{'active' : activePhase == 2}" >
+													<a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Step 2">
+														<span class="round-tab">
+															2
+														</span>
+													</a>
+												</li>
+												<li role="presentation" class="disabled">
+													<a>
+														<span class="round-tab">
+															3
+														</span>
+													</a>
+												</li>
+												<li role="presentation" class="disabled">
+													<a>
+														<span class="round-tab">
+															4
+														</span>
+													</a>
+												</li>
+											</ul>
+										</div>
+										<div class="wizard-icon">
+											<img src="assets/images/icon_12.png" />
+											<h5>Team Availability</h5>
+											<p>Enter your Number of Engineers, Working Experience, Support Day & Time Details</p>
+										</div>
+									</div>
+								</div>
+								<div class="tab-pane" role="tabpanel" id="step3">
+									<form role="form" novalidate [formGroup]="bankDetailForm" >
+										<div class="col-md-8 col-sm-12 col-xs-12 gap-top">
+											<div class="form-group reg-form">
+												<input type="text" class="form-control" placeholder="GST No" name="gstNo" formControlName="gstNumber" />
+											</div>
+											<div class="error-div" *ngIf="gstNumber.errors && (gstNumber.dirty || gstNumber.touched)" >
+												<p *ngIf="gstNumber.errors.required">GST No. is required</p>
+											</div>
+											<div class="form-group reg-form bank-name-container" style="position:relative;" >
+												<input type="text" style="padding-right: 50px;" formControlName="bankName" class="form-control" placeholder="Bank Name" name="bankName" />
+												<span class="cross-icon1" style="bottom:12px !important;" *ngIf="bankDetailForm.get('bankName').value && bankDetailForm.get('bankName').value.length > 0" ><i class="glyphicon glyphicon-remove" (click)="clearBankName()" ></i></span>
+											</div>
+											<ul class="filter-select1" style="box-shadow:none !important;display:block;margin-top:-15px !important;" id="category-container" *ngIf="bankDetailForm.controls.bankName.dirty && bankNames && bankNames.length > 0">
+												<li class="li-style" *ngFor="let bank of bankNames | filterBankList : bankDetailForm.get('bankName').value" >
+													<a (click)="selectBank(bank)" class="a-style-list" >{{bank}}</a>
+												</li>
+											</ul>
+											<div class="error-div" *ngIf="bankName.errors && (bankName.dirty || bankName.touched)" >
+												<p *ngIf="bankName.errors.required">Please specify Bank</p>
+											</div>
+											<div class="form-group reg-form">
+												<input type="text" class="form-control" placeholder="Firm Name" name="firmName" formControlName="firmName" />
+											</div>
+											<div class="error-div" *ngIf="firmName.errors && (firmName.dirty || firmName.touched)" >
+												<p *ngIf="firmName.errors.required">Please specify Firm</p>
+											</div>
+											<div class="form-group reg-form">
+												<input type="text" class="form-control" max="11" placeholder="IFSC Code" name="ifscCode" formControlName="ifscCode" />
+											</div>
+											<div class="error-div" *ngIf="ifscCode.errors && (ifscCode.dirty || ifscCode.touched)" >
+												<p *ngIf="ifscCode.errors.required">Bank IFSC Code is required</p>
+												<p *ngIf="ifscCode.errors.validIfsc" >Invalid IFSC Code</p>
+											</div>
+											<div class="form-group reg-form">
+												<input type="text" class="form-control" placeholder="Account No" name="accountNo" formControlName="accountNumber" />
+											</div>
+											<div class="error-div" *ngIf="accountNumber.errors && (accountNumber.dirty || accountNumber.touched)" >
+												<p *ngIf="accountNumber.errors.required">Account No. is required</p>
+												<p *ngIf="accountNumber.errors.validAccountNo" >Invalid Account Number</p>
+											</div>
+
+											<div class="row">
+												<div class="col-md-12">
+													All files should be in image format(ex: jpeg, png)
+												</div>	
+											</div>	
+
+											<div class="row" >
+												<div class="col-md-6 col-sm-6 col-xs-12 img-section img-section4">
+													<h4>Adhaar Card Image</h4>
+													<img [src]="aadharImg" class="imgCircle" style="width: 150px;height: 150px;" alt="Product Image" />
+													<input type="file" id="image-input3" rah-file-dir accept="image/*" (imageAsUrl)="aadharImg = $event;noAadharImg = false;"  (assignValue)="files.aadharImg = $event" class="form-control form-input Profile-input-file Profile-input-file4 img-cont " />
+													<div class="error-div" *ngIf="noAadharImg" >
+														<p style="color: inherit !important;font-size: inherit !important;margin-top: 20px !important;text-align: left !important;" >Image is required</p>
+													</div>
+												</div>
+												<div class="col-md-6 col-sm-6 col-xs-12 img-section img-section4">
+													<h4>Pan Card Image</h4>
+													<img [src]="panImg" class="imgCircle" style="width: 150px;height: 150px;" alt="Product Image" />
+													<input type="file" id="image-input4" rah-file-dir accept="image/*" (imageAsUrl)="panImg = $event;noPanImg = false;" (assignValue)="files.panImg = $event" class="form-control form-input Profile-input-file Profile-input-file4 img-cont" />
+													<div class="error-div" *ngIf="noPanImg" >
+														<p style="color: inherit !important;font-size: inherit !important;margin-top: 20px !important;text-align: left !important;" >Image is required</p>
+													</div>
+												</div>
+											</div>
+											<div class="row" >
+												<div class="col-md-6 col-sm-6 col-xs-12 img-section img-section4">
+													<h4>GST Document Image</h4>
+													<img [src]="gstImg" class="imgCircle" style="width: 150px;height: 150px;" alt="Product Image" />
+													<input type="file" id="image-input5" rah-file-dir accept="image/*" (imageAsUrl)="gstImg = $event;noGstImg= false;"  (assignValue)="files.gstImg = $event" class="form-control form-input Profile-input-file Profile-input-file4 img-cont" />
+													<div class="error-div" *ngIf="noGstImg" >
+														<p style="color: inherit !important;font-size: inherit !important;margin-top: 20px !important;text-align: left !important;" >Image is required</p>
+													</div>
+												</div>
+												<div class="col-md-6 col-sm-6 col-xs-12 img-section img-section4">
+													<h4>Cheque Book Image</h4>
+													<img [src]="chequeImg" class="imgCircle" style="width: 150px;height: 150px;" alt="Product Image" />
+													<input type="file" id="image-input6" rah-file-dir accept="image/*" (imageAsUrl)="chequeImg = $event;noChequeImg = false;" (assignValue)="files.chequeImg = $event" class="form-control form-input Profile-input-file Profile-input-file4 img-cont" />
+													<div class="error-div" *ngIf="noChequeImg" >
+														<p style="color: inherit !important;font-size: inherit !important;margin-top: 20px !important;text-align: left !important;" >Image is required</p>
+													</div>
+												</div>
+											</div>
+											
+											<ul class="next-button">
+												<li>
+													<button type="button" class="btn btn-default prev-step" (click)="goToStep('2')" >Previous</button>
+												</li>
+												<li>
+													<button type="button" class="btn btn-primary btn-info-full next-step" (click)="checkPhase('3')" >Save and continue</button>
+												</li>
+											</ul>
+										</div>
+									</form>
+									<div class="col-md-4 col-sm-12 col-xs-12 icon-bgcolor">
+										<div class="wizard-inner">
+											<div class="connecting-line"></div>
+											<ul class="nav nav-tabs" role="tablist">
+												<li role="presentation" class="disabled">
+													<a >
+														<span class="round-tab">
+															1
+														</span>
+													</a>
+												</li>
+												<li role="presentation" class="disabled">
+													<a>
+														<span class="round-tab">
+															2
+														</span>
+													</a>
+												</li>
+												<li role="presentation" [ngClass]="{'active' : activePhase == 3}" >
+													<a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Step 3">
+														<span class="round-tab">
+															3
+														</span>
+													</a>
+												</li>
+												<li role="presentation" class="disabled">
+													<a>
+														<span class="round-tab">
+															4
+														</span>
+													</a>
+												</li>
+											</ul>
+										</div>
+										<div class="wizard-icon">
+											<img src="assets/images/Bank-Details2.png">
+											<h5>Payment information</h5>
+											<p>Enter your Bank & Business Details</p>
+										</div>
+									</div>
+								</div>
+								<div class="tab-pane" role="tabpanel" id="complete">
+									<form role="form" novalidate [formGroup]="servicesForm" >
+										<div class="col-md-8 col-sm-12 col-xs-12 gap-top">
+											<div class="step2-heading">
+												<h3>Service Support</h3>
+											</div>
+											<div class="col-md-12 col-xs-12 col-sm-12">
+												<div class="patner-cheack">
+													<div class="form-check" *ngFor="let service of servicesOffered;" >
+														<label class="container2">{{service.name}}
+															<input type="checkbox" [value]="service.id" (change)="changeServices(service.id,$event)" />
+															<span class="checkmark1"></span>
+														</label>
+													</div>
+												</div>
+											</div>
+											<div class="error-div1" *ngIf="noServices" >
+												<p>Select Atleast one</p>
+											</div>
+											<div style="clear: both;"></div>
+											<br/>
+											<div class="step2-heading">
+												<h3>Product Selling</h3>
+											</div>
+											<div class="col-md-12 col-xs-12 col-sm-12">
+												<div class="patner-cheack">
+													<div class="form-check" *ngFor="let product of productsOffered;" >
+														<label class="container2">{{product.name}}
+															<input type="checkbox" [value]="product.id" (change)="changeProducts(product.id,$event)" />
+															<span class="checkmark1"></span>
+														</label>
+													</div>
+												</div>
+											</div>
+											<div class="error-div1" *ngIf="noProducts" >
+												<p>Select Atleast one</p>
+											</div>
+											<div class="next-button">
+												<!-- <button type="button" class="btn btn-primary next-step save" (click)="checkSignUpForm()" >Save</button> -->
+												<ul>
+													<li>
+														<button type="button" class="btn btn-default prev-step" (click)="goToStep('3')" >Previous</button>
+													</li>
+													<li>
+														<button type="button" class="btn btn-primary btn-info-full next-step" [ngClass]="{'disabled' : disableVend}" (click)="checkSignUpForm()" >Save</button>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</form>
+									<div class="col-md-4 col-sm-12 col-xs-12 icon-bgcolor">
+										<div class="wizard-inner">
+											<div class="connecting-line"></div>
+											<ul class="nav nav-tabs" role="tablist">
+												<li role="presentation" class="disabled">
+													<a>
+														<span class="round-tab">
+															1
+														</span>
+													</a>
+												</li>
+												<li role="presentation" class="disabled">
+													<a>
+														<span class="round-tab">
+															2
+														</span>
+													</a>
+												</li>
+												<li role="presentation" class="disabled">
+													<a>
+														<span class="round-tab">
+															3
+														</span>
+													</a>
+												</li>
+												<li role="presentation" [ngClass]="{'active' : activePhase == 4}" >
+													<a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Complete">
+														<span class="round-tab">
+															4
+														</span>
+													</a>
+												</li>
+											</ul>
+										</div>
+										<div class="wizard-icon">
+											<img src="assets/images/Service-Details4.png">
+											<h5>Service & Product</h5>
+											<p>Tick only those details for Services Support and Product Selling that is offered by you</p>
+										</div>
+									</div>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+						<!-- </form> -->
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer no-padding">
+			</div>
+		</div>
+	</div>
+</div>

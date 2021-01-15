@@ -1,0 +1,68 @@
+<div class="vendor_header">
+	<div class="container">
+		<h2>Engineer Info</h2>
+	</div>
+</div>
+	
+<div class="container img_us">
+	<div class="col-sm-12">
+		<div class="vendor-info-image">
+			<img [src]="user.image?(user.image.includes('http')?user.image:baseUrl+user.image):userDefaultImage">
+		</div>
+	</div>
+	<div class="col-sm-12">
+		<div class="vendor-info-image"  *ngIf="user.rating">
+
+			<span *ngFor="let x of [1,2,3,4,5]">
+            	<span [ngClass]="{'fa fa-start':true,checked:x<=user.rating.avgRating}" class="fa fa-star checked"></span> 
+        	</span>
+			<!-- <span class="fa fa-star checked"></span>  -->
+
+		</div>
+	</div>
+	<hr>
+	<div class="row pt_p">
+		<table class="table-responsive">
+			<tr>
+				<td><b>Name</b> </td>
+				<td>{{user.fullName}}</td>
+				<td><b>Email</b></td>
+				<td>{{user.email}}</td>
+			</tr>
+			<tr>
+				<td><b>Phone Number</b></td>
+				<td>{{user.mobile}}</td>
+				<td><b>Address</b></td>
+				<td>{{user.address}}</td>
+			</tr>
+			<tr>
+				<td><b>GST Number</b></td>
+				<td>
+					<span *ngIf="user.gstNumber">{{user.gstNumber}}</span>
+					<span *ngIf="!user.gstNumber">Not Available</span>
+				</td>
+				<td><b>Year of Experience</b></td>
+				<td>{{user.exp}}</td>
+			</tr>
+            <!-- <tr>
+				<td><b>Company Name</b> </td>
+				<td>Laptop</td>
+				<td><b>Mobile Verified </b></td>
+				<td><i class="fa fa-check-square-o" aria-hidden="true"></i> Verified </td>
+			</tr> -->
+		</table>		
+	</div>
+	<hr>
+	<div class="container engg" style="margin-bottom: 5%;">
+		<h3>Expertise:</h3>
+		<div *ngFor="let expertise of user.expertise;let i = index">
+		  	<div class="engd" >
+	  			<div class="rer">
+	  				<b>{{i+1}}.</b> 
+	  				<a href="javascript:;">  &nbsp;&nbsp;{{expertise.name}}</a>
+	  			</div>
+	  		</div>
+	  		<hr>
+	  	</div>	
+	</div>  	
+</div>

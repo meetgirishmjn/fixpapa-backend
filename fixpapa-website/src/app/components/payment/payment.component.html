@@ -1,0 +1,56 @@
+<div class="row no-row">
+	<div class="col-md-12" style="border : none !important;padding: 0px !important;"  >
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<div class="col-md-10 col-sm-10 col-xs-12" style="margin-top:10px;margin-bottom:10px;" >
+				<div class="col-md-3 cont1 col-sm-3 col-xs-12 category-cont combo" >
+					<h5>Cash</h5>
+					<h5><b>{{cashPay}}</b></h5>
+				</div>
+				<div class="col-md-1 col-sm-1" ></div>
+				<div class="col-md-3 cont1 col-sm-3 col-xs-12 category-cont combo" >
+					<h5>Cheque</h5>
+					<h5><b>{{chequePay}}</b></h5>
+				</div>
+				<div class="col-md-1 col-sm-1" ></div>
+				<div class="col-md-3 cont1 col-sm-3 col-xs-12 category-cont combo" >
+					<h5>Online</h5>
+					<h5><b>{{onlinePay}}</b></h5>
+				</div>
+			</div>
+			<div class="col-md-2 col-sm-2 col-xs-12" style="margin-top:10px;" >
+				<form novalidate [formGroup]="filterForm" >
+					<div class="row">
+						<select class="form-control option-container" (change)="filterList()" name="month" formControlName="month"  >
+							<option *ngFor="let option of monthList;" [ngValue]="option.value" >{{option.month}}</option>
+						</select>
+					</div>
+					<div class="row" style="margin-top:10px;" >
+						<select class="form-control option-container" (change)="filterList()" name="year" formControlName="year" >
+							<option *ngFor="let option of yearList;" [ngValue]="option" >{{option}}</option>
+						</select>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="col-md-12 fixed-height1" *ngIf="payments.length > 0 && !loadingPayments" >
+			<div class="row" *ngFor="let job of payments;let index1 = index;" [ngClass]="{'border' : index1 != payments.length-1}" >
+				<div class="col-md-2 col-sm-3 col-xs-12" >
+					<h5>{{job.orderId}}</h5>
+				</div>
+				<div class="col-md-8 col-sm-6 col-xs-12" >
+					<h5 *ngIf="job.completeJob?.modeOfPayment" >Payment is done via&nbsp;{{job.completeJob.modeOfPayment}} on {{job.completeJob.completedAt | date }}&nbsp;,&nbsp;{{ job.completeJob.completedAt | date : 'shortTime' }}, Bill is due before {{job.completeJob.dueDate | date }}&nbsp;,&nbsp;{{ job.completeJob.dueDate | date : 'shortTime' }}</h5>
+				</div>
+				<div class="col-md-2 col-sm-3 col-xs-12" style="margin-top:5px;" >
+					<a (click)="navigateToBill(job.id)" *ngIf="!job.venToAdmin" >Generate</a>
+					<a *ngIf="job.venToAdmin" >Generated</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12 fixed-height1" *ngIf="loadingPayments" >
+			<img src="assets/images/Loading_apple.gif" alt="loading screen" id="loading-jobs" />
+		</div>
+		<div class="col-md-12 fixed-height1" *ngIf="!loadingPayments && payments.length === 0" >
+			<h5 class="greyColor" ><b>None of the payment is done</b></h5>
+		</div>
+	</div>
+</div>

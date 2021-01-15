@@ -1,0 +1,49 @@
+<ol class="progtrckr" data-progtrckr-steps="5" style="padding-left: 25px;" >
+    <li class="progtrckr-done" [tooltip]="jobPlaced" >Job Placed</li>
+	<tooltip-content #jobPlaced [animation]="true" placement="top">
+		<h6 style="padding-left:20px;" >Placed On</h6>
+		<h6 style="padding-left:20px;" >{{jobToCheckStatus.createdAt | date }}&nbsp;,&nbsp;{{ jobToCheckStatus.createdAt | date : 'shortTime' }}</h6>
+		<h6 style="padding-left:20px;" *ngIf="value == 1" >Your order has been placed and fix papa expert will assign you a engineer shortly</h6>
+	</tooltip-content>
+	<li [tooltip]="engAssigned" *ngIf="value >=2 " class="progtrckr-done" >FP Assigned Engineer</li>
+	<li class="progtrckr-todo" *ngIf="value < 2" >FP Assigned Engineer</li>
+	<tooltip-content #engAssigned [animation]="true" placement="top">
+		<h5 *ngIf="jobToCheckStatus.engineer" >Engineer</h5>
+		<h6 *ngIf="jobToCheckStatus.engineer" >{{jobToCheckStatus.engineer.fullName}}</h6>
+		<h6 *ngIf="jobToCheckStatus.engineer" >{{jobToCheckStatus.engineer.mobile}}</h6>
+		<h6 *ngIf="jobToCheckStatus.engineer" >{{jobToCheckStatus.engineer.exp}}&nbsp;years&nbsp;Experienced</h6>
+	</tooltip-content>
+	<li class="progtrckr-done" [tooltip]="onTheWay" *ngIf="value >= 3" >FP Expert on the way</li>
+	<li class="progtrckr-todo" *ngIf="value < 3" >FP Expert on the way</li>
+	<tooltip-content #onTheWay [animation]="true" placement="top">
+		<h6 *ngIf="value === 3" >Engineer is on the way, will reach to your site shortly</h6>
+		<h6 *ngIf="value > 3" >Job Started</h6>
+	</tooltip-content>
+	<li class="progtrckr-done" *ngIf="value >= 4" [tooltip]="inProcess" >Job in Progress</li>
+	<li class="progtrckr-todo" *ngIf="value < 4" >Job in Progress</li>
+	<tooltip-content #inProcess [animation]="true" placement="top">
+		<h6 *ngIf="jobToCheckStatus.status === 'inprocess'" >Engineer is fixing the problem in the device, FixPapa team will let you know whenever it's done</h6>
+		<h6 *ngIf="jobToCheckStatus.status === 'outForDelivery'" >Engineer is out for delivery, will reach to you shortly</h6>
+		<h6 *ngIf="jobToCheckStatus.status === 'billGenerated'" >The bill for the job has been generated</h6>
+		<h6 *ngIf="jobToCheckStatus.status === 'paymentDone'" >Payment is done</h6>
+		<h6 *ngIf="jobToCheckStatus.status === 'indispute'" >Job is in Dispute</h6>
+		<h6 *ngIf="jobToCheckStatus.status === 'completed'" >Job is completed</h6>
+		<!--<div *ngIf="jobToCheckStatus.status === 'inprocess'; then content else other_content" ></div>
+		<ng-template #content>
+			<h6>Engineer is fixing the problem in the device, FixPapa team will let you know whenever it's done</h6>
+		</ng-template>
+		<ng-template #other_content></ng-template>-->
+	</tooltip-content>
+	<li class="progtrckr-done" *ngIf="value >= 5" [tooltip]="completed" >Job Completed</li>
+	<li class="progtrckr-todo" *ngIf="value < 5" >Job Completed</li>
+  <tooltip-content #completed [animation]="true" placement="top">
+		<h5 *ngIf="jobToCheckStatus.completeJob" >Info</h5>
+		<h6 *ngIf="jobToCheckStatus.completeJob?.isPaymentDone" >Payment is done via&nbsp;{{jobToCheckStatus.completeJob.modeOfPayment}}</h6>
+		<h6 *ngIf="!jobToCheckStatus.completeJob?.isPaymentDone" >Payment is not done</h6>
+		<h6 *ngIf="jobToCheckStatus.completeJob?.comment" >{{jobToCheckStatus.completeJob.comment}}</h6>
+		<h6 *ngIf="jobToCheckStatus.completeJob?.completedAt" >{{jobToCheckStatus.completeJob.completedAt | date }}&nbsp;,&nbsp;{{ jobToCheckStatus.completeJob.completedAt | date : 'shortTime' }}</h6>
+	</tooltip-content>
+</ol>
+
+
+<!-- \00B7 -->

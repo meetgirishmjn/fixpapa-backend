@@ -1,0 +1,63 @@
+.bannerOnForm input{
+  margin:1rem 0rem;
+  border-radius:0px!important;
+}
+.bannerOnForm input[type="submit"]{
+  background-color:#1b56b5;
+  color:white;
+}
+.bannerOnForm textarea{
+  border-radius:0px!important;
+}
+.bannerOnForm{
+  margin-top:176px!important;
+}
+
+
+#myCarousel{
+  margin-top:140px;
+}
+.errMsg{
+  padding-top:10px;
+}
+.errMsg2{
+  padding-top:18px!important;
+}
+
+.left.carousel-control{
+  width: fit-content;
+  color:blue!important;
+}
+.right.carousel-control{
+  width: fit-content;
+ color:blue!important;
+}
+.padding-top-start{
+  padding-top: 80px;
+}
+
+
+
+@media all and (max-width: 699px) and (min-width: 300px) {
+  .loader-icon1{
+    width:10% !important;
+    top:45% !important;
+    left:45% !important;
+  }
+}
+.loader-icon1{
+  width:4%;
+  height:auto;
+  top:48%;
+  left:48%;
+  position:absolute;
+}
+.filter-select[_ngcontent-c7]{
+  z-index: 99;
+}
+
+@media all and (max-width:768px) {
+  #myCarousel{
+    margin-top:150px;
+  }
+}

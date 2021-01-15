@@ -1,0 +1,21 @@
+{
+  "addProduct":{
+    "replyCode": "Success",
+    "replyMessage": "Successfully product added!!"
+  },
+  "getProducts" : {
+  "replyCode":"Success",
+  "replyMessage":"Success"
+  
+ },
+ "getProduct" : {
+  "replyCode":"Success",
+  "replyMessage":"Success"
+ },
+ "editProduct" : {
+  "replyCode":"Success",
+  "replyMessage":"Successfully updated!!"
+ }
+
+
+}

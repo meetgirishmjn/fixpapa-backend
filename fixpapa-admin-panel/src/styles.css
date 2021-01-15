@@ -1,0 +1,379 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~ngx-toastr/toastr.css';
+@import "~ng-pick-datetime/assets/style/picker.min.css";
+
+/* No Data found text */
+  .noDataFound{
+    text-align: center;
+    padding-top: 70px;
+  }
+/* No Data found text */
+
+
+
+
+/* user profile page css */
+
+
+.vendor_header {
+    background: #234d7a;
+    width: 100%;
+    height: 80px;
+    padding-top: 12px;
+}
+.vendor_footer {
+    background: #234d7a;
+    width: 100%;
+    height: 50px;
+    padding-top: 6px;
+    margin-top: 25px;
+}
+.vendor_footer h2
+{
+  color: #fff;
+  font-size:25px;
+}
+.vendor_header h2
+{
+  color: #fff;
+  text-transform: uppercase;
+}
+.vendor-info-image img {
+        border-radius: 30%;
+    height: 103px;
+    border: 2px solid #234d7a;
+}
+.vendor-info-image  {
+text-align: center;
+    margin-top: 10px;
+}
+span.fa.fa-star.checked {
+    color: #ffc107;
+}
+
+.img_us{
+  padding: 0px;
+  padding-top: 2%;
+      font-size: 18px;
+} 
+.img_us hr{
+  
+      border-top: 1px solid rgb(35, 77, 122);
+}
+.pt_p{
+    padding-bottom: 2%;
+    padding-top: 2%;
+        padding-left: 2%;
+  }
+  .pt_p table{
+      width: 100%;
+          
+          color: #565555;
+    }
+    .pt_p .fa{
+      color: #234d7a;
+    }
+    .pt_p table tr td{
+    padding-left: 20px !important;
+    padding: 10px ;
+    }
+
+    .pt_p table tr:nth-child(1){
+      background: #efecec;
+    }
+    .dl_po .col-md-3{
+      float: left;
+    }
+    .dl_po {
+      padding-top: 2%;
+      padding-bottom: 10%;
+          background: #efecec;
+    }
+.dl_po .col-md-3 .document-image{
+  width: 150px;
+  margin-bottom: 20px;
+  box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
+  margin: auto;
+}
+.engg h3{
+  background: #234d7a;
+  color: white;
+      padding: 5px 10px;
+      margin-bottom: 2%;
+}
+.engg a{
+  
+  color: #234d7a ;
+      display: block;
+}
+.engg a:hover{
+  color: #234d7a !important
+}
+.engg{
+    background: #efecec;
+    padding-bottom: 20px;
+  }
+  .rer{
+    display: inline-flex;
+    width: 100%;
+  }
+  .engd{
+    padding: 10px 0px 0px 10px;
+  }
+.table-responsive{
+  display: inline-table;
+}
+  @media only screen and (max-width: 600px){
+    .engg a{
+      width: 100% !important;
+      display: block;
+    }
+    .table-responsive{
+      display: inherit;
+    }
+    .dl_po .col-md-3{
+      margin-bottom: 6% !important;
+    }
+  }
+
+
+/* user profile page css */
+
+/* Loading CSS Start here */
+
+#loader {
+  position: absolute;
+  left: 55%;
+  top: 50%;
+  z-index: 1;
+  width: 20px;
+  height: 20px;
+  margin: -75px 0 0 -75px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 70px;
+  height: 70px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Add animation to "page content" */
+.animate-bottom {
+  position: relative;
+  -webkit-animation-name: animatebottom;
+  -webkit-animation-duration: 1s;
+  animation-name: animatebottom;
+  animation-duration: 1s
+}
+
+@-webkit-keyframes animatebottom {
+  from { bottom:-100px; opacity:0 } 
+  to { bottom:0px; opacity:1 }
+}
+
+@keyframes animatebottom { 
+  from{ bottom:-100px; opacity:0 } 
+  to{ bottom:0; opacity:1 }
+}
+
+#myDiv {
+  display: none;
+  text-align: center;
+}
+
+
+/* Loading CSS End here */
+
+.borderless td, .borderless th {
+    border: none!important;
+}
+
+.side-menu-li-text{
+    padding-left: 10px;
+    color: white;
+
+}
+.cdk-overlay-container {
+    position: fixed!important;
+    z-index: 1060!important;
+}
+.side-menu-toggle{
+    color: white;
+    margin-top: -1px;
+}
+
+.error-div{
+	color:red!important;
+	text-align: right;
+	margin-top: 0px;
+	padding:5px;
+}
+
+.no-data-found{
+	height:400px;
+	width:100%;
+	text-align: center;
+	line-height: 100px;
+}
+
+.container-min-height{
+	min-height: 400px;
+}
+
+/*body{
+	background: url(./../../../assets/img/login-bg.jpg) !important;
+}*/
+
+
+.rah-card-container {
+    background: #fff;
+    padding: 25px 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+
+
+.card-img {
+    width: 70px;
+}
+.card-row {
+	margin: 5px;
+	border-radius: 10px;
+    background: #fff;
+    padding: 15px;
+}
+
+.card-row-modal {
+    margin: 5px;
+    border-radius: 10px;
+    background: #fff;
+    padding: 0px;
+}
+
+.rah-btn-top-margin{
+	margin-top: 20px;	
+}
+
+.rah-left{
+	float: left;
+}
+.rah-right{
+	float: right;
+}
+.rah-title{
+	font-size: 16px;
+    font-weight: 400;
+}
+
+.pagination-page[_ngcontent-c5] .input-group-addon{
+	display: table-cell!important;
+}
+
+
+/* Navbar CSS */
+
+.nav-tabs {
+    border-bottom: 2px solid #DDD;
+}
+
+.nav-tabs>li.active>a,
+.nav-tabs>li.active>a:focus,
+.nav-tabs>li.active>a:hover {
+    border-width: 0;
+}
+
+.nav-tabs>li>a {
+    border: none;
+    color: #666;
+}
+
+.nav-tabs>li.active>a,
+.nav-tabs>li>a:hover {
+    border: none;
+    color: #4285F4 !important;
+    background: transparent;
+}
+
+.nav-tabs>li>a::after {
+    content: "";
+    background: #4285F4;
+    height: 2px;
+    position: absolute;
+    width: 100%;
+    left: 0px;
+    bottom: -1px;
+    transition: all 250ms ease 0s;
+    transform: scale(0);
+}
+
+.nav-tabs>li.active>a::after,
+.nav-tabs>li:hover>a::after {
+    transform: scale(1);
+}
+
+.tab-nav>li>a::after {
+    background: #21527d none repeat scroll 0% 0%;
+    color: #fff;
+}
+
+.tab-pane {
+    padding: 15px 0;
+}
+
+.tab-content {
+    padding: 20px
+}
+
+.card {
+    background: #FFF none repeat scroll 0% 0%;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+    margin-bottom: 30px;
+}
+
+.page-heading {
+    margin-top: 35px;
+}
+.page-heading h4 {
+    background: #e0e0e0;
+    padding: 12px 20px;
+    font-size: 20px;
+    border: 1px solid #c9c3c3;
+    color: #767676;
+    margin-bottom: 0px;
+}
+.card ul li a {
+    font-size: 15px;
+}
+.tab-pane {
+    font-size: 15px;
+}
+
+.sub-menu .down{
+    display: none;
+}
+.active .down{
+    display: block;
+    float: right;
+    padding-right: 10px;
+}
+.active .right{
+    display: none;
+}
+.sub-menu .right{
+    float: right;
+    padding-right: 10px;
+}
+
+/* Nav bar css */

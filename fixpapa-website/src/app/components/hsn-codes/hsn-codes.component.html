@@ -1,0 +1,28 @@
+<div class="modal  wow  login-modal fade-in" id="hsn-modal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" >
+	<div class="modal-dialog modal-lg" >
+		<div class="modal-content" *ngIf="hsnCodes" >
+			<div class="modal-header login-header" >
+				<button type="button" class="close login-close" data-dismiss="modal" (click)="closeModal()" >&times;</button>
+			</div>
+			<div class="modal-body no-padding">
+				<div class="col-md-12 no-gap reg-bg1">
+					<div class="reg-bg">
+						<h2>HSN CODES</h2>
+						<table>
+							<tr>
+								<th>Product</th>
+								<th>Code</th>
+								<th>Tax Rate</th>
+							</tr>
+							<tr *ngFor="let item of hsnCodes;" >
+								<td>{{item.productName}}</td>
+								<td>{{item.code}}</td>
+								<td>{{item.taxRate}}</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

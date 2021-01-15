@@ -1,0 +1,398 @@
+{
+  "name": "Requestjob",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins":{
+    "Aggregate":true
+  },
+  "properties": {
+    "image": {
+      "type": [
+        "string"
+      ],
+      "default": []
+    },
+    "address": {
+      "type": "object",
+      "default": {}
+    },
+
+    "totalPrice": {
+      "type": "number",
+      "default": {}
+    },
+    "problemDes": {
+      "type": "string",
+      "default": ""
+    },
+    "startDate": {
+      "type": "date",
+      "default": ""
+    },
+    "endDate": {
+      "type": "date",
+      "default": ""
+    },
+    "problems": {
+      "type": [
+        "object"
+      ],
+      "default": []
+    },
+    "statusArr": {
+      "type": [
+        "string"
+      ]
+    },
+    "orderId": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "validations": [],
+  "relations": {
+    "ratedetails": {
+      "type": "embedsMany",
+      "model": "Ratedetail",
+      "property": "ratedetail",
+      "options": {
+        "validate": false,
+        "forceId": true,
+        "persistent": true
+      }
+    },
+   
+    
+    "category": {
+      "type": "belongsTo",
+      "model": "Category",
+      "foreignKey": ""
+    },
+    "product": {
+      "type": "belongsTo",
+      "model": "Products",
+      "foreignKey": ""
+    },
+    "brand": {
+      "type": "belongsTo",
+      "model": "Brand",
+      "foreignKey": ""
+    },
+    "customer": {
+      "type": "belongsTo",
+      "model": "People",
+      "foreignKey": "customerId"
+    },
+    "vendor": {
+      "type": "belongsTo",
+      "model": "People",
+      "foreignKey": "vendorId"
+    },
+    "engineer": {
+      "type": "belongsTo",
+      "model": "People",
+      "foreignKey": "engineerId"
+    },
+    "people": {
+      "type": "belongsTo",
+      "model": "People",
+      "foreignKey": "peopleId"
+    },
+    "transaction": {
+      "type": "belongsTo",
+      "model": "Transaction",
+      "foreignKey": "transactionId"
+    }
+  },
+  "indexes": {
+      "bid_req_index": {
+        "keys": {"peopleId": 1,"transactionId":1,"engineerId":1,"vendorId":1,
+        "customerId":1,"categoryId":1,"productId":1,"brandId":1}
+      }
+  
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "deleteById"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "find"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "createJob"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "customer",
+      "permission": "ALLOW",
+      "property": "pendingJobs"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "customer",
+      "permission": "ALLOW",
+      "property": "acceptedJobs"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "customer",
+      "permission": "ALLOW",
+      "property": "completedJobs"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "getJobById"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW",
+      "property": "vendorAssign"
+    },
+      {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "superAdmin",
+      "permission": "ALLOW",
+      "property": "vendorAssign"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "vendor",
+      "permission": "ALLOW",
+      "property": "vendorJobs"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "vendor",
+      "permission": "ALLOW",
+      "property": "assignEngineer"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "engineer",
+      "permission": "ALLOW",
+      "property": "startJob"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "getAllJobs"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "getPeopleJobs"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "engineer",
+      "permission": "ALLOW",
+      "property": "engineerNewJobs"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "custAllJobs"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "jobByStatus"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "generateBill"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "engineer",
+      "permission": "ALLOW",
+      "property": "engineerSchedule"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "engineer",
+      "permission": "ALLOW",
+      "property": "pickProduct"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "vendorAllJobs"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "engineer",
+      "permission": "ALLOW",
+      "property": "engineerAllJobs"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "vendor",
+      "permission": "ALLOW",
+      "property": "vendorAcceptorCancel"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "engineer",
+      "permission": "ALLOW",
+      "property": "partRequest"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "vendor",
+      "permission": "ALLOW",
+      "property": "partRequest"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "customer",
+      "permission": "ALLOW",
+      "property": "partResponse"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "cancelJob"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "engineer",
+      "permission": "ALLOW",
+      "property": "engineerAccept"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "updateStatus"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "updateJobStatus"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "completeJob"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW",
+      "property": "getJobsAdmin"
+    },
+     {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "superAdmin",
+      "permission": "ALLOW",
+      "property": "getJobsAdmin"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "getMeJobs"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW",
+      "property": "getAllJobByAdmin"
+    },
+     {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "superAdmin",
+      "permission": "ALLOW",
+      "property": "getAllJobByAdmin"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "reassignJob"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "superAdmin",
+      "permission": "ALLOW",
+      "property": "reassignJob"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "sendMessage"
+    }                 
+  ],
+  "methods": {}
+}

@@ -1,0 +1,152 @@
+<section id="container">
+    <header class="header black-bg" *ngIf="!isLoginPage">
+        <div class="sidebar-toggle-box">
+            <div class="fa fa-bars tooltips side-menu-toggle"  (click)="navBar()" data-placement="right" data-original-title="Toggle Navigation"></div>
+        </div>
+        <a routerLink="/dashboard" class="logo"><b>FixPapa</b></a>
+        <div class="top-menu">
+            <ul class="nav pull-right top-menu">
+                <li>
+                  <a class="logout" href="javascript:;" (click)="notyToggle()">
+                    <i class="fa fa-bell-o"></i>
+                    <span class="noti_Counter" *ngIf="notiCount">{{notiCount}}</span>
+                    <app-notification (countSet)="setNotiCount($event)" #notification></app-notification>
+                  </a>
+                </li>
+                <li><a class="logout" (click)="logout()" href="javascript:;">Logout</a></li>
+                
+            </ul>
+        </div>
+    </header>
+    <aside [hidden]="isLoginPage">
+        <div id="sidebar" class="nav-collapse">
+            <ul class="sidebar-menu" id="nav-accordion">
+
+                <li>
+                    <a (click)="navigate('/products')" [ngClass]="{'active-link':activeUrl.startsWith('/products')}" href="javascript:;">
+                      <!-- <i class="fa fa-gears"></i> -->
+                      <img src="assets/icons/side-menu/png/products.png" height="20px" width="20px" />
+                      <span class="side-menu-li-text">Products</span>
+                    </a>
+                </li>  
+                <!-- <li class="mt"> -->
+                <li>  
+                    <a (click)="navigate('/brand')" [ngClass]="{'active-link':activeUrl.startsWith('/brand')}" href="javascript:;">
+                      <!-- <i class="fa fa-random"></i> -->
+                      <img src="assets/icons/side-menu/png/brand.png" height="20px" width="20px" />
+                      <span class="side-menu-li-text">Brand</span>
+                    </a>
+                </li>                            
+                <li>
+                    <a (click)="navigate('/services')"  [ngClass]="{'active-link':activeUrl.startsWith('/services')}" href="javascript:;">
+                      <img src="assets/icons/side-menu/png/service.png" height="20px" width="20px" />
+                      <!-- <i class="fa fa-gears"></i> -->
+                      <span class="side-menu-li-text">Services</span>
+                    </a>
+                </li>
+
+                <li class="sub-menu" [hidden]="role!='superAdmin'">
+                    <a href="javascript:;" [ngClass]="{'active':activeUrl.startsWith('/user-list')}">
+                    <!-- <img src="assets/icons/side-menu/svg.svg" class="svg-icon" height="50px" width="50px"/> -->
+                    <!-- <i class="fa fa-desktop"></i> -->
+                    <img src="assets/icons/side-menu/png/user.png" height="20px" width="20px" />
+                    <span class="side-menu-li-text">Users</span>
+                    <span class="right"><i class="fa fa-chevron-right"></i></span>
+                    <span class="down"><i class="fa fa-chevron-down"></i></span>
+                  </a>
+                  <ul class="sub">
+                    <li><a href="javascript:;" [ngClass]="{'active-link':activeUrl.startsWith('/user-list/vendors')}" (click)="navigate('user-list/vendors')"><span class="side-menu-li-text">Vendors</span></a></li>
+                    <li><a href="javascript:;" [ngClass]="{'active-link':activeUrl.startsWith('/user-list/engineers')}" (click)="navigate('user-list/engineers')"><span class="side-menu-li-text">Engineers</span></a></li>
+                    <li><a href="javascript:;" (click)="navigate('user-list/customers')" [ngClass]="{'active-link':activeUrl.startsWith('/user-list/customers')}"><span class="side-menu-li-text">Customers</span></a></li>
+                  </ul>
+                </li>
+
+                <li class="sub-menu">
+                    <a href="javascript:;" [ngClass]="{'active':(activeUrl.startsWith('/job-requests')||activeUrl.startsWith('/hardware-requests') || activeUrl.startsWith('/rent-requests') || activeUrl.startsWith('/amc-requests') || activeUrl.startsWith('/bid-requests')) }">
+                    <!-- <i class="fa fa-desktop"></i> -->
+                    <img src="assets/icons/side-menu/png/request.png" height="20px" width="20px" />
+                    <span class="side-menu-li-text">Requests</span>
+                    <span class="right"><i class="fa fa-chevron-right"></i></span>
+                    <span class="down"><i class="fa fa-chevron-down"></i></span>
+                  </a>
+                  <ul class="sub">
+                      <li>
+                          <a (click)="navigate('/job-requests')" [ngClass]="{'active-link':activeUrl.startsWith('/job-requests')}" href="javascript:;">
+                            <!-- <i class="fa fa-cogs"></i> -->
+                            <span  class="side-menu-li-text">Repair Services</span>
+                          </a>
+                      </li>
+                      <li>
+                          <a (click)="navigate('/hardware-requests')" [ngClass]="{'active-link':activeUrl.startsWith('/hardware-requests')}" href="javascript:;">
+                            <!-- <i class="fa fa-cogs"></i> -->
+                            <span  class="side-menu-li-text">Consult & Buy</span>
+                          </a>
+                      </li>
+                      <li>
+                          <a (click)="navigate('/rent-requests')" [ngClass]="{'active-link':activeUrl.startsWith('/rent-requests')}" href="javascript:;">
+                            <!-- <i class="fa fa-cogs"></i> -->
+                            <span  class="side-menu-li-text">Products on Rent</span>
+                          </a>
+                      </li>
+                      <li>
+                          <a (click)="navigate('/amc-requests')" [ngClass]="{'active-link':activeUrl.startsWith('/amc-requests')}" href="javascript:;">
+                            <!-- <i class="fa fa-cogs"></i> -->
+                            <span  class="side-menu-li-text">AMC Requests</span>
+                          </a>
+                      </li>
+                      <li>
+                          <a (click)="navigate('/bid-requests')" [ngClass]="{'active-link':activeUrl.startsWith('/bid-requests')}" href="javascript:;">
+                            <!-- <i class="fa fa-cogs"></i> -->
+                            <span  class="side-menu-li-text">Bid Requests</span>
+                          </a>
+                      </li>
+                    
+                  </ul>
+                </li>
+
+                <li>
+                    <a (click)="navigate('/categories')" [ngClass]="{'active-link':activeUrl.startsWith('/categories')}" href="javascript:;">
+                      <!-- <i class="fa fa-random"></i> -->
+                      <img src="assets/icons/side-menu/png/categories.png" height="20px" width="20px" />
+                      <span class="side-menu-li-text">Repair Services</span>
+                    </a>
+                </li>
+                <li>
+                    <a (click)="navigate('/amc-contract')" [ngClass]="{'active-link':activeUrl.startsWith('/amc-contract')}" href="javascript:;">
+                      <!-- <i class="glyphicon glyphicon-list-alt"></i> -->
+                      <img src="assets/icons/side-menu/png/amc-contract.png" height="20px" width="20px" />
+                      <span class="side-menu-li-text">Maintenance Services</span>
+                    </a>
+                </li>
+                <li>
+                    <a (click)="navigate('/get-a-bid')" [ngClass]="{'active-link':activeUrl.startsWith('/get-a-bid')}" href="javascript:;">
+                      <!-- <i class="fa fa-cogs"></i> -->
+                      <img src="assets/icons/side-menu/png/bid.png" height="20px" width="20px" />
+                      <span class="side-menu-li-text">Get Bid for IT Setup</span>
+                    </a>
+                </li>
+                <li>
+                    <a (click)="navigate('/hardware-purchase')" [ngClass]="{'active-link':activeUrl.startsWith('/hardware-purchase')}" href="javascript:;">
+                      <!-- <i class="fa fa-cogs"></i> -->
+                      <img src="assets/icons/side-menu/png/hardware.png" height="20px" width="20px" />
+                      <span class="side-menu-li-text">Consult & Buy</span>
+                    </a>
+                </li>
+                <li>
+                    <a (click)="navigate('/settings')" [ngClass]="{'active-link':activeUrl.startsWith('/settings')}" href="javascript:;">
+                      <!-- <i class="fa fa-cogs"></i> -->
+                      <img src="assets/icons/side-menu/png/hardware.png" height="20px" width="20px" />
+                      <span class="side-menu-li-text">Settings</span>
+                    </a>
+                </li>
+                <br />                
+            </ul>
+        </div>
+    </aside>
+    <section id="main-content" [ngClass]="{'main-content':!isLoginPage,'col-md-10':!isLoginPage,'col-md-12':isLoginPage}">
+    <!-- <section id="main-content">   -->
+      <section [ngClass]="{'wrapper':!isLoginPage}">
+         <router-outlet></router-outlet>
+      </section>
+    </section>
+</section>

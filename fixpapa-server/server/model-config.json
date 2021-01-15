@@ -1,0 +1,151 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins",
+      "../node_modules/loopback-mongo-aggregate-mixin/dist"
+    ]
+  },
+  "User": {
+    "dataSource": "db",
+    "public": true
+  },
+  "AccessToken": {
+    "dataSource": "db",
+    "public": true
+  },
+  "ACL": {
+    "dataSource": "db",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "db",
+    "public": false,
+    "options": {
+      "strictObjectIDCoercion": true
+    }
+  },
+  "Role": {
+    "dataSource": "db",
+    "public": true
+  },
+  "UserCredential": {
+    "dataSource": "db",
+    "public": true
+  },
+  "UserIdentity": {
+    "dataSource": "db",
+    "public": true
+  },
+  "People": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Container": {
+    "dataSource": "storage",
+    "public": true
+  },
+  "Email": {
+    "dataSource": "Email"
+  },
+  "Problem": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Category": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Products": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Brand": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Services": {
+    "dataSource": "db",
+    "public": true
+  },
+  "AMC": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Bid": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Newpurchase": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Requestamc": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Requestbid": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Requestjob": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Requestpurchase": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Notification": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Transaction": {
+    "dataSource": "db",
+    "public": true
+  },
+  "AmcDetail": {
+    "dataSource": "db",
+    "public": false
+  },
+  "BidDetail": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Otp": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Requestrent": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Rentdetail": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Rating": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Ratedetail": {
+    "dataSource": "db",
+    "public": true
+  },
+   "Hsncode": {
+    "dataSource": "db",
+    "public": true
+  },
+    "Bill": {
+    "dataSource": "db",
+    "public": true
+  }
+}

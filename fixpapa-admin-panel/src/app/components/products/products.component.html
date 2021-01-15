@@ -1,0 +1,120 @@
+<div class="container-min-height" >
+    <div class="Page-heading" >
+        <h3>
+            <div class="row">
+                <div class="col-md-11">Products</div>
+                <div class="col-md-1">
+                    <a type="button" class="btn block-btn" (click)="openModal()"><i class="fa fa-plus"></i></a>
+                </div>    
+            </div>
+            
+        </h3>
+    </div>
+
+    <div class="noDataFound" *ngIf="!products.length && !isLoading">No data found</div>
+    <div id="loader" *ngIf="isLoading"></div>
+    <div class="col-lg-12" *ngFor="let product of products">
+        <div class="rah-card-container ">
+        	<div>
+        		<span class="rah-title">{{product.name}}</span>
+        	</div>
+        	<div>
+                <a type="button" class="btn block-btn rah-right" (click)="openModal(product)" href="javascript:;"><i class="fa fa-edit"></i></a>
+        		<span>
+                    <b>Brands</b> : {{product.brand | commaSeparatedList :'name'  }} <br />
+                    <span *ngIf="product.values && product.values.length"><b>values</b> : {{product.values}}<br /></span>
+                    <span>{{product.createdAt | date:'dd MMMM, yyyy'}}</span>
+                </span>
+        	</div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="productModal"  role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Product</h4>
+            </div>
+            <form id="productForm" (submit)="addProduct(productForm)" #productForm="ngForm">
+                <div class="modal-body">
+                    <!-- <div class="alert alert-danger" >
+                      alert
+                    </div> -->
+                    <!-- <p >Are you sure you want to block this user?</p> -->
+                    <div class="bootstrap-iso">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <form  class="form-horizontal" >
+                                        <div class="row">
+                                            <div class="form-group col-lg-12">
+                                                <label for="brandName">Name</label>
+                                                <input type="text" required [(ngModel)]="product.name" class="form-control" name="name" id="name" placeholder="Product Name"   #name="ngModel">
+
+                                                <div class="error-div" *ngIf="productForm._submitted && name.errors?.required" >
+                                                  this field is required
+                                                </div>
+                                            </div>
+                                        </div>    
+                                        <div class="row">
+                                            <div class="form-group col-lg-12">
+                                                <label for="brandName">Select Brand</label>
+                                                <!-- <ng-select [multiple]="true"
+                                                    [active]="selectedBrands"
+                                                    [allowClear]="true"
+                                                    [items]="brands |selectAutocomplete:'name'"
+                                                    [disabled]="disabled"
+                                                    (data) = "selectData($event)"
+                                                    placeholder="No Brand Selected">
+                                                </ng-select> -->
+                                                <ng-select [multiple]="true"
+                                                    [active]="selectedBrands"
+                                                    [allowClear]="true"
+                                                    [items]="brands |selectAutocomplete:'name'"
+                                                    (data) = "selectData($event)"
+                                                    placeholder="No Brand Selected">
+                                                </ng-select>
+
+                                                <!-- <div class="error-div" *ngIf="productForm._submitted && !selectedBrands.length" >
+                                                  this field is required
+                                                </div> -->
+                                            </div>
+                                        </div>    
+
+                                        <h4>
+                                            <span style="margin-left:-15px">Add Values</span>
+                                            <a type="button" class="btn block-btn rah-right"  (click)="product.values.push('')"><i class="fa fa-plus"></i></a>
+                                        </h4><br />
+                                        <div class="row" *ngFor="let x of product.values;let i = index; trackBy:trackByIndex;">
+                                            <div class=" col-lg-10">
+                                                <div class="form-group">
+                                                    <label for="brandName">Value</label>
+                                                    <input type="text" required="" [(ngModel)]="product.values[i]" class="form-control" name="value{{i+1}}" id="value{{i+1}}" placeholder="Product Value">
+
+                                                    <div class="error-div" *ngIf="productForm._submitted && !product.values[i].length" >
+                                                      this field is required
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-lg-2">    
+                                                <a type="button" class="btn block-btn rah-btn-top-margin" (click)="product.values.splice(i,1)"><i class="fa fa-minus"></i></a>
+                                            </div>    
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary " id="productBtn" data-loading-text="Submit..." type="submit" >Submit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </form>    
+        </div>
+    </div>
+</div>

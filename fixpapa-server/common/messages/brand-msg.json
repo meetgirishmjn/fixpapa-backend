@@ -1,0 +1,17 @@
+{
+  "addBrand":{
+    "replyCode": "Success",
+    "replyMessage": "Success"
+  },
+  "getBrand" : {
+  "replyCode":"Success",
+  "replyMessage":"Success"
+  
+ },
+ "editBrand" : {
+  "replyCode":"Success",
+  "replyMessage":"Successfully updated!!"
+  
+ }
+
+}

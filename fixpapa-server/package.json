@@ -1,0 +1,63 @@
+{
+  "name": "fixpapa",
+  "version": "1.0.0",
+  "main": "server/server.js",
+  "engines": {
+    "node": ">=4"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "build:sdk": "./node_modules/.bin/lb-sdk server/server.js client/sdk -d ng2web -i enabled",
+    "start": "node .",
+    "testApp": "node ./node_modules/mocha/bin/mocha test/index.test.js",
+    "posttest": "npm run lint && nsp check"
+  },
+  "dependencies": {
+    "axios": "^0.18.1",
+    "compression": "^1.0.3",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.5.2",
+    "cron": "^1.3.0",
+    "date-and-time": "^0.6.2",
+    "dateformat": "^3.0.3",
+    "express": "^4.17.1",
+    "express-flash": "0.0.2",
+    "express-session": "^1.15.6",
+    "firebase-admin": "^5.11.0",
+    "google-auth-library": "^1.6.1",
+    "helmet": "^1.3.0",
+    "html-pdf": "^2.2.0",
+    "jade": "^1.11.0",
+    "loopback": "^3.26.0",
+    "loopback-boot": "^2.6.5",
+    "loopback-component-explorer": "^5.0.0",
+    "loopback-component-passport": "^3.11.0",
+    "loopback-component-storage": "^3.6.3",
+    "loopback-connector-mongodb": "^3.9.2",
+    "loopback-mongo-aggregate-mixin": "^1.0.1",
+    "moment": "^2.22.2",
+    "passport-facebook-token": "^3.3.0",
+    "passport-google-oauth": "^1.0.0",
+    "passport-google-plus-token": "^2.1.0",
+    "pdfkit": "^0.8.3",
+    "serve-favicon": "^2.0.1",
+    "shortid": "^2.2.8",
+    "strong-error-handler": "^2.0.0",
+    "unique-number": "^2.0.1"
+  },
+  "devDependencies": {
+    "@mean-expert/loopback-sdk-builder": "^2.2.5",
+    "chai": "^4.1.2",
+    "eslint": "^3.17.1",
+    "eslint-config-loopback": "^8.0.0",
+    "mocha": "^5.1.1",
+    "nsp": "^2.1.0",
+    "supertest": "^3.0.0"
+  },
+  "repository": {
+    "type": "",
+    "url": ""
+  },
+  "license": "UNLICENSED",
+  "description": "fixpapa"
+}

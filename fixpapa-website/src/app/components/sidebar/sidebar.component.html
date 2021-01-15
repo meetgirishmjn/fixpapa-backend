@@ -1,0 +1,84 @@
+<div id="mySidenav" class="sidenav" >
+	<a class="closebtn" (click)="closeNav()" >x</a>
+	<div class="form-group">
+		<input type="text" style="padding-right: 25px;width: 40%;margin-left: 50%;border-radius: 10px;" [(ngModel)]="searchText" class="form-control" placeholder="Search For" name="search" />
+		<!-- <span class="cross-icon1" style="bottom:305px !important;" *ngIf="searchText" ><i class="glyphicon glyphicon-remove" (click)="clearText()" ></i></span> -->
+	</div>
+	<h3 style="padding-left:20px;" >Available Engineers</h3>
+	<div class="latest-job-listing first-list" *ngFor="let engineer of engineersArr | filterEngineer : searchText" >
+		<div class="row" style="padding: 20px 20px 0px 20px;" >
+			<div class="col-md-3 col-xs-6">
+				<div class="latest-job-img">
+					<img class="img-responsive" [src]="engineer.image">
+				</div>
+				<h5 style="color:grey;" ><b>Experties</b></h5>
+			</div>
+			<div class="col-md-5" *ngIf="!isMobile" >
+				<div class="latest-job-text engineer-text">
+					<h4 class="name-cont" >{{engineer.fullName}}</h4>
+				</div>
+			</div>
+			<div class="col-xs-6" *ngIf="isMobile" >
+				<div class="latest-job-text engineer-text">
+					<h4 class="name-cont" >{{engineer.fullName}}</h4>
+				</div>
+				<div class="latest-job-button" >
+					<ul>
+						<li>
+							<div class="center" *ngIf="engineer.rating" >
+								<div class="mark">
+									<span class="rating-input"></span>
+									<span data-value="1" *ngIf="engineer.rating.avgRating > 1 || engineer.rating.avgRating == 1" class="glyphicon glyphicon-star" ></span>
+									<span data-value="1" *ngIf="engineer.rating.avgRating < 1" class="glyphicon glyphicon-star-empty"></span>
+									<span data-value="2" *ngIf="engineer.rating.avgRating > 2 || engineer.rating.avgRating == 2" class="glyphicon glyphicon-star"></span>
+									<span data-value="2" *ngIf="engineer.rating.avgRating < 2" class="glyphicon glyphicon-star-empty"></span>
+									<span data-value="3" *ngIf="engineer.rating.avgRating > 3 || engineer.rating.avgRating == 3" class="glyphicon glyphicon-star" ></span>
+									<span data-value="3" *ngIf="engineer.rating.avgRating < 3" class="glyphicon glyphicon-star-empty"></span>
+									<span data-value="4" *ngIf="engineer.rating.avgRating > 4 || engineer.rating.avgRating == 4" class="glyphicon glyphicon-star" ></span>
+									<span data-value="4" *ngIf="engineer.rating.avgRating < 4" class="glyphicon glyphicon-star-empty"></span>
+									<span data-value="5" *ngIf="engineer.rating.avgRating == 5" class="glyphicon glyphicon-star"></span>
+									<span data-value="5" *ngIf="engineer.rating.avgRating < 5" class="glyphicon glyphicon-star-empty"></span>
+									&nbsp;&nbsp;<span class="grey" >{{engineer.rating.totalUsers}}</span>
+								</div>
+							</div>
+							
+						</li>
+						<li style="margin-top:10px;" >
+							<button type="button" class="btn btn-primary" (click)="assignJob(engineer.id)" >Assign</button>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-md-4" *ngIf="!isMobile" >
+				<div class="latest-job-button">
+					<ul>
+						<li>
+							<div class="center" *ngIf="engineer.rating" >
+								<div class="mark">
+									<span class="rating-input"></span>
+									<span data-value="1" *ngIf="engineer.rating.avgRating > 1 || engineer.rating.avgRating == 1" class="glyphicon glyphicon-star" ></span>
+									<span data-value="1" *ngIf="engineer.rating.avgRating < 1" class="glyphicon glyphicon-star-empty"></span>
+									<span data-value="2" *ngIf="engineer.rating.avgRating > 2 || engineer.rating.avgRating == 2" class="glyphicon glyphicon-star"></span>
+									<span data-value="2" *ngIf="engineer.rating.avgRating < 2" class="glyphicon glyphicon-star-empty"></span>
+									<span data-value="3" *ngIf="engineer.rating.avgRating > 3 || engineer.rating.avgRating == 3" class="glyphicon glyphicon-star" ></span>
+									<span data-value="3" *ngIf="engineer.rating.avgRating < 3" class="glyphicon glyphicon-star-empty"></span>
+									<span data-value="4" *ngIf="engineer.rating.avgRating > 4 || engineer.rating.avgRating == 4" class="glyphicon glyphicon-star" ></span>
+									<span data-value="4" *ngIf="engineer.rating.avgRating < 4" class="glyphicon glyphicon-star-empty"></span>
+									<span data-value="5" *ngIf="engineer.rating.avgRating == 5" class="glyphicon glyphicon-star"></span>
+									<span data-value="5" *ngIf="engineer.rating.avgRating < 5" class="glyphicon glyphicon-star-empty"></span>
+									&nbsp;&nbsp;<span class="grey" >{{engineer.rating.totalUsers}}</span>
+								</div>
+							</div>
+						</li>
+						<li style="margin-top:10px;" >
+							<button type="button" class="btn btn-primary" (click)="assignJob(engineer.id)" >Assign</button>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="row" id="experties" >
+			<label class="experties-cont" *ngFor="let experties of engineer.expertise;" >{{experties.name}}</label>
+		</div>
+	</div>
+</div>

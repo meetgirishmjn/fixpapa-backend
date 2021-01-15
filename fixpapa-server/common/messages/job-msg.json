@@ -1,0 +1,70 @@
+{
+  "createJob":{
+    "replyCode": "Success",
+    "replyMessage": "Successfully created a job request!!"
+  },
+  "allJobs":{
+    "replyCode": "Success",
+    "replyMessage": "Success"
+  },
+  "getJob":{
+    "replyCode": "Success",
+    "replyMessage": "Success"
+  },
+  "vendorAssign":{
+    "replyCode": "Success",
+    "replyMessage": "Successfully vendor assigned!!"
+  },
+  "vendorJobs":{
+    "replyCode": "Success",
+    "replyMessage": "done"
+  },
+  "engineerAssign":{
+    "replyCode": "Success",
+    "replyMessage": "Successfully engineer assigned!!"
+  },
+  "engineerAccepted":{
+    "replyCode": "Success",
+    "replyMessage": "Engineer accepted job_requests!!"
+  },
+  "startJob":{
+    "replyCode": "Success",
+    "replyMessage": "Engineer started job!!"
+  },
+  "generateBill":{
+    "replyCode": "Success",
+    "replyMessage": "Successfully bill generated!!"
+  },
+  "pickup":{
+    "replyCode": "Success",
+    "replyMessage": "Product picked successfully for offsite repair!!"
+  },
+  "vendorAccept":{
+    "replyCode": "Success",
+    "replyMessage": "Successfully accepted job request!!"
+  },
+  "requestPart":{
+    "replyCode": "Success",
+    "replyMessage": "Successfully requested for part!!"
+  },
+   "responsePart":{
+    "replyCode": "Success",
+    "replyMessage": "Response of requested parts!!"
+  },
+   "approvePart":{
+    "replyCode": "Success",
+    "replyMessage": "client response for part!!"
+  },
+  "cancelJob":{
+    "replyCode": "Success",
+    "replyMessage": "Successfully job cancelled!!"
+  },
+   "updateStatus":{
+    "replyCode": "Success",
+    "replyMessage": "Successfully updated status!!"
+  },
+  "completeJob":{
+    "replyCode": "Success",
+    "replyMessage": "Successfully job complete!!"
+  }
+}

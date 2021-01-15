@@ -1,0 +1,146 @@
+<div class="modal fade" id="billModal" role="dialog">
+	<div class="modal-dialog">
+		<div *ngIf="loadingJob" class="modal-content" >
+			<div class="modal-body" style="height:500px;" >
+				<img src="assets/images/loader.gif" alt="loading screen" style="width: 50px;height: 50px;position: absolute;left: 46%;top:46%;" />
+			</div>
+		</div>
+		<div class="modal-content" *ngIf="job && !loadingJob" >
+			<div class="modal-header job-modal-header">
+				<button type="button" class="close job-close" (click)="closeModal()" >&times;</button>
+				<h4 class="modal-title">Order Details</h4>
+			</div>
+			<div class="modal-body job-modal-height" >
+				<table style="width:100%;" >
+					<tr>
+						<td class="grey" ><h5>Order Date</h5></td>
+						<td class="grey" style="float:right;" ><h5>{{job.startDate | date }}&nbsp;,&nbsp;{{ job.startDate | date : 'shortTime' }}</h5></td>
+					</tr>
+					<tr>
+						<td class="grey" ><h5>Order #</h5></td>
+						<td class="grey" style="float:right;" ><h5>{{ job.orderId }}</h5></td>
+					</tr>
+					<tr *ngIf="job.status === 'completed' && job.completeJob" >
+						<td class="grey" ><h5>Payment Date</h5></td>
+						<td class="grey" style="float:right;" ><h5>{{job.completeJob.completedAt | date }}&nbsp;,&nbsp;{{job.completeJob.completedAt | date : 'shortTime' }}</h5></td>
+					</tr>
+				</table>
+				<div class="row status-of-job">
+					<table cellspacing="10" *ngIf="job.bill" >
+						<tr>
+							<td class="status-text" colspan="2" align="center" >Problems Charges</td>
+						</tr>
+						<tr *ngFor="let problem of job.problems;" >
+							<td class="status-text" >{{problem.probContent}}</td>
+							<td class="grey" align="center" >{{problem.price | currency:'INR'}}</td>
+						</tr>
+						<tr *ngIf="job.bill?.addPart?.length > 0" >
+							<td class="status-text" colspan="2" align="center" >Additional Parts Charges</td>
+						</tr>
+						<tr *ngFor="let part of job.bill?.addPart;" >
+							<td class="status-text" >{{part.partName}}({{part.partNumber}})</td>
+							<td class="grey" align="center" >{{part.partCost | currency:'INR'}}</td>
+						</tr>
+						<tr>
+							<td class="status-text" >Service Charges</td>
+							<td class="grey" align="center" >{{job.bill.addServiceCost | currency:'INR'}}</td>
+						</tr>
+						<tr>
+							<td class="status-text" >Discount</td>
+							<td class="grey" align="center" >{{job.bill.discount | currency:'INR'}}</td>
+						</tr>
+						<tr class="blue" >
+							<td align="center" class="combo font-large" >Total</td>
+							<td align="center" class="combo font-large" >{{job.bill.total | currency:'INR'}}</td>
+						</tr>
+						<tr *ngIf="realm === 'vendor'" >
+							<td colspan="2" align="center" class="font-large" >Customer Signature</td>
+						</tr>
+						<tr *ngIf="realm === 'vendor'" >
+							<td colspan="2" >
+								<img [src]="job.bill.custSign" style="width:30%;height:150px;" />
+							</td>
+						</tr>
+						<!-- job.status === 'completed' && job.completeJob job.bill?.addPart?.length > 0 &&-->
+						<tr *ngIf="job.status === 'billGenerated'" >
+							<td class="status-text" colspan="2" align="center" >Payment Mode</td>
+						</tr>
+						<tr *ngIf="job.status === 'billGenerated'" >
+							<td class="grey" colspan="2" align="left" >
+							<label class="radio-btn">Net Banking/ Credit Card/ Debit Card/ Wallet
+								<input type="radio" [(ngModel)]="bill.mode" value="online" id="owner" name="paytm" />
+								<span class="checkmark"></span>
+							  </label>
+							</td>
+						</tr>
+						<tr *ngIf="job.status === 'billGenerated'" >
+							<td class="grey" colspan="2" align="left" >
+							<label class="radio-btn">Cash
+								<input type="radio" [(ngModel)]="bill.mode" value="cash" name="type" id="cash" />
+								<span class="checkmark"></span>
+							</label>
+							</td>
+						</tr>
+						<tr *ngIf="job.status === 'billGenerated'" >
+							<td class="grey" colspan="2" align="left" >
+								<label class="radio-btn">Cheque
+									<input type="radio" [(ngModel)]="bill.mode" value="cheque" name="type" id="cheque" />
+									<span class="checkmark"></span>
+								</label>
+							</td>
+						</tr>
+						<tr *ngIf="bill.mode === 'cheque' && chequeForm" >
+							<td class="grey" colspan="2" align="left">
+								<form id="chequeForm" novalidate [formGroup]="chequeForm" >
+									<div class="input-group placeholder-color">
+										<label>
+											<select class="form-control option-container" style="color:grey !important;" formControlName="bankName" >
+												<option *ngFor="let bank of bankNames" [ngValue]="bank" >{{bank}}</option>
+											</select>
+										</label>
+										<!--<div class="error-div3" *ngIf="bankName.errors && (bankName.dirty || bankName.touched)" >
+											<p *ngIf="bankName.errors.required">Select Bank</p>
+										</div>
+										<ul class="filter-select1" style="box-shadow:none !important;display:block;margin-top:-15px !important;" id="category-container" *ngIf="chequeForm.controls.bankName.dirty && bankNames && bankNames.length > 0" >
+											<li class="li-style" *ngFor="let bank of bankNames | filterBankList : chequeForm.get('bankName').value" >
+												<a (click)="selectBank(bank)" class="a-style-list" >{{bank}}</a>
+											</li>
+										</ul>-->
+									</div>
+									<div class="input-group placeholder-color">
+										<label>
+											<input type="text" placeholder=" " formControlName="chequeNo" name="chequeNo" id="chequeNo" />
+											<span>Cheque No.</span>
+										</label>
+										<div class="error-div3" *ngIf="chequeNo.errors && (chequeNo.dirty || chequeNo.touched)" >
+											<p *ngIf="chequeNo.errors.required">Enter Cheque No.</p>
+										</div>
+									</div>
+									<div class="input-group placeholder-color" #chequeDate>
+										<label>
+											<input id="chequeDate" (focus)="focusedBefore()" (focusout)="changedValue()" name="chequeDate" type="text" placeholder=" " formControlName="chequeDate" />
+											<span>Cheque Date</span>
+										</label>
+										<!--<div class="error-div3" *ngIf="chequeDate.errors && (chequeDate.dirty || chequeDate.touched)" >
+											<p *ngIf="chequeDate.errors.required">Enter Cheque date</p>
+										</div>-->
+										<div class="error-div3" *ngIf="!cheqDate && focusBeforeDate" >
+											<p>Please select date</p>
+										</div>
+									</div>
+								</form>
+							</td>
+						</tr>
+						<tr *ngIf="job.status === 'billGenerated'" id="pay-button" >
+							<td class="grey" colspan="2" align="left" >
+								<button class="btn btn-primary combo-but" (click)="makePayment(bill.mode,job)" >Pay</button>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="modal-footer job-modal-footer">
+			</div>
+		</div>
+	</div>
+</div>

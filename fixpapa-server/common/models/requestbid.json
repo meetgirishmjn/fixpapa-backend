@@ -1,0 +1,106 @@
+{
+  "name": "Requestbid",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "Aggregate": true
+  },
+  "properties": {
+    "address": {
+      "type": "string",
+      "default": ""
+    },
+    "description": {
+      "type": "string",
+      "default": ""
+    },
+    "startDate": {
+      "type": "date",
+      "default": ""
+    },
+    "endDate": {
+      "type": "date",
+      "default": ""
+    },
+    "estiBudget": {
+      "type": "number",
+      "default": ""
+    },
+    "bidDetail": {
+      "type": [
+        "object"
+      ],
+      "default": []
+    }
+  },
+  "validations": [],
+  "relations": {
+    "bidDetails": {
+      "type": "embedsMany",
+      "model": "BidDetail",
+      "property": "bidDetail",
+      "options": {
+        "validate": true,
+        "forceId": true,
+        "persistent": true
+      },
+      "scope": {
+        "include": "services"
+      }
+    },
+    "bid": {
+      "type": "belongsTo",
+      "model": "Bid",
+      "foreignKey": ""
+    },
+    "services": {
+      "type": "belongsTo",
+      "model": "Services",
+      "foreignKey": ""
+    },
+    "people": {
+      "type": "belongsTo",
+      "model": "People",
+      "foreignKey": ""
+    }
+  },
+   "indexes": {
+      "bid_req_index": {
+        "keys": {"peopleId": 1,"bidId":1,"servicesId":1}
+      }
+  
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "find"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "createBid"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "getAllBidReq"
+    }
+  ],
+  "methods": {}
+}

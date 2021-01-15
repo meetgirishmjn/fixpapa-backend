@@ -1,0 +1,245 @@
+<section class="customer-deshboard-bg inner-top-gap" >
+	<div class="container" *ngIf="job.vendor" >
+		<div class="row" >
+			<button class="btn btn-primary" style="float:right;" type="button" (click)="openNew()" >Help</button>
+		</div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="invoice-title">
+                    <h2>G L Technovations</h2>
+                    <p>#5F25 5th Floor,Mahima Trinity Mall Near, New Sanganer Road,Swage Farm  Jaipur-302019, Rajasthan</p>
+					<p>Tel.: # 0141-2980666, Mobile: +919799044449</p>
+                </div>
+                <div class="bg-heading">
+                    <h6>INVOICE</h6>
+                </div>
+                <div class="row" style="overflow-x: scroll;">
+                    <table class="tb_top">
+                        <tr>
+                            <td>
+                                <address>
+                                    <strong>Billed To:</strong>
+                                    <br/> {{bill.invoiceTo}}
+                                </address>
+                            </td>
+                             <td> <address>
+                                    <strong>Supplier :</strong>
+                                    <br/>{{bill.admin}}
+                                </address>
+                            </td>
+                             <td> <address>
+                                    <strong>Admin Invoice No.</strong>
+                                    <br>{{bill.adminInvoiceNo}}
+                                    <br>
+                                    <br>
+                                    <p><strong>Customer Invoice No.</strong>
+                                        <br>{{bill.customerInvoiceNo}}
+                                    </p>
+                                </address>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td> <address>
+                            <strong>Payment Method:</strong>
+                            <br>{{bill.paymentMethod}}
+                            <br>
+                            
+                            <br>
+                            <p><strong>Payment ID:</strong>
+                                <br>{{bill.paymentId}}
+                            </p>
+                        </address>
+                    </td>
+                     <td> <address>
+                            <strong>Order Date:</strong>
+                            <br/> {{bill.orderDate | date }}
+                            <br/>
+                            <br/>
+                        </address>
+                    </td>
+                     <td> <address>
+                            
+                            <p><strong>Order ID:</strong>
+                                <br/> {{bill.orderId}}
+                            </p>
+                        </address>
+                    </td>
+                        </tr>
+                    </table>
+                </div>
+                <!--<div class="row">
+                    <div class="col-xs-4 no-gap-right">
+                        <address>
+                            <strong>Billed To:</strong>
+                            <br/> {{bill.invoiceTo}}
+                        </address>
+                    </div>
+                    <div class="col-xs-4 no-gap">
+                        <address>
+                            <strong>Supplier :</strong>
+                            <br/>{{bill.admin}}
+                        </address>
+                    </div>
+                    <div class="col-xs-4 no-gap-left">
+                        <address>
+                            <strong>Admin Invoice No.</strong>
+                            <br>{{bill.adminInvoiceNo}}
+							<br>
+							<br>
+							<p><strong>Customer Invoice No.</strong>
+                                <br>{{bill.customerInvoiceNo}}
+                            </p>
+                        </address>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4 no-gap-right">
+                        <address>
+                            <strong>Payment Method:</strong>
+                            <br>{{bill.paymentMethod}}
+                            <br>
+							
+                            <br>
+                            <p><strong>Payment ID:</strong>
+                                <br>{{bill.paymentId}}
+                            </p>
+                        </address>
+                    </div>
+                    <div class="col-xs-4 no-gap">
+                        <address>
+                            <strong>Order Date:</strong>
+                            <br/> {{bill.orderDate | date }}
+                            <br/>
+							<br/>
+                        </address>
+                    </div>
+                    <div class="col-xs-4 no-gap-left">
+                        <address>
+                            <strong>Customer Name:</strong>
+                            <br/> {{bill.customerId}}
+							<br/>
+							<br/>
+							<p><strong>Order ID:</strong>
+                                <br/> {{bill.orderId}}
+                            </p>
+                        </address>
+                    </div>
+                </div>-->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" style="padding: 0px !important;">
+                <div class="panel panel-default">
+                    <div class="panel-body" style="overflow-x: scroll;">
+                        <div class="table-responsive">
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <td width="5%" class="text-center"><strong>No.</strong></td>
+                                        <td width="20%" class="text-center"><strong>Description</strong></td>
+                                        <td width="10%" class="text-center"><strong>HSN CODE</strong></td>
+                                        <td width="10%" class="text-center"><strong>Category</strong></td>
+                                        <td width="10%" class="text-center"><strong>Qty.</strong></td>
+                                        <td width="10%" class="text-center"><strong>User Price</strong></td>
+                                        <td width="10%" class="text-center"><strong>Amount</strong></td>
+										<td width="10%" class="text-center"><strong>Tax Amount</strong></td>
+                                        <td width="10%" class="text-center"><strong>CGST (%)</strong></td>
+                                        <td width="10%" class="text-center"><strong>SGST (%)</strong></td>
+										<td width="10%" class="text-center"><strong>Total Tax (%)</strong></td>
+                                        <td width="10%" class="text-center"><strong>Total</strong></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of bill.items;let i = index;" >
+                                        <td width="5%" class="text-center">{{i+1}}</td>
+                                        <td width="20%" class="text-center" >{{item.description}}</td>
+                                        <td width="10%" class="text-center"><input type="text" name="hsnCodes" class="hsn-cont" [(ngModel)]="item.hsnCodes" id="hsncode{{i+1}}" /></td>
+                                        <td width="10%" class="text-center">{{item.category}}</td>
+                                        <td width="10%" class="text-center">{{item.qty}}</td>
+                                        <td width="10%" class="text-center">{{item.pricePerUnit}}</td>
+                                        <td width="10%" class="text-center">{{item.exclTaxAmount }}</td>
+                                        <td width="10%" class="text-center">{{item.taxAmount}}</td>
+                                        <td width="10%" class="text-center">{{item.cgst}}</td>
+                                        <td width="10%" class="text-center">{{item.sgst}}</td>
+										<td width="10%" class="text-center"><input type="text" class="tax-cont" placeholder="0.00" name="tax" (ngModelChange)="updateRow(i,$event)" [(ngModel)]="item.tax" id="tax{{i+1}}" /></td>
+										<td width="10%" class="text-center">{{item.total}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td style="background-color: #06386b; color: #fff;" class="text-center">{{bill.totalPricePerUnit}}</td>
+                                        <td style="background-color: #06386b; color: #fff;" class="text-center">{{bill.totalExclTaxAmount}}</td>
+                                        <td style="background-color: #06386b; color: #fff;" class="text-center">{{bill.totalTaxAmount}}</td>
+                                        <td></td>
+										<td></td>
+										<td></td>
+                                        <td style="background-color: #06386b; color: #fff;" class="text-center">{{bill.totalOfTotal}}</td>
+                                    </tr>
+                                    <div style="clear: both;"></div>
+                                    <tr>
+                                        <td colspan="2" class="text-center" style="background-color: #06386b; color: #fff;">Company's GST No.</td>
+                                        <td colspan="2" class="text-center" style="background-color: #06386b; color: #fff;">08BGNPS7159C1ZX</td>
+                                        <td colspan="7">Total Amt. Excl. Taxes</td>
+                                        <td colspan="1">{{bill.totalExclTaxAmount}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" class="text-center" style="background-color: #06386b; color: #fff;"></td>
+                                        <td colspan="2" class="text-center" style="background-color: #06386b; color: #fff;"></td>
+                                        <td colspan="7">Tax Amount</td>
+                                        <td colspan="1">{{bill.totalTaxAmount}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" class="text-center" style="background-color: #06386b; color: #fff;">Supplier's Gst No.</td>
+                                        <td colspan="2" class="text-center" style="background-color: #06386b; color: #fff;">{{job.vendor.gstNumber}}</td>
+                                        <td colspan="7">Discount Amount</td>
+                                        <td colspan="1">{{bill.discount}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2"></td>
+                                        <td colspan="2"></td>
+                                        <td colspan="7" style="background-color: #06386b; color: #fff;">Total Amount Incl. Taxes </td>
+                                        <td colspan="1" style="height: 25px;">{{bill.totalIncAll}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="footer-content">
+                            <h5>Terms & Conditions:</h5>
+                            <ul>
+                                <li>I confirm that the said products and services are being purchased for my internal/personal consumption and not for re-sale.</li>
+                                <!-- <li>Payment will be released, within 15 days from the date of submission of the bill, after the satisfactory completion of the activity along with submission of required supporting documents as per G L Tecnovations standards.</li>
+                                <li>The PI NO is valid for 15 days from the date of issuance. Activity must be completed with-in 15 days from date of issuance of this document.</li>
+                                <li>If the vendor becomes aware that it is unable to deliver the goods and services by due date, it must communicate the company in writing about the cause and the circumstances of the delay and the steps taken by the vendor to mitigate the delay. Otherwise company may impose a penalty of 1% deduction in payment per day delayed from the due date & if the delay continues for more than 10 Days the PI shall be deemed cancelled.</li>
+                                <li>The Indian laws shall be the governing legislation for any matter arising out of this document or the interpretations thereof and shall be subject to the jurisdiction courts at Jaipur Rajasthan.</li> -->
+                            </ul>
+                        </div>
+                        <div class="sub-footer-text row">
+                            <p class="col-md-6"><strong>Confirmed by : (Supplier)</strong>{{bill.admin}}</p>
+                            <p class="col-md-6" style="text-align: right;">G L Techonovations</p>
+                        </div>
+                        <br/><br/><br/><br/>
+                        <div class="sub-footer-text row">
+                            <p class="col-md-12">System Generated Bill</p>
+                            <!-- <p class="col-md-6" style="text-align: right;">Authorised signatory</p> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		<button (click)="createBill()" type="submit" class="btn btn-primary" >Generate</button>
+    </div>
+</section>
+
+
+<app-hsn-codes #hsn></app-hsn-codes>
+
+
+<!--
+Payment Id - when Engineer will generate bill to customer (Kaccha Bill) 
+Order ID - When customer order any services 
+Invoice ID of vendor - Unique series for separate Vendor
+Invoice for customer - Unique Series for all customer (Pakka Bill). 
+ -->
